@@ -293,7 +293,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function signInWithGoogle() {
       initFirebase(() => {
         const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider);
+        firebase.auth().signInWithPopup(provider).catch(error => {
+            console.error("Google 登入失敗:", error);
+            alert("Google 登入失敗：" + error.message);
+        });
       });
   }
 
@@ -409,6 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnShowConfig.addEventListener('click', () => { firebaseConfigTextarea.style.display = 'block'; });
     btnGoogleLogin.addEventListener('click', signInWithGoogle);
 
+    // Initialize Firebase and set up the auth state listener
     initFirebase(() => {
         firebase.auth().onAuthStateChanged(handleAuthStateChanged);
     });
@@ -419,4 +423,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
