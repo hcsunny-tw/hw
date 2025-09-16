@@ -10,10 +10,9 @@
   let currentFilter = 'all';
   let firebaseUnsubscribes = [];
 
-  // DOM（登入頁有的）
+  // DOM
   const mainApp = document.querySelector('.main-app');
 
-  // DOM（登入後才會生成）
   let userInfo, userName, btnLogout, themeToggle, teacherFilter, views,
       navDashboardBtn, navRosterBtn, navStudentStatusBtn,
       ipTeacherSelect, ipTeacherCustom, ipTitle, ipDate, btnCreate,
@@ -21,6 +20,7 @@
       detailTitle, gridContainer, rangeSize, rosterEditor,
       taRosterPaste, btnLoadFromPaste, btnApplyRoster, studentStatusContainer;
 
+  // 主畫面骨架（不改你的 UI）
   const mainAppHTML = `
     <header>
       <div class="brand">
@@ -138,27 +138,25 @@
   };
   const saveData = (uid) => { if (uid) localStorage.setItem(getLocalDataKey(uid), JSON.stringify(data)); };
 
-  // Firebase 便捷
   const db = () => window.__appState.db();
   const getUid = () => window.__appState.getUid();
+  const safeOn = (el, type, handler) => { if (el) el.addEventListener(type, handler); };
 
-  // Firestore 監聽
-  function attachFirebaseListeners(userId) {
-    // 清掉舊監聽
+  // 雲端監聽
+  function attachFirebaseListeners(uid) {
     firebaseUnsubscribes.forEach(u => u && u());
     firebaseUnsubscribes = [];
 
     const rosterUnsub = db()
-      .collection('users').doc(userId)
+      .collection('users').doc(uid)
       .collection('data').doc('roster')
       .onSnapshot(doc => {
         data.roster = doc.exists && doc.data().list ? doc.data().list : [];
-        saveData(userId);
-        renderAll();
+        saveData(uid); renderAll();
       }, err => console.error('Roster listener error:', err));
 
     const assignmentsUnsub = db()
-      .collection('users').doc(userId)
+      .collection('users').doc(uid)
       .collection('assignments')
       .onSnapshot(snap => {
         snap.docChanges().forEach(ch => {
@@ -168,8 +166,7 @@
           else if (ch.type === 'modified' && i > -1) data.assignments[i] = d;
           else if (ch.type === 'removed' && i > -1) data.assignments.splice(i, 1);
         });
-        saveData(userId);
-        renderAll();
+        saveData(uid); renderAll();
       }, err => console.error('Assignments listener error:', err));
 
     firebaseUnsubscribes.push(rosterUnsub, assignmentsUnsub);
@@ -180,54 +177,44 @@
     const uid = getUid(); if (!uid) return;
     await db().collection('users').doc(uid).collection('data').doc('roster').set({ list: newRoster });
   }
-  async function addAssignmentToFirebase(assignment) {
+  async function addAssignmentToFirebase(a) {
     const uid = getUid(); if (!uid) return;
-    await db().collection('users').doc(uid).collection('assignments').doc(String(assignment.id)).set(assignment);
+    await db().collection('users').doc(uid).collection('assignments').doc(String(a.id)).set(a);
   }
-  async function deleteAssignmentFromFirebase(assignmentId) {
+  async function deleteAssignmentFromFirebase(id) {
     const uid = getUid(); if (!uid) return;
-    await db().collection('users').doc(uid).collection('assignments').doc(String(assignmentId)).delete();
+    await db().collection('users').doc(uid).collection('assignments').doc(String(id)).delete();
   }
-  async function updateAssignmentFieldInFirebase(assignmentId, field, value) {
+  async function updateAssignmentFieldInFirebase(id, field, value) {
     const uid = getUid(); if (!uid) return;
-    await db().collection('users').doc(uid).collection('assignments').doc(String(assignmentId)).update({ [field]: value });
+    await db().collection('users').doc(uid).collection('assignments').doc(String(id)).update({ [field]: value });
   }
 
-  // 畫面渲染
+  // 渲染
   function renderAll() {
     if (!getUid()) return;
-    const currentView = document.querySelector('.main-app .view.show');
-    const viewId = currentView ? currentView.id : 'view-dashboard';
-    switch (viewId) {
-      case 'view-dashboard':
-        populateTeacherFilter();
-        renderDashboard();
-        break;
-      case 'view-detail':
-        renderDetail(currentAssignmentId);
-        break;
-      case 'view-roster':
-        renderRosterEditor();
-        break;
-      case 'view-student-status':
-        renderStudentStatus();
-        break;
-    }
+    const shown = document.querySelector('.main-app .view.show');
+    const id = shown ? shown.id : 'view-dashboard';
+    if (id === 'view-dashboard') { populateTeacherFilter(); renderDashboard(); }
+    else if (id === 'view-detail') { renderDetail(currentAssignmentId); }
+    else if (id === 'view-roster') { renderRosterEditor(); }
+    else if (id === 'view-student-status') { renderStudentStatus(); }
   }
 
   function populateTeacherFilter() {
+    if (!teacherFilter) return;
     const teachers = ['all', ...new Set(data.assignments.map(a => a.teacher))];
-    if (teacherFilter) {
-      teacherFilter.innerHTML = teachers.map(t => `<option value="${t}">${t === 'all' ? '所有老師' : t}</option>`).join('');
-      teacherFilter.value = currentFilter;
-    }
+    teacherFilter.innerHTML = teachers.map(t => `<option value="${t}">${t === 'all' ? '所有老師' : t}</option>`).join('');
+    teacherFilter.value = currentFilter;
   }
 
   function renderDashboard() {
+    if (!assignmentList) return;
+
     let list = [...data.assignments];
     if (currentFilter !== 'all') list = list.filter(a => a.teacher === currentFilter);
     list.sort((a, b) => {
-      const av = a[sortState.key]; const bv = b[sortState.key];
+      const av = a[sortState.key], bv = b[sortState.key];
       if (av < bv) return sortState.direction === 'asc' ? -1 : 1;
       if (av > bv) return sortState.direction === 'asc' ? 1 : -1;
       return 0;
@@ -240,10 +227,7 @@
         th.style.color = 'var(--text-main)';
         if (icon) icon.style.opacity = '0.3';
         if (th.dataset.sort === sortState.key) {
-          if (icon) {
-            icon.className = sortState.direction === 'asc' ? 'bi bi-sort-up' : 'bi bi-sort-down';
-            icon.style.opacity = '1';
-          }
+          if (icon) { icon.className = sortState.direction === 'asc' ? 'bi bi-sort-up' : 'bi bi-sort-down'; icon.style.opacity = '1'; }
           th.style.color = 'var(--primary)';
         } else if (icon) {
           icon.className = 'bi bi-arrow-down-up';
@@ -251,7 +235,6 @@
       });
     }
 
-    if (!assignmentList) return;
     assignmentList.innerHTML = '';
     if (list.length === 0) {
       assignmentList.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">沒有符合條件的作業。</td></tr>';
@@ -259,9 +242,9 @@
     }
 
     list.forEach(a => {
-      const doneCount = (a.statuses || []).filter(s => s === 3).length;
+      const done = (a.statuses || []).filter(s => s === 3).length;
       const total = data.roster.length;
-      const progress = total > 0 ? (doneCount / total) * 100 : 0;
+      const progress = total > 0 ? (done / total) * 100 : 0;
 
       const tr = document.createElement('tr');
       tr.dataset.id = a.id;
@@ -272,7 +255,7 @@
         <td>
           <div style="display:flex;align-items:center;gap:8px;">
             <progress value="${progress}" max="100"></progress>
-            <span>${doneCount}/${total}</span>
+            <span>${done}/${total}</span>
           </div>
         </td>
         <td><button class="btn warn sm btn-delete" data-id="${a.id}"><i class="bi bi-trash3"></i></button></td>
@@ -282,22 +265,18 @@
   }
 
   function renderDetail(assignmentId) {
+    if (!detailTitle || !gridContainer) return;
     const a = data.assignments.find(x => x.id == assignmentId);
     if (!a) { switchView('view-dashboard'); return; }
     currentAssignmentId = assignmentId;
-    if (detailTitle) detailTitle.innerHTML = `<i class="bi bi-journal-bookmark-fill"></i> ${a.title} <span class="chip">${a.date}</span> <span class="chip">${a.teacher}</span>`;
-
-    if (!gridContainer) return;
+    detailTitle.innerHTML = `<i class="bi bi-journal-bookmark-fill"></i> ${a.title} <span class="chip">${a.date}</span> <span class="chip">${a.teacher}</span>`;
     gridContainer.innerHTML = '';
     data.roster.forEach((name, idx) => {
-      const status = (a.statuses || [])[idx] || 0;
-      const seatItem = document.createElement('div');
-      seatItem.className = 'seatItem';
-      seatItem.innerHTML = `
-        <div class="seat s${status}" data-index="${idx}">${idx + 1}</div>
-        <div class="seatName"><span class="seatNo">${idx + 1}.</span> ${name}</div>
-      `;
-      gridContainer.appendChild(seatItem);
+      const st = (a.statuses || [])[idx] || 0;
+      const item = document.createElement('div');
+      item.className = 'seatItem';
+      item.innerHTML = `<div class="seat s${st}" data-index="${idx}">${idx + 1}</div><div class="seatName"><span class="seatNo">${idx + 1}.</span> ${name}</div>`;
+      gridContainer.appendChild(item);
     });
   }
 
@@ -305,10 +284,10 @@
     if (!rosterEditor) return;
     rosterEditor.innerHTML = '';
     data.roster.forEach((name, idx) => {
-      const item = document.createElement('div');
-      item.className = 'roster-item';
-      item.innerHTML = `<div class="badge-no">${idx + 1}</div><input type="text" value="${name}" data-index="${idx}" class="roster-name-input">`;
-      rosterEditor.appendChild(item);
+      const el = document.createElement('div');
+      el.className = 'roster-item';
+      el.innerHTML = `<div class="badge-no">${idx + 1}</div><input type="text" value="${name}" data-index="${idx}" class="roster-name-input">`;
+      rosterEditor.appendChild(el);
     });
     if (taRosterPaste) taRosterPaste.value = '';
   }
@@ -324,26 +303,25 @@
     const pending = [];
     const allDoneNos = [];
 
-    data.roster.forEach((studentName, studentIndex) => {
-      const mine = [];
-      let hasPending = false;
-      data.assignments.forEach(assn => {
-        const st = (assn.statuses || [])[studentIndex];
-        if (st === 0 || st === 2) { hasPending = true; mine.push({ id: assn.id, title: assn.title, status: st }); }
+    data.roster.forEach((nm, i) => {
+      const mine = []; let hasPending = false;
+      data.assignments.forEach(a => {
+        const st = (a.statuses || [])[i];
+        if (st === 0 || st === 2) { hasPending = true; mine.push({ id: a.id, title: a.title, status: st }); }
       });
-      if (hasPending) pending.push({ name: studentName, index: studentIndex, assignments: mine });
-      else allDoneNos.push(studentIndex + 1);
+      if (hasPending) pending.push({ name: nm, index: i, assignments: mine });
+      else allDoneNos.push(i + 1);
     });
 
-    const summaryCard = document.createElement('div');
-    summaryCard.className = 'card';
-    summaryCard.style.marginBottom = '20px';
-    let summaryHTML = '<h2><i class="bi bi-check2-all"></i> 完成狀況</h2>';
-    if (allDoneNos.length > 0) {
-      summaryHTML += `<p style="color: var(--success); font-weight: bold; margin: 8px 0; font-size: 15px;">已完成所有作業的學生座號： ${allDoneNos.join('、')}</p>`;
-    } else summaryHTML += '<p style="margin: 8px 0;">目前沒有學生完成所有作業。</p>';
-    summaryCard.innerHTML = summaryHTML;
-    studentStatusContainer.appendChild(summaryCard);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.marginBottom = '20px';
+    let html = '<h2><i class="bi bi-check2-all"></i> 完成狀況</h2>';
+    html += allDoneNos.length > 0
+      ? `<p style="color: var(--success); font-weight: bold; margin: 8px 0; font-size: 15px;">已完成所有作業的學生座號： ${allDoneNos.join('、')}</p>`
+      : '<p style="margin: 8px 0;">目前沒有學生完成所有作業。</p>';
+    card.innerHTML = html;
+    studentStatusContainer.appendChild(card);
 
     if (pending.length > 0) {
       const title = document.createElement('h2');
@@ -351,25 +329,25 @@
       title.innerHTML = '<i class="bi bi-exclamation-triangle"></i> 尚有作業待完成';
       studentStatusContainer.appendChild(title);
 
-      const gridWrapper = document.createElement('div');
-      gridWrapper.className = 'student-status-grid';
+      const grid = document.createElement('div');
+      grid.className = 'student-status-grid';
 
       pending.forEach(s => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.style.marginBottom = '0';
+        const c = document.createElement('div');
+        c.className = 'card';
+        c.style.marginBottom = '0';
         let lis = '<ul class="student-status-list">';
         s.assignments.forEach(pa => {
-          const statusText = pa.status === 0 ? '未繳' : '需訂正';
+          const txt = pa.status === 0 ? '未繳' : '需訂正';
           const pill = pa.status === 0 ? 'p-gray' : 'p-orange';
-          lis += `<li data-assignment-id="${pa.id}" data-student-index="${s.index}">${pa.title} <span class="pill ${pill}">${statusText}</span></li>`;
+          lis += `<li data-assignment-id="${pa.id}" data-student-index="${s.index}">${pa.title} <span class="pill ${pill}">${txt}</span></li>`;
         });
         lis += '</ul>';
-        card.innerHTML = `<h2 style="font-size:18px;margin-bottom:4px;font-weight:bold;"><i class="bi bi-person"></i> <span style="color: var(--danger);">${s.index + 1}.</span> ${s.name}</h2>${lis}`;
-        gridWrapper.appendChild(card);
+        c.innerHTML = `<h2 style="font-size:18px;margin-bottom:4px;font-weight:bold;"><i class="bi bi-person"></i> <span style="color: var(--danger);">${s.index + 1}.</span> ${s.name}</h2>${lis}`;
+        grid.appendChild(c);
       });
 
-      studentStatusContainer.appendChild(gridWrapper);
+      studentStatusContainer.appendChild(grid);
     } else {
       const msg = document.createElement('div');
       msg.innerHTML = '<p style="text-align:center;font-size:18px;font-weight:bold;margin-top:20px;">🎉 太棒了！全班都完成了所有作業！ 🎉</p>';
@@ -377,188 +355,162 @@
     }
   }
 
-  function switchView(targetId) {
+  function switchView(id) {
     if (!views) return;
-    views.forEach(v => v.classList.toggle('show', v.id === targetId));
+    views.forEach(v => v.classList.toggle('show', v.id === id));
   }
 
-  // 綁定事件（全部先做「存在才綁」）
+  // 事件（全部「存在才綁」）
   function addMainAppEventListeners() {
-    if (btnLogout) btnLogout.addEventListener('click', () => window.__auth.signOut());
+    safeOn(btnLogout, 'click', () => window.__auth.signOut());
+    safeOn(navDashboardBtn, 'click', () => switchView('view-dashboard'));
+    safeOn(navRosterBtn, 'click', () => { renderRosterEditor(); switchView('view-roster'); });
+    safeOn(navStudentStatusBtn, 'click', () => { renderStudentStatus(); switchView('view-student-status'); });
 
-    if (navDashboardBtn) navDashboardBtn.addEventListener('click', () => switchView('view-dashboard'));
-    if (navRosterBtn) navRosterBtn.addEventListener('click', () => { renderRosterEditor(); switchView('view-roster'); });
-    if (navStudentStatusBtn) navStudentStatusBtn.addEventListener('click', () => { renderStudentStatus(); switchView('view-student-status'); });
+    safeOn(ipTeacherSelect, 'change', () => {
+      if (ipTeacherCustom) ipTeacherCustom.style.display = ipTeacherSelect.value === 'custom' ? 'block' : 'none';
+    });
 
-    if (ipTeacherSelect) {
-      ipTeacherSelect.addEventListener('change', () => {
-        if (ipTeacherCustom) ipTeacherCustom.style.display = ipTeacherSelect.value === 'custom' ? 'block' : 'none';
+    safeOn(btnCreate, 'click', () => {
+      const teacher = (ipTeacherSelect && ipTeacherSelect.value === 'custom')
+        ? (ipTeacherCustom?.value.trim() || '')
+        : (ipTeacherSelect?.value || '');
+      const title = (ipTitle?.value || '').trim();
+      const date = ipDate?.value;
+      if (!teacher || !title || !date) { alert('老師姓名、作業名稱和日期為必填項目！'); return; }
+      const newA = { id: Date.now(), teacher, title, date, statuses: Array(data.roster.length).fill(0) };
+      addAssignmentToFirebase(newA);
+      if (ipTitle) ipTitle.value = '';
+      if (ipTeacherSelect) ipTeacherSelect.selectedIndex = 0;
+      if (ipTeacherCustom) { ipTeacherCustom.value = ''; ipTeacherCustom.style.display = 'none'; }
+    });
+
+    safeOn(assignmentList, 'click', (e) => {
+      const del = e.target.closest('.btn-delete');
+      const tr = e.target.closest('tr');
+      if (del) {
+        if (confirm('確定要刪除這份作業嗎？')) deleteAssignmentFromFirebase(del.dataset.id);
+      } else if (tr) {
+        currentAssignmentId = tr.dataset.id;
+        switchView('view-detail');
+        renderDetail(currentAssignmentId);
+      }
+    });
+
+    safeOn(gridContainer, 'click', (e) => {
+      const seat = e.target.closest('.seat'); if (!seat) return;
+      const idx = parseInt(seat.dataset.index, 10);
+      const a = data.assignments.find(x => x.id == currentAssignmentId); if (!a) return;
+      const cur = (a.statuses || [])[idx] || 0;
+      const next = (cur + 1) % 4;
+      const statuses = [...(a.statuses || Array(data.roster.length).fill(0))];
+      statuses[idx] = next;
+      updateAssignmentFieldInFirebase(currentAssignmentId, 'statuses', statuses);
+    });
+
+    safeOn(studentStatusContainer, 'click', (e) => {
+      const li = e.target.closest('.student-status-list li'); if (!li) return;
+      const assignmentId = li.dataset.assignmentId;
+      const i = parseInt(li.dataset.studentIndex, 10);
+      const a = data.assignments.find(x => x.id == assignmentId); if (!a) return;
+      const cur = (a.statuses || [])[i] || 0;
+      const next = (cur + 1) % 4;
+      const statuses = [...(a.statuses || [])];
+      statuses[i] = next;
+      updateAssignmentFieldInFirebase(assignmentId, 'statuses', statuses);
+    });
+
+    safeOn(assignmentTableHead, 'click', (e) => {
+      const th = e.target.closest('th'); if (!th || !th.dataset.sort) return;
+      const key = th.dataset.sort;
+      if (sortState.key === key) sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
+      else { sortState.key = key; sortState.direction = 'asc'; }
+      renderDashboard();
+    });
+
+    safeOn(teacherFilter, 'change', (e) => { currentFilter = e.target.value; renderDashboard(); });
+
+    safeOn(themeToggle, 'click', () => {
+      const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem(THEME_KEY, newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    safeOn(rangeSize, 'input', (e) => {
+      const v = e.target.value;
+      document.documentElement.style.setProperty('--seat', `${v}px`);
+      document.documentElement.style.setProperty('--seat-font', `${Math.floor(v * 0.3)}px`);
+    });
+
+    safeOn(btnLoadFromPaste, 'click', () => {
+      if (!taRosterPaste || !rosterEditor) return;
+      const t = taRosterPaste.value.trim(); if (!t) return;
+      const list = t.split('\n').map(x => x.trim()).filter(Boolean);
+      rosterEditor.innerHTML = '';
+      list.forEach((name, idx) => {
+        const item = document.createElement('div');
+        item.className = 'roster-item';
+        item.innerHTML = `<div class="badge-no">${idx + 1}</div><input type="text" value="${name}" data-index="${idx}" class="roster-name-input">`;
+        rosterEditor.appendChild(item);
       });
-    }
+      taRosterPaste.value = '';
+      alert('列表已更新，請確認後儲存。');
+    });
 
-    if (btnCreate) {
-      btnCreate.addEventListener('click', () => {
-        const teacher = (ipTeacherSelect && ipTeacherSelect.value === 'custom')
-          ? (ipTeacherCustom?.value.trim() || '')
-          : (ipTeacherSelect?.value || '');
-        const title = (ipTitle?.value || '').trim();
-        const date = ipDate?.value;
-        if (!teacher || !title || !date) { alert('老師姓名、作業名稱和日期為必填項目！'); return; }
-        const newA = { id: Date.now(), teacher, title, date, statuses: Array(data.roster.length).fill(0) };
-        addAssignmentToFirebase(newA);
-        if (ipTitle) ipTitle.value = '';
-        if (ipTeacherSelect) ipTeacherSelect.selectedIndex = 0;
-        if (ipTeacherCustom) { ipTeacherCustom.value = ''; ipTeacherCustom.style.display = 'none'; }
+    safeOn(btnApplyRoster, 'click', async () => {
+      const inputs = document.querySelectorAll('.roster-name-input');
+      const list = Array.from(inputs).map(ip => ip.value.trim()).filter(Boolean);
+      if (!confirm('更新名單會影響所有作業，是否繼續？')) return;
+      const uid = getUid(); if (!uid) { alert('請先連接 Firebase'); return; }
+
+      const batch = db().batch();
+      data.assignments.forEach(a => {
+        const old = [...(a.statuses || [])];
+        const next = Array(list.length).fill(0);
+        for (let i = 0; i < list.length; i++) if (old[i] !== undefined) next[i] = old[i];
+        const ref = db().collection('users').doc(uid).collection('assignments').doc(String(a.id));
+        batch.update(ref, { statuses: next });
       });
-    }
+      await saveRosterToFirebase(list);
+      await batch.commit();
+      alert('名單已更新並同步！');
+    });
 
-    if (assignmentList) {
-      assignmentList.addEventListener('click', (e) => {
-        const del = e.target.closest('.btn-delete');
-        const tr = e.target.closest('tr');
-        if (del) {
-          if (confirm('確定要刪除這份作業嗎？')) deleteAssignmentFromFirebase(del.dataset.id);
-        } else if (tr) {
-          currentAssignmentId = tr.dataset.id;
-          switchView('view-detail');
-          renderDetail(currentAssignmentId);
+    safeOn(btnExport, 'click', () => {
+      const json = JSON.stringify({ roster: data.roster, assignments: data.assignments }, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'homework-data.json'; a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    safeOn(fileImport, 'change', (e) => {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async (ev) => {
+        try {
+          const imported = JSON.parse(ev.target.result);
+          if (!(imported.roster && imported.assignments)) { alert('檔案格式不符。'); return; }
+          if (!confirm('匯入資料將覆蓋雲端備份，確定嗎？')) return;
+          const uid = getUid(); if (!uid) { alert('請先連接 Firebase'); return; }
+          const assignmentsRef = db().collection('users').doc(uid).collection('assignments');
+          const snap = await assignmentsRef.get();
+          const batch = db().batch();
+          snap.docs.forEach(doc => batch.delete(doc.ref));
+          imported.assignments.forEach(a => batch.set(assignmentsRef.doc(String(a.id)), a));
+          await saveRosterToFirebase(imported.roster);
+          await batch.commit();
+          alert('資料匯入並同步成功！');
+        } catch (err) {
+          console.error(err);
+          alert('讀取檔案錯誤。');
         }
-      });
-    }
-
-    if (gridContainer) {
-      gridContainer.addEventListener('click', (e) => {
-        const seat = e.target.closest('.seat'); if (!seat) return;
-        const idx = parseInt(seat.dataset.index, 10);
-        const a = data.assignments.find(x => x.id == currentAssignmentId); if (!a) return;
-        const cur = (a.statuses || [])[idx] || 0;
-        const next = (cur + 1) % 4;
-        const newStatuses = [...(a.statuses || Array(data.roster.length).fill(0))];
-        newStatuses[idx] = next;
-        updateAssignmentFieldInFirebase(currentAssignmentId, 'statuses', newStatuses);
-      });
-    }
-
-    if (studentStatusContainer) {
-      studentStatusContainer.addEventListener('click', (e) => {
-        const li = e.target.closest('.student-status-list li'); if (!li) return;
-        const assignmentId = li.dataset.assignmentId;
-        const sIdx = parseInt(li.dataset.studentIndex, 10);
-        const a = data.assignments.find(x => x.id == assignmentId); if (!a) return;
-        const cur = (a.statuses || [])[sIdx] || 0;
-        const next = (cur + 1) % 4;
-        const newStatuses = [...(a.statuses || [])];
-        newStatuses[sIdx] = next;
-        updateAssignmentFieldInFirebase(assignmentId, 'statuses', newStatuses);
-      });
-    }
-
-    if (assignmentTableHead) {
-      assignmentTableHead.addEventListener('click', (e) => {
-        const th = e.target.closest('th'); if (!th || !th.dataset.sort) return;
-        const key = th.dataset.sort;
-        if (sortState.key === key) sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
-        else { sortState.key = key; sortState.direction = 'asc'; }
-        renderDashboard();
-      });
-    }
-
-    if (teacherFilter) teacherFilter.addEventListener('change', (e) => { currentFilter = e.target.value; renderDashboard(); });
-
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem(THEME_KEY, newTheme);
-        updateThemeIcon(newTheme);
-      });
-    }
-
-    if (rangeSize) {
-      rangeSize.addEventListener('input', (e) => {
-        const v = e.target.value;
-        document.documentElement.style.setProperty('--seat', `${v}px`);
-        document.documentElement.style.setProperty('--seat-font', `${Math.floor(v * 0.3)}px`);
-      });
-    }
-
-    if (btnLoadFromPaste) {
-      btnLoadFromPaste.addEventListener('click', () => {
-        const t = (taRosterPaste?.value || '').trim();
-        if (!t) return;
-        const newRoster = t.split('\n').map(x => x.trim()).filter(Boolean);
-        if (!rosterEditor) return;
-        rosterEditor.innerHTML = '';
-        newRoster.forEach((name, idx) => {
-          const item = document.createElement('div');
-          item.className = 'roster-item';
-          item.innerHTML = `<div class="badge-no">${idx + 1}</div><input type="text" value="${name}" data-index="${idx}" class="roster-name-input">`;
-          rosterEditor.appendChild(item);
-        });
-        if (taRosterPaste) taRosterPaste.value = '';
-        alert('列表已更新，請確認後儲存。');
-      });
-    }
-
-    if (btnApplyRoster) {
-      btnApplyRoster.addEventListener('click', async () => {
-        const inputs = document.querySelectorAll('.roster-name-input');
-        const newRoster = Array.from(inputs).map(ip => ip.value.trim()).filter(Boolean);
-        if (!confirm('更新名單會影響所有作業，是否繼續？')) return;
-        const uid = getUid(); if (!uid) { alert('請先連接 Firebase'); return; }
-
-        const batch = db().batch();
-        data.assignments.forEach(a => {
-          const old = [...(a.statuses || [])];
-          const next = Array(newRoster.length).fill(0);
-          for (let i = 0; i < newRoster.length; i++) if (old[i] !== undefined) next[i] = old[i];
-          const ref = db().collection('users').doc(uid).collection('assignments').doc(String(a.id));
-          batch.update(ref, { statuses: next });
-        });
-        await saveRosterToFirebase(newRoster);
-        await batch.commit();
-        alert('名單已更新並同步！');
-      });
-    }
-
-    if (btnExport) {
-      btnExport.addEventListener('click', () => {
-        const json = JSON.stringify({ roster: data.roster, assignments: data.assignments }, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url; a.download = 'homework-data.json'; a.click();
-        URL.revokeObjectURL(url);
-      });
-    }
-
-    if (fileImport) {
-      fileImport.addEventListener('change', (e) => {
-        const file = e.target.files[0]; if (!file) return;
-        const reader = new FileReader();
-        reader.onload = async (ev) => {
-          try {
-            const imported = JSON.parse(ev.target.result);
-            if (!(imported.roster && imported.assignments)) { alert('檔案格式不符。'); return; }
-            if (!confirm('匯入資料將覆蓋雲端備份，確定嗎？')) return;
-            const uid = getUid(); if (!uid) { alert('請先連接 Firebase'); return; }
-            const assignmentsRef = db().collection('users').doc(uid).collection('assignments');
-            const snap = await assignmentsRef.get();
-            const batch = db().batch();
-            snap.docs.forEach(doc => batch.delete(doc.ref));
-            imported.assignments.forEach(a => batch.set(assignmentsRef.doc(String(a.id)), a));
-            await saveRosterToFirebase(imported.roster);
-            await batch.commit();
-            alert('資料匯入並同步成功！');
-          } catch (err) {
-            console.error(err);
-            alert('讀取檔案錯誤。');
-          }
-        };
-        reader.readAsText(file);
-        e.target.value = '';
-      });
-    }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
   }
 
   function updateThemeIcon(theme) {
@@ -608,7 +560,7 @@
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
 
-    // 取代後選取元素並綁定事件
+    // 取代後選取元素並綁定事件（存在才綁）
     reselectElements();
     addMainAppEventListeners();
 
