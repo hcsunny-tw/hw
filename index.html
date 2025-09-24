@@ -4,69 +4,422 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>📚 作業繳交系統｜Google 登入版</title>
+  <!-- 圖示 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-  <!-- Firebase v8 SDK -->
+  
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
   <style>
-    /* == 你的原樣式，略 == */
-    :root{ --bg:#f0f9ff; --card:#fff; --muted:#64748b; --primary:#3b82f6; --accent:#14b8a6; --success:#22c55e; --danger:#ef4444; --ring:rgba(59,130,246,.3); --shadow:0 8px 30px rgba(100,116,139,.1); --radius:16px; --text-main:#1e293b; --text-light:#475569; --tbl-border:#e2e8f0; --tbl-head:#e0f2fe; --tbl-alt:#f8fafc; --tbl-hover:#ecfeff; }
-    html[data-theme='dark']{ --bg:#0f172a; --card:#1e293b; --muted:#94a3b8; --primary:#60a5fa; --accent:#2dd4bf; --success:#4ade80; --danger:#f87171; --ring:rgba(96,165,250,.3); --shadow:0 8px 30px rgba(0,0,0,.1); --text-main:#e2e8f0; --text-light:#94a3b8; --tbl-border:#334155; --tbl-head:#1e293b; --tbl-alt:#0f172a; --tbl-hover:#334155; }
-    *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:"Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans";background:var(--bg);color:var(--text-main)}
-    .wrap{max-width:1200px;margin:0 auto;padding:16px 12px 96px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:24px;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:var(--shadow)}
-    h1{margin:0;font-size:clamp(18px,2.2vw,24px);font-weight:800;line-height:1.2}
-    .muted{color:var(--muted);font-size:12px}
-    .badge{display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;background:var(--card);border:1px solid var(--tbl-border);font-size:12px;font-weight:800}
-    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid transparent;padding:12px;margin-bottom:10px}
-    .row{display:grid;gap:8px;grid-template-columns:repeat(12,1fr)}
-    .field{grid-column:span 12;display:flex;flex-direction:column;gap:4px}
-    @media (min-width:720px){.sm-6{grid-column:span 6}.sm-4{grid-column:span 4}.sm-3{grid-column:span 3}.sm-2{grid-column:span 2}}
-    label{font-weight:700;font-size:13px}
-    input,select,textarea{background:var(--bg);color:var(--text-main);border:1px solid var(--tbl-border);border-radius:10px;padding:10px;font-size:14px}
-    .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-    .btn{border:none;border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;background:var(--primary);color:#fff;box-shadow:var(--shadow);font-size:14px}
-    .btn.ghost{background:var(--card);color:var(--text-light);border:1px dashed var(--tbl-border);box-shadow:none}
-    .btn.warn{background:var(--danger)} .btn.secondary{background:var(--accent)} .btn.sm{font-size:12px;padding:4px 10px}
-    .view{display:none}.view.show{display:block}
-    .table-wrap{overflow:auto;border-radius:12px;border:1px solid var(--tbl-border);background:var(--card)}
-    table{width:100%;border-collapse:collapse;font-size:14px}
-    thead th{position:sticky;top:0;background:var(--tbl-head);text-align:left;padding:10px;border-bottom:1px solid var(--tbl-border);white-space:nowrap;cursor:pointer;user-select:none}
-    tbody td{padding:10px;border-bottom:1px solid var(--tbl-border)} tbody tr:nth-child(odd){background:var(--tbl-alt)}
-    .grid{display:grid;gap:var(--grid-gap);grid-template-columns:repeat(auto-fill,minmax(calc(var(--seat) + 70px),1fr));background:var(--bg);border:1px solid var(--tbl-border);border-radius:var(--radius);padding:var(--grid-pad)}
-    .seat{width:var(--seat);height:var(--seat);border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:var(--seat-font);border:2px solid transparent;cursor:pointer;box-shadow:var(--shadow)}
-    .s0{background:#e2e8f0;color:#334155}.s1{background:#fef9c3;color:#713f12}.s2{background:#ffedd5;color:#9a3412}.s3{background:#dcfce7;color:#166534}
-    #login-view{text-align:center;padding-top:10vh}.main-app{display:none}.user-info{display:none;align-items:center;gap:8px}
+    /* ============================================================
+       💎 藍色與藍綠色主題
+       ============================================================ */
+    :root{
+      --bg:#f0f9ff; --card:#fff; --muted:#64748b;
+      --primary:#3b82f6; --accent:#14b8a6; --success:#22c55e; --danger:#ef4444;
+      --ring:rgba(59, 130, 246, 0.3); --shadow:0 8px 30px rgba(100,116,139,.1); --radius:16px;
+      --text-main: #1e293b; --text-light: #475569;
+
+      /* 表格色 */
+      --tbl-border:#e2e8f0; --tbl-head:#e0f2fe; --tbl-alt:#f8fafc; --tbl-hover:#ecfeff;
+    }
+
+    html[data-theme='dark'] {
+      --bg:#0f172a; --card:#1e293b; --muted:#94a3b8;
+      --primary:#60a5fa; --accent:#2dd4bf; --success:#4ade80; --danger:#f87171;
+      --ring:rgba(96, 165, 250, 0.3); --shadow:0 8px 30px rgba(0,0,0,.1);
+      --text-main: #e2e8f0; --text-light: #94a3b8;
+      
+      --tbl-border:#334155; --tbl-head:#1e293b; --tbl-alt:#0f172a; --tbl-hover:#334155;
+    }
+
+    /* ✅ 版面健保與字型 */
+    *{ box-sizing:border-box; }
+    input, select, textarea{ max-width:100%; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Microsoft JhengHei", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      background: var(--bg);
+      color: var(--text-main);
+      transition: background-color .3s, color .3s;
+    }
+
+    .wrap{ max-width:1200px; margin:0 auto; padding:16px 12px 96px; }
+    header{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .brand{ display:flex; align-items:center; gap:12px; }
+    .logo{ width:48px; height:48px; border-radius:50%; display:grid; place-items:center; color:#fff; font-size:24px;
+      background:linear-gradient(135deg, var(--primary), var(--accent)); box-shadow:var(--shadow); }
+    h1{ margin:0; font-size:clamp(18px,2.2vw,24px); font-weight:800; line-height:1.2; }
+    .muted{ color:var(--muted); font-size:12px; }
+    .badge{ display:inline-flex; gap:6px; align-items:center; padding:6px 10px; border-radius:999px; background:var(--card); border:1px solid var(--tbl-border); font-size:12px; font-weight:800; }
+
+    .card{ background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid transparent; padding:12px; margin-bottom:10px; transition: background-color .3s; }
+    html[data-theme='dark'] .card { border-color: var(--tbl-border); }
+    .card h2{ margin:0 0 8px; font-size:16px; display:flex; align-items:center; gap:8px; }
+    .row{ display:grid; gap:8px; grid-template-columns:repeat(12, 1fr); }
+    .field{ grid-column:span 12; display:flex; flex-direction:column; gap:4px; }
+    @media (min-width:720px){ .sm-6{ grid-column:span 6; } .sm-4{ grid-column:span 4; } .sm-3{ grid-column:span 3; } .sm-2{ grid-column:span 2; } }
+    label{ font-weight:700; font-size:13px; }
+    input, select, textarea {
+      background:var(--bg); color: var(--text-main); border:1px solid var(--tbl-border); border-radius:10px; padding:10px; font-size:14px; outline:none; transition:.2s ease;
+    }
+    input:focus, select:focus, textarea:focus{ border-color:var(--primary); box-shadow:0 0 0 4px var(--ring); }
+    
+    .actions{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+    .btn{ border:none; border-radius:999px; padding:8px 14px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:6px;
+      background:var(--primary); color:#fff; box-shadow:var(--shadow); font-size:14px; transition:transform .05s, filter .2s, background .2s; }
+    .btn:hover{ filter:brightness(1.05); } .btn:active{ transform:translateY(1px); }
+    .btn.outline{ background:transparent; color:var(--primary); border:2px solid var(--primary); }
+    .btn.ghost{ background:var(--card); color:var(--text-light); border:1px dashed var(--tbl-border); box-shadow: none; }
+    .btn.warn{ background:var(--danger); }
+    .btn.secondary{ background:var(--accent); color:#fff; }
+    .btn.sm{ font-size:12px; padding:4px 10px; }
+    .btn:disabled{ background:#ccc; cursor:not-allowed; filter:none; }
+
+    .view{ display:none; } .view.show{ display:block; animation:fadeIn .3s ease; }
+    @keyframes fadeIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
+
+    /* Dashboard 表格 */
+    .table-wrap{ overflow:auto; border-radius:12px; border:1px solid var(--tbl-border); background:var(--card); }
+    table{ width:100%; border-collapse:collapse; font-size:14px; }
+    thead th{ position:sticky; top:0; background:var(--tbl-head); text-align:left; padding:10px; border-bottom:1px solid var(--tbl-border); white-space:nowrap; cursor:pointer; user-select:none; }
+    tbody td{ padding:10px; border-bottom:1px solid var(--tbl-border); }
+    tbody tr{ cursor:pointer; }
+    tbody tr:nth-child(odd){ background:var(--tbl-alt); }
+    tbody tr:hover{ background:var(--tbl-hover); }
+    
+    .pill{ display:inline-flex; gap:6px; align-items:center; padding:4px 8px; border-radius:999px; font-weight:800; }
+    .p-gray{ background:#f1f5f9; color:#475569; } .p-yellow{ background:#fefce8; color:#854d0e; }
+    .p-orange{ background:#fff7ed; color:#9a3412; } .p-green{ background:#f0fdf4; color:#166534; }
+
+    /* Detail：標頭＋點點 */
+    .grid{ display:grid; gap:var(--grid-gap); grid-template-columns:repeat(auto-fill, minmax(calc(var(--seat) + 70px), 1fr));
+      background:var(--bg); border:1px solid var(--tbl-border); border-radius:var(--radius); padding:var(--grid-pad); }
+    .seat{ width:var(--seat); height:var(--seat); border-radius:50%; display:grid; place-items:center; font-weight:900; font-size:var(--seat-font);
+      border:2px solid transparent; cursor:pointer; user-select:none; box-shadow:var(--shadow); transition:transform .06s; flex:0 0 auto; }
+    html[data-theme='dark'] .seat { border-color: var(--tbl-border); }
+    .seat:active{ transform:scale(.98); }
+    .s0{ background:#e2e8f0; color:#334155; } .s1{ background:#fef9c3; color:#713f12; }
+    .s2{ background:#ffedd5; color:#9a3412; } .s3{ background:#dcfce7; color:#166534; }
+    .seatName{ flex:1 1 auto; font-size:13px; font-weight:800; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    /* 名單管理 */
+    .roster-wrapper{ max-height: 56vh; overflow:auto; border:1px solid var(--tbl-border); border-radius:12px; padding:10px; background:var(--bg); }
+    .roster-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:8px; }
+    .roster-item{ display:flex; align-items:center; gap:6px; background:var(--card); border:1px solid var(--tbl-border); border-radius:10px; padding:6px; }
+    .badge-no{ min-width:24px; height:24px; border-radius:999px; display:grid; place-items:center; font-weight:900; font-size:12px;
+      background:var(--bg); color:var(--primary); border:1px solid var(--tbl-border); }
+    
+    /* 學生狀態列表 */
+    .student-status-list { list-style-type: none; padding-left: 0; margin-top: 8px; margin-bottom: 0; }
+    .student-status-list li { padding: 8px; border-bottom: 1px solid var(--tbl-border); display: flex; justify-content: space-between; align-items: center; font-size: 14px; cursor: pointer; transition: background-color .2s; }
+    .student-status-list li:hover { background-color: var(--tbl-hover); }
+    .student-status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; align-items: start; }
+
+    /* 登入畫面 */
+    #login-view { text-align: center; padding-top: 10vh; }
+    .main-app { display: none; }
+    .user-info { display: none; align-items: center; gap: 8px; }
   </style>
 </head>
 <body>
+
   <!-- 登入畫面 -->
   <div id="login-view" class="wrap">
-    <div class="card" style="max-width:400px;margin:auto;">
-      <div class="logo" style="margin:0 auto 16px;width:64px;height:64px;font-size:32px;">💎</div>
-      <h2 style="justify-content:center;">作業繳交系統</h2>
-      <p class="muted">請使用 Google 帳號登入，即可在多個裝置間同步您的資料。</p>
-      <div class="actions" style="justify-content:center;">
-        <button class="btn" id="btn-google-login">
-          <svg width="20" height="20" viewBox="0 0 512 512" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M473.16 221.48l-2.26-9.59H262.46v88.22h119.92c-5.4 33.68-23.24 62.42-51.84 81.56v57.17h73.45c42.84-39.52 67.62-98.04 67.62-165.7v-51.66z"/><path d="M262.46 496c65.04 0 119.5-21.36 159.32-57.17l-73.45-57.17c-21.36 14.28-48.78 22.85-85.87 22.85-65.57 0-121.05-44.13-140.92-103.21H48.1v58.9c29.18 57.7 86.4 96.34 159.32 96.34v.02z" fill="#34a853"/><path d="M121.54 301.21c-4.28-12.85-6.85-26.27-6.85-40.12s2.57-27.27 6.85-40.12V162H48.1C32.14 194.21 24 230.85 24 269.9s8.14 75.69 24.1 107.9l73.44-58.59z" fill="#fbbc04"/><path d="M262.46 104.18c35.42 0 67.06 12.28 92 36.57l65.04-65.04C381.96 34.33 327.5 16 262.46 16c-72.92 0-130.14 38.64-159.32 96.34l73.44 58.9c19.87-59.08 75.35-103.22 140.92-103.22z" fill="#ea4335"/></svg>
-          使用 Google 帳號登入
-        </button>
+      <div class="card" style="max-width: 400px; margin: auto;">
+          <div class="logo" style="margin: 0 auto 16px; width:64px; height:64px; font-size:32px;">💎</div>
+          <h2 style="justify-content: center;">作業繳交系統</h2>
+          <p class="muted">請使用 Google 帳號登入，即可在多個裝置間同步您的資料。</p>
+          <div class="actions" style="justify-content: center;">
+              <button class="btn" id="btn-google-login">
+                  <svg width="20" height="20" viewBox="0 0 512 512" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M473.16 221.48l-2.26-9.59H262.46v88.22h119.92c-5.4 33.68-23.24 62.42-51.84 81.56v57.17h73.45c42.84-39.52 67.62-98.04 67.62-165.7v-51.66z"/><path d="M262.46 496c65.04 0 119.5-21.36 159.32-57.17l-73.45-57.17c-21.36 14.28-48.78 22.85-85.87 22.85-65.57 0-121.05-44.13-140.92-103.21H48.1v58.9c29.18 57.7 86.4 96.34 159.32 96.34v.02z" fill="#34a853"/><path d="M121.54 301.21c-4.28-12.85-6.85-26.27-6.85-40.12s2.57-27.27 6.85-40.12V162H48.1C32.14 194.21 24 230.85 24 269.9s8.14 75.69 24.1 107.9l73.44-58.59z" fill="#fbbc04"/><path d="M262.46 104.18c35.42 0 67.06 12.28 92 36.57l65.04-65.04C381.96 34.33 327.5 16 262.46 16c-72.92 0-130.14 38.64-159.32 96.34l73.44 58.9c19.87-59.08 75.35-103.22 140.92-103.22z" fill="#ea4335"/></svg>
+                  使用 Google 帳號登入
+              </button>
+          </div>
+          <textarea id="firebaseConfig" rows="5" placeholder="初次使用請貼上 Firebase 設定檔..." style="margin-top:20px; width: 100%; display:none;"></textarea>
+          <button class="btn ghost sm" id="btn-show-config" style="margin-top:8px;">首次設定</button>
       </div>
-      <textarea id="firebaseConfig" rows="5" placeholder="初次使用請貼上 Firebase 設定檔..." style="margin-top:20px;width:100%;display:none;"></textarea>
-      <button class="btn ghost sm" id="btn-show-config" style="margin-top:8px;">首次設定</button>
-    </div>
   </div>
 
   <!-- 主應用程式畫面 -->
-  <div class="wrap main-app"><!-- JS 注入 --></div>
+  <div class="wrap main-app">
+    <!-- Main content is injected here by JS -->
+  </div>
 
-<script src="./js/firebase-init.js"></script>
-<script src="./js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ============================================================
+  // 全域變數 & 狀態
+  // ============================================================
+  let data = { roster: [], assignments: [] };
+  let currentAssignmentId = null;
+  let firebaseUnsubscribes = [];
+  let sortState = { key: 'id', direction: 'desc' };
+  let currentFilter = 'all';
+
+  // ============================================================
+  // 元素選取 (登入前)
+  // ============================================================
+  const loginView = document.getElementById('login-view');
+  const mainApp = document.querySelector('.main-app');
+  const btnShowConfig = document.getElementById('btn-show-config');
+  const firebaseConfigTextarea = document.getElementById('firebaseConfig');
+  const btnGoogleLogin = document.getElementById('btn-google-login');
+  
+  // 登入後才會選取的元素
+  let userInfo, userName, btnLogout, themeToggle, teacherFilter, views, 
+      navDashboardBtn, navRosterBtn, navStudentStatusBtn, ipTeacherSelect, 
+      ipTeacherCustom, ipTitle, ipDate, btnCreate, assignmentList, 
+      assignmentTableHead, btnExport, fileImport, detailTitle, gridContainer, 
+      rangeSize, rosterEditor, taRosterPaste, btnLoadFromPaste, btnApplyRoster, 
+      studentStatusContainer;
+  
+  // ============================================================
+  // HTML 模板
+  // ============================================================
+  const mainAppHTML = `
+    <header>
+      <div class="brand">
+        <div class="logo">💎</div>
+        <div>
+          <h1><i class="bi bi-journal-check"></i> 作業繳交系統</h1>
+          <div class="muted">狀態循環：灰＝未繳 → 黃＝已繳 → 橘＝需訂正 → 綠＝完成 →（回到）灰</div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="user-info">
+            <span id="user-name" class="badge"></span>
+            <button class="btn warn sm" id="btn-logout">登出</button>
+        </div>
+        <button class="btn ghost" id="theme-toggle" title="切換深色模式"><i class="bi bi-moon-stars-fill"></i></button>
+      </div>
+    </header>
+    <section id="view-dashboard" class="view show">
+      <div class="card">
+        <h2><i class="bi bi-plus-circle-dotted"></i> 建立新作業</h2>
+        <div class="row">
+          <div class="field sm-4"><label for="ipTeacherSelect">老師姓名</label><select id="ipTeacherSelect"><option>彭老師</option><option>謝老師</option><option>石老師</option><option value="custom">自行輸入...</option></select><input id="ipTeacherCustom" type="text" placeholder="請輸入老師姓名" style="display: none; margin-top: 8px;"></div>
+          <div class="field sm-5"><label for="ipTitle">作業名稱</label><input id="ipTitle" type="text" placeholder="例：GOING SEVENTEEN 觀後感" /></div>
+          <div class="field sm-3"><label for="ipDate">日期</label><input id="ipDate" type="date" /></div>
+        </div>
+        <div class="actions"><button class="btn" id="btnCreate"><i class="bi bi-plus-circle"></i> 建立作業</button><button class="btn ghost" id="btnExport"><i class="bi bi-download"></i> 匯出 JSON</button><label class="btn ghost" for="fileImport" style="cursor:pointer;"><i class="bi bi-upload"></i> 匯入 JSON</label><input id="fileImport" type="file" accept="application/json" hidden /></div>
+      </div>
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h2><i class="bi bi-list-task"></i> 作業列表</h2>
+            <div class="field" style="max-width:200px;"><label for="teacherFilter">依老師篩選</label><select id="teacherFilter"></select></div>
+        </div>
+        <div class="table-wrap">
+          <table id="assignmentTable">
+            <thead><tr><th data-sort="date">日期 <i class="bi"></i></th><th data-sort="title">作業名稱 <i class="bi"></i></th><th data-sort="teacher">老師 <i class="bi"></i></th><th>繳交進度</th><th></th></tr></thead>
+            <tbody id="assignmentList"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section id="view-detail" class="view">
+      <div class="card">
+        <div class="assignment-bar"><div class="title" id="detailTitle"></div><div class="legend"><div><span class="dot s0"></span>未繳</div><div><span class="dot s1"></span>已繳</div><div><span class="dot s2"></span>需訂正</div><div><span class="dot s3"></span>完成</div></div></div>
+        <div class="row" style="align-items:center;"><div class="field sm-6"><label for="rangeSize">調整顯示大小</label><input type="range" id="rangeSize" min="40" max="100" value="56"></div></div>
+        <div id="gridContainer" class="grid"></div>
+      </div>
+    </section>
+    <section id="view-roster" class="view">
+      <div class="card">
+        <h2><i class="bi bi-person-lines-fill"></i> 編輯學生名單</h2>
+        <div class="roster-wrapper"><div class="roster-grid" id="rosterEditor"></div></div>
+        <details><summary>或從文字一次貼上 (一行一個姓名)</summary><textarea id="taRosterPaste" rows="10" style="width:100%; margin-top:10px;" placeholder="S.Coups&#10;淨漢..."></textarea><div class="actions" style="justify-content: flex-end;"><button class="btn secondary sm" id="btnLoadFromPaste"><i class="bi bi-clipboard-plus"></i> 從上方文字更新列表</button></div></details>
+        <div class="actions"><button class="btn" id="btnApplyRoster"><i class="bi bi-check-circle"></i> 確認並儲存名單</button></div>
+      </div>
+    </section>
+    <section id="view-student-status" class="view">
+      <div class="card"><h2><i class="bi bi-clipboard2-check"></i> 學生待辦事項</h2><div id="studentStatusContainer"></div></div>
+    </section>
+  `;
+
+  // ============================================================
+  // 資料管理 & Firebase
+  // ============================================================
+  const LOCAL_DATA_KEY_PREFIX = 'homeworkSystemData_';
+  const FIREBASE_CONFIG_KEY = 'homeworkFirebaseConfig';
+  const THEME_KEY = 'homeworkSystemTheme';
+  
+  function getLocalDataKey(userId) { return `${LOCAL_DATA_KEY_PREFIX}${userId}`; }
+  function loadData(userId) { const savedData = localStorage.getItem(getLocalDataKey(userId)); if (savedData) { data = JSON.parse(savedData); } else { data = { roster: [], assignments: [] }; } }
+  function saveData(userId) { if(userId) { localStorage.setItem(getLocalDataKey(userId), JSON.stringify(data)); } }
+  
+  function initFirebase(callback) {
+      let configStr = localStorage.getItem(FIREBASE_CONFIG_KEY);
+      if (firebaseConfigTextarea.value.trim()) { configStr = firebaseConfigTextarea.value.trim(); }
+      if (!configStr) { firebaseConfigTextarea.style.display = 'block'; alert('首次使用，請貼上您的 Firebase 設定檔。'); return; }
+      try {
+          const startIndex = configStr.indexOf('{');
+          const endIndex = configStr.lastIndexOf('}');
+          if (startIndex === -1 || endIndex === -1) throw new Error("設定檔格式不正確。");
+          configStr = configStr.substring(startIndex, endIndex + 1);
+          const config = JSON.parse(configStr);
+          if (!firebase.apps.length) firebase.initializeApp(config);
+          localStorage.setItem(FIREBASE_CONFIG_KEY, configStr);
+          firebaseConfigTextarea.style.display = 'none';
+          callback();
+      } catch (error) { console.error("Firebase 初始化失敗:", error); alert('Firebase 初始化失敗，請檢查設定檔是否正確。');}
+  }
+
+  function handleAuthStateChanged(user) {
+      if (user) {
+          mainApp.innerHTML = mainAppHTML;
+          reselectElements();
+          addMainAppEventListeners();
+          userName.textContent = user.displayName || user.email;
+          userInfo.style.display = 'flex';
+          loginView.style.display = 'none';
+          mainApp.style.display = 'block';
+          ipDate.value = new Date().toISOString().slice(0, 10);
+          loadData(user.uid);
+          attachFirebaseListeners(user.uid);
+      } else {
+          firebaseUnsubscribes.forEach(unsub => unsub());
+          firebaseUnsubscribes = [];
+          if(userInfo) userInfo.style.display = 'none';
+          loginView.style.display = 'block';
+          mainApp.style.display = 'none';
+          data = { roster: [], assignments: [] };
+      }
+  }
+  
+  function signInWithGoogle() {
+      initFirebase(() => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).catch(error => {
+            console.error("Google 登入失敗:", error);
+            alert("Google 登入失敗：" + error.message);
+        });
+      });
+  }
+
+  function signOut() { firebase.auth().signOut(); }
+
+  function attachFirebaseListeners(userId) {
+      const db = firebase.firestore();
+      firebaseUnsubscribes.forEach(unsub => unsub());
+      firebaseUnsubscribes = [];
+      const unsubRoster = db.collection('users').doc(userId).collection('data').doc('roster').onSnapshot(doc => { console.log("Roster updated."); data.roster = doc.exists && doc.data().list ? doc.data().list : []; saveData(userId); renderAll(); }, error => console.error("Roster listener:", error));
+      const unsubAssignments = db.collection('users').doc(userId).collection('assignments').onSnapshot(snapshot => { console.log("Assignments updated."); snapshot.docChanges().forEach(change => { const d = change.doc.data(); const i = data.assignments.findIndex(a => a.id == d.id); if (change.type === 'added' && i === -1) data.assignments.push(d); else if (change.type === 'modified' && i > -1) data.assignments[i] = d; else if (change.type === 'removed' && i > -1) data.assignments.splice(i, 1); }); saveData(userId); renderAll(); }, error => console.error("Assignments listener:", error));
+      firebaseUnsubscribes.push(unsubRoster, unsubAssignments);
+  }
+
+  const db = () => firebase.firestore();
+  const getUid = () => firebase.auth().currentUser?.uid;
+  async function saveRosterToFirebase(newRoster) { const userId = getUid(); if (!userId) return; await db().collection('users').doc(userId).collection('data').doc('roster').set({ list: newRoster }); }
+  async function addAssignmentToFirebase(assignment) { const userId = getUid(); if (!userId) return; await db().collection('users').doc(userId).collection('assignments').doc(String(assignment.id)).set(assignment); }
+  async function deleteAssignmentFromFirebase(assignmentId) { const userId = getUid(); if (!userId) return; await db().collection('users').doc(userId).collection('assignments').doc(String(assignmentId)).delete(); }
+  async function updateAssignmentFieldInFirebase(assignmentId, field, value) { const userId = getUid(); if (!userId) return; await db().collection('users').doc(userId).collection('assignments').doc(String(assignmentId)).update({ [field]: value }); }
+  
+  function renderAll() {
+    if (!getUid()) return;
+    const currentView = document.querySelector('.main-app .view.show');
+    const viewId = currentView ? currentView.id : 'view-dashboard';
+    switch(viewId) {
+        case 'view-dashboard': populateTeacherFilter(); renderDashboard(); break;
+        case 'view-detail': renderDetail(currentAssignmentId); break;
+        case 'view-roster': renderRosterEditor(); break;
+        case 'view-student-status': renderStudentStatus(); break;
+    }
+  }
+  
+  function renderDashboard() { let assignmentsToRender = [...data.assignments]; if (currentFilter !== 'all') { assignmentsToRender = assignmentsToRender.filter(a => a.teacher === currentFilter); } assignmentsToRender.sort((a, b) => { const aVal = a[sortState.key]; const bVal = b[sortState.key]; if (aVal < bVal) return sortState.direction === 'asc' ? -1 : 1; if (aVal > bVal) return sortState.direction === 'asc' ? 1 : -1; return 0; }); document.querySelectorAll('#assignmentTable thead th[data-sort]').forEach(th => { const icon = th.querySelector('i'); th.style.color = 'var(--text-main)'; icon.style.opacity = '0.3'; if (th.dataset.sort === sortState.key) { icon.className = sortState.direction === 'asc' ? 'bi bi-sort-up' : 'bi bi-sort-down'; th.style.color = 'var(--primary)'; icon.style.opacity = '1'; } else { icon.className = 'bi bi-arrow-down-up'; } }); assignmentList.innerHTML = ''; if (assignmentsToRender.length === 0) { assignmentList.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">沒有符合條件的作業。</td></tr>'; return; } assignmentsToRender.forEach(assignment => { const doneCount = (assignment.statuses || []).filter(s => s === 3).length; const totalCount = data.roster.length; const progress = totalCount > 0 ? (doneCount / totalCount) * 100 : 0; const tr = document.createElement('tr'); tr.dataset.id = assignment.id; tr.innerHTML = `<td>${new Date(assignment.id).toLocaleDateString()}</td><td>${assignment.title}</td><td>${assignment.teacher}</td><td><div style="display: flex; align-items: center; gap: 8px;"><progress value="${progress}" max="100"></progress><span>${doneCount}/${totalCount}</span></div></td><td><button class="btn warn sm btn-delete" data-id="${assignment.id}"><i class="bi bi-trash3"></i></button></td>`; assignmentList.appendChild(tr); }); }
+  function populateTeacherFilter() { const teachers = ['all', ...new Set(data.assignments.map(a => a.teacher))]; teacherFilter.innerHTML = teachers.map(t => `<option value="${t}">${t === 'all' ? '所有老師' : t}</option>`).join(''); teacherFilter.value = currentFilter; }
+  function renderDetail(assignmentId) { const assignment = data.assignments.find(a => a.id == assignmentId); if (!assignment) { switchView('view-dashboard'); return; } currentAssignmentId = assignmentId; detailTitle.innerHTML = `<i class="bi bi-journal-bookmark-fill"></i> ${assignment.title} <span class="chip">${assignment.date}</span> <span class="chip">${assignment.teacher}</span>`; gridContainer.innerHTML = ''; data.roster.forEach((name, index) => { const status = (assignment.statuses || [])[index] || 0; const seatItem = document.createElement('div'); seatItem.className = 'seatItem'; seatItem.innerHTML = `<div class="seat s${status}" data-index="${index}">${index + 1}</div><div class="seatName"><span class="seatNo">${index+1}.</span> ${name}</div>`; gridContainer.appendChild(seatItem); }); }
+  function renderRosterEditor() { rosterEditor.innerHTML = ''; data.roster.forEach((name, index) => { const item = document.createElement('div'); item.className = 'roster-item'; item.innerHTML = `<div class="badge-no">${index + 1}</div><input type="text" value="${name}" data-index="${index}" class="roster-name-input">`; rosterEditor.appendChild(item); }); taRosterPaste.value = ''; }
+  function renderStudentStatus() { studentStatusContainer.innerHTML = ''; if (data.roster.length === 0) { studentStatusContainer.innerHTML = '<p>名單中沒有學生。</p>'; return; } const pendingStudents = []; const completedStudentNumbers = []; data.roster.forEach((studentName, studentIndex) => { const assignmentsForStudent = []; let hasPending = false; data.assignments.forEach(assignment => { const status = (assignment.statuses || [])[studentIndex]; if (status === 0 || status === 2) { hasPending = true; assignmentsForStudent.push({ id: assignment.id, title: assignment.title, status: status }); } }); if (hasPending) { pendingStudents.push({ name: studentName, index: studentIndex, assignments: assignmentsForStudent }); } else { completedStudentNumbers.push(studentIndex + 1); } }); const summaryCard = document.createElement('div'); summaryCard.className = 'card'; summaryCard.style.marginBottom = '20px'; let summaryHTML = '<h2><i class="bi bi-check2-all"></i> 完成狀況</h2>'; if (completedStudentNumbers.length > 0) { summaryHTML += `<p style="color: var(--success); font-weight: bold; margin: 8px 0; font-size: 15px;">已完成所有作業的學生座號： ${completedStudentNumbers.join('、')}</p>`; } else { summaryHTML += '<p style="margin: 8px 0;">目前沒有學生完成所有作業。</p>'; } summaryCard.innerHTML = summaryHTML; studentStatusContainer.appendChild(summaryCard); if (pendingStudents.length > 0) { const pendingTitle = document.createElement('h2'); pendingTitle.style.cssText = 'font-size: 16px; margin-bottom: 12px;'; pendingTitle.innerHTML = '<i class="bi bi-exclamation-triangle"></i> 尚有作業待完成'; studentStatusContainer.appendChild(pendingTitle); const gridWrapper = document.createElement('div'); gridWrapper.className = 'student-status-grid'; pendingStudents.forEach(student => { const studentCard = document.createElement('div'); studentCard.className = 'card'; studentCard.style.marginBottom = '0'; let assignmentsHTML = '<ul class="student-status-list">'; student.assignments.forEach(pa => { const statusText = pa.status === 0 ? '未繳' : '需訂正'; const pillClass = pa.status === 0 ? 'p-gray' : 'p-orange'; assignmentsHTML += `<li data-assignment-id="${pa.id}" data-student-index="${student.index}">${pa.title} <span class="pill ${pillClass}">${statusText}</span></li>`; }); assignmentsHTML += '</ul>'; studentCard.innerHTML = `<h2 style="font-size: 18px; margin-bottom: 4px; font-weight: bold;"><i class="bi bi-person"></i> <span style="color: var(--danger);">${student.index + 1}.</span> ${student.name}</h2>${assignmentsHTML}`; gridWrapper.appendChild(studentCard); }); studentStatusContainer.appendChild(gridWrapper); } else if (data.roster.length > 0) { const allDoneMessage = document.createElement('div'); allDoneMessage.innerHTML = '<p style="text-align: center; font-size: 18px; font-weight: bold; margin-top: 20px;">🎉 太棒了！全班都完成了所有作業！ 🎉</p>'; studentStatusContainer.appendChild(allDoneMessage); } }
+
+  function switchView(targetId) {
+      views.forEach(view => { view.classList.toggle('show', view.id === targetId); });
+  }
+
+  // ============================================================
+  // 事件監聽
+  // ============================================================
+  btnShowConfig.addEventListener('click', () => { firebaseConfigTextarea.style.display = 'block'; });
+  btnGoogleLogin.addEventListener('click', signInWithGoogle);
+
+  function addMainAppEventListeners() {
+      btnLogout.addEventListener('click', signOut);
+      navDashboardBtn.addEventListener('click', () => switchView('view-dashboard'));
+      navRosterBtn.addEventListener('click', () => { renderRosterEditor(); switchView('view-roster'); });
+      navStudentStatusBtn.addEventListener('click', () => { renderStudentStatus(); switchView('view-student-status'); });
+      ipTeacherSelect.addEventListener('change', () => { ipTeacherCustom.style.display = ipTeacherSelect.value === 'custom' ? 'block' : 'none'; });
+      btnCreate.addEventListener('click', () => { let teacher = ipTeacherSelect.value === 'custom' ? ipTeacherCustom.value.trim() : ipTeacherSelect.value; const title = ipTitle.value.trim(); const date = ipDate.value; if (!teacher || !title || !date) { alert('老師姓名、作業名稱和日期為必填項目！'); return; } const newAssignment = { id: Date.now(), teacher, title, date, statuses: Array(data.roster.length).fill(0) }; addAssignmentToFirebase(newAssignment); ipTitle.value = ''; ipTeacherSelect.selectedIndex = 0; ipTeacherCustom.value = ''; ipTeacherCustom.style.display = 'none'; });
+      assignmentList.addEventListener('click', (e) => { const tr = e.target.closest('tr'); const deleteBtn = e.target.closest('.btn-delete'); if (deleteBtn) { if (confirm('確定要刪除這份作業嗎？')) deleteAssignmentFromFirebase(deleteBtn.dataset.id); } else if (tr) { currentAssignmentId = tr.dataset.id; switchView('view-detail'); renderDetail(currentAssignmentId); } });
+      gridContainer.addEventListener('click', (e) => { const seat = e.target.closest('.seat'); if (!seat) return; const studentIndex = parseInt(seat.dataset.index); const assignment = data.assignments.find(a => a.id == currentAssignmentId); if (!assignment) return; let currentStatus = (assignment.statuses || [])[studentIndex] || 0; const newStatus = (currentStatus + 1) % 4; const newStatuses = [...(assignment.statuses || Array(data.roster.length).fill(0))]; newStatuses[studentIndex] = newStatus; updateAssignmentFieldInFirebase(currentAssignmentId, 'statuses', newStatuses); });
+      studentStatusContainer.addEventListener('click', (e) => { const li = e.target.closest('.student-status-list li'); if (!li) return; const assignmentId = li.dataset.assignmentId; const studentIndex = parseInt(li.dataset.studentIndex, 10); const assignment = data.assignments.find(a => a.id == assignmentId); if (!assignment) return; let currentStatus = (assignment.statuses || [])[studentIndex] || 0; const newStatus = (currentStatus + 1) % 4; const newStatuses = [...(assignment.statuses || [])]; newStatuses[studentIndex] = newStatus; updateAssignmentFieldInFirebase(assignmentId, 'statuses', newStatuses); });
+      assignmentTableHead.addEventListener('click', (e) => { const th = e.target.closest('th'); if (!th || !th.dataset.sort) return; const key = th.dataset.sort; if (sortState.key === key) { sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc'; } else { sortState.key = key; sortState.direction = 'asc'; } renderDashboard(); });
+      teacherFilter.addEventListener('change', (e) => { currentFilter = e.target.value; renderDashboard(); });
+      themeToggle.addEventListener('click', () => { const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', newTheme); localStorage.setItem(THEME_KEY, newTheme); updateThemeIcon(newTheme); });
+      rangeSize.addEventListener('input', (e) => { const newSize = e.target.value; document.documentElement.style.setProperty('--seat', `${newSize}px`); document.documentElement.style.setProperty('--seat-font', `${Math.floor(newSize * 0.3)}px`); });
+      btnLoadFromPaste.addEventListener('click', () => { const pastedText = taRosterPaste.value.trim(); if (!pastedText) return; const newRoster = pastedText.split('\n').map(name => name.trim()).filter(Boolean); rosterEditor.innerHTML = ''; newRoster.forEach((name, index) => { const item = document.createElement('div'); item.className = 'roster-item'; item.innerHTML = `<div class="badge-no">${index + 1}</div><input type="text" value="${name}" data-index="${index}" class="roster-name-input">`; rosterEditor.appendChild(item); }); taRosterPaste.value = ''; alert('列表已更新，請確認後儲存。'); });
+      btnApplyRoster.addEventListener('click', () => { const newRoster = Array.from(document.querySelectorAll('.roster-name-input')).map(input => input.value.trim()).filter(Boolean); if (confirm('更新名單會影響所有作業，是否繼續？')) { const userId = getUid(); if (!userId) { alert("請先連接 Firebase"); return; } const batch = db().batch(); data.assignments.forEach(a => { const oldStatuses = [...(a.statuses || [])]; const newStatuses = Array(newRoster.length).fill(0); for (let i=0; i < newRoster.length; i++) { if(oldStatuses[i] !== undefined) newStatuses[i] = oldStatuses[i]; } const docRef = db().collection('users').doc(userId).collection('assignments').doc(String(a.id)); batch.update(docRef, { statuses: newStatuses }); }); saveRosterToFirebase(newRoster).then(() => { batch.commit().then(() => alert('名單已更新並同步！')); }); }});
+      btnExport.addEventListener('click', () => { const dataStr = JSON.stringify({roster: data.roster, assignments: data.assignments}, null, 2); const blob = new Blob([dataStr], {type: 'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `homework-data.json`; a.click(); URL.revokeObjectURL(url); });
+      fileImport.addEventListener('change', (e) => { const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = async (event) => { try { const importedData = JSON.parse(event.target.result); if (importedData.roster && importedData.assignments) { if (confirm('匯入資料將覆蓋雲端備份，確定嗎？')) { const userId = getUid(); if(!userId) { alert("請先連接 Firebase"); return; } const assignmentsRef = db().collection('users').doc(userId).collection('assignments'); const snapshot = await assignmentsRef.get(); const batch = db().batch(); snapshot.docs.forEach(doc => batch.delete(doc.ref)); importedData.assignments.forEach(a => { const docRef = assignmentsRef.doc(String(a.id)); batch.set(docRef, a); }); await saveRosterToFirebase(importedData.roster); await batch.commit(); alert('資料匯入並同步成功！'); } } else { alert('檔案格式不符。'); } } catch (err) { alert('讀取檔案錯誤。'); console.error(err); } }; reader.readAsText(file); e.target.value = ''; });
+  }
+
+  function updateThemeIcon(theme) { 
+      if(themeToggle) {
+          themeToggle.innerHTML = theme === 'dark' ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>'; 
+      }
+  }
+  
+  function reselectElements() {
+      userInfo = document.querySelector('.user-info');
+      userName = document.getElementById('user-name');
+      btnLogout = document.getElementById('btn-logout');
+      themeToggle = document.getElementById('theme-toggle');
+      teacherFilter = document.getElementById('teacherFilter');
+      views = document.querySelectorAll('.main-app .view');
+      navDashboardBtn = document.getElementById('btnNavDashboard');
+      navRosterBtn = document.getElementById('btnNavRoster');
+      navStudentStatusBtn = document.getElementById('btnNavStudentStatus');
+      ipTeacherSelect = document.getElementById('ipTeacherSelect');
+      ipTeacherCustom = document.getElementById('ipTeacherCustom');
+      ipTitle = document.getElementById('ipTitle');
+      ipDate = document.getElementById('ipDate');
+      btnCreate = document.getElementById('btnCreate');
+      assignmentList = document.getElementById('assignmentList');
+      assignmentTableHead = document.querySelector('#assignmentTable thead');
+      btnExport = document.getElementById('btnExport');
+      fileImport = document.getElementById('fileImport');
+      detailTitle = document.getElementById('detailTitle');
+      gridContainer = document.getElementById('gridContainer');
+      rangeSize = document.getElementById('rangeSize');
+      rosterEditor = document.getElementById('rosterEditor');
+      taRosterPaste = document.getElementById('taRosterPaste');
+      btnLoadFromPaste = document.getElementById('btnLoadFromPaste');
+      btnApplyRoster = document.getElementById('btnApplyRoster');
+      studentStatusContainer = document.getElementById('studentStatusContainer');
+  }
+
+  // ============================================================
+  // 初始化
+  // ============================================================
+  function init() {
+    const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    // Auth listeners are always available
+    btnShowConfig.addEventListener('click', () => { firebaseConfigTextarea.style.display = 'block'; });
+    btnGoogleLogin.addEventListener('click', signInWithGoogle);
+
+    initFirebase(() => {
+        firebase.auth().onAuthStateChanged(handleAuthStateChanged);
+    });
+  }
+
+  init();
+});
+</script>
 </body>
 </html>
 
