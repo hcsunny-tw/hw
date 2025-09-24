@@ -412,6 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnShowConfig.addEventListener('click', () => { firebaseConfigTextarea.style.display = 'block'; });
     btnGoogleLogin.addEventListener('click', signInWithGoogle);
 
+    // Initialize Firebase and set up the auth state listener
     initFirebase(() => {
         firebase.auth().onAuthStateChanged(handleAuthStateChanged);
     });
