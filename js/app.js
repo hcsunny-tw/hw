@@ -14,7 +14,7 @@
   const mainApp = document.querySelector('.main-app');
 
   let userInfo, userName, btnLogout, themeToggle, teacherFilter, views,
-      navDashboardBtn, navRosterBtn, navStudentStatusBtn,
+      navDashboardBtn, navRosterBtn, navStudentStatusBtn, // <-- 宣告導覽按鈕
       ipTeacherSelect, ipTeacherCustom, ipTitle, ipDate, btnCreate,
       assignmentList, assignmentTableHead, btnExport, fileImport,
       detailTitle, gridContainer, rangeSize, rosterEditor,
@@ -39,6 +39,11 @@
       </div>
     </header>
 
+    <nav class="main-nav">
+      <button class="btn active" id="btnNavDashboard"><i class="bi bi-grid-1x2-fill"></i> 作業儀表板</button>
+      <button class="btn" id="btnNavRoster"><i class="bi bi-person-lines-fill"></i> 編輯學生名單</button>
+      <button class="btn" id="btnNavStudentStatus"><i class="bi bi-clipboard2-check-fill"></i> 學生待辦事項</button>
+    </nav>
     <section id="view-dashboard" class="view show">
       <div class="card">
         <h2><i class="bi bi-plus-circle-dotted"></i> 建立新作業</h2>
@@ -360,12 +365,33 @@
     views.forEach(v => v.classList.toggle('show', v.id === id));
   }
 
+  // ========= START: 修正的事件處理 =========
   // 事件（全部「存在才綁」）
   function addMainAppEventListeners() {
     safeOn(btnLogout, 'click', () => window.__auth.signOut());
-    safeOn(navDashboardBtn, 'click', () => switchView('view-dashboard'));
-    safeOn(navRosterBtn, 'click', () => { renderRosterEditor(); switchView('view-roster'); });
-    safeOn(navStudentStatusBtn, 'click', () => { renderStudentStatus(); switchView('view-student-status'); });
+
+    // 導覽按鈕的 Active 狀態管理
+    function updateNavActiveState(activeBtn) {
+      [navDashboardBtn, navRosterBtn, navStudentStatusBtn].forEach(btn => {
+        if (btn) btn.classList.toggle('active', btn === activeBtn);
+      });
+    }
+
+    safeOn(navDashboardBtn, 'click', () => {
+      switchView('view-dashboard');
+      updateNavActiveState(navDashboardBtn);
+    });
+    safeOn(navRosterBtn, 'click', () => {
+      renderRosterEditor();
+      switchView('view-roster');
+      updateNavActiveState(navRosterBtn);
+    });
+    safeOn(navStudentStatusBtn, 'click', () => {
+      renderStudentStatus();
+      switchView('view-student-status');
+      updateNavActiveState(navStudentStatusBtn);
+    });
+    // ========= END: 修正的事件處理 =========
 
     safeOn(ipTeacherSelect, 'change', () => {
       if (ipTeacherCustom) ipTeacherCustom.style.display = ipTeacherSelect.value === 'custom' ? 'block' : 'none';
@@ -394,6 +420,8 @@
         currentAssignmentId = tr.dataset.id;
         switchView('view-detail');
         renderDetail(currentAssignmentId);
+        // 當從列表跳轉到詳細頁時，沒有對應的主導覽按鈕，所以取消所有按鈕的 active 狀態
+        updateNavActiveState(null);
       }
     });
 
