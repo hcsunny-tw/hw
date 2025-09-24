@@ -16,6 +16,31 @@
     /* ============================================================
        💎 藍色與藍綠色主題
        ============================================================ */
+    /* main-nav.css */
+.main-nav {
+  display: flex;
+  gap: 8px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.main-nav .btn {
+  border-radius: 4px 4px 0 0;
+  border-bottom: 0;
+  background: transparent;
+  color: var(--text-muted);
+  position: relative;
+  top: 1px; /* 為了蓋住底線 */
+  border-color: transparent;
+}
+
+.main-nav .btn.active {
+  background: var(--bg-card);
+  color: var(--primary);
+  border-color: var(--border);
+  border-bottom-color: var(--bg-card);
+}
     :root{
       --bg:#f0f9ff; --card:#fff; --muted:#64748b;
       --primary:#3b82f6; --accent:#14b8a6; --success:#22c55e; --danger:#ef4444;
@@ -422,4 +447,5 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
