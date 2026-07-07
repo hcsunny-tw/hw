@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>釜山 7 天 6 夜漫遊｜涵晴脈脈 姊妹淘 (V17)</title>
+    <!-- 韓國國旗 Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇰🇷</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Montserrat:wght@600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --busan-blue: #074a91;
+            --bestie-pink: #f472b6;
+            --busan-accent: #3b82f6;
+        }
+        body { 
+            font-family: 'Inter', 'Noto Sans TC', sans-serif; 
+            background-color: #f1f5f9; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hero-bg {
+            background: linear-gradient(rgba(7, 74, 145, 0.8), rgba(7, 74, 145, 0.95)), url('https://images.unsplash.com/photo-1578922746465-3a80a228f223?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover; background-position: center;
+        }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-out; }
+        
+        .tab-btn.active { background-color: #2563eb; color: white; border-color: #2563eb; }
+        .tab-btn.phrase-active { background-color: #9333ea; color: white; border-color: #9333ea; }
+        .tab-btn.currency-active { background-color: #eab308; color: white; border-color: #eab308; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .compact-card { background-color: white; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 12px; }
+        .hotel-card { background-color: #eff6ff; border: 1px solid #dbeafe; border-radius: 8px; padding: 6px 12px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; color: #1d4ed8; }
+        .nav-icon { color: #22c55e; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background-color: #f0fdf4; border-radius: 50%; }
+        
+        .meal-nav { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
+        .meal-pill { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9999px; font-size: 10px; font-weight: 700; white-space: nowrap; border: 1px solid; }
+        .meal-pill.breakfast { background-color: #fff7ed; color: #ea580c; border-color: #ffedd5; }
+        .meal-pill.lunch { background-color: #f0fdf4; color: #16a34a; border-color: #dcfce7; }
+        .meal-pill.dinner { background-color: #fff1f2; color: #e11d48; border-color: #ffe4e6; }
+
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4); }
+            50% { transform: scale(1.03); box-shadow: 0 0 0 8px rgba(168, 85, 247, 0); }
+        }
+        .playing { animation: pulse-soft 1.2s infinite ease-in-out; border-color: #a855f7 !important; background-color: #faf5ff !important; }
+
+        .toast {
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.9); color: white; padding: 10px 20px;
+            border-radius: 99px; font-size: 12px; font-weight: bold; z-index: 1000;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(8px); display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); white-space: nowrap;
+        }
+        .toast.show { bottom: 24px; }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+    <div id="loading-overlay" class="fixed inset-0 bg-white/70 backdrop-blur-sm z-[100] hidden items-center justify-center">
+        <div class="flex flex-col items-center">
+            <div class="animate-spin rounded-full h-10 w-10 border-4 border-purple-600 border-t-transparent mb-3"></div>
+            <p class="text-sm font-bold text-purple-700 animate-pulse" id="loading-text">載入中...</p>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"><i class="fa-solid fa-circle-check text-green-400"></i> <span id="toast-msg"></span></div>
+
+    <header class="hero-bg h-36 flex flex-col justify-end p-5 text-white relative">
+        <div class="absolute top-4 right-4 flex gap-2">
+            <a href="https://my.map.naver.com/" target="_blank" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-400 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="我的 Naver Map 清單">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </a>
+            <button onclick="switchTab('currency', document.getElementById('currency-tab'))" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+                <i class="fa-solid fa-won-sign"></i>
+            </button>
+            <button onclick="switchTab('phrases', document.getElementById('phrase-tab'))" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-purple-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+                <i class="fa-solid fa-language"></i>
+            </button>
+        </div>
+        <div class="max-w-md mx-auto w-full">
+            <h1 class="text-xl font-black font-[Montserrat] uppercase tracking-tighter flex items-center gap-1.5">
+                <i class="fa-solid fa-heart text-pink-400 text-sm animate-pulse"></i> Busan Besties
+            </h1>
+            <div class="flex justify-between items-end mt-0.5">
+                <p class="text-[9px] opacity-80 tracking-widest uppercase border-l border-white/30 pl-2">涵晴脈脈 · 2026 閨密漫遊 (V17)</p>
+                <span class="text-[9px] bg-white/20 border border-white/30 px-2 py-0.5 rounded-full font-bold">48H VBP</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="sticky top-0 z-50 bg-white shadow-md border-b border-slate-100">
+        <div class="max-w-md mx-auto flex items-center px-3 py-2.5 gap-1.5 overflow-x-auto no-scrollbar snap-x" id="nav-container">
+            <button onclick="switchTab('prep', this)" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all active">準備</button>
+            <div class="w-[1px] h-4 bg-slate-200 shrink-0"></div>
+            <button onclick="switchTab('day1', this)" id="nav-day1" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all">D1</button>
+            <button onclick="switchTab('day2', this)" id="nav-day2" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all">D2</button>
+            <button onclick="switchTab('day3', this)" id="nav-day3" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all">D3</button>
+            <button onclick="switchTab('day4', this)" id="nav-day4" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all">D4</button>
+            <button onclick="switchTab('day5', this)" id="nav-day5" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all">D5</button>
+            <button onclick="switchTab('day6', this)" id="nav-day6" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all">D6</button>
+            <button onclick="switchTab('day7', this)" id="nav-day7" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all">D7</button>
+            <div class="w-[1px] h-4 bg-slate-200 shrink-0"></div>
+            <button onclick="switchTab('phrases', this)" id="phrase-tab" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all hidden md:block">韓語</button>
+            <button onclick="switchTab('currency', this)" id="currency-tab" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all hidden md:block">匯率</button>
+        </div>
+    </nav>
+
+    <main class="max-w-md mx-auto w-full flex-grow p-4 pb-20">
+
+        <section id="currency-content" class="tab-content space-y-4">
+            <div class="flex items-center gap-2 mb-2">
+                <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                </div>
+                <div>
+                    <h2 class="text-base font-extrabold text-slate-700">即時匯率換算</h2>
+                    <p class="text-[10px] text-slate-400">參考匯率: 1 KRW ≈ 0.024 TWD</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 relative">
+                <div class="absolute left-6 top-[60px] bottom-[60px] w-0.5 bg-slate-100 z-0"></div>
+                <div class="absolute left-[13px] top-1/2 -translate-y-1/2 w-7 h-7 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 z-10 shadow-sm">
+                    <i class="fa-solid fa-arrow-right-arrow-left rotate-90 text-[10px]"></i>
+                </div>
+
+                <div class="relative z-10 space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0">
+                            <span class="font-black text-sm">🇰🇷</span>
+                        </div>
+                        <div class="flex-grow">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">韓元 (KRW) ₩</label>
+                            <input type="number" id="krw-input" placeholder="0" class="w-full text-2xl font-black text-slate-800 bg-transparent border-none p-0 focus:ring-0 placeholder-slate-200" oninput="convertCurrency('krw')">
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0">
+                            <span class="font-black text-sm">🇹🇼</span>
+                        </div>
+                        <div class="flex-grow">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">新台幣 (TWD) $</label>
+                            <input type="number" id="twd-input" placeholder="0" class="w-full text-2xl font-black text-slate-800 bg-transparent border-none p-0 focus:ring-0 placeholder-slate-200" oninput="convertCurrency('twd')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-2 mt-4">
+                <button onclick="setKRW(1000)" class="bg-yellow-50 text-yellow-700 py-2 rounded-xl text-xs font-bold border border-yellow-100 active:scale-95 transition-transform">₩ 1,000</button>
+                <button onclick="setKRW(5000)" class="bg-yellow-50 text-yellow-700 py-2 rounded-xl text-xs font-bold border border-yellow-100 active:scale-95 transition-transform">₩ 5,000</button>
+                <button onclick="setKRW(10000)" class="bg-yellow-50 text-yellow-700 py-2 rounded-xl text-xs font-bold border border-yellow-100 active:scale-95 transition-transform">₩ 10,000</button>
+                <button onclick="setKRW(50000)" class="bg-yellow-50 text-yellow-700 py-2 rounded-xl text-xs font-bold border border-yellow-100 active:scale-95 transition-transform">₩ 50,000</button>
+            </div>
+            
+            <div class="bg-slate-50 p-4 rounded-xl mt-4 border border-slate-100">
+                 <h3 class="text-xs font-bold text-slate-600 mb-2"><i class="fa-solid fa-lightbulb text-yellow-400 mr-1"></i> 韓國購物小常識</h3>
+                 <p class="text-[10px] text-slate-500 leading-relaxed">
+                     韓國物價通常標示為「1.0」代表一萬韓元（約台幣240元）。<br>
+                     看到標價，可以直接**「去掉兩個零，再乘以 2.4」**，就能超快心算出台幣大約價格喔！
+                 </p>
+            </div>
+        </section>
+
+        <section id="prep-content" class="tab-content active space-y-4">
+            <!-- (D0 Content remains largely the same, optimized for space) -->
+            <div class="bg-slate-900 text-white rounded-2xl p-4 shadow-lg relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 opacity-10"><i class="fa-solid fa-plane text-8xl"></i></div>
+                <div class="relative z-10">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[10px] bg-yellow-400 text-black px-2 py-0.5 rounded font-black">【去程】易斯達 ZE 988</span>
+                        <span class="text-[10px] text-slate-300">07.15 (週三)</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="text-left">
+                            <p class="text-2xl font-black text-yellow-400 leading-none">02:25</p>
+                            <p class="text-[9px] text-slate-400 mt-1">桃園 TPE T1</p>
+                        </div>
+                        <div class="flex-grow border-t-2 border-dashed border-slate-700 mx-4 relative">
+                            <i class="fa-solid fa-plane absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-slate-500"></i>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-black text-yellow-400 leading-none">06:05</p>
+                            <p class="text-[9px] text-slate-400 mt-1">釜山 PUS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                <h3 class="text-[10px] font-black text-slate-400 mb-3 uppercase tracking-widest">核取清單 CheckList</h3>
+                <div class="grid grid-cols-1 gap-3">
+                    <label class="flex items-center gap-3 text-[13px] text-slate-600">
+                        <input type="checkbox" id="check1" onchange="saveChecks()" class="custom-checkbox"> 護照 (確認效期 6 個月以上)
+                    </label>
+                    <label class="flex items-center gap-3 text-[13px] text-slate-600">
+                        <input type="checkbox" id="check2" onchange="saveChecks()" class="custom-checkbox"> Visit Busan Pass (實體/QR)
+                    </label>
+                    <label class="flex items-center gap-3 text-[13px] text-slate-600">
+                        <input type="checkbox" id="check3" onchange="saveChecks()" class="custom-checkbox"> 韓國網卡/eSIM (截圖開通說明)
+                    </label>
+                    <label class="flex items-center gap-3 text-[13px] text-slate-600">
+                        <input type="checkbox" id="check4" onchange="saveChecks()" class="custom-checkbox"> T-Money / WOWPASS 儲值卡
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section id="day1-content" class="tab-content space-y-3">
+            <div class="flex justify-between items-baseline mb-2">
+                <h2 class="text-xl font-extrabold text-blue-600">Day 1 <span class="text-xs font-normal text-slate-400 ml-1">07.15 (週三)</span></h2>
+                <a href="https://map.naver.com/v5/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
+            </div>
+
+            <div class="meal-nav">
+                <a href="https://map.naver.com/v5/search/송정3대국밥" target="_blank" class="meal-pill breakfast"><i class="fa-solid fa-mug-hot"></i> B: 松亭豬肉湯飯</a>
+                <a href="https://map.naver.com/v5/search/전포카페거리" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: 田浦選物/午茶</a>
+                <a href="https://map.naver.com/v5/search/맛찬들왕소금구이 서면점" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-fire-burner"></i> D: 味贊王烤肉</a>
+            </div>
+
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-blue-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">06:05</span>
+                        <div>
+                            <h3 class="font-bold text-sm">落地釜山金海機場</h3>
+                            <p class="text-[10px] text-slate-500">輕軌轉地鐵至西面站 (約 50 分)</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/서면역" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:30</span>
+                        <div>
+                            <h3 class="font-bold text-sm">松亭 3 代豬肉湯飯</h3>
+                            <p class="text-[10px] text-slate-500">24H 暖胃回血、避開排隊</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/송정3대국밥" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+            
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">西面商圈 & Olive Young</h3>
+                            <p class="text-[10px] text-slate-500">10:00-22:30 | 第一波藥妝掃貨</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/올리브영 서면" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-blue-400">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-blue-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">20:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">味贊王烤肉 (西面店)</h3>
+                            <p class="text-[10px] text-slate-500">11:30-23:00 | 3.5公分厚切豬五花</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/맛찬들왕소금구이 서면점" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="day2-content" class="tab-content space-y-3">
+            <div class="flex justify-between items-baseline mb-2">
+                <h2 class="text-xl font-extrabold text-teal-600">Day 2 <span class="text-xs font-normal text-slate-400 ml-1">07.16 (週四)</span></h2>
+                <a href="https://map.naver.com/v5/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
+            </div>
+            
+            <div class="meal-nav">
+                <a href="https://map.naver.com/v5/search/이재모피자 본점" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: 李在模 Pizza (黃金避排隊時段)</a>
+                <a href="https://map.naver.com/v5/search/밀양순대돼지국밥" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-fire-burner"></i> D: 密陽豬肉湯飯</a>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-teal-400">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-teal-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm text-teal-800">李在模 Pizza 本店</h3>
+                            <p class="text-[10px] text-slate-500">避開中午尖峰，吃神級牽絲起司</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/이재모피자 본점" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-cyan-400">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">松島海上纜車 & 雲橋</h3>
+                            <p class="text-[10px] text-slate-500">VBP (1) 啟動！享受跨海絕美視野</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/송도해상케이블카" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+            
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:30</span>
+                        <div>
+                            <h3 class="font-bold text-sm">南浦洞 & BIFF廣場</h3>
+                            <p class="text-[10px] text-slate-500">逛街買衣服，吃元祖黑糖餅</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="day3-content" class="tab-content space-y-3">
+            <div class="flex justify-between items-baseline mb-2">
+                <h2 class="text-xl font-extrabold text-rose-500">Day 3 <span class="text-xs font-normal text-slate-400 ml-1">07.17 (週五)</span></h2>
+                <a href="https://map.naver.com/v5/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
+            </div>
+            
+            <div class="meal-nav">
+                <a href="https://map.naver.com/v5/search/롯데프리미엄아울렛 동부산점" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: Outlet 美食街</a>
+                <a href="https://map.naver.com/v5/search/해운대 배달" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-fire-burner"></i> D: 自由安排/汗蒸幕蛋</a>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-rose-400">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-rose-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">08:30</span>
+                        <div>
+                            <div class="flex items-center gap-1">
+                                <h3 class="font-bold text-sm">天空膠囊列車</h3>
+                                <span class="text-[8px] bg-red-100 text-red-600 px-1 py-0.2 rounded font-black border border-red-200">🚩 已預約</span>
+                            </div>
+                            <p class="text-[10px] text-slate-500">青沙浦出發 ➔ 尾浦 (拍晨光海景)</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/청사포정거장" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-cyan-400">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">Skyline Luge 斜坡滑車</h3>
+                            <p class="text-[10px] text-slate-500">VBP (2) | 在 Outlet 對面，瘋狂飆車！</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/스카이라인루지 부산" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+            
+            <div class="compact-card border-l-4 border-l-cyan-400">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">15:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">Spa Land 五星汗蒸幕</h3>
+                            <p class="text-[10px] text-slate-500">VBP (3) | 徹底舒緩，吃烤蛋喝米釀</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/스파랜드" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="day4-content" class="tab-content space-y-3">
+            <div class="flex justify-between items-baseline mb-2">
+                <h2 class="text-xl font-extrabold text-indigo-600">Day 4 <span class="text-xs font-normal text-slate-400 ml-1">07.18 (週六)</span></h2>
+                <a href="https://map.naver.com/v5/search/더블유 레지던스 호텔 해운대" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-indigo-400"></i> 住宿：W Residence Hotel 海雲臺</a>
+            </div>
+            
+            <div class="meal-nav">
+                <a href="https://map.naver.com/v5/search/밀락더마켓" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: Millac 市集美食</a>
+                <a href="https://map.naver.com/v5/search/해운대시장" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-utensils"></i> D: 海雲台市場</a>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-cyan-400">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:30</span>
+                        <div>
+                            <h3 class="font-bold text-sm">Busan X the SKY 觀景台</h3>
+                            <p class="text-[10px] text-slate-500">VBP (4) | 13:00 過期前壓線刷卡進場！</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/부산엑스더스카이" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+            
+            <div class="compact-card border-l-4 border-l-indigo-400">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-indigo-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">19:00</span>
+                        <div>
+                            <div class="flex items-center gap-1">
+                                <h3 class="font-bold text-sm">鑽石灣遊艇夜遊</h3>
+                                <span class="text-[8px] bg-red-100 text-red-600 px-1 py-0.2 rounded font-black border border-red-200">🚩需預約</span>
+                            </div>
+                            <p class="text-[10px] text-slate-500">超浪漫！看完接 20:00 廣安里無人機秀</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/다이아몬드베이" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="day5-content" class="tab-content space-y-3">
+            <div class="flex justify-between items-baseline mb-2">
+                <h2 class="text-xl font-extrabold text-violet-600">Day 5 <span class="text-xs font-normal text-slate-400 ml-1">07.19 (週日)</span></h2>
+                <a href="https://map.naver.com/v5/search/호텔1 광안리" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-violet-400"></i> 住宿：Gwanganli Hotel 1 (晴)</a>
+            </div>
+
+            <div class="bg-sky-50 border border-sky-100 rounded-xl p-3 mb-3">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-[10px] bg-sky-500 text-white px-2 py-0.5 rounded font-black">【回程-涵】大韓航空 KE2085</span>
+                    <span class="text-[10px] text-sky-700 italic">09:00 ➔ 10:30 (TPE)</span>
+                </div>
+                <p class="text-[10px] text-sky-800 font-medium">涵早上搭機回台，台灣見囉！👋</p>
+            </div>
+
+            <div class="compact-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="font-bold text-sm text-violet-700 italic">閨密分流點 / 晴 獨旅充電</h3>
+                        <p class="text-[10px] text-slate-500 mt-1">【晴】前往廣安里寄行李、入住海景網美 Hotel 1，下午在海景咖啡廳發發呆。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="day6-content" class="tab-content space-y-3">
+            <div class="flex justify-between items-baseline mb-2">
+                <h2 class="text-xl font-extrabold text-slate-700">Day 6 <span class="text-xs font-normal text-slate-400 ml-1">07.20 (週一)</span></h2>
+                <a href="https://map.naver.com/v5/search/에이치에비뉴 서면역점" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-slate-400"></i> 住宿：H-AVENUE Hotel 西面站</a>
+            </div>
+            
+            <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 mb-4">
+                <h3 class="text-sm font-bold text-pink-400 flex items-center gap-2 font-[Montserrat]"><i class="fa-solid fa-bag-shopping"></i> FINAL MISSION:</h3>
+                <ul class="text-[11px] opacity-80 space-y-1">
+                    <li>• <b>西面醫美</b>：皮秒雷射除斑 (🚩預約制)</li>
+                    <li>• <b>姊妹補貨</b>：8 seconds, WHO.A.U 服飾</li>
+                    <li>• <b>零食掃購</b>：No Brand 買紫薯洋芋片</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="day7-content" class="tab-content space-y-3">
+            <div class="flex justify-between items-baseline mb-2">
+                <h2 class="text-xl font-extrabold text-slate-400">Day 7 <span class="text-xs font-normal text-slate-400 ml-1">07.21 (週二)</span></h2>
+            </div>
+            
+            <div class="bg-pink-50 border border-pink-100 rounded-xl p-3 mb-3">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-[10px] bg-pink-500 text-white px-2 py-0.5 rounded font-black">【回程-晴】星宇 JX311</span>
+                    <span class="text-[10px] text-pink-700 italic">12:30 ➔ 14:00 (台中)</span>
+                </div>
+            </div>
+
+            <div class="compact-card text-center py-10 bg-slate-50 border-dashed border-2">
+                <i class="fa-solid fa-plane-departure text-slate-300 text-4xl mb-4"></i>
+                <h3 class="font-bold text-sm text-slate-600 font-[Montserrat]">FAREWELL BUSAN</h3>
+                <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">晴 帶著滿滿戰利品與滿格電力回台中！</p>
+            </div>
+        </section>
+
+        <section id="phrases-content" class="tab-content space-y-4">
+            
+            <!-- AI Translator Module -->
+            <div class="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl p-4 text-white shadow-md relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 opacity-20"><i class="fa-solid fa-language text-8xl"></i></div>
+                <div class="relative z-10">
+                    <h3 class="text-sm font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-yellow-300"></i> AI 中翻韓 翻譯機</h3>
+                    <p class="text-[10px] text-purple-200 mb-3">輸入中文，AI 會自動翻譯成道地韓文並用語音唸出來給店員聽！</p>
+                    
+                    <textarea id="translate-input" rows="2" placeholder="例如：請問可以幫我微波嗎？" class="w-full bg-white/10 border border-white/20 rounded-xl p-3 text-sm text-white placeholder-purple-300 focus:ring-2 focus:ring-white/50 focus:outline-none mb-3 resize-none"></textarea>
+                    
+                    <button onclick="translateAndPlay(this)" class="w-full bg-white text-purple-700 font-bold text-xs py-3 rounded-xl shadow-sm active:scale-95 transition-transform flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i> 翻譯並播放語音
+                    </button>
+
+                    <div id="translate-result-container" class="mt-3 bg-black/20 rounded-xl p-3 hidden">
+                        <p class="text-[10px] text-purple-300 mb-1">韓文翻譯結果：</p>
+                        <p id="translate-result-text" class="text-sm font-bold"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 mb-2 mt-4">
+                <i class="fa-solid fa-star text-purple-600"></i>
+                <h2 class="text-sm font-bold text-purple-900">常用求生語句 <span class="text-[10px] font-normal text-slate-400">(點擊播放)</span></h2>
+            </div>
+            
+            <div class="grid gap-2">
+                <button onclick="playTTS('영수증 주세요', this)" class="phrase-btn group bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm active:scale-95 transition-all flex items-center justify-between">
+                    <div class="text-left">
+                        <p class="text-[10px] text-purple-400">請給我收據 (Tax Refund)</p>
+                        <p class="text-sm font-bold text-slate-700">영수증 주세요</p>
+                    </div>
+                    <i class="fa-solid fa-circle-play text-purple-300 text-xl group-hover:text-purple-500 transition-colors"></i>
+                </button>
+                <button onclick="playTTS('파 빼주세요', this)" class="phrase-btn group bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm active:scale-95 transition-all flex items-center justify-between">
+                    <div class="text-left">
+                        <p class="text-[10px] text-emerald-500">請不要加蔥 (口味偏好)</p>
+                        <p class="text-sm font-bold text-emerald-700">파 빼주세요</p>
+                    </div>
+                    <i class="fa-solid fa-circle-play text-emerald-300 text-xl group-hover:text-emerald-500 transition-colors"></i>
+                </button>
+                <button onclick="playTTS('텍스 리펀드 돼요?', this)" class="phrase-btn group bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm active:scale-95 transition-all flex items-center justify-between">
+                    <div class="text-left">
+                        <p class="text-[10px] text-purple-400">可以退稅嗎？</p>
+                        <p class="text-sm font-bold text-slate-700">텍스 리펀드 돼요?</p>
+                    </div>
+                    <i class="fa-solid fa-circle-play text-purple-300 text-xl group-hover:text-purple-500 transition-colors"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // === 1. UI Switcher & Auto-Date Logic ===
+        const tripDates = {
+            "2026-07-15": "day1",
+            "2026-07-16": "day2",
+            "2026-07-17": "day3",
+            "2026-07-18": "day4",
+            "2026-07-19": "day5",
+            "2026-07-20": "day6",
+            "2026-07-21": "day7"
+        };
+
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active', 'phrase-active', 'currency-active');
+            });
+
+            const target = document.getElementById(tabId + '-content');
+            if(target) target.classList.add('active');
+
+            if (btnElement) {
+                if (tabId === 'phrases') btnElement.classList.add('phrase-active');
+                else if (tabId === 'currency') btnElement.classList.add('currency-active');
+                else btnElement.classList.add('active');
+                
+                // Center the button in scroll view if it's in the nav container
+                const nav = document.getElementById('nav-container');
+                if(nav.contains(btnElement)) {
+                    nav.scrollTo({ left: btnElement.offsetLeft - 80, behavior: 'smooth' });
+                }
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function checkAutoDateJump() {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${yyyy}-${mm}-${dd}`;
+
+            if (tripDates[dateStr]) {
+                const targetDayId = tripDates[dateStr];
+                const btn = document.getElementById('nav-' + targetDayId);
+                if(btn) {
+                    switchTab(targetDayId, btn);
+                    showToast(`🗓️ 已自動跳轉至今日行程 (${mm}/${dd})`);
+                }
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // === 2. Currency Converter Logic ===
+        const KRW_TO_TWD_RATE = 0.024; // 1 KRW = 0.024 TWD
+        const TWD_TO_KRW_RATE = 1 / 0.024;
+
+        function convertCurrency(source) {
+            const krwInput = document.getElementById('krw-input');
+            const twdInput = document.getElementById('twd-input');
+            
+            if (source === 'krw') {
+                const krw = parseFloat(krwInput.value) || 0;
+                twdInput.value = (krw * KRW_TO_TWD_RATE).toFixed(0);
+            } else {
+                const twd = parseFloat(twdInput.value) || 0;
+                krwInput.value = (twd * TWD_TO_KRW_RATE).toFixed(0);
+            }
+        }
+
+        function setKRW(amount) {
+            const krwInput = document.getElementById('krw-input');
+            krwInput.value = amount;
+            convertCurrency('krw');
+            showToast(`已填入 ₩ ${amount.toLocaleString()}`);
+        }
+
+        // === 3. Checklist Local Storage ===
+        function saveChecks() {
+            for(let i=1; i<=4; i++) {
+                localStorage.setItem('busan_check_'+i, document.getElementById('check'+i).checked);
+            }
+        }
+        function loadChecks() {
+            for(let i=1; i<=4; i++) {
+                const val = localStorage.getItem('busan_check_'+i);
+                if(val === 'true') document.getElementById('check'+i).checked = true;
+            }
+        }
+
+        // === 4. TTS & Free Translation (No API Key Required) ===
+        function setLoading(isLoading, text = "載入中...") {
+            const overlay = document.getElementById('loading-overlay');
+            const txt = document.getElementById('loading-text');
+            if(txt) txt.innerText = text;
+            overlay.style.display = isLoading ? 'flex' : 'none';
+        }
+
+        // Web Speech API for TTS (100% Free, Client-side)
+        function playTTS(text, element) {
+            if (element) element.classList.add('playing');
+            
+            if (!('speechSynthesis' in window)) {
+                showToast("⚠️ 您的瀏覽器不支援語音播放");
+                if (element) element.classList.remove('playing');
+                return;
+            }
+
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ko-KR'; // Korean
+            utterance.rate = 0.85; // Slower for clarity
+
+            utterance.onend = () => { if (element) element.classList.remove('playing'); };
+            utterance.onerror = () => { if (element) element.classList.remove('playing'); };
+            
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Free Translation API (MyMemory)
+        async function translateAndPlay(btnElement) {
+            const input = document.getElementById('translate-input').value.trim();
+            if (!input) {
+                showToast("⚠️ 請先輸入要翻譯的中文！");
+                return;
+            }
+
+            setLoading(true, "翻譯中...");
+            
+            try {
+                // MyMemory Free API - perfect for GitHub Pages without keys
+                const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(input)}&langpair=zh-TW|ko`;
+                
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Translation API failed");
+                
+                const data = await response.json();
+                const koreanText = data.responseData.translatedText.trim();
+
+                // Show result
+                document.getElementById('translate-result-container').classList.remove('hidden');
+                document.getElementById('translate-result-text').innerText = koreanText;
+                
+                setLoading(false);
+                showToast("✅ 翻譯成功，準備播放語音！");
+                
+                // Play the translated text
+                setTimeout(() => {
+                    playTTS(koreanText, btnElement);
+                }, 500);
+
+            } catch (err) {
+                console.error("Translation Error:", err);
+                setLoading(false);
+                showToast("❌ 翻譯失敗，請檢查網路連線。");
+            }
+        }
+
+        // Init App
+        window.onload = () => {
+            loadChecks();
+            // Automatically jump to current day if within trip dates
+            checkAutoDateJump();
+        };
+
+    </script>
+</body>
+</html>
