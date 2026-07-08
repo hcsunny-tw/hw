@@ -72,10 +72,10 @@
 </head>
 <body class="text-slate-800 flex flex-col min-h-screen">
 
-    <div id="loading-overlay" class="fixed inset-0 bg-white/70 backdrop-blur-sm z-[100] hidden items-center justify-center">
-        <div class="flex flex-col items-center">
-            <div class="animate-spin rounded-full h-10 w-10 border-4 border-purple-600 border-t-transparent mb-3"></div>
-            <p class="text-sm font-bold text-purple-700 animate-pulse" id="loading-text">載入中...</p>
+    <div id="loading-overlay" class="fixed top-32 left-1/2 -translate-x-1/2 bg-slate-900/95 backdrop-blur-sm z-[100] hidden items-center justify-center px-6 py-3 rounded-full shadow-2xl pointer-events-none transition-all border border-slate-700">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-notch fa-spin text-purple-400 text-lg"></i>
+            <p class="text-sm font-bold text-white tracking-wide" id="loading-text">載入中...</p>
         </div>
     </div>
 
@@ -89,7 +89,7 @@
             <a href="https://docs.google.com/spreadsheets/d/15_v4fE0W9NrclHeJzAG8lWO9y2KY9jUFwx-BaE61K5Y/edit?usp=sharing" target="_blank" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-200 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="Google 試算表行程">
                 <i class="fa-solid fa-file-excel"></i>
             </a>
-            <a href="https://my.map.naver.com/" target="_blank" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-400 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="我的 Naver Map 清單">
+            <a href="https://map.naver.com/p/favorite/myPlace/folder/b4d3dd71ed7442b1b872df3d686a1d0f" target="_blank" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-400 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="我的 Naver Map 清單">
                 <i class="fa-solid fa-map-location-dot"></i>
             </a>
             <button onclick="switchTab('currency', document.getElementById('currency-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
@@ -521,9 +521,14 @@
                         <i class="fa-solid fa-arrow-right-arrow-left"></i> 文字翻譯並播放語音
                     </button>
 
-                    <div id="translate-result-container" class="mt-3 bg-black/20 rounded-xl p-3 hidden">
-                        <p class="text-[10px] text-purple-300 mb-1" id="translate-result-label">韓文翻譯結果：</p>
-                        <p id="translate-result-text" class="text-sm font-bold"></p>
+                    <div id="translate-result-container" class="mt-3 bg-black/20 rounded-xl p-3 hidden items-start justify-between gap-3">
+                        <div class="flex-grow">
+                            <p class="text-[10px] text-purple-300 mb-1" id="translate-result-label">韓文翻譯結果：</p>
+                            <p id="translate-result-text" class="text-sm font-bold"></p>
+                        </div>
+                        <button onclick="playTTS(document.getElementById('translate-result-text').innerText, this)" class="shrink-0 w-10 h-10 rounded-full bg-purple-500/30 text-purple-100 flex items-center justify-center hover:bg-purple-500/50 active:scale-95 transition-all shadow-sm border border-purple-400/30 hidden" id="replay-btn" title="重新播放語音">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -699,18 +704,21 @@
                 const container = document.getElementById('translate-result-container');
                 const label = document.getElementById('translate-result-label');
                 const resultEl = document.getElementById('translate-result-text');
+                const replayBtn = document.getElementById('replay-btn');
                 
                 container.classList.remove('hidden');
+                container.classList.add('flex');
                 resultEl.innerText = resultText;
                 
                 if (langpair === 'ko|zh-TW') {
                     label.innerText = "中文翻譯結果：";
+                    replayBtn.classList.add('hidden'); // 中文時不顯示播放按鈕
                     showToast("✅ 翻譯成功！");
-                    // 翻譯成中文時，不一定要播報語音，方便看就好
                 } else {
                     label.innerText = "韓文翻譯結果：";
+                    replayBtn.classList.remove('hidden'); // 韓文時顯示播放按鈕
                     showToast("✅ 翻譯成功，準備播放語音！");
-                    setTimeout(() => playTTS(resultText, null), 500);
+                    setTimeout(() => playTTS(resultText, replayBtn), 500);
                 }
                 setLoading(false);
             } catch (err) {
