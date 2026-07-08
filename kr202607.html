@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>釜山 7 天 6 夜漫遊｜涵晴脈脈 姊妹淘 (V17)</title>
+    <title>釜山｜涵晴脈脈 (V17)</title>
     <!-- 韓國國旗 Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇰🇷</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -82,14 +82,20 @@
     <div id="toast" class="toast"><i class="fa-solid fa-circle-check text-green-400"></i> <span id="toast-msg"></span></div>
 
     <header class="hero-bg h-36 flex flex-col justify-end p-5 text-white relative">
-        <div class="absolute top-4 right-4 flex gap-2">
-            <a href="https://naver.me/x3cfyUHK" target="_blank" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-400 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="我的 Naver Map 清單">
+        <div class="absolute top-4 right-4 flex gap-1.5">
+            <a href="https://canva.link/t28gycxdpx9dhh1" target="_blank" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-cyan-200 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="Canva 旅遊手冊">
+                <i class="fa-solid fa-palette"></i>
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/15_v4fE0W9NrclHeJzAG8lWO9y2KY9jUFwx-BaE61K5Y/edit?usp=sharing" target="_blank" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-200 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="Google 試算表行程">
+                <i class="fa-solid fa-file-excel"></i>
+            </a>
+            <a href="https://my.map.naver.com/" target="_blank" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-400 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="我的 Naver Map 清單">
                 <i class="fa-solid fa-map-location-dot"></i>
             </a>
-            <button onclick="switchTab('currency', document.getElementById('currency-tab'))" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+            <button onclick="switchTab('currency', document.getElementById('currency-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
                 <i class="fa-solid fa-won-sign"></i>
             </button>
-            <button onclick="switchTab('phrases', document.getElementById('phrase-tab'))" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-purple-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+            <button onclick="switchTab('phrases', document.getElementById('phrase-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-purple-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
                 <i class="fa-solid fa-language"></i>
             </button>
         </div>
@@ -497,17 +503,26 @@
             <div class="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl p-4 text-white shadow-md relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 opacity-20"><i class="fa-solid fa-language text-8xl"></i></div>
                 <div class="relative z-10">
-                    <h3 class="text-sm font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-yellow-300"></i> AI 中翻韓 翻譯機</h3>
-                    <p class="text-[10px] text-purple-200 mb-3">輸入中文，AI 會自動翻譯成道地韓文並用語音唸出來給店員聽！</p>
+                    <h3 class="text-sm font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-yellow-300"></i> AI 雙向語音翻譯機</h3>
+                    <p class="text-[10px] text-purple-200 mb-3">使用麥克風辨識語音，或直接輸入文字。翻譯後會自動發音！</p>
                     
-                    <textarea id="translate-input" rows="2" placeholder="例如：請問可以幫我微波嗎？" class="w-full bg-white/10 border border-white/20 rounded-xl p-3 text-sm text-white placeholder-purple-300 focus:ring-2 focus:ring-white/50 focus:outline-none mb-3 resize-none"></textarea>
+                    <textarea id="translate-input" rows="2" placeholder="輸入中文或韓文..." class="w-full bg-white/10 border border-white/20 rounded-xl p-3 text-sm text-white placeholder-purple-300 focus:ring-2 focus:ring-white/50 focus:outline-none mb-3 resize-none"></textarea>
                     
+                    <div class="flex gap-2 mb-3">
+                        <button onclick="startDictation('zh-TW')" class="flex-1 bg-blue-500/30 hover:bg-blue-500/50 border border-blue-400/30 text-blue-100 font-bold text-[11px] py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm active:scale-95">
+                            <i class="fa-solid fa-microphone"></i> 說中文
+                        </button>
+                        <button onclick="startDictation('ko-KR')" class="flex-1 bg-pink-500/30 hover:bg-pink-500/50 border border-pink-400/30 text-pink-100 font-bold text-[11px] py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm active:scale-95">
+                            <i class="fa-solid fa-microphone"></i> 한국어 (說韓文)
+                        </button>
+                    </div>
+
                     <button onclick="translateAndPlay(this)" class="w-full bg-white text-purple-700 font-bold text-xs py-3 rounded-xl shadow-sm active:scale-95 transition-transform flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-arrow-right-arrow-left"></i> 翻譯並播放語音
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i> 文字翻譯並播放語音
                     </button>
 
                     <div id="translate-result-container" class="mt-3 bg-black/20 rounded-xl p-3 hidden">
-                        <p class="text-[10px] text-purple-300 mb-1">韓文翻譯結果：</p>
+                        <p class="text-[10px] text-purple-300 mb-1" id="translate-result-label">韓文翻譯結果：</p>
                         <p id="translate-result-text" class="text-sm font-bold"></p>
                     </div>
                 </div>
@@ -671,42 +686,93 @@
         }
 
         // Free Translation API (MyMemory)
-        async function translateAndPlay(btnElement) {
-            const input = document.getElementById('translate-input').value.trim();
-            if (!input) {
-                showToast("⚠️ 請先輸入要翻譯的中文！");
-                return;
-            }
-
+        async function executeTranslation(text, langpair) {
             setLoading(true, "翻譯中...");
-            
             try {
-                // MyMemory Free API - perfect for GitHub Pages without keys
-                const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(input)}&langpair=zh-TW|ko`;
-                
+                const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langpair}`;
                 const response = await fetch(url);
                 if (!response.ok) throw new Error("Translation API failed");
                 
                 const data = await response.json();
-                const koreanText = data.responseData.translatedText.trim();
+                let resultText = data.responseData.translatedText.trim();
 
-                // Show result
-                document.getElementById('translate-result-container').classList.remove('hidden');
-                document.getElementById('translate-result-text').innerText = koreanText;
+                const container = document.getElementById('translate-result-container');
+                const label = document.getElementById('translate-result-label');
+                const resultEl = document.getElementById('translate-result-text');
                 
+                container.classList.remove('hidden');
+                resultEl.innerText = resultText;
+                
+                if (langpair === 'ko|zh-TW') {
+                    label.innerText = "中文翻譯結果：";
+                    showToast("✅ 翻譯成功！");
+                    // 翻譯成中文時，不一定要播報語音，方便看就好
+                } else {
+                    label.innerText = "韓文翻譯結果：";
+                    showToast("✅ 翻譯成功，準備播放語音！");
+                    setTimeout(() => playTTS(resultText, null), 500);
+                }
                 setLoading(false);
-                showToast("✅ 翻譯成功，準備播放語音！");
-                
-                // Play the translated text
-                setTimeout(() => {
-                    playTTS(koreanText, btnElement);
-                }, 500);
-
             } catch (err) {
                 console.error("Translation Error:", err);
                 setLoading(false);
                 showToast("❌ 翻譯失敗，請檢查網路連線。");
             }
+        }
+
+        async function translateAndPlay(btnElement) {
+            const input = document.getElementById('translate-input').value.trim();
+            if (!input) {
+                showToast("⚠️ 請先輸入要翻譯的文字！");
+                return;
+            }
+            // 自動偵測：如果輸入包含韓文，就執行韓翻中；否則中翻韓
+            const hasKorean = /[\u3131-\uD79D]/.test(input);
+            const langpair = hasKorean ? 'ko|zh-TW' : 'zh-TW|ko';
+            
+            executeTranslation(input, langpair);
+        }
+
+        function startDictation(lang) {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                showToast("⚠️ 您的瀏覽器不支援語音辨識功能 (請使用 Chrome/Safari)");
+                return;
+            }
+            
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            
+            recognition.lang = lang;
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            
+            setLoading(true, "🎤 聆聽中... 請說話");
+            
+            recognition.start();
+            
+            recognition.onresult = function(event) {
+                const text = event.results[0][0].transcript;
+                document.getElementById('translate-input').value = text;
+                setLoading(false);
+                showToast("✅ 語音辨識成功！正在翻譯...");
+                
+                // 根據按下的按鈕語言決定翻譯方向
+                const pair = lang === 'ko-KR' ? 'ko|zh-TW' : 'zh-TW|ko';
+                executeTranslation(text, pair);
+            };
+            
+            recognition.onerror = function(event) {
+                setLoading(false);
+                if (event.error === 'not-allowed') {
+                    showToast("❌ 請允許瀏覽器使用麥克風權限");
+                } else {
+                    showToast("❌ 辨識失敗或超時，請再試一次");
+                }
+            };
+            
+            recognition.onspeechend = function() {
+                recognition.stop();
+            };
         }
 
         // Init App
