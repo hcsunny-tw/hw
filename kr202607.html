@@ -489,7 +489,7 @@
                     <div class="absolute -left-12 top-0 w-10 h-10 bg-teal-500 rounded-full border-4 border-[#f8fafc] shadow-sm flex items-center justify-center text-white text-xs font-bold">21:30</div>
                     <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-teal-200 transition-all border-l-4 border-l-teal-500">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold">Yacht Tale 遊艇夜遊</h3>
+                            <h3 class="text-xl font-bold text-slate-800">Yacht Tale 遊艇夜遊</h3>
                             <a href="https://map.naver.com/v5/search/더베이101%20요트탈래" target="_blank" class="naver-btn shrink-0"><i class="fa-solid fa-location-dot"></i> The Bay 101</a>
                         </div>
                         <div class="flex items-center gap-1 mb-2">
@@ -635,11 +635,11 @@
                 </div>
 
                 <div class="relative z-10 group">
-                    <div class="absolute -left-12 top-0 w-10 h-10 bg-slate-800 rounded-full border-4 border-white shadow-md flex items-center justify-center text-white text-xs font-bold">13:30</div>
+                    <div class="absolute -left-12 top-0 w-10 h-10 bg-slate-800 rounded-full border-4 border-[#f8fafc] shadow-md flex items-center justify-center text-white text-xs font-bold">13:30</div>
                     <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-slate-300 transition-all">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold">金陽濟皮膚科診所</h3>
-                            <a href="https://map.naver.com/v5/search/고운세상김양제장봉석피부과의원" target="_blank" class="naver-btn shrink-0 bg-slate-800 hover:bg-slate-700"><i class="fa-solid fa-location-dot"></i> Naver Map</a>
+                            <h3 class="text-xl font-bold text-slate-800">金陽濟皮膚科診所</h3>
+                            <a href="https://map.naver.com/v5/search/김양제피부과" target="_blank" class="naver-btn shrink-0 bg-slate-800 hover:bg-slate-700"><i class="fa-solid fa-location-dot"></i> Naver Map</a>
                         </div>
                         <div class="flex items-center gap-1 mb-2">
                             <span class="text-[10px] bg-red-100 text-red-600 px-1.5 py-0.5 rounded font-black border border-red-200 uppercase">🚩 預約制</span>
@@ -840,10 +840,27 @@
         // --- Init App ---
         window.onload = () => {
             loadChecks();
-            // Optional: Auto-jump to current day based on date
-            // const today = new Date().toISOString().split('T')[0];
-            // const dates = {"2026-07-15":"day1", "2026-07-16":"day2", "2026-07-17":"day3", "2026-07-18":"day4", "2026-07-19":"day5", "2026-07-20":"day6", "2026-07-21":"day7"};
-            // if(dates[today]) switchTab(dates[today], document.getElementById('nav-'+dates[today]));
+            // Auto-jump logic if within trip dates
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${yyyy}-${mm}-${dd}`;
+            
+            const dates = {
+                "2026-07-15":"day1", 
+                "2026-07-16":"day2", 
+                "2026-07-17":"day3", 
+                "2026-07-18":"day4", 
+                "2026-07-19":"day5", 
+                "2026-07-20":"day6", 
+                "2026-07-21":"day7"
+            };
+            
+            if(dates[dateStr]) {
+                switchTab(dates[dateStr], document.getElementById('nav-'+dates[dateStr]));
+                setTimeout(() => showToast(`歡迎來到釜山！已跳轉至今日行程 ✨`), 500);
+            }
         };
     </script>
 </body>
