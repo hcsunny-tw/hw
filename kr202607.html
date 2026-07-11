@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>釜山｜涵晴脈脈 (V18)</title>
+    <title>釜山 7 天 6 夜漫遊｜涵晴脈脈 姊妹淘 (V19)</title>
     <!-- 韓國國旗 Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇰🇷</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -43,9 +43,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .compact-card { background-color: white; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); margin-bottom: 12px; }
+        .compact-card { background-color: white; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); position: relative; z-index: 10; }
         .hotel-card { background-color: #eff6ff; border: 1px solid #dbeafe; border-radius: 8px; padding: 6px 12px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; color: #1d4ed8; }
         .nav-icon { color: #22c55e; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background-color: #f0fdf4; border-radius: 50%; }
+        
+        .transit-line { margin-left: 28px; border-left: 2px dashed #cbd5e1; padding: 10px 0 10px 24px; position: relative; }
         
         .meal-nav { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
         .meal-pill { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9999px; font-size: 10px; font-weight: 700; white-space: nowrap; border: 1px solid; }
@@ -104,7 +106,7 @@
                 <i class="fa-solid fa-heart text-pink-400 text-sm animate-pulse"></i> Busan Besties
             </h1>
             <div class="flex justify-between items-end mt-0.5">
-                <p class="text-[9px] opacity-80 tracking-widest uppercase border-l border-white/30 pl-2">涵晴脈脈 · 2026 閨密漫遊 (V18)</p>
+                <p class="text-[9px] opacity-80 tracking-widest uppercase border-l border-white/30 pl-2">涵晴脈脈 · 2026 閨密漫遊 (V19)</p>
                 <span class="text-[9px] bg-white/20 border border-white/30 px-2 py-0.5 rounded-full font-bold">48H VBP</span>
             </div>
         </div>
@@ -179,7 +181,7 @@
             <div class="bg-slate-50 p-4 rounded-xl mt-4 border border-slate-100">
                  <h3 class="text-xs font-bold text-slate-600 mb-2"><i class="fa-solid fa-lightbulb text-yellow-400 mr-1"></i> 韓國購物小常識</h3>
                  <p class="text-[10px] text-slate-500 leading-relaxed">
-                     韓國物價通常標示為「1.0」代表一萬韓元（約台幣210元）。<br>
+                     韓國物價通常標示為「1.0」代表一萬韓元（約台幣 210 元）。<br>
                      看到標價，可以直接**「去掉兩個零，再乘以 2.1」**，就能超快心算出台幣大約價格喔！
                  </p>
             </div>
@@ -228,7 +230,7 @@
             </div>
         </section>
 
-        <section id="day1-content" class="tab-content space-y-3">
+        <section id="day1-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-blue-600">Day 1 <span class="text-xs font-normal text-slate-400 ml-1">07.15 (週三)</span></h2>
                 <a href="https://map.naver.com/v5/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
@@ -236,21 +238,25 @@
 
             <div class="meal-nav">
                 <a href="https://map.naver.com/v5/search/송정3대국밥" target="_blank" class="meal-pill breakfast"><i class="fa-solid fa-mug-hot"></i> B: 松亭豬肉湯飯</a>
-                <a href="https://map.naver.com/v5/search/스파랜드" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: Spa Land 烤蛋</a>
+                <a href="https://map.naver.com/v5/search/전포카페거리" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: 田浦選物/午茶</a>
                 <a href="https://map.naver.com/v5/search/맛찬들왕소금구이 서면점" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-fire-burner"></i> D: 味贊王烤肉</a>
             </div>
 
             <div class="compact-card">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-start">
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-blue-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">06:05</span>
                         <div>
-                            <h3 class="font-bold text-sm">抵達金海機場</h3>
-                            <p class="text-[10px] text-slate-500">07:30 入境完成、搭地鐵</p>
+                            <h3 class="font-bold text-sm">落地金海機場</h3>
+                            <p class="text-[10px] text-slate-500">抵達釜山，入境手續辦理</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/서면역" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">搭輕軌至沙上，轉地鐵 2號線 (往 <b class="text-slate-700">萇山 장산</b>) 至「西面站」，約 50 分鐘。</p>
             </div>
             
             <div class="compact-card">
@@ -259,39 +265,52 @@
                         <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:00</span>
                         <div>
                             <h3 class="font-bold text-sm">松亭 3 代豬肉湯飯</h3>
-                            <p class="text-[10px] text-slate-500">24H 暖胃回血、避開排隊</p>
+                            <p class="text-[10px] text-slate-500">西面步行可達，暖胃回血</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/송정3대국밥" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/송정3대국밥" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
-
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">西面搭地鐵 2號線 (往 <b class="text-slate-700">萇山 장산</b>) 直達「Centum City 站」，約 30 分鐘。</p>
+            </div>
+            
             <div class="compact-card border-l-4 border-l-cyan-400">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">Spa Land 放鬆</h3>
-                            <p class="text-[10px] text-slate-500">停留約 3 小時，洗去紅眼班機疲憊</p>
+                            <h3 class="font-bold text-sm">Spa Land 汗蒸放鬆</h3>
+                            <p class="text-[10px] text-slate-500">休息 3 小時，洗去紅眼班機疲憊</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/스파랜드" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/스파랜드" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
-            
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">搭地鐵 2號線 (往 <b class="text-slate-700">梁山 양산</b>) 返回「西面站」。</p>
+            </div>
+
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">14:00</span>
                         <div>
                             <h3 class="font-bold text-sm">回西面 Check-in / 寄放行李</h3>
-                            <p class="text-[10px] text-slate-500">前往 Travel Light Hostel</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/트래블라이트 호스텔" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
-
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">從 Hostel 步行前往商圈。</p>
+            </div>
+            
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
@@ -301,46 +320,51 @@
                             <p class="text-[10px] text-slate-500">第一波藥妝掃貨</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/올리브영 서면" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/올리브영 서면" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
 
-            <div class="compact-card">
+            <div class="compact-card mt-3">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">17:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">田浦咖啡街</h3>
+                            <h3 class="font-bold text-sm">田浦咖啡街選物</h3>
                             <p class="text-[10px] text-slate-500">逛逛網美服飾與特色小店</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/전포카페거리" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/전포카페거리" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
 
-            <div class="compact-card border-l-4 border-l-blue-400">
+            <div class="compact-card border-l-4 border-l-blue-400 mt-3">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-blue-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">20:00</span>
                         <div>
                             <h3 class="font-bold text-sm">味贊王烤肉 (西面店)</h3>
-                            <p class="text-[10px] text-slate-500">晚餐後返回 Travel Light Hostel 休息</p>
+                            <p class="text-[10px] text-slate-500">厚切豬五花，飽餐後回 Hostel</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/맛찬들왕소금구이 서면점" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/맛찬들왕소금구이 서면점" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
         </section>
 
-        <section id="day2-content" class="tab-content space-y-3">
+        <section id="day2-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-teal-600">Day 2 <span class="text-xs font-normal text-slate-400 ml-1">07.16 (週四)</span></h2>
                 <a href="https://map.naver.com/v5/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
             </div>
             
             <div class="meal-nav">
-                <a href="https://map.naver.com/v5/search/이재모피자 본점" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: 李在模 Pizza (黃金避排隊時段)</a>
+                <a href="https://map.naver.com/v5/search/이재모피자 본점" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: 李在模 Pizza</a>
                 <a href="https://map.naver.com/v5/search/밀양순대돼지국밥" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-fire-burner"></i> D: 密陽豬肉湯飯</a>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">西面搭地鐵 1號線 (往 <b class="text-slate-700">多大浦 다대포해수욕장</b>) 至「南浦站」，約 20 分鐘。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-teal-400">
@@ -348,12 +372,17 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-teal-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
                         <div>
-                            <h3 class="font-bold text-sm text-teal-800">李在模 Pizza 本店</h3>
+                            <h3 class="font-bold text-sm text-teal-800">李在模 Pizza (南浦總店)</h3>
                             <p class="text-[10px] text-slate-500">避開中午尖峰，吃神級牽絲起司</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/이재모피자 본점" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/이재모피자 본점" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-yellow-500"><i class="fa-solid fa-taxi text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">南浦洞搭計程車過去約 10 分鐘，車資估計 ₩6,000。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-cyan-400">
@@ -365,8 +394,13 @@
                             <p class="text-[10px] text-slate-500">VBP (1) 啟動！享受跨海絕美視野</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/송도해상케이블카" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/송도해상케이블카" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-yellow-500"><i class="fa-solid fa-taxi text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">從松島搭計程車返回南浦商圈，約 ₩6,000。</p>
             </div>
             
             <div class="compact-card">
@@ -378,8 +412,13 @@
                             <p class="text-[10px] text-slate-500">逛街買衣服，吃元祖黑糖餅</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/프사이" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/프사이" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">南浦搭地鐵 1號線 (往 <b class="text-slate-700">老圃 노포</b>) 回「西面站」，約 20 分鐘。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-teal-400">
@@ -391,8 +430,13 @@
                             <p class="text-[10px] text-slate-500">VBP (2) | 西面三井大樓闖關</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/런닝맨 부산" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/런닝맨 부산" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">西面搭地鐵 2號線 (往 <b class="text-slate-700">萇山 장산</b>) 至「海雲台站」，約 45 分。太累可直接搭計程車 (約₩20,000)。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-teal-400">
@@ -400,16 +444,16 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-teal-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">20:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">密陽血腸豬肉湯飯</h3>
-                            <p class="text-[10px] text-slate-500">海雲台名店，宵夜首選</p>
+                            <h3 class="font-bold text-sm">密陽血腸豬肉湯飯 (海雲台)</h3>
+                            <p class="text-[10px] text-slate-500">宵夜首選，喝完熱湯暖暖身</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/밀양순대돼지국밥" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/밀양순대돼지국밥" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
         </section>
 
-        <section id="day3-content" class="tab-content space-y-3">
+        <section id="day3-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-rose-500">Day 3 <span class="text-xs font-normal text-slate-400 ml-1">07.17 (週五)</span></h2>
                 <a href="https://map.naver.com/v5/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
@@ -417,7 +461,12 @@
             
             <div class="meal-nav">
                 <a href="https://map.naver.com/v5/search/롯데프리미엄아울렛 동부산점" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: Outlet 美食街</a>
-                <a href="#" class="meal-pill dinner"><i class="fa-solid fa-fire-burner"></i> D: 簡單晚餐/輕食</a>
+                <a href="#" class="meal-pill dinner"><i class="fa-solid fa-fire-burner"></i> D: 輕食/簡單晚餐</a>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">西面搭 2號線 (往 <b class="text-slate-700">萇山 장산</b>) 到終點站，出站後轉計程車 (約₩5,000) 到青沙浦站。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-rose-400">
@@ -429,23 +478,53 @@
                                 <h3 class="font-bold text-sm">天空膠囊列車</h3>
                                 <span class="text-[8px] bg-red-100 text-red-600 px-1 py-0.2 rounded font-black border border-red-200">🚩 已預約</span>
                             </div>
-                            <p class="text-[10px] text-slate-500">青沙浦出發 ➔ 尾浦 (拍晨光海景)</p>
+                            <p class="text-[10px] text-slate-500">青沙浦出發 ➔ 尾浦 (約 09:10 抵達)</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/청사포정거장" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/청사포정거장" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">下車後，前往尾浦站 <b class="text-sky-600">1樓實體售票處</b> 出示 VBP 換取海岸列車車票。</p>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-teal-400">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-teal-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:30</span>
+                        <div>
+                            <div class="flex items-center gap-1">
+                                <h3 class="font-bold text-sm text-teal-800">海岸列車</h3>
+                                <span class="text-[8px] bg-sky-100 text-sky-600 px-1 py-0.2 rounded font-black border border-sky-200">💳 VBP (實體換票)</span>
+                            </div>
+                            <p class="text-[10px] text-slate-500">尾浦 ➔ 松亭 (沿途看海，約 10:00 抵達)</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/미포정거장" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-train text-teal-600"></i></a>
+                </div>
+            </div>
+            
+            <div class="compact-card border-l-4 border-l-yellow-400 mt-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-yellow-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm text-yellow-800">松亭海灘 ＆ Moon Toast</h3>
+                            <p class="text-[10px] text-slate-500">看衝浪客，吃超人氣牽絲起司吐司</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 shrink-0">
+                        <a href="https://map.naver.com/v5/search/송정해수욕장" target="_blank" class="nav-icon w-8 h-8 flex items-center justify-center text-blue-500 bg-blue-50 rounded-full border border-blue-100" title="松亭海水浴場"><i class="fa-solid fa-water text-[13px]"></i></a>
+                        <a href="https://map.naver.com/v5/search/문토스트 본점" target="_blank" class="nav-icon w-8 h-8 flex items-center justify-center text-orange-500 bg-orange-50 rounded-full border border-orange-100" title="Moon Toast"><i class="fa-solid fa-bread-slice text-[13px]"></i></a>
+                    </div>
                 </div>
             </div>
 
-            <div class="compact-card">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:30</span>
-                        <div>
-                            <h3 class="font-bold text-sm">前往 Skyline Luge</h3>
-                            <p class="text-[10px] text-slate-500">搭乘交通工具移動</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-yellow-500"><i class="fa-solid fa-taxi text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">從松亭直接攔計程車去 Luge 只要 5-10 分鐘，超順！車資估計 ₩6,000 內。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-cyan-400">
@@ -454,11 +533,16 @@
                         <span class="text-[9px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:00</span>
                         <div>
                             <h3 class="font-bold text-sm">Skyline Luge 斜坡滑車</h3>
-                            <p class="text-[10px] text-slate-500">瘋狂飆車！</p>
+                            <p class="text-[10px] text-slate-500">VBP (3) | 瘋狂飆車！</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/스카이라인루지 부산" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/스카이라인루지 부산" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">過馬路即可抵達 Outlet。</p>
             </div>
 
             <div class="compact-card">
@@ -467,11 +551,16 @@
                         <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:00</span>
                         <div>
                             <h3 class="font-bold text-sm">Lotte Outlets 東釜山</h3>
-                            <p class="text-[10px] text-slate-500">逛街、吃午餐</p>
+                            <p class="text-[10px] text-slate-500">吃美食街午餐＋逛街吹冷氣</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/롯데프리미엄아울렛 동부산점" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/롯데프리미엄아울렛 동부산점" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-yellow-500"><i class="fa-solid fa-taxi text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">建議 <b class="text-slate-700">14:45</b> 從 Outlet 搭計程車回海雲台，車程約 20 分鐘，車資約 ₩10,000。</p>
             </div>
             
             <div class="compact-card border-l-4 border-l-cyan-400">
@@ -480,23 +569,33 @@
                         <span class="text-[9px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">15:30</span>
                         <div>
                             <h3 class="font-bold text-sm">Club D Oasis</h3>
-                            <p class="text-[10px] text-slate-500">絕美海景 Spa 徹底放鬆身心</p>
+                            <p class="text-[10px] text-slate-500">網美海景 Spa，洗去汗水徹底放鬆</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/클럽디 오아시스" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/클럽디오아시스" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
-
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">離開 Spa，在海雲台附近找簡單輕食墊胃。</p>
+            </div>
+            
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">離開 / 簡單晚餐或輕食</h3>
-                            <p class="text-[10px] text-slate-500">為遊艇夜遊做準備</p>
+                            <h3 class="font-bold text-sm">離開 / 簡單晚餐</h3>
+                            <p class="text-[10px] text-slate-500">吃點輕食準備搭遊艇</p>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-yellow-500"><i class="fa-solid fa-taxi text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">海雲台搭計程車去廣安里集合，約 15 分鐘，車資約 ₩8,000。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-rose-400">
@@ -505,30 +604,35 @@
                         <span class="text-[9px] font-bold bg-rose-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">19:30</span>
                         <div>
                             <div class="flex items-center gap-1">
-                                <h3 class="font-bold text-sm">Yacht Tale 遊艇夜遊</h3>
+                                <h3 class="font-bold text-sm">Yacht 遊艇夜遊</h3>
                                 <span class="text-[8px] bg-red-100 text-red-600 px-1 py-0.2 rounded font-black border border-red-200">🚩需預約</span>
                             </div>
-                            <p class="text-[10px] text-slate-500">集合地：The Bay 101 | 絕美大橋夜景</p>
+                            <p class="text-[10px] text-slate-500 font-bold text-rose-600">集合地：廣安里海洋休閒運動中心</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/더베이101 요트탈래" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/광안리해양레포츠센터" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot text-rose-500"></i></a>
                 </div>
             </div>
-
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">「廣安站」搭地鐵 2號線 (往 <b class="text-slate-700">梁山 양산</b>) 回西面，約 25 分。</p>
+            </div>
+            
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">22:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">返回 Travel Light Hostel</h3>
-                            <p class="text-[10px] text-slate-500">結束充實的第三天</p>
+                            <h3 class="font-bold text-sm">返回 Hostel</h3>
+                            <p class="text-[10px] text-slate-500">回到西面休息</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="day4-content" class="tab-content space-y-3">
+        <section id="day4-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-indigo-600">Day 4 <span class="text-xs font-normal text-slate-400 ml-1">07.18 (週六)</span></h2>
                 <a href="https://map.naver.com/v5/search/더블유 레지던스 호텔 해운대" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-indigo-400"></i> 住宿：W Residence Hotel 海雲臺</a>
@@ -536,7 +640,12 @@
             
             <div class="meal-nav">
                 <a href="https://map.naver.com/v5/search/밀락더마켓" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: Millac 市集美食</a>
-                <a href="https://map.naver.com/v5/search/해운대시장" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-utensils"></i> D: 海雲台市場</a>
+                <a href="#" class="meal-pill dinner"><i class="fa-solid fa-utensils"></i> D: Toneou / CLAM</a>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">有行李！搭 2號線 (往 <b class="text-slate-700">萇山 장산</b>) 直達「海雲台站」，約 45 分鐘。</p>
             </div>
 
             <div class="compact-card">
@@ -545,10 +654,15 @@
                         <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:30</span>
                         <div>
                             <h3 class="font-bold text-sm">行李寄放海雲台</h3>
-                            <p class="text-[10px] text-slate-500">前往 W Residence Hotel</p>
+                            <p class="text-[10px] text-slate-500">帶著行李前往 W Residence Hotel</p>
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">步行前往海雲台沙灘尾端的 X the SKY。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-cyan-400">
@@ -557,11 +671,16 @@
                         <span class="text-[9px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:30</span>
                         <div>
                             <h3 class="font-bold text-sm">Busan X the SKY 觀景台</h3>
-                            <p class="text-[10px] text-slate-500">VBP (5) | 13:00 過期前壓線刷卡進場！</p>
+                            <p class="text-[10px] text-slate-500">VBP (5) | 壓線進場</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/부산엑스더스카이" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/부산엑스더스카이" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-yellow-500"><i class="fa-solid fa-taxi text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">從海雲台搭計程車去市集最方便，約 15 分鐘，車資約 ₩8,000。</p>
             </div>
             
             <div class="compact-card">
@@ -573,8 +692,46 @@
                             <p class="text-[10px] text-slate-500">複合市集，吹冷氣吃午餐挖寶</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/밀락더마켓" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/밀락더마켓" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">步行前往廣安里商圈找餐廳。</p>
+            </div>
+            
+            <div class="compact-card border-l-4 border-l-pink-400 overflow-hidden">
+                <div class="flex flex-col gap-2">
+                    <div class="flex gap-2 mb-1">
+                        <span class="text-[9px] font-bold bg-pink-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">17:30</span>
+                        <div>
+                            <h3 class="font-bold text-sm text-pink-700">晚餐候選 (二選一)</h3>
+                            <p class="text-[10px] text-slate-500">提早吃晚餐避開無人機排隊潮</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                        <a href="https://map.naver.com/v5/search/톤쇼우 광안점" target="_blank" class="flex-1 min-w-[140px] bg-pink-50 border border-pink-100 p-2 rounded-xl flex items-center justify-between hover:bg-pink-100 transition-colors">
+                            <div>
+                                <p class="text-xs font-bold text-pink-800">Toneou (톤쇼우)</p>
+                                <p class="text-[9px] text-pink-600">神級炸豬排</p>
+                            </div>
+                            <i class="fa-solid fa-location-dot text-pink-400"></i>
+                        </a>
+                        <a href="https://map.naver.com/v5/search/클램 광안리" target="_blank" class="flex-1 min-w-[140px] bg-pink-50 border border-pink-100 p-2 rounded-xl flex items-center justify-between hover:bg-pink-100 transition-colors">
+                            <div>
+                                <p class="text-xs font-bold text-pink-800">CLAM (클램)</p>
+                                <p class="text-[9px] text-pink-600">海景西班牙餐酒</p>
+                            </div>
+                            <i class="fa-solid fa-location-dot text-pink-400"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">吃飽後步行至廣安里沙灘找台階坐著等。</p>
             </div>
             
             <div class="compact-card border-l-4 border-l-indigo-400">
@@ -583,18 +740,23 @@
                         <span class="text-[9px] font-bold bg-indigo-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">20:00</span>
                         <div>
                             <h3 class="font-bold text-sm">廣安里無人機秀</h3>
-                            <p class="text-[10px] text-slate-500">買好小吃坐沙灘欣賞百萬級燈光秀</p>
+                            <p class="text-[10px] text-slate-500">欣賞百萬級燈光秀</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/광안리해수욕장" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/광안리해수욕장" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
         </section>
 
-        <section id="day5-content" class="tab-content space-y-3">
+        <section id="day5-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-violet-600">Day 5 <span class="text-xs font-normal text-slate-400 ml-1">07.19 (週日)</span></h2>
                 <a href="https://map.naver.com/v5/search/호텔1 광안리" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-violet-400"></i> 住宿：Gwanganli Hotel 1 (晴)</a>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium"><b class="text-sky-600">【涵 往機場】</b>2號線 (往 <b class="text-slate-700">梁山 양산</b>) 至沙上轉輕軌。行李多可考慮計程車 (約₩30,000)。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-sky-400">
@@ -604,24 +766,34 @@
                         <div>
                             <span class="text-[10px] bg-sky-100 text-sky-700 px-1 py-0.2 rounded font-black mb-1 inline-block">涵 登機回台</span>
                             <h3 class="font-bold text-sm">大韓航空 KE2085</h3>
-                            <p class="text-[10px] text-slate-500">前往金海機場，台灣見囉！👋</p>
+                            <p class="text-[10px] text-slate-500">台灣見囉！👋</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="compact-card">
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium"><b class="text-violet-600">【晴 往廣安里】</b>搭 2號線 (往 <b class="text-slate-700">梁山 양산</b>) 至「金蓮山站」。或搭計程車 (約 ₩8,000)。</p>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-violet-400">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:00</span>
+                        <span class="text-[9px] font-bold bg-violet-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:00</span>
                         <div>
                             <span class="text-[10px] bg-violet-100 text-violet-700 px-1 py-0.2 rounded font-black mb-1 inline-block">晴 獨旅開始</span>
                             <h3 class="font-bold text-sm">移宿 Hotel 1</h3>
-                            <p class="text-[10px] text-slate-500">前往廣安里寄行李、入住海景網美飯店</p>
+                            <p class="text-[10px] text-slate-500">廣安里寄行李、準備入住</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/호텔1" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/호텔1" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">在廣安里海線散步找咖啡廳。</p>
             </div>
             
             <div class="compact-card">
@@ -636,24 +808,28 @@
                 </div>
             </div>
 
-            <div class="compact-card border-l-4 border-l-violet-400">
+            <div class="compact-card bg-violet-50/30 mt-3 border border-violet-100">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-violet-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">橋村炸雞 (晚餐)</h3>
-                            <p class="text-[10px] text-slate-500">外帶蜂蜜炸雞回飯店配海景</p>
+                            <h3 class="font-bold text-sm text-violet-800">晚餐自由安排</h3>
+                            <p class="text-[10px] text-slate-500">隨心所欲吃點喜歡的！</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/교촌치킨 광안리" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
         </section>
 
-        <section id="day6-content" class="tab-content space-y-3">
+        <section id="day6-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-slate-700">Day 6 <span class="text-xs font-normal text-slate-400 ml-1">07.20 (週一)</span></h2>
                 <a href="https://map.naver.com/v5/search/에이치에비뉴 서면역점" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-slate-400"></i> 住宿：H-AVENUE Hotel 西面站</a>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">退房後，搭地鐵 2號線 (往 <b class="text-slate-700">梁山 양산</b>) 回「西面站」，約 25 分鐘。</p>
             </div>
             
             <div class="compact-card">
@@ -662,23 +838,51 @@
                         <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
                         <div>
                             <h3 class="font-bold text-sm">西面飯店放行李</h3>
-                            <p class="text-[10px] text-slate-500">退房廣安里，回西面寄放行李</p>
+                            <p class="text-[10px] text-slate-500">寄放行李後準備出門</p>
                         </div>
                     </div>
                 </div>
             </div>
             
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">西面商圈步行可達。</p>
+            </div>
+            
             <div class="compact-card border-l-4 border-l-pink-400">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-pink-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:30</span>
+                        <span class="text-[9px] font-bold bg-pink-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:30</span>
                         <div>
-                            <h3 class="font-bold text-sm text-pink-700">金陽濟皮膚科診所</h3>
-                            <p class="text-[10px] text-slate-500">🚩 已預約，皮秒雷射亮顏</p>
+                            <h3 class="font-bold text-sm text-pink-700">PPEUM 醫美 (쁨클리닉)</h3>
+                            <p class="text-[10px] text-slate-500">🚩 變美美行程！</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/김양제피부과" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot text-pink-500"></i></a>
+                    <a href="https://map.naver.com/v5/search/쁨클리닉 서면" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot text-pink-500"></i></a>
                 </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">搭地鐵 1號線 (往 <b class="text-slate-700">多大浦 다대포해수욕장</b>) 到「南浦站」，約 20 分鐘。</p>
+            </div>
+
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">14:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">樂天百貨光復店</h3>
+                            <p class="text-[10px] text-slate-500">前往挑選 Reclow 墨鏡</p>
+                        </div>
+                    </div>
+                    <a href="https://map.naver.com/v5/search/롯데백화점 광복점" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">搭地鐵 1號線 (往 <b class="text-slate-700">老圃 노포</b>) 返回「西面站」繼續瞎拚！</p>
             </div>
             
             <div class="compact-card">
@@ -687,17 +891,22 @@
                         <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:00</span>
                         <div>
                             <h3 class="font-bold text-sm">快時尚服飾補貨</h3>
-                            <p class="text-[10px] text-slate-500">8 seconds、WHO.A.U 服飾掃貨</p>
+                            <p class="text-[10px] text-slate-500">8 seconds、WHO.A.U 服飾掃貨，No Brand 買零食</p>
                         </div>
                     </div>
-                    <a href="https://map.naver.com/v5/search/에잇세컨즈 서면" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://map.naver.com/v5/search/에잇세컨즈 서면" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
         </section>
 
-        <section id="day7-content" class="tab-content space-y-3">
+        <section id="day7-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-slate-400">Day 7 <span class="text-xs font-normal text-slate-400 ml-1">07.21 (週二)</span></h2>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-slate-100 p-1.5 rounded-full text-slate-400"><i class="fa-solid fa-train-subway text-[10px]"></i></div>
+                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">搭 2號線 (往 <b class="text-slate-700">梁山 양산</b>) 至沙上轉輕軌往機場，約 50 分鐘。</p>
             </div>
             
             <div class="compact-card">
@@ -706,20 +915,20 @@
                         <span class="text-[9px] font-bold bg-slate-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
                         <div>
                             <h3 class="font-bold text-sm">晴 前往金海機場</h3>
-                            <p class="text-[10px] text-slate-500">做好防曬，搭乘輕軌前往機場</p>
+                            <p class="text-[10px] text-slate-500">做好防曬，準備回台</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="bg-pink-50 border border-pink-100 rounded-xl p-3 mb-3 mt-2">
+            <div class="bg-pink-50 border border-pink-100 rounded-xl p-3 mb-3 mt-4">
                 <div class="flex justify-between items-center mb-1">
                     <span class="text-[10px] bg-pink-500 text-white px-2 py-0.5 rounded font-black">【回程-晴】星宇 JX311</span>
                     <span class="text-[10px] text-pink-700 italic">12:30 ➔ 14:00 (台中)</span>
                 </div>
             </div>
 
-            <div class="compact-card text-center py-10 bg-slate-50 border-dashed border-2">
+            <div class="compact-card text-center py-10 bg-slate-50 border-dashed border-2 mt-4">
                 <i class="fa-solid fa-plane-departure text-slate-300 text-4xl mb-4"></i>
                 <h3 class="font-bold text-sm text-slate-600 font-[Montserrat]">FAREWELL BUSAN</h3>
                 <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">晴 帶著滿滿戰利品與滿格電力回台中！</p>
@@ -728,7 +937,6 @@
 
         <section id="phrases-content" class="tab-content space-y-4">
             
-            <!-- AI Translator Module -->
             <div class="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl p-4 text-white shadow-md relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 opacity-20"><i class="fa-solid fa-language text-8xl"></i></div>
                 <div class="relative z-10">
@@ -795,7 +1003,6 @@
     </main>
 
     <script>
-        // === 1. UI Switcher & Auto-Date Logic ===
         const tripDates = {
             "2026-07-15": "day1",
             "2026-07-16": "day2",
@@ -820,7 +1027,6 @@
                 else if (tabId === 'currency') btnElement.classList.add('currency-active');
                 else btnElement.classList.add('active');
                 
-                // Center the button in scroll view if it's in the nav container
                 const nav = document.getElementById('nav-container');
                 if(nav.contains(btnElement)) {
                     nav.scrollTo({ left: btnElement.offsetLeft - 80, behavior: 'smooth' });
@@ -853,8 +1059,7 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // === 2. Currency Converter Logic ===
-        const KRW_TO_TWD_RATE = 0.021; // 1 KRW = 0.021 TWD
+        const KRW_TO_TWD_RATE = 0.021; 
         const TWD_TO_KRW_RATE = 1 / 0.021;
 
         function convertCurrency(source) {
@@ -877,7 +1082,6 @@
             showToast(`已填入 ₩ ${amount.toLocaleString()}`);
         }
 
-        // === 3. Checklist Local Storage ===
         function saveChecks() {
             for(let i=1; i<=4; i++) {
                 localStorage.setItem('busan_check_'+i, document.getElementById('check'+i).checked);
@@ -890,7 +1094,6 @@
             }
         }
 
-        // === 4. TTS & Free Translation (No API Key Required) ===
         function setLoading(isLoading, text = "載入中...") {
             const overlay = document.getElementById('loading-overlay');
             const txt = document.getElementById('loading-text');
@@ -898,7 +1101,6 @@
             overlay.style.display = isLoading ? 'flex' : 'none';
         }
 
-        // Web Speech API for TTS (100% Free, Client-side)
         function playTTS(text, element) {
             if (element) element.classList.add('playing');
             
@@ -910,8 +1112,8 @@
 
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'ko-KR'; // Korean
-            utterance.rate = 0.85; // Slower for clarity
+            utterance.lang = 'ko-KR'; 
+            utterance.rate = 0.85; 
 
             utterance.onend = () => { if (element) element.classList.remove('playing'); };
             utterance.onerror = () => { if (element) element.classList.remove('playing'); };
@@ -919,7 +1121,6 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        // Free Translation API (MyMemory)
         async function executeTranslation(text, langpair) {
             setLoading(true, "翻譯中...");
             try {
@@ -941,11 +1142,11 @@
                 
                 if (langpair === 'ko|zh-TW') {
                     label.innerText = "中文翻譯結果：";
-                    replayBtn.classList.add('hidden'); // 中文時不顯示播放按鈕
+                    replayBtn.classList.add('hidden'); 
                     showToast("✅ 翻譯成功！");
                 } else {
                     label.innerText = "韓文翻譯結果：";
-                    replayBtn.classList.remove('hidden'); // 韓文時顯示播放按鈕
+                    replayBtn.classList.remove('hidden'); 
                     showToast("✅ 翻譯成功，準備播放語音！");
                     setTimeout(() => playTTS(resultText, replayBtn), 500);
                 }
@@ -963,7 +1164,6 @@
                 showToast("⚠️ 請先輸入要翻譯的文字！");
                 return;
             }
-            // 自動偵測：如果輸入包含韓文，就執行韓翻中；否則中翻韓
             const hasKorean = /[\u3131-\uD79D]/.test(input);
             const langpair = hasKorean ? 'ko|zh-TW' : 'zh-TW|ko';
             
@@ -993,7 +1193,6 @@
                 setLoading(false);
                 showToast("✅ 語音辨識成功！正在翻譯...");
                 
-                // 根據按下的按鈕語言決定翻譯方向
                 const pair = lang === 'ko-KR' ? 'ko|zh-TW' : 'zh-TW|ko';
                 executeTranslation(text, pair);
             };
@@ -1012,10 +1211,8 @@
             };
         }
 
-        // Init App
         window.onload = () => {
             loadChecks();
-            // Automatically jump to current day if within trip dates
             checkAutoDateJump();
         };
 
