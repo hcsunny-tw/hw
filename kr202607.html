@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>釜山｜涵晴脈脈 (V19)</title>
+    <title>釜山 7 天 6 夜漫遊｜涵晴脈脈 姊妹淘 (V20)</title>
     <!-- 韓國國旗 Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇰🇷</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,6 +37,7 @@
         .tab-btn.active { background-color: #2563eb; color: white; border-color: #2563eb; }
         .tab-btn.phrase-active { background-color: #9333ea; color: white; border-color: #9333ea; }
         .tab-btn.currency-active { background-color: #eab308; color: white; border-color: #eab308; }
+        .tab-btn.food-active { background-color: #f97316; color: white; border-color: #f97316; } /* 美食 Tab 樣式 */
         
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
@@ -54,6 +55,13 @@
         .meal-pill.breakfast { background-color: #fff7ed; color: #ea580c; border-color: #ffedd5; }
         .meal-pill.lunch { background-color: #f0fdf4; color: #16a34a; border-color: #dcfce7; }
         .meal-pill.dinner { background-color: #fff1f2; color: #e11d48; border-color: #ffe4e6; }
+
+        /* 美食專屬雙欄卡片樣式 */
+        .food-card {
+            background-color: white; border: 1px solid #f1f5f9; border-top: 4px solid #fb923c; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08); display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 10; transition: all 0.2s;
+        }
+        .food-card:active { transform: scale(0.96); }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
         @keyframes pulse-soft {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4); }
@@ -81,7 +89,7 @@
         </div>
     </div>
 
-    <div id="toast" class="toast"><i class="fa-solid fa-circle-check text-green-400"></i> <span id="toast-msg"></span></div>
+    <div id="toast" class="toast"><i class="fa-solid fa-circle-check text-green-400" id="toast-icon"></i> <span id="toast-msg"></span></div>
 
     <header class="hero-bg h-36 flex flex-col justify-end p-5 text-white relative">
         <div class="absolute top-4 right-4 flex gap-1.5">
@@ -100,13 +108,17 @@
             <button onclick="switchTab('phrases', document.getElementById('phrase-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-purple-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
                 <i class="fa-solid fa-language"></i>
             </button>
+            <!-- 新增美食快捷鍵 -->
+            <button onclick="switchTab('food', document.getElementById('food-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-orange-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+                <i class="fa-solid fa-utensils"></i>
+            </button>
         </div>
         <div class="max-w-md mx-auto w-full">
             <h1 class="text-xl font-black font-[Montserrat] uppercase tracking-tighter flex items-center gap-1.5">
                 <i class="fa-solid fa-heart text-pink-400 text-sm animate-pulse"></i> Busan Besties
             </h1>
             <div class="flex justify-between items-end mt-0.5">
-                <p class="text-[9px] opacity-80 tracking-widest uppercase border-l border-white/30 pl-2">涵晴脈脈 · 2026 閨密漫遊 (V19)</p>
+                <p class="text-[9px] opacity-80 tracking-widest uppercase border-l border-white/30 pl-2">涵晴脈脈 · 2026 閨密漫遊 (V20)</p>
                 <span class="text-[9px] bg-white/20 border border-white/30 px-2 py-0.5 rounded-full font-bold">48H VBP</span>
             </div>
         </div>
@@ -124,6 +136,7 @@
             <button onclick="switchTab('day6', this)" id="nav-day6" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all">D6</button>
             <button onclick="switchTab('day7', this)" id="nav-day7" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all">D7</button>
             <div class="w-[1px] h-4 bg-slate-200 shrink-0"></div>
+            <button onclick="switchTab('food', this)" id="food-tab" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all hidden md:block">美食</button>
             <button onclick="switchTab('phrases', this)" id="phrase-tab" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all hidden md:block">韓語</button>
             <button onclick="switchTab('currency', this)" id="currency-tab" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-slate-200 text-slate-500 bg-slate-50 transition-all hidden md:block">匯率</button>
         </div>
@@ -131,6 +144,54 @@
 
     <main class="max-w-md mx-auto w-full flex-grow p-4 pb-20">
 
+        <!-- ================= 新增：美食模組 ================= -->
+        <section id="food-content" class="tab-content space-y-4">
+            <!-- 標題與操作按鈕區 -->
+            <div class="flex justify-between items-end mb-2">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shadow-inner">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-extrabold text-slate-700">美食口袋名單</h2>
+                        <p class="text-[10px] text-slate-400">距離自動算，美食隨機抽</p>
+                    </div>
+                </div>
+                
+                <!-- 操作按鈕群 -->
+                <div class="flex gap-2">
+                    <button onclick="pickRandomFood()" class="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-rose-400 to-orange-400 text-white rounded-full shadow-md active:scale-90 transition-all" title="選擇困難？隨機抽一家！">
+                        <i class="fa-solid fa-dice text-sm"></i>
+                    </button>
+                    <button onclick="updateLocation()" id="location-btn" class="flex items-center gap-1 text-[10px] bg-slate-800 text-white px-2.5 py-1.5 rounded-full shadow-md active:scale-95 transition-all">
+                        <i class="fa-solid fa-location-crosshairs"></i> <span id="location-status">更新位置</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 地區篩選器 -->
+            <div class="space-y-1 mt-4">
+                <p class="text-[10px] font-bold text-slate-400 ml-1">📍 依地區尋找</p>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="filter-area">
+                    <!-- JS 動態生成 -->
+                </div>
+            </div>
+
+            <!-- 種類篩選器 -->
+            <div class="space-y-1">
+                <p class="text-[10px] font-bold text-slate-400 ml-1">🍽️ 依種類尋找</p>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="filter-type">
+                    <!-- JS 動態生成 -->
+                </div>
+            </div>
+
+            <!-- 餐廳列表渲染區 -->
+            <div id="restaurant-list" class="mt-4 pb-10 grid grid-cols-2 gap-3">
+                <!-- JS 動態生成雙欄卡片 -->
+            </div>
+        </section>
+
+        <!-- ================= 現有 V19 功能模組 ================= -->
         <section id="currency-content" class="tab-content space-y-4">
             <div class="flex items-center gap-2 mb-2">
                 <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
@@ -230,6 +291,7 @@
             </div>
         </section>
 
+        <!-- 行程區塊與原本 V19 完全一致 -->
         <section id="day1-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-blue-600">Day 1 <span class="text-xs font-normal text-slate-400 ml-1">07.15 (週三)</span></h2>
@@ -671,7 +733,7 @@
                         <span class="text-[9px] font-bold bg-cyan-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:30</span>
                         <div>
                             <h3 class="font-bold text-sm">Busan X the SKY 觀景台</h3>
-                            <p class="text-[10px] text-slate-500">VBP (5) | 壓線進場</p>
+                            <p class="text-[10px] text-slate-500">VBP (5) | 13:00 過期前壓線刷卡進場！</p>
                         </div>
                     </div>
                     <a href="https://map.naver.com/v5/search/부산엑스더스카이" target="_blank" class="nav-icon shrink-0"><i class="fa-solid fa-location-dot"></i></a>
@@ -1002,21 +1064,37 @@
 
     </main>
 
+    <!-- 美食隨機抽籤 Modal -->
+    <div id="dice-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-[300px] w-full mx-4 transform scale-95 transition-transform duration-300" id="dice-modal-content">
+            <div class="text-center mb-5">
+                <div class="w-14 h-14 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
+                    <i class="fa-solid fa-hand-sparkles"></i>
+                </div>
+                <h3 class="text-lg font-black text-slate-800">就決定吃這家了！</h3>
+            </div>
+            
+            <div id="dice-result-card" class="bg-orange-50 p-4 rounded-xl border border-orange-100 mb-5 relative overflow-hidden">
+                <!-- 動態填入抽籤結果 -->
+            </div>
+            
+            <button onclick="closeModal()" class="w-full bg-slate-800 text-white font-bold py-2.5 rounded-xl shadow-md active:scale-95 transition-transform text-sm">
+                太棒了，出發！
+            </button>
+        </div>
+    </div>
+
     <script>
+        // ================= V19 核心邏輯 =================
         const tripDates = {
-            "2026-07-15": "day1",
-            "2026-07-16": "day2",
-            "2026-07-17": "day3",
-            "2026-07-18": "day4",
-            "2026-07-19": "day5",
-            "2026-07-20": "day6",
-            "2026-07-21": "day7"
+            "2026-07-15": "day1", "2026-07-16": "day2", "2026-07-17": "day3",
+            "2026-07-18": "day4", "2026-07-19": "day5", "2026-07-20": "day6", "2026-07-21": "day7"
         };
 
         function switchTab(tabId, btnElement) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('active', 'phrase-active', 'currency-active');
+                b.classList.remove('active', 'phrase-active', 'currency-active', 'food-active');
             });
 
             const target = document.getElementById(tabId + '-content');
@@ -1025,10 +1103,11 @@
             if (btnElement) {
                 if (tabId === 'phrases') btnElement.classList.add('phrase-active');
                 else if (tabId === 'currency') btnElement.classList.add('currency-active');
+                else if (tabId === 'food') btnElement.classList.add('food-active');
                 else btnElement.classList.add('active');
                 
                 const nav = document.getElementById('nav-container');
-                if(nav.contains(btnElement)) {
+                if(nav && nav.contains(btnElement)) {
                     nav.scrollTo({ left: btnElement.offsetLeft - 80, behavior: 'smooth' });
                 }
             }
@@ -1052,9 +1131,13 @@
             }
         }
 
-        function showToast(msg) {
+        // 共用通知系統 (Toast)
+        function showToast(msg, iconClass = "fa-circle-check", iconColor = "text-green-400") {
             const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toast-icon');
             document.getElementById('toast-msg').innerText = msg;
+            
+            toastIcon.className = `fa-solid ${iconClass} ${iconColor}`;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
@@ -1065,7 +1148,6 @@
         function convertCurrency(source) {
             const krwInput = document.getElementById('krw-input');
             const twdInput = document.getElementById('twd-input');
-            
             if (source === 'krw') {
                 const krw = parseFloat(krwInput.value) || 0;
                 twdInput.value = (krw * KRW_TO_TWD_RATE).toFixed(0);
@@ -1103,21 +1185,17 @@
 
         function playTTS(text, element) {
             if (element) element.classList.add('playing');
-            
             if (!('speechSynthesis' in window)) {
-                showToast("⚠️ 您的瀏覽器不支援語音播放");
+                showToast("⚠️ 您的瀏覽器不支援語音播放", "fa-triangle-exclamation", "text-yellow-400");
                 if (element) element.classList.remove('playing');
                 return;
             }
-
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'ko-KR'; 
             utterance.rate = 0.85; 
-
             utterance.onend = () => { if (element) element.classList.remove('playing'); };
             utterance.onerror = () => { if (element) element.classList.remove('playing'); };
-            
             window.speechSynthesis.speak(utterance);
         }
 
@@ -1127,19 +1205,15 @@
                 const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langpair}`;
                 const response = await fetch(url);
                 if (!response.ok) throw new Error("Translation API failed");
-                
                 const data = await response.json();
                 let resultText = data.responseData.translatedText.trim();
-
                 const container = document.getElementById('translate-result-container');
                 const label = document.getElementById('translate-result-label');
                 const resultEl = document.getElementById('translate-result-text');
                 const replayBtn = document.getElementById('replay-btn');
-                
                 container.classList.remove('hidden');
                 container.classList.add('flex');
                 resultEl.innerText = resultText;
-                
                 if (langpair === 'ko|zh-TW') {
                     label.innerText = "中文翻譯結果：";
                     replayBtn.classList.add('hidden'); 
@@ -1152,68 +1226,324 @@
                 }
                 setLoading(false);
             } catch (err) {
-                console.error("Translation Error:", err);
                 setLoading(false);
-                showToast("❌ 翻譯失敗，請檢查網路連線。");
+                showToast("❌ 翻譯失敗，請檢查網路連線。", "fa-circle-xmark", "text-red-400");
             }
         }
 
         async function translateAndPlay(btnElement) {
             const input = document.getElementById('translate-input').value.trim();
             if (!input) {
-                showToast("⚠️ 請先輸入要翻譯的文字！");
+                showToast("⚠️ 請先輸入要翻譯的文字！", "fa-triangle-exclamation", "text-yellow-400");
                 return;
             }
             const hasKorean = /[\u3131-\uD79D]/.test(input);
             const langpair = hasKorean ? 'ko|zh-TW' : 'zh-TW|ko';
-            
             executeTranslation(input, langpair);
         }
 
         function startDictation(lang) {
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                showToast("⚠️ 您的瀏覽器不支援語音辨識功能 (請使用 Chrome/Safari)");
+                showToast("⚠️ 不支援語音辨識 (請使用 Chrome/Safari)", "fa-triangle-exclamation", "text-yellow-400");
                 return;
             }
-            
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const recognition = new SpeechRecognition();
-            
             recognition.lang = lang;
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
-            
             setLoading(true, "🎤 聆聽中... 請說話");
-            
             recognition.start();
-            
             recognition.onresult = function(event) {
                 const text = event.results[0][0].transcript;
                 document.getElementById('translate-input').value = text;
                 setLoading(false);
                 showToast("✅ 語音辨識成功！正在翻譯...");
-                
                 const pair = lang === 'ko-KR' ? 'ko|zh-TW' : 'zh-TW|ko';
                 executeTranslation(text, pair);
             };
-            
             recognition.onerror = function(event) {
                 setLoading(false);
                 if (event.error === 'not-allowed') {
-                    showToast("❌ 請允許瀏覽器使用麥克風權限");
+                    showToast("❌ 請允許瀏覽器使用麥克風權限", "fa-circle-xmark", "text-red-400");
                 } else {
-                    showToast("❌ 辨識失敗或超時，請再試一次");
+                    showToast("❌ 辨識失敗或超時，請再試一次", "fa-circle-xmark", "text-red-400");
                 }
             };
-            
-            recognition.onspeechend = function() {
-                recognition.stop();
-            };
+            recognition.onspeechend = function() { recognition.stop(); };
         }
 
+
+        // ================= 美食名單模組 (V20 新增) =================
+        const foodDatabase = [
+            { id: 1, name: "味贊王鹽烤肉", korName: "맛찬들왕소금구이 서면점", area: "西面", types: ["烤肉"], lat: 35.1534, lng: 129.0578, desc: "3.5cm厚切豬五花，專人代烤", rec: "3.5cm厚切豬五花、烤蝦醬", url: "https://maps.app.goo.gl/aHhpEjrM8TbcgA8P6" },
+            { id: 2, name: "松亭三代豬肉湯飯", korName: "송정3대국밥", area: "西面", types: ["湯飯"], lat: 35.1541, lng: 129.0577, desc: "西面湯飯街老字號，豬肉軟嫩", rec: "豬肉湯飯、血腸", url: "https://maps.app.goo.gl/rXFU2c9DzABPPXqs5" },
+            { id: 3, name: "李在模披薩", korName: "이재모피자 서면점", area: "西面", types: ["異國料理"], lat: 35.1560, lng: 129.0581, desc: "牽絲起司披薩，排隊名店", rec: "招牌起司披薩 (必加芝心餅皮)", url: "https://maps.app.goo.gl/dM5DAH1eQzEU79xZ8" },
+            { id: 4, name: "釜山烤肋排", korName: "부산쪽쪽갈비", area: "西面", types: ["烤肉"], lat: 35.1555, lng: 129.0570, desc: "鹽烤與調味半半，配起司絕讚", rec: "鹽烤/調味半半、起司沾醬", url: "https://maps.app.goo.gl/USMYDhx6cbqxxPb77" },
+            { id: 5, name: "釜山宅", korName: "부산댁", area: "西面", types: ["烤肉"], lat: 35.1565, lng: 129.0573, desc: "專人代烤豬肉，環境復古舒適", rec: "豬肉拼盤 (廚房烤好才上桌)", url: "https://map.naver.com/p/search/부산댁%20서면" },
+            { id: 6, name: "濟州家", korName: "제주가 서면점", area: "西面", types: ["海鮮"], lat: 35.1546, lng: 129.0559, desc: "濃郁鮑魚粥與海膽海帶湯", rec: "鮑魚粥、海膽海帶湯", url: "https://map.naver.com/p/search/제주가%20서면점" },
+            { id: 7, name: "伍班長烤肉", korName: "오반장", area: "海雲台", types: ["烤肉"], lat: 35.1610, lng: 129.1620, desc: "半露天烤肉，烤蛋汁與豬肉完美搭配", rec: "海鷗肉、烤盤外圈蒸蛋", url: "https://map.naver.com/p/search/오반장" },
+            { id: 8, name: "古來思魚糕", korName: "고래사어묵 해운대점", area: "海雲台", types: ["街邊小吃"], lat: 35.1613, lng: 129.1599, desc: "釜山代表魚板，可現吃", rec: "起司魚糕、章魚魚糕", url: "https://map.naver.com/p/search/고래사어묵%20해운대점" },
+            { id: 9, name: "名品蔘雞湯", korName: "해운대이름난삼계탕", area: "海雲台", types: ["韓式料理"], lat: 35.1612, lng: 129.1625, desc: "濃郁滋補蔘雞湯，在地人也愛", rec: "招牌蔘雞湯 (附贈人蔘酒)", url: "https://map.naver.com/p/search/해운대이름난삼계탕" },
+            { id: 10, name: "極東豬肉湯飯", korName: "극동돼지국밥", area: "海雲台", types: ["湯飯"], lat: 35.1601, lng: 129.1691, desc: "近尾浦，清甜湯頭排隊名店", rec: "豬肉湯飯 (清湯派首選)", url: "https://map.naver.com/p/search/극동돼지국밥" },
+            { id: 11, name: "密陽血腸豬肉湯飯", korName: "밀양순대돼지국밥", area: "海雲台", types: ["湯飯"], lat: 35.1616, lng: 129.1610, desc: "24小時營業，必吃濃郁湯頭", rec: "綜合湯飯、馬鈴薯排骨湯", url: "https://maps.app.goo.gl/ScHyxKzxFEPxjKFn7" },
+            { id: 12, name: "錦繡河豚湯", korName: "금수복국", area: "海雲台", types: ["海鮮", "湯飯"], lat: 35.1620, lng: 129.1650, desc: "50年老店，解酒必備河豚清湯", rec: "銀河豚清湯、炸河豚", url: "https://map.naver.com/p/search/금수복국" },
+            { id: 13, name: "海雲台小麥冷麵", korName: "해운대밀면", area: "海雲台", types: ["韓式料理"], lat: 35.1633, lng: 129.1637, desc: "清爽解暑，釜山特色小麥冷麵", rec: "水冷麵、手工蒸餃", url: "https://map.naver.com/p/search/해운대밀면" },
+            { id: 14, name: "Diart coffee", korName: "디아트커피", area: "海雲台", types: ["網美咖啡"], lat: 35.1580, lng: 129.1760, desc: "aespa超愛吃的Kaymak", rec: "Kaymak(凱瑪克)土耳其奶油吐司", url: "https://map.naver.com/p/search/디아트커피" },
+            { id: 15, name: "Working Holiday", korName: "워킹홀리데이", area: "海雲台", types: ["網美咖啡"], lat: 35.1590, lng: 129.1550, desc: "絕美海景早午餐與烘焙", rec: "海景早午餐拼盤", url: "https://map.naver.com/p/search/워킹홀리데이%20해운대" },
+            { id: 16, name: "Rendezja-vous", korName: "랑데자뷰", area: "海雲台", types: ["網美咖啡"], lat: 35.1595, lng: 129.1550, desc: "海景第一排，濟州島風格", rec: "漢拏峰柑橘氣泡飲、抹茶拿鐵", url: "https://map.naver.com/p/search/랑데자뷰%20해운대" },
+            { id: 17, name: "海雲台市場盲鰻", korName: "해운대시장 꼼장어", area: "海雲台市場", types: ["海鮮", "街邊小吃"], lat: 35.1611, lng: 129.1622, desc: "現殺盲鰻，辣炒超下酒", rec: "辣炒盲鰻 (吃完必加炒飯)", url: "https://map.naver.com/p/search/해운대시장%20꼼장어" },
+            { id: 42, name: "海雲台名品糖餅", korName: "해운대 명품호떡", area: "海雲台市場", types: ["街邊小吃"], lat: 35.1614, lng: 129.1605, desc: "永遠在排隊的超人氣黑糖餅", rec: "起司黑糖餅、堅果黑糖餅", url: "https://map.naver.com/p/search/해운대%20명품호떡" },
+            { id: 18, name: "扎嘎其市場海鮮", korName: "자갈치시장", area: "南浦洞", types: ["海鮮"], lat: 35.0967, lng: 129.0305, desc: "釜山最大海鮮市場", rec: "帝王蟹、生章魚", url: "https://map.naver.com/p/search/자갈치시장" },
+            { id: 19, name: "海田烤腸", korName: "해전곱창", area: "南浦洞", types: ["烤肉"], lat: 35.0991, lng: 129.0285, desc: "烤起司盲鰻與烤腸", rec: "起司烤腸、半半烤腸", url: "https://map.naver.com/p/search/해전곱창" },
+            { id: 20, name: "南浦蔘雞湯", korName: "남포삼계탕", area: "南浦洞", types: ["韓式料理"], lat: 35.0995, lng: 129.0300, desc: "南浦老字號，雞肉軟嫩", rec: "蔘雞湯", url: "https://map.naver.com/p/search/남포삼계탕" },
+            { id: 21, name: "BIFF廣場糖餅", korName: "BIFF광장 씨앗호떡", area: "南浦洞", types: ["街邊小吃"], lat: 35.0985, lng: 129.0289, desc: "塞滿堅果的黑糖餅", rec: "堅果黑糖餅 (씨앗호떡)", url: "https://map.naver.com/p/search/BIFF광장%20씨앗호떡" },
+            { id: 43, name: "昇基元祖黑糖餅", korName: "승기찹쌀씨앗호떡", area: "南浦洞", types: ["街邊小吃"], lat: 35.0986, lng: 129.0288, desc: "李昇基造訪過！超人氣堅果糖餅", rec: "招牌堅果黑糖餅", url: "https://map.naver.com/p/search/승기찹쌀씨앗호떡" },
+            { id: 44, name: "大叔黑糖餅", korName: "아저씨씨앗호떡", area: "南浦洞", types: ["街邊小吃"], lat: 35.0986, lng: 129.0290, desc: "外皮酥脆不油膩，在地人也愛排的黑糖餅", rec: "堅果黑糖餅", url: "https://map.naver.com/p/search/아저씨씨앗호떡" },
+            { id: 22, name: "豆田裡嫩豆腐", korName: "콩밭에", area: "南浦洞", types: ["韓式料理"], lat: 35.1001, lng: 129.0322, desc: "點鍋送自助吧，CP值高", rec: "嫩豆腐鍋 (為了無限小菜而來)", url: "https://map.naver.com/p/search/콩밭에" },
+            { id: 23, name: "馬山鮟鱇魚", korName: "마산아구찜", area: "南浦洞", types: ["鮟鱇魚"], lat: 35.0998, lng: 129.0298, desc: "微辣下飯，釜山在地老店", rec: "辣炒鮟鱇魚", url: "https://map.naver.com/p/search/마산아구찜" },
+            { id: 24, name: "胡同醬蟹", korName: "골목게장", area: "南浦洞", types: ["醬蟹"], lat: 35.1152, lng: 129.0422, desc: "白飯小偷，鮮甜無腥味", rec: "醬油蟹拼盤、蟹膏拌飯", url: "https://map.naver.com/p/search/골목게장" },
+            { id: 25, name: "南浦雪濃湯", korName: "남포설렁탕", area: "南浦洞", types: ["湯飯"], lat: 35.0970, lng: 129.0280, desc: "牛骨熬製濃郁湯頭", rec: "雪濃湯、白切肉", url: "https://map.naver.com/p/search/남포설렁탕" },
+            { id: 26, name: "元祖釜山豬腳", korName: "원조부산족발", area: "南浦洞", types: ["韓式料理"], lat: 35.1011, lng: 129.0268, desc: "招牌涼拌豬腳", rec: "招牌涼拌豬腳 (冷盤)", url: "https://map.naver.com/p/search/원조부산족발" },
+            { id: 27, name: "廣安里大門", korName: "광안리 대문", area: "廣安里", types: ["烤肉", "海鮮"], lat: 35.1530, lng: 129.1189, desc: "廣安里知名聚餐餐廳", url: "https://map.naver.com/p/search/광안리%20대문" },
+            { id: 28, name: "水邊最高豬肉湯飯", korName: "수변최고돼지국밥", area: "廣安里", types: ["湯飯"], lat: 35.1532, lng: 129.1275, desc: "民樂水邊公園旁濃郁湯頭", rec: "豬頸肉湯飯 (항정국밥) 必點", url: "https://map.naver.com/p/search/수변최고돼지국밥" },
+            { id: 29, name: "田浦咖啡街", korName: "전포카페거리", area: "田浦", types: ["網美咖啡"], lat: 35.1557, lng: 129.0637, desc: "文青咖啡廳與甜點店聚集", url: "https://map.naver.com/p/search/전포카페거리" },
+            { id: 39, name: "Goof 咖啡", korName: "구프", area: "田浦", types: ["網美咖啡"], lat: 35.1578, lng: 129.0618, desc: "超人氣黑膠唱片復古咖啡廳", rec: "羅勒番茄汽水、冰滴咖啡", url: "https://map.naver.com/p/search/구프" },
+            { id: 40, name: "Werk Roasters", korName: "베르크로스터스", area: "田浦", types: ["網美咖啡"], lat: 35.1554, lng: 129.0631, desc: "地下室點餐、復古工業風超酷空間", rec: "拿鐵 (B1點餐)", url: "https://map.naver.com/p/search/베르크로스터스" },
+            { id: 41, name: "FM Coffee", korName: "FM커피", area: "田浦", types: ["網美咖啡"], lat: 35.1565, lng: 129.0625, desc: "田浦經典必喝，招牌冷萃咖啡", rec: "明天咖啡 (투모로우, 冷萃奶蓋)", url: "https://map.naver.com/p/search/FM커피" },
+            { id: 30, name: "機張大蟹", korName: "기장대게", area: "機張", types: ["海鮮"], lat: 35.2443, lng: 129.2227, desc: "現挑現蒸鮮甜松葉蟹", rec: "蒸松葉蟹、蟹膏炒飯", url: "https://map.naver.com/p/search/기장대게" },
+            { id: 31, name: "海東龍宮寺炸醬麵", korName: "용궁해물쟁반짜장", area: "機張", types: ["異國料理"], lat: 35.1885, lng: 129.2155, desc: "超大盤海鮮炸醬麵", rec: "鐵板海鮮炸醬麵、糖醋肉", url: "https://map.naver.com/p/search/용궁해물쟁반짜장" },
+            { id: 32, name: "Cafe Coralani", korName: "카페 코랄라니", area: "機張", types: ["網美咖啡"], lat: 35.1960, lng: 129.2270, desc: "機張海岸絕美海景咖啡廳", rec: "海鹽咖啡、烘焙麵包", url: "https://map.naver.com/p/search/카페%20코랄라니" },
+            { id: 33, name: "松島海鮮餐廳", korName: "송도해물탕", area: "松島", types: ["海鮮"], lat: 35.0768, lng: 129.0195, desc: "無敵海景搭配新鮮海鮮湯", rec: "豪華海鮮鍋", url: "https://map.naver.com/p/search/송도해물탕" },
+            { id: 34, name: "Having Moment", korName: "해빙모먼트", area: "影島", types: ["網美咖啡"], lat: 35.0780, lng: 129.0450, desc: "白淺灘絕美海景咖啡", rec: "黑芝麻拿鐵、冰淇淋可朗芙", url: "https://map.naver.com/p/search/해빙모먼트" },
+            { id: 35, name: "Keveren House", korName: "케베렌 하우스", area: "海雲台", types: ["伴手禮"], lat: 35.1627, lng: 129.1610, desc: "特色伴手禮與生活選物", url: "https://map.naver.com/p/search/케베렌%20하우스" },
+            { id: 36, name: "二代名菓", korName: "이대명과 해운대점", area: "海雲台", types: ["伴手禮"], lat: 35.1615, lng: 129.1645, desc: "傳承兩代的美味煎餅", rec: "花生煎餅、海苔煎餅", url: "https://map.naver.com/p/search/이대명과%20해운대점" },
+            { id: 37, name: "Bada sand", korName: "부산바다샌드", area: "海雲台", types: ["伴手禮"], lat: 35.1625, lng: 129.1600, desc: "海理團路超人氣奶油焦糖夾心餅", rec: "焦糖奶油夾心餅乾 (原味)", url: "https://map.naver.com/p/search/부산바다샌드" },
+            { id: 38, name: "老虎冰淇淋大福", korName: "호랑이젤라떡", area: "海雲台", types: ["伴手禮"], lat: 35.1574, lng: 129.1742, desc: "麻糬包義式冰淇淋，排隊名店", rec: "開心果口味、海鹽牛奶口味", url: "https://map.naver.com/p/search/호랑이젤라떡" },
+            { id: 45, name: "松亭家 樂天美食街", korName: "송정집 롯데아울렛동부산점", area: "東釜山", types: ["韓式料理"], lat: 35.1925, lng: 129.2120, desc: "韓式麵條與紫菜包飯", rec: "溫麵、紫菜包飯", url: "https://map.naver.com/p/search/송정집%20롯데아울렛동부산점" },
+            { id: 46, name: "柳家辣炒雞排", korName: "유가네닭갈비 롯데몰동부산점", area: "東釜山", types: ["韓式料理", "烤肉"], lat: 35.1926, lng: 129.2122, desc: "經典辣炒雞排，樂天Outlet內", rec: "起司辣炒雞排 (吃完必加炒飯)", url: "https://map.naver.com/p/search/유가네닭갈비%20롯데몰동부산점" },
+            { id: 47, name: "Shake Shack 新世界店", korName: "쉐이크쉑 센텀시티점", area: "Centum City", types: ["異國料理"], lat: 35.1689, lng: 129.1297, desc: "新世界百貨1樓超人氣漢堡", rec: "招牌起司漢堡 (ShackBurger)", url: "https://map.naver.com/p/search/쉐이크쉑%20센텀시티점" },
+            { id: 48, name: "點點心 新世界店", korName: "딤딤섬 센텀시티점", area: "Centum City", types: ["異國料理"], lat: 35.1691, lng: 129.1295, desc: "知名港式飲茶，百貨9樓美食街", rec: "蝦餃、燒賣", url: "https://map.naver.com/p/search/딤딤섬%20센텀시티점" },
+            { id: 49, name: "Gelati Gelati", korName: "젤라띠젤라띠 신세계센텀시티점", area: "Centum City", types: ["網美咖啡", "街邊小吃"], lat: 35.1689, lng: 129.1297, desc: "百貨內必吃義式冰淇淋", rec: "大米口味 (利川米)、開心果", url: "https://map.naver.com/p/search/젤라띠젤라띠%20센텀" },
+            { id: 50, name: "橋村炸雞 西面店", korName: "교촌치킨 서면점", area: "西面", types: ["炸雞"], lat: 35.1530, lng: 129.0590, desc: "蜂蜜炸雞神級美味，宵夜首選", rec: "蜂蜜無骨炸雞 (허니순살)", url: "https://map.naver.com/p/search/교촌치킨%20서면점" },
+            { id: 51, name: "60雞炸雞 海雲台店", korName: "60계치킨 부산해운대우동점", area: "海雲台", types: ["炸雞"], lat: 35.1622, lng: 129.1595, desc: "每天只用新油炸60隻雞", rec: "脆脆脆炸雞 (크크크)、乾烹炸雞", url: "https://map.naver.com/p/search/60계치킨%20해운대" },
+            { id: 52, name: "橋村炸雞 海雲台1號店", korName: "교촌치킨 해운대1호점", area: "海雲台", types: ["炸雞"], lat: 35.1630, lng: 129.1585, desc: "吃完海鮮再來份蜂蜜炸雞做宵夜", rec: "蜂蜜無骨炸雞 (허니순살)", url: "https://map.naver.com/p/search/교촌치킨%20해운대" },
+            { id: 53, name: "橋村炸雞 廣安店", korName: "교촌치킨 광안점", area: "廣安里", types: ["炸雞"], lat: 35.1535, lng: 129.1170, desc: "外帶去沙灘配啤酒最強組合", rec: "蜂蜜無骨炸雞 (허니순살)", url: "https://map.naver.com/p/search/교촌치킨%20광안점" },
+            { id: 54, name: "橋村炸雞 南浦富平店", korName: "교촌치킨 남포부평점", area: "南浦洞", types: ["炸雞"], lat: 35.1010, lng: 129.0255, desc: "逛完富平夜市的宵夜好朋友", rec: "蜂蜜無骨炸雞 (허니순살)", url: "https://map.naver.com/p/search/교촌치킨%20남포부평점" },
+            { id: 55, name: "60雞炸雞 西面店", korName: "60계치킨 서면점", area: "西面", types: ["炸雞"], lat: 35.1540, lng: 129.0580, desc: "隨時可以吃到的乾淨炸雞", rec: "脆脆脆炸雞 (크크크)", url: "https://map.naver.com/p/search/60계치킨%20서면" },
+            { id: 56, name: "李在模披薩 南浦本店", korName: "이재모피자 본점", area: "南浦洞", types: ["異國料理"], lat: 35.1021, lng: 129.0305, desc: "永遠在排隊的超牽絲起司披薩", rec: "招牌起司披薩 (必加芝心餅皮)", url: "https://map.naver.com/p/search/이재모피자%20본점" },
+            { id: 57, name: "李在模披薩 釜山站店", korName: "이재모피자 부산역점", area: "釜山站", types: ["異國料理"], lat: 35.1150, lng: 129.0400, desc: "搭KTX高鐵前後必吃", rec: "招牌起司披薩 (必加芝心餅皮)", url: "https://map.naver.com/p/search/이재모피자%20부산역점" },
+            { id: 58, name: "Shake Shack 西面店", korName: "쉐이크쉑 서면점", area: "西面", types: ["異國料理"], lat: 35.1525, lng: 129.0595, desc: "西面商圈必吃的紐約人氣漢堡", rec: "招牌起司漢堡 (ShackBurger)", url: "https://map.naver.com/p/search/쉐이크쉑%20서면점" },
+            { id: 59, name: "古來思魚糕 釜山站店", korName: "고래사어묵 부산역점", area: "釜山站", types: ["街邊小吃", "伴手禮"], lat: 35.1148, lng: 129.0402, desc: "離開釜山前採買熱呼呼魚板", rec: "起司魚糕、章魚魚糕", url: "https://map.naver.com/p/search/고래사어묵%20부산역점" },
+            { id: 60, name: "Bada sand 釜山站店", korName: "부산바다샌드 부산역점", area: "釜山站", types: ["伴手禮"], lat: 35.1145, lng: 129.0395, desc: "釜山站也買得到超夯焦糖夾心餅", rec: "焦糖奶油夾心餅乾 (原味)", url: "https://map.naver.com/p/search/부산바다샌드%20부산역점" },
+            { id: 61, name: "螞蟻家 海雲台店", korName: "개미집 해운대직영점", area: "海雲台", types: ["韓式料理", "海鮮"], lat: 35.1610, lng: 129.1595, desc: "24小時營業！釜山必吃辣炒章魚", rec: "落烤蝦 (낙곱새: 章魚+肥腸+蝦子)", url: "https://map.naver.com/p/search/개미집%20해운대" },
+            { id: 62, name: "螞蟻家 西面店", korName: "개미집 서면본점", area: "西面", types: ["韓式料理", "海鮮"], lat: 35.1531, lng: 129.0575, desc: "西面商圈超人氣，海苔拌飯超爽", rec: "落烤蝦 (낙곱새)", url: "https://map.naver.com/p/search/개미집%20서면" },
+            { id: 63, name: "螞蟻家 廣安里店", korName: "개미집 광안리점", area: "廣安里", types: ["韓式料理", "海鮮"], lat: 35.1534, lng: 129.1182, desc: "近廣安里，吃完散步剛剛好", rec: "落烤蝦 (낙곱새)", url: "https://map.naver.com/p/search/개미집%20광안리" },
+            { id: 64, name: "蜂群家", korName: "벌떼집", area: "蓮山洞", types: ["海鮮", "韓式料理"], lat: 35.1865, lng: 129.0838, desc: "在地超高CP值海鮮帳篷小吃", rec: "海鮮湯 (해물탕)、鮑魚生魚片", url: "https://naver.me/xwwlz3JW" },
+            { id: 65, name: "影島海女村", korName: "영도해녀촌", area: "影島", types: ["海鮮", "街邊小吃"], lat: 35.0667, lng: 129.0660, desc: "海邊礁石上吹海風吃新鮮海產", rec: "海膽紫菜包飯、海鮮拉麵", url: "https://map.naver.com/p/search/영도해녀촌" },
+            { id: 66, name: "Gome小麥麵 西面店", korName: "고메밀면 서면점", area: "西面", types: ["韓式料理"], lat: 35.1558, lng: 129.0594, desc: "吃小麥麵配炭火烤肉的滿足套餐", rec: "肉煎水冷麵+炭火烤肉", url: "https://naver.me/Fc5Pphu7" },
+            { id: 67, name: "濟州薄切五花肉", korName: "제주대패와옛날갈비", area: "南浦洞", types: ["烤肉"], lat: 35.1015, lng: 129.0232, desc: "高CP值烤肉，濟州薄切豬五花", rec: "濟州薄切豬五花", url: "https://naver.me/FVSHsGSi" },
+            { id: 68, name: "Jeongdaun飯桌", korName: "정다운식탁", area: "釜山站", types: ["韓式料理"], lat: 35.1182, lng: 129.0357, desc: "釜山站溫馨的韓國家常定食", rec: "家常韓式定食", url: "https://naver.me/FeN6FltV" },
+            { id: 69, name: "Handasot 南浦店", korName: "한다솥 남포점", area: "南浦洞", types: ["韓式料理"], lat: 35.1012, lng: 129.0315, desc: "高級精緻的釜飯專賣店", rec: "牛小排釜飯、鮭魚釜飯", url: "https://naver.me/xLsYQppQ" },
+            { id: 70, name: "Samojeong 西面店", korName: "사모정 서면점", area: "西面", types: ["韓式料理"], lat: 35.1552, lng: 129.0581, desc: "傳統韓料與日式豬排的完美結合", rec: "炸豬排、石鍋拌飯", url: "https://naver.me/GtJgxKtN" },
+            { id: 71, name: "Chaseonchaek", korName: "차선책 본점", area: "廣安里", types: ["網美咖啡"], lat: 35.1537, lng: 129.1189, desc: "韓國藍絲帶推薦！無敵海景甜點", rec: "黃豆粉慕斯蛋糕、黑芝麻拿鐵", url: "https://naver.me/FeN6FdHB" }
+        ];
+
+        let currentArea = '全部';
+        let currentType = '全部';
+        let userLocation = null;
+
+        const allAreas = ['全部', ...new Set(foodDatabase.map(food => food.area))];
+        const allTypes = ['全部', ...new Set(foodDatabase.reduce((acc, food) => acc.concat(food.types), []))];
+
+        function renderFilters() {
+            const areaContainer = document.getElementById('filter-area');
+            const typeContainer = document.getElementById('filter-type');
+            
+            const validAreas = currentType === '全部' ? allAreas : ['全部', ...new Set(foodDatabase.filter(f => f.types.includes(currentType)).map(f => f.area))];
+            const validTypes = currentArea === '全部' ? allTypes : ['全部', ...new Set(foodDatabase.filter(f => f.area === currentArea).flatMap(f => f.types))];
+
+            const displayAreas = allAreas.filter(a => validAreas.includes(a));
+            const displayTypes = allTypes.filter(t => validTypes.includes(t));
+
+            areaContainer.innerHTML = displayAreas.map(area => `
+                <button onclick="setFilter('area', '${area}')" 
+                        class="px-3 py-1.5 text-xs font-bold rounded-full whitespace-nowrap transition-colors shadow-sm ${currentArea === area ? 'bg-slate-800 text-white' : 'bg-white border border-slate-200 text-slate-500 hover:bg-slate-100'}">
+                    ${area}
+                </button>
+            `).join('');
+
+            typeContainer.innerHTML = displayTypes.map(type => `
+                <button onclick="setFilter('type', '${type}')" 
+                        class="px-3 py-1.5 text-xs font-bold rounded-full whitespace-nowrap transition-colors shadow-sm ${currentType === type ? 'bg-orange-500 text-white' : 'bg-orange-50 border border-orange-200 text-orange-500 hover:bg-orange-100'}">
+                    ${type}
+                </button>
+            `).join('');
+        }
+
+        function setFilter(category, value) {
+            if (category === 'area') {
+                currentArea = value;
+                const validTypes = currentArea === '全部' ? allTypes : foodDatabase.filter(f => f.area === currentArea).flatMap(f => f.types);
+                if (currentType !== '全部' && !validTypes.includes(currentType)) currentType = '全部';
+            }
+            if (category === 'type') {
+                currentType = value;
+                const validAreas = currentType === '全部' ? allAreas : foodDatabase.filter(f => f.types.includes(currentType)).map(f => f.area);
+                if (currentArea !== '全部' && !validAreas.includes(currentArea)) currentArea = '全部';
+            }
+            renderFilters();
+            renderList();
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            if (!lat1 || !lon1 || !lat2 || !lon2) return Infinity;
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        function updateLocation() {
+            const btnStatus = document.getElementById('location-status');
+            if (!navigator.geolocation) {
+                showToast("⚠️ 瀏覽器不支援定位", "fa-triangle-exclamation", "text-yellow-400");
+                return;
+            }
+            btnStatus.innerText = "定位中...";
+            showToast("📍 正在獲取您的位置...");
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
+                    btnStatus.innerText = "已更新";
+                    showToast("✅ 位置已更新！名單已依距離排序。");
+                    renderList();
+                    setTimeout(() => { btnStatus.innerText = "更新位置"; }, 3000);
+                },
+                (error) => {
+                    btnStatus.innerText = "更新位置";
+                    let msg = "❌ 定位失敗";
+                    if(error.code === 1) msg = "❌ 請允許位置權限以計算距離";
+                    showToast(msg, "fa-circle-xmark", "text-red-400");
+                },
+                { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+            );
+        }
+
+        function renderList() {
+            const listContainer = document.getElementById('restaurant-list');
+            let filteredList = foodDatabase.filter(food => {
+                const matchArea = currentArea === '全部' || food.area === currentArea;
+                const matchType = currentType === '全部' || food.types.includes(currentType);
+                return matchArea && matchType;
+            });
+
+            if (userLocation) {
+                filteredList = filteredList.map(food => {
+                    const dist = calculateDistance(userLocation.lat, userLocation.lng, food.lat, food.lng);
+                    return { ...food, distance: dist };
+                }).sort((a, b) => a.distance - b.distance);
+            }
+
+            if (filteredList.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="col-span-2 text-center py-10 text-slate-400 text-sm">
+                        <i class="fa-solid fa-face-frown text-2xl mb-2 block"></i>
+                        沒有符合的餐廳，換個篩選條件吧！
+                    </div>`;
+                return;
+            }
+
+            listContainer.innerHTML = filteredList.map(food => {
+                let distanceHtml = '<span class="inline-block mt-2 text-[10px] bg-slate-100 text-slate-400 px-1.5 py-0.5 rounded font-medium"><i class="fa-solid fa-location-arrow"></i> 未定位</span>';
+                if (food.distance !== undefined) {
+                    const distText = food.distance < 1 ? `${Math.round(food.distance * 1000)}m` : `${food.distance.toFixed(1)}km`;
+                    distanceHtml = `<span class="inline-block mt-2 text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-person-walking"></i> 約 ${distText}</span>`;
+                }
+
+                let recHtml = food.rec ? `<div class="mt-1.5 text-[10px] text-red-500 font-bold bg-red-50/80 px-1.5 py-0.5 rounded inline-block"><i class="fa-solid fa-fire text-red-500 mr-0.5"></i>激推: ${food.rec}</div>` : '';
+
+                return `
+                <div class="food-card">
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-bold text-sm text-slate-800 leading-tight">${food.name}</h3>
+                            <a href="${food.url}" target="_blank" class="text-green-500 bg-green-50 w-7 h-7 rounded-full flex items-center justify-center shrink-0 ml-1 mb-1 active:scale-95 transition-transform" title="開啟 Naver Map">
+                                <i class="fa-solid fa-map-location-dot text-xs"></i>
+                            </a>
+                        </div>
+                        <p class="text-[9px] text-slate-400 mb-1 line-clamp-1" title="${food.korName}">${food.korName}</p>
+                        <p class="text-[10px] text-slate-600 font-medium mb-1">📍 ${food.area} | ${food.types[0]}</p>
+                        <p class="text-[10px] text-slate-500 line-clamp-2 leading-snug">${food.desc}</p>
+                        ${recHtml}
+                    </div>
+                    <div class="text-right border-t border-slate-50 pt-1 mt-1">
+                        ${distanceHtml}
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function pickRandomFood() {
+            const filteredList = foodDatabase.filter(food => {
+                const matchArea = currentArea === '全部' || food.area === currentArea;
+                const matchType = currentType === '全部' || food.types.includes(currentType);
+                return matchArea && matchType;
+            });
+
+            if (filteredList.length === 0) {
+                showToast("⚠️ 目前篩選下沒有餐廳可以抽喔！", "fa-triangle-exclamation", "text-yellow-400");
+                return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * filteredList.length);
+            const winner = filteredList[randomIndex];
+            const recModalHtml = winner.rec ? `<div class="mt-2 text-[11px] font-bold text-red-500 bg-red-100/50 px-2 py-1 rounded-lg inline-block border border-red-100"><i class="fa-solid fa-fire"></i> 行家必點：${winner.rec}</div>` : '';
+
+            const resultHtml = `
+                <div class="absolute -right-4 -top-4 text-orange-200 opacity-30 text-6xl rotate-12">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <div class="relative z-10">
+                    <p class="text-[10px] font-bold text-orange-500 mb-1">📍 ${winner.area} · 🏷️ ${winner.types[0]}</p>
+                    <h4 class="font-black text-lg text-slate-800 mb-1">${winner.name}</h4>
+                    <p class="text-xs text-slate-500 mb-2">${winner.korName}</p>
+                    <p class="text-xs text-slate-700 bg-white/60 p-2 rounded-lg font-medium leading-snug">${winner.desc}</p>
+                    ${recModalHtml}
+                </div>
+            `;
+            
+            document.getElementById('dice-result-card').innerHTML = resultHtml;
+            const modal = document.getElementById('dice-modal');
+            const modalContent = document.getElementById('dice-modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('dice-modal');
+            const modalContent = document.getElementById('dice-modal-content');
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        // ================= 頁面初始化 =================
         window.onload = () => {
             loadChecks();
             checkAutoDateJump();
+            renderFilters();
+            renderList();
         };
 
     </script>
