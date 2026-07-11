@@ -1276,12 +1276,15 @@
 
         // ================= 美食名單模組 (V20 新增) =================
         const foodDatabase = [
+            // 西面
             { id: 1, name: "味贊王鹽烤肉", korName: "맛찬들왕소금구이 서면점", area: "西面", types: ["烤肉"], lat: 35.1534, lng: 129.0578, desc: "3.5cm厚切豬五花，專人代烤", rec: "3.5cm厚切豬五花、烤蝦醬", url: "https://maps.app.goo.gl/aHhpEjrM8TbcgA8P6" },
             { id: 2, name: "松亭三代豬肉湯飯", korName: "송정3대국밥", area: "西面", types: ["湯飯"], lat: 35.1541, lng: 129.0577, desc: "西面湯飯街老字號，豬肉軟嫩", rec: "豬肉湯飯、血腸", url: "https://maps.app.goo.gl/rXFU2c9DzABPPXqs5" },
             { id: 3, name: "李在模披薩", korName: "이재모피자 서면점", area: "西面", types: ["異國料理"], lat: 35.1560, lng: 129.0581, desc: "牽絲起司披薩，排隊名店", rec: "招牌起司披薩 (必加芝心餅皮)", url: "https://maps.app.goo.gl/dM5DAH1eQzEU79xZ8" },
             { id: 4, name: "釜山烤肋排", korName: "부산쪽쪽갈비", area: "西面", types: ["烤肉"], lat: 35.1555, lng: 129.0570, desc: "鹽烤與調味半半，配起司絕讚", rec: "鹽烤/調味半半、起司沾醬", url: "https://maps.app.goo.gl/USMYDhx6cbqxxPb77" },
             { id: 5, name: "釜山宅", korName: "부산댁", area: "西面", types: ["烤肉"], lat: 35.1565, lng: 129.0573, desc: "專人代烤豬肉，環境復古舒適", rec: "豬肉拼盤 (廚房烤好才上桌)", url: "https://map.naver.com/p/search/부산댁%20서면" },
             { id: 6, name: "濟州家", korName: "제주가 서면점", area: "西面", types: ["海鮮"], lat: 35.1546, lng: 129.0559, desc: "濃郁鮑魚粥與海膽海帶湯", rec: "鮑魚粥、海膽海帶湯", url: "https://map.naver.com/p/search/제주가%20서면점" },
+            
+            // 海雲台 & 海雲台市場
             { id: 7, name: "伍班長烤肉", korName: "오반장", area: "海雲台", types: ["烤肉"], lat: 35.1610, lng: 129.1620, desc: "半露天烤肉，烤蛋汁與豬肉完美搭配", rec: "海鷗肉、烤盤外圈蒸蛋", url: "https://map.naver.com/p/search/오반장" },
             { id: 8, name: "古來思魚糕", korName: "고래사어묵 해운대점", area: "海雲台", types: ["街邊小吃"], lat: 35.1613, lng: 129.1599, desc: "釜山代表魚板，可現吃", rec: "起司魚糕、章魚魚糕", url: "https://map.naver.com/p/search/고래사어묵%20해운대점" },
             { id: 9, name: "名品蔘雞湯", korName: "해운대이름난삼계탕", area: "海雲台", types: ["韓式料理"], lat: 35.1612, lng: 129.1625, desc: "濃郁滋補蔘雞湯，在地人也愛", rec: "招牌蔘雞湯 (附贈人蔘酒)", url: "https://map.naver.com/p/search/해운대이름난삼계탕" },
@@ -1293,61 +1296,89 @@
             { id: 15, name: "Working Holiday", korName: "워킹홀리데이", area: "海雲台", types: ["網美咖啡"], lat: 35.1590, lng: 129.1550, desc: "絕美海景早午餐與烘焙", rec: "海景早午餐拼盤", url: "https://map.naver.com/p/search/워킹홀리데이%20해운대" },
             { id: 16, name: "Rendezja-vous", korName: "랑데자뷰", area: "海雲台", types: ["網美咖啡"], lat: 35.1595, lng: 129.1550, desc: "海景第一排，濟州島風格", rec: "漢拏峰柑橘氣泡飲、抹茶拿鐵", url: "https://map.naver.com/p/search/랑데자뷰%20해운대" },
             { id: 17, name: "海雲台市場盲鰻", korName: "해운대시장 꼼장어", area: "海雲台市場", types: ["海鮮", "街邊小吃"], lat: 35.1611, lng: 129.1622, desc: "現殺盲鰻，辣炒超下酒", rec: "辣炒盲鰻 (吃完必加炒飯)", url: "https://map.naver.com/p/search/해운대시장%20꼼장어" },
-            { id: 42, name: "海雲台名品糖餅", korName: "해운대 명품호떡", area: "海雲台市場", types: ["街邊小吃"], lat: 35.1614, lng: 129.1605, desc: "永遠在排隊的超人氣黑糖餅", rec: "起司黑糖餅、堅果黑糖餅", url: "https://map.naver.com/p/search/해운대%20명품호떡" },
+            { id: 42, name: "海雲台名品糖餅", korName: "해운대 명품호떡", area: "海雲台市場", types: ["街邊小吃"], lat: 35.1614, lng: 129.1605, desc: "海雲台市場必吃，永遠在排隊的超人氣黑糖餅", rec: "起司黑糖餅、堅果黑糖餅", url: "https://map.naver.com/p/search/해운대%20명품호떡" },
+            
+            // 南浦洞
             { id: 18, name: "扎嘎其市場海鮮", korName: "자갈치시장", area: "南浦洞", types: ["海鮮"], lat: 35.0967, lng: 129.0305, desc: "釜山最大海鮮市場", rec: "帝王蟹、生章魚", url: "https://map.naver.com/p/search/자갈치시장" },
             { id: 19, name: "海田烤腸", korName: "해전곱창", area: "南浦洞", types: ["烤肉"], lat: 35.0991, lng: 129.0285, desc: "烤起司盲鰻與烤腸", rec: "起司烤腸、半半烤腸", url: "https://map.naver.com/p/search/해전곱창" },
             { id: 20, name: "南浦蔘雞湯", korName: "남포삼계탕", area: "南浦洞", types: ["韓式料理"], lat: 35.0995, lng: 129.0300, desc: "南浦老字號，雞肉軟嫩", rec: "蔘雞湯", url: "https://map.naver.com/p/search/남포삼계탕" },
             { id: 21, name: "BIFF廣場糖餅", korName: "BIFF광장 씨앗호떡", area: "南浦洞", types: ["街邊小吃"], lat: 35.0985, lng: 129.0289, desc: "塞滿堅果的黑糖餅", rec: "堅果黑糖餅 (씨앗호떡)", url: "https://map.naver.com/p/search/BIFF광장%20씨앗호떡" },
-            { id: 43, name: "昇基元祖黑糖餅", korName: "승기찹쌀씨앗호떡", area: "南浦洞", types: ["街邊小吃"], lat: 35.0986, lng: 129.0288, desc: "李昇基造訪過！超人氣堅果糖餅", rec: "招牌堅果黑糖餅", url: "https://map.naver.com/p/search/승기찹쌀씨앗호떡" },
+            { id: 43, name: "昇基元祖黑糖餅", korName: "승기찹쌀씨앗호떡", area: "南浦洞", types: ["街邊小吃"], lat: 35.0986, lng: 129.0288, desc: "李昇基造訪過！BIFF廣場超人氣堅果糖餅", rec: "招牌堅果黑糖餅", url: "https://map.naver.com/p/search/승기찹쌀씨앗호떡" },
             { id: 44, name: "大叔黑糖餅", korName: "아저씨씨앗호떡", area: "南浦洞", types: ["街邊小吃"], lat: 35.0986, lng: 129.0290, desc: "外皮酥脆不油膩，在地人也愛排的黑糖餅", rec: "堅果黑糖餅", url: "https://map.naver.com/p/search/아저씨씨앗호떡" },
             { id: 22, name: "豆田裡嫩豆腐", korName: "콩밭에", area: "南浦洞", types: ["韓式料理"], lat: 35.1001, lng: 129.0322, desc: "點鍋送自助吧，CP值高", rec: "嫩豆腐鍋 (為了無限小菜而來)", url: "https://map.naver.com/p/search/콩밭에" },
             { id: 23, name: "馬山鮟鱇魚", korName: "마산아구찜", area: "南浦洞", types: ["鮟鱇魚"], lat: 35.0998, lng: 129.0298, desc: "微辣下飯，釜山在地老店", rec: "辣炒鮟鱇魚", url: "https://map.naver.com/p/search/마산아구찜" },
             { id: 24, name: "胡同醬蟹", korName: "골목게장", area: "南浦洞", types: ["醬蟹"], lat: 35.1152, lng: 129.0422, desc: "白飯小偷，鮮甜無腥味", rec: "醬油蟹拼盤、蟹膏拌飯", url: "https://map.naver.com/p/search/골목게장" },
             { id: 25, name: "南浦雪濃湯", korName: "남포설렁탕", area: "南浦洞", types: ["湯飯"], lat: 35.0970, lng: 129.0280, desc: "牛骨熬製濃郁湯頭", rec: "雪濃湯、白切肉", url: "https://map.naver.com/p/search/남포설렁탕" },
             { id: 26, name: "元祖釜山豬腳", korName: "원조부산족발", area: "南浦洞", types: ["韓式料理"], lat: 35.1011, lng: 129.0268, desc: "招牌涼拌豬腳", rec: "招牌涼拌豬腳 (冷盤)", url: "https://map.naver.com/p/search/원조부산족발" },
+            
+            // 廣安里 & 田浦
             { id: 27, name: "廣安里大門", korName: "광안리 대문", area: "廣安里", types: ["烤肉", "海鮮"], lat: 35.1530, lng: 129.1189, desc: "廣安里知名聚餐餐廳", url: "https://map.naver.com/p/search/광안리%20대문" },
-            { id: 28, name: "水邊最高豬肉湯飯", korName: "수변최고돼지국밥", area: "廣安里", types: ["湯飯"], lat: 35.1532, lng: 129.1275, desc: "民樂水邊公園旁濃郁湯頭", rec: "豬頸肉湯飯 (항정국밥) 必點", url: "https://map.naver.com/p/search/수변최고돼지국밥" },
+            { id: 28, name: "水邊最高豬肉湯飯 民樂本店", korName: "수변최고돼지국밥 민락본점", area: "廣安里", types: ["湯飯"], lat: 35.1532, lng: 129.1275, desc: "民樂水邊公園旁濃郁湯頭，永遠在排隊的總店", rec: "豬頸肉湯飯 (항정국밥)", url: "https://map.naver.com/p/search/수변최고돼지국밥%20민락본점" },
             { id: 29, name: "田浦咖啡街", korName: "전포카페거리", area: "田浦", types: ["網美咖啡"], lat: 35.1557, lng: 129.0637, desc: "文青咖啡廳與甜點店聚集", url: "https://map.naver.com/p/search/전포카페거리" },
             { id: 39, name: "Goof 咖啡", korName: "구프", area: "田浦", types: ["網美咖啡"], lat: 35.1578, lng: 129.0618, desc: "超人氣黑膠唱片復古咖啡廳", rec: "羅勒番茄汽水、冰滴咖啡", url: "https://map.naver.com/p/search/구프" },
-            { id: 40, name: "Werk Roasters", korName: "베르크로스터스", area: "田浦", types: ["網美咖啡"], lat: 35.1554, lng: 129.0631, desc: "地下室點餐、復古工業風超酷空間", rec: "拿鐵 (B1點餐)", url: "https://map.naver.com/p/search/베르크로스터스" },
+            { id: 40, name: "Werk Roasters", korName: "베르크로스터스", area: "田浦", types: ["網美咖啡"], lat: 35.1554, lng: 129.0631, desc: "地下室點餐、復古工業風超酷空間", rec: "拿鐵 (B1點餐，2F座位像教堂)", url: "https://map.naver.com/p/search/베르크로스터스" },
             { id: 41, name: "FM Coffee", korName: "FM커피", area: "田浦", types: ["網美咖啡"], lat: 35.1565, lng: 129.0625, desc: "田浦經典必喝，招牌冷萃咖啡", rec: "明天咖啡 (투모로우, 冷萃奶蓋)", url: "https://map.naver.com/p/search/FM커피" },
+            
+            // 機張 & 松島 & 影島
             { id: 30, name: "機張大蟹", korName: "기장대게", area: "機張", types: ["海鮮"], lat: 35.2443, lng: 129.2227, desc: "現挑現蒸鮮甜松葉蟹", rec: "蒸松葉蟹、蟹膏炒飯", url: "https://map.naver.com/p/search/기장대게" },
             { id: 31, name: "海東龍宮寺炸醬麵", korName: "용궁해물쟁반짜장", area: "機張", types: ["異國料理"], lat: 35.1885, lng: 129.2155, desc: "超大盤海鮮炸醬麵", rec: "鐵板海鮮炸醬麵、糖醋肉", url: "https://map.naver.com/p/search/용궁해물쟁반짜장" },
             { id: 32, name: "Cafe Coralani", korName: "카페 코랄라니", area: "機張", types: ["網美咖啡"], lat: 35.1960, lng: 129.2270, desc: "機張海岸絕美海景咖啡廳", rec: "海鹽咖啡、烘焙麵包", url: "https://map.naver.com/p/search/카페%20코랄라니" },
             { id: 33, name: "松島海鮮餐廳", korName: "송도해물탕", area: "松島", types: ["海鮮"], lat: 35.0768, lng: 129.0195, desc: "無敵海景搭配新鮮海鮮湯", rec: "豪華海鮮鍋", url: "https://map.naver.com/p/search/송도해물탕" },
             { id: 34, name: "Having Moment", korName: "해빙모먼트", area: "影島", types: ["網美咖啡"], lat: 35.0780, lng: 129.0450, desc: "白淺灘絕美海景咖啡", rec: "黑芝麻拿鐵、冰淇淋可朗芙", url: "https://map.naver.com/p/search/해빙모먼트" },
+            
+            // 伴手禮
             { id: 35, name: "Keveren House", korName: "케베렌 하우스", area: "海雲台", types: ["伴手禮"], lat: 35.1627, lng: 129.1610, desc: "特色伴手禮與生活選物", url: "https://map.naver.com/p/search/케베렌%20하우스" },
             { id: 36, name: "二代名菓", korName: "이대명과 해운대점", area: "海雲台", types: ["伴手禮"], lat: 35.1615, lng: 129.1645, desc: "傳承兩代的美味煎餅", rec: "花生煎餅、海苔煎餅", url: "https://map.naver.com/p/search/이대명과%20해운대점" },
             { id: 37, name: "Bada sand", korName: "부산바다샌드", area: "海雲台", types: ["伴手禮"], lat: 35.1625, lng: 129.1600, desc: "海理團路超人氣奶油焦糖夾心餅", rec: "焦糖奶油夾心餅乾 (原味)", url: "https://map.naver.com/p/search/부산바다샌드" },
             { id: 38, name: "老虎冰淇淋大福", korName: "호랑이젤라떡", area: "海雲台", types: ["伴手禮"], lat: 35.1574, lng: 129.1742, desc: "麻糬包義式冰淇淋，排隊名店", rec: "開心果口味、海鹽牛奶口味", url: "https://map.naver.com/p/search/호랑이젤라떡" },
-            { id: 45, name: "松亭家 樂天美食街", korName: "송정집 롯데아울렛동부산점", area: "東釜山", types: ["韓式料理"], lat: 35.1925, lng: 129.2120, desc: "韓式麵條與紫菜包飯", rec: "溫麵、紫菜包飯", url: "https://map.naver.com/p/search/송정집%20롯데아울렛동부산점" },
+            
+            // 東釜山 Lotte Outlet
+            { id: 45, name: "松亭家 樂天美食街", korName: "송정집 롯데아울렛동부산점", area: "東釜山", types: ["韓式料理"], lat: 35.1925, lng: 129.2120, desc: "韓式麵條與紫菜包飯，逛街必吃", rec: "溫麵、紫菜包飯", url: "https://map.naver.com/p/search/송정집%20롯데아울렛동부산점" },
             { id: 46, name: "柳家辣炒雞排", korName: "유가네닭갈비 롯데몰동부산점", area: "東釜山", types: ["韓式料理", "烤肉"], lat: 35.1926, lng: 129.2122, desc: "經典辣炒雞排，樂天Outlet內", rec: "起司辣炒雞排 (吃完必加炒飯)", url: "https://map.naver.com/p/search/유가네닭갈비%20롯데몰동부산점" },
+
+            // 新世界百貨 (Centum City)
             { id: 47, name: "Shake Shack 新世界店", korName: "쉐이크쉑 센텀시티점", area: "Centum City", types: ["異國料理"], lat: 35.1689, lng: 129.1297, desc: "新世界百貨1樓超人氣漢堡", rec: "招牌起司漢堡 (ShackBurger)", url: "https://map.naver.com/p/search/쉐이크쉑%20센텀시티점" },
             { id: 48, name: "點點心 新世界店", korName: "딤딤섬 센텀시티점", area: "Centum City", types: ["異國料理"], lat: 35.1691, lng: 129.1295, desc: "知名港式飲茶，百貨9樓美食街", rec: "蝦餃、燒賣", url: "https://map.naver.com/p/search/딤딤섬%20센텀시티점" },
             { id: 49, name: "Gelati Gelati", korName: "젤라띠젤라띠 신세계센텀시티점", area: "Centum City", types: ["網美咖啡", "街邊小吃"], lat: 35.1689, lng: 129.1297, desc: "百貨內必吃義式冰淇淋", rec: "大米口味 (利川米)、開心果", url: "https://map.naver.com/p/search/젤라띠젤라띠%20센텀" },
+
+            // 炸雞及各大名店分店
             { id: 50, name: "橋村炸雞 西面店", korName: "교촌치킨 서면점", area: "西面", types: ["炸雞"], lat: 35.1530, lng: 129.0590, desc: "蜂蜜炸雞神級美味，宵夜首選", rec: "蜂蜜無骨炸雞 (허니순살)", url: "https://map.naver.com/p/search/교촌치킨%20서면점" },
-            { id: 51, name: "60雞炸雞 海雲台店", korName: "60계치킨 부산해운대우동점", area: "海雲台", types: ["炸雞"], lat: 35.1622, lng: 129.1595, desc: "每天只用新油炸60隻雞", rec: "脆脆脆炸雞 (크크크)、乾烹炸雞", url: "https://map.naver.com/p/search/60계치킨%20해운대" },
+            { id: 51, name: "60雞炸雞 海雲台店", korName: "60계치킨 부산해운대우동점", area: "海雲台", types: ["炸雞"], lat: 35.1622, lng: 129.1595, desc: "李英子推薦！每天只用新油炸60隻雞", rec: "脆脆脆炸雞 (크크크)、乾烹炸雞", url: "https://map.naver.com/p/search/60계치킨%20해운대" },
             { id: 52, name: "橋村炸雞 海雲台1號店", korName: "교촌치킨 해운대1호점", area: "海雲台", types: ["炸雞"], lat: 35.1630, lng: 129.1585, desc: "吃完海鮮再來份蜂蜜炸雞做宵夜", rec: "蜂蜜無骨炸雞 (허니순살)", url: "https://map.naver.com/p/search/교촌치킨%20해운대" },
-            { id: 53, name: "橋村炸雞 廣安店", korName: "교촌치킨 광안점", area: "廣安里", types: ["炸雞"], lat: 35.1535, lng: 129.1170, desc: "外帶去沙灘配啤酒最強組合", rec: "蜂蜜無骨炸雞 (허니순살)", url: "https://map.naver.com/p/search/교촌치킨%20광안점" },
-            { id: 54, name: "橋村炸雞 南浦富平店", korName: "교촌치킨 남포부평점", area: "南浦洞", types: ["炸雞"], lat: 35.1010, lng: 129.0255, desc: "逛完富平夜市的宵夜好朋友", rec: "蜂蜜無骨炸雞 (허니순살)", url: "https://map.naver.com/p/search/교촌치킨%20남포부평점" },
-            { id: 55, name: "60雞炸雞 西面店", korName: "60계치킨 서면점", area: "西面", types: ["炸雞"], lat: 35.1540, lng: 129.0580, desc: "隨時可以吃到的乾淨炸雞", rec: "脆脆脆炸雞 (크크크)", url: "https://map.naver.com/p/search/60계치킨%20서면" },
-            { id: 56, name: "李在模披薩 南浦本店", korName: "이재모피자 본점", area: "南浦洞", types: ["異國料理"], lat: 35.1021, lng: 129.0305, desc: "永遠在排隊的超牽絲起司披薩", rec: "招牌起司披薩 (必加芝心餅皮)", url: "https://map.naver.com/p/search/이재모피자%20본점" },
-            { id: 57, name: "李在模披薩 釜山站店", korName: "이재모피자 부산역점", area: "釜山站", types: ["異國料理"], lat: 35.1150, lng: 129.0400, desc: "搭KTX高鐵前後必吃", rec: "招牌起司披薩 (必加芝心餅皮)", url: "https://map.naver.com/p/search/이재모피자%20부산역점" },
+            { id: 53, name: "橋村炸雞 廣安店", korName: "교촌치킨 광안점", area: "廣安里", types: ["炸雞"], lat: 35.1535, lng: 129.1170, desc: "外帶去廣安里沙灘，配啤酒看橋的最強組合", rec: "蜂蜜無骨炸雞 (허니순살)", url: "https://map.naver.com/p/search/교촌치킨%20광안점" },
+            { id: 54, name: "橋村炸雞 南浦富平店", korName: "교촌치킨 남포부평점", area: "南浦洞", types: ["炸雞"], lat: 35.1010, lng: 129.0255, desc: "逛完富平罐頭夜市的宵夜好朋友", rec: "蜂蜜無骨炸雞 (허니순살)", url: "https://map.naver.com/p/search/교촌치킨%20남포부평점" },
+            { id: 55, name: "60雞炸雞 西面店", korName: "60계치킨 서면점", area: "西面", types: ["炸雞"], lat: 35.1540, lng: 129.0580, desc: "西面商圈逛累了，隨時可以吃到的乾淨炸雞", rec: "脆脆脆炸雞 (크크크)", url: "https://map.naver.com/p/search/60계치킨%20서면" },
+            { id: 56, name: "李在模披薩 南浦本店", korName: "이재모피자 본점", area: "南浦洞", types: ["異國料理"], lat: 35.1021, lng: 129.0305, desc: "永遠在排隊的超牽絲起司披薩發源地！", rec: "招牌起司披薩 (必加芝心餅皮)", url: "https://map.naver.com/p/search/이재모피자%20본점" },
+            { id: 57, name: "李在模披薩 釜山站店", korName: "이재모피자 부산역점", area: "釜山站", types: ["異國料理"], lat: 35.1150, lng: 129.0400, desc: "搭KTX高鐵前後必吃，對面就是釜山站", rec: "招牌起司披薩 (必加芝心餅皮)", url: "https://map.naver.com/p/search/이재모피자%20부산역점" },
             { id: 58, name: "Shake Shack 西面店", korName: "쉐이크쉑 서면점", area: "西面", types: ["異國料理"], lat: 35.1525, lng: 129.0595, desc: "西面商圈必吃的紐約人氣漢堡", rec: "招牌起司漢堡 (ShackBurger)", url: "https://map.naver.com/p/search/쉐이크쉑%20서면점" },
-            { id: 59, name: "古來思魚糕 釜山站店", korName: "고래사어묵 부산역점", area: "釜山站", types: ["街邊小吃", "伴手禮"], lat: 35.1148, lng: 129.0402, desc: "離開釜山前採買熱呼呼魚板", rec: "起司魚糕、章魚魚糕", url: "https://map.naver.com/p/search/고래사어묵%20부산역점" },
-            { id: 60, name: "Bada sand 釜山站店", korName: "부산바다샌드 부산역점", area: "釜山站", types: ["伴手禮"], lat: 35.1145, lng: 129.0395, desc: "釜山站也買得到超夯焦糖夾心餅", rec: "焦糖奶油夾心餅乾 (原味)", url: "https://map.naver.com/p/search/부산바다샌드%20부산역점" },
-            { id: 61, name: "螞蟻家 海雲台店", korName: "개미집 해운대직영점", area: "海雲台", types: ["韓式料理", "海鮮"], lat: 35.1610, lng: 129.1595, desc: "24小時營業！釜山必吃辣炒章魚", rec: "落烤蝦 (낙곱새: 章魚+肥腸+蝦子)", url: "https://map.naver.com/p/search/개미집%20해운대" },
-            { id: 62, name: "螞蟻家 西面店", korName: "개미집 서면본점", area: "西面", types: ["韓式料理", "海鮮"], lat: 35.1531, lng: 129.0575, desc: "西面商圈超人氣，海苔拌飯超爽", rec: "落烤蝦 (낙곱새)", url: "https://map.naver.com/p/search/개미집%20서면" },
-            { id: 63, name: "螞蟻家 廣安里店", korName: "개미집 광안리점", area: "廣安里", types: ["韓式料理", "海鮮"], lat: 35.1534, lng: 129.1182, desc: "近廣安里，吃完散步剛剛好", rec: "落烤蝦 (낙곱새)", url: "https://map.naver.com/p/search/개미집%20광안리" },
-            { id: 64, name: "蜂群家", korName: "벌떼집", area: "蓮山洞", types: ["海鮮", "韓式料理"], lat: 35.1865, lng: 129.0838, desc: "在地超高CP值海鮮帳篷小吃", rec: "海鮮湯 (해물탕)、鮑魚生魚片", url: "https://naver.me/xwwlz3JW" },
-            { id: 65, name: "影島海女村", korName: "영도해녀촌", area: "影島", types: ["海鮮", "街邊小吃"], lat: 35.0667, lng: 129.0660, desc: "海邊礁石上吹海風吃新鮮海產", rec: "海膽紫菜包飯、海鮮拉麵", url: "https://map.naver.com/p/search/영도해녀촌" },
-            { id: 66, name: "Gome小麥麵 西面店", korName: "고메밀면 서면점", area: "西面", types: ["韓式料理"], lat: 35.1558, lng: 129.0594, desc: "吃小麥麵配炭火烤肉的滿足套餐", rec: "肉煎水冷麵+炭火烤肉", url: "https://naver.me/Fc5Pphu7" },
-            { id: 67, name: "濟州薄切五花肉", korName: "제주대패와옛날갈비", area: "南浦洞", types: ["烤肉"], lat: 35.1015, lng: 129.0232, desc: "高CP值烤肉，濟州薄切豬五花", rec: "濟州薄切豬五花", url: "https://naver.me/FVSHsGSi" },
-            { id: 68, name: "Jeongdaun飯桌", korName: "정다운식탁", area: "釜山站", types: ["韓式料理"], lat: 35.1182, lng: 129.0357, desc: "釜山站溫馨的韓國家常定食", rec: "家常韓式定食", url: "https://naver.me/FeN6FltV" },
-            { id: 69, name: "Handasot 南浦店", korName: "한다솥 남포점", area: "南浦洞", types: ["韓式料理"], lat: 35.1012, lng: 129.0315, desc: "高級精緻的釜飯專賣店", rec: "牛小排釜飯、鮭魚釜飯", url: "https://naver.me/xLsYQppQ" },
-            { id: 70, name: "Samojeong 西面店", korName: "사모정 서면점", area: "西面", types: ["韓式料理"], lat: 35.1552, lng: 129.0581, desc: "傳統韓料與日式豬排的完美結合", rec: "炸豬排、石鍋拌飯", url: "https://naver.me/GtJgxKtN" },
-            { id: 71, name: "Chaseonchaek", korName: "차선책 본점", area: "廣安里", types: ["網美咖啡"], lat: 35.1537, lng: 129.1189, desc: "韓國藍絲帶推薦！無敵海景甜點", rec: "黃豆粉慕斯蛋糕、黑芝麻拿鐵", url: "https://naver.me/FeN6FdHB" }
+            { id: 59, name: "古來思魚糕 釜山站店", korName: "고래사어묵 부산역점", area: "釜山站", types: ["街邊小吃", "伴手禮"], lat: 35.1148, lng: 129.0402, desc: "離開釜山前最後採買熱呼呼魚板的好所在", rec: "起司魚糕、章魚魚糕", url: "https://map.naver.com/p/search/고래사어묵%20부산역점" },
+            { id: 60, name: "Bada sand 釜山站店", korName: "부산바다샌드 부산역점", area: "釜山站", types: ["伴手禮"], lat: 35.1145, lng: 129.0395, desc: "不用跑海雲台，釜山站也買得到超夯焦糖夾心餅", rec: "焦糖奶油夾心餅乾 (原味)", url: "https://map.naver.com/p/search/부산바다샌드%20부산역점" },
+
+            // 螞蟻家 分店
+            { id: 61, name: "螞蟻家 海雲台店", korName: "개미집 해운대직영점", area: "海雲台", types: ["韓式料理", "海鮮"], lat: 35.1610, lng: 129.1595, desc: "24小時營業！釜山必吃辣炒章魚肥腸蝦子，白飯殺手", rec: "落烤蝦 (낙곱새: 章魚+肥腸+蝦子)", url: "https://map.naver.com/p/search/개미집%20해운대" },
+            { id: 62, name: "螞蟻家 西面店", korName: "개미집 서면본점", area: "西面", types: ["韓式料理", "海鮮"], lat: 35.1531, lng: 129.0575, desc: "西面商圈超人氣，把海苔跟辣醬拌飯吃超級爽快", rec: "落烤蝦 (낙곱새: 章魚+肥腸+蝦子)", url: "https://map.naver.com/p/search/개미집%20서면" },
+            { id: 63, name: "螞蟻家 廣安里店", korName: "개미집 광안리점", area: "廣安里", types: ["韓式料理", "海鮮"], lat: 35.1534, lng: 129.1182, desc: "近廣安里海水浴場，吃完辣炒章魚去海邊散步剛剛好", rec: "落烤蝦 (낙곱새: 章魚+肥腸+蝦子)", url: "https://map.naver.com/p/search/개미집%20광안리" },
+            
+            // 網友新增 Naver Map 推薦清單
+            { id: 64, name: "蜂群家", korName: "벌떼집", area: "蓮山洞", types: ["海鮮", "韓式料理"], lat: 35.1865, lng: 129.0838, desc: "蓮山洞在地超高CP值海鮮帳篷小吃，氣氛熱鬧", rec: "海鮮湯 (해물탕)、鮑魚生魚片", url: "https://naver.me/xwwlz3JW" },
+            { id: 65, name: "影島海女村", korName: "영도해녀촌", area: "影島", types: ["海鮮", "街邊小吃"], lat: 35.0667, lng: 129.0660, desc: "坐在海邊礁石上吹海風吃新鮮海產，超Chill打卡熱點", rec: "海膽紫菜包飯、海鮮拉麵", url: "https://map.naver.com/p/search/영도해녀촌" },
+            { id: 66, name: "Gome小麥麵 西面店", korName: "고메밀면 서면점", area: "西面", types: ["韓式料理"], lat: 35.1558, lng: 129.0594, desc: "吃小麥麵配炭火烤肉的超滿足套餐，高人氣排隊名店", rec: "肉煎水冷麵+炭火烤肉", url: "https://naver.me/Fc5Pphu7" },
+            { id: 67, name: "濟州薄切五花肉和昔日排骨", korName: "제주대패와옛날갈비", area: "南浦洞", types: ["烤肉"], lat: 35.1015, lng: 129.0232, desc: "富平洞高CP值烤肉，濟州薄切豬五花越嚼越香", rec: "濟州薄切豬五花", url: "https://naver.me/FVSHsGSi" },
+            { id: 68, name: "Jeongdaun飯桌", korName: "정다운식탁", area: "釜山站", types: ["韓式料理"], lat: 35.1182, lng: 129.0357, desc: "釜山站草梁洞溫馨的韓國家常定食料理", rec: "家常韓式定食", url: "https://naver.me/FeN6FltV" },
+            { id: 69, name: "Handasot 南浦店", korName: "한다솥 남포점", area: "南浦洞", types: ["韓式料理"], lat: 35.1012, lng: 129.0315, desc: "南浦洞高級精緻的釜飯專賣店，食材新鮮環境舒適", rec: "牛小排釜飯、鮭魚釜飯", url: "https://naver.me/xLsYQppQ" },
+            { id: 70, name: "Samojeong 西面店", korName: "사모정 서면점", area: "西面", types: ["韓式料理"], lat: 35.1552, lng: 129.0581, desc: "西面老字號餐廳，傳統韓式料理與日式豬排的完美結合", rec: "炸豬排、石鍋拌飯", url: "https://naver.me/GtJgxKtN" },
+            { id: 71, name: "Chaseonchaek 總店", korName: "차선책 본점", area: "廣安里", types: ["網美咖啡"], lat: 35.1537, lng: 129.1189, desc: "榮獲韓國藍絲帶推薦！坐擁廣安大橋海景的質感甜點店", rec: "黃豆粉慕斯蛋糕、黑芝麻拿鐵", url: "https://naver.me/FeN6FdHB" },
+            
+            // 水邊最高豬肉湯飯 各大分店擴充
+            { id: 72, name: "水邊最高豬肉湯飯 海雲台店", korName: "수변최고돼지국밥 해운대점", area: "海雲台", types: ["湯飯"], lat: 35.1610, lng: 129.1605, desc: "海雲台大街上，24小時營業隨時能吃", rec: "豬頸肉湯飯 (항정국밥)", url: "https://map.naver.com/p/search/수변최고돼지국밥%20해운대점" },
+            { id: 73, name: "水邊最高豬肉湯飯 Centum店", korName: "수변최고돼지국밥 센텀점", area: "Centum City", types: ["湯飯"], lat: 35.1691, lng: 129.1302, desc: "逛新世界百貨附近的好選擇，百貨血拼完必吃", rec: "豬頸肉湯飯 (항정국밥)", url: "https://map.naver.com/p/search/수변최고돼지국밥%20센텀점" },
+            { id: 74, name: "水邊最高豬肉湯飯 西面樂天店", korName: "수변최고돼지국밥 롯데점", area: "西面", types: ["湯飯"], lat: 35.1565, lng: 129.0558, desc: "西面樂天百貨9樓，逛街吃飯超方便", rec: "豬頸肉湯飯 (항정국밥)", url: "https://map.naver.com/p/search/수변최고돼지국밥%20롯데점" },
+            { id: 75, name: "水邊最高豬肉湯飯 松亭店", korName: "수변최고돼지국밥 송정점", area: "松亭", types: ["湯飯"], lat: 35.1785, lng: 129.1995, desc: "近松亭海水浴場，衝浪玩水後必吃", rec: "豬頸肉湯飯 (항정국밥)", url: "https://map.naver.com/p/search/수변최고돼지국밥%20송정점" },
+            { id: 76, name: "水邊最高豬肉湯飯 尾浦店", korName: "수변최고돼지국밥 해운대미포점", area: "海雲台", types: ["湯飯"], lat: 35.1601, lng: 129.1695, desc: "海雲台膠囊列車尾浦站旁，搭車前後推薦", rec: "豬頸肉湯飯 (항정국밥)", url: "https://map.naver.com/p/search/수변최고돼지국밥%20해운대미포점" },
+            { id: 77, name: "水邊最高豬肉湯飯 Marine City店", korName: "수변최고돼지국밥 마린시티점", area: "海雲台", types: ["湯飯"], lat: 35.1555, lng: 129.1450, desc: "24小時營業，邊賞海景邊吃熱湯飯", rec: "豬頸肉湯飯 (항정국밥)", url: "https://map.naver.com/p/search/수변최고돼지국밥%20마린시티점" },
+            { id: 78, name: "水邊最高豬肉湯飯 廣安店", korName: "수변최고돼지국밥 광안점", area: "廣安里", types: ["湯飯"], lat: 35.1525, lng: 129.1160, desc: "24小時營業，近廣安里海水浴場主街", rec: "豬頸肉湯飯 (항정국밥)", url: "https://map.naver.com/p/search/수변최고돼지국밥%20광안점" }
         ];
+
 
         let currentArea = '全部';
         let currentType = '全部';
