@@ -1278,28 +1278,47 @@
             "2026-07-18": "day4", "2026-07-19": "day5", "2026-07-20": "day6", "2026-07-21": "day7"
         };
 
-        function switchTab(tabId, btnElement) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('active', 'phrase-active', 'currency-active', 'food-active', 'places-active');
+function switchTab(tabId, btnElement) {
+            // 1. 先去尋找目標內容區塊
+            const targetContent = document.getElementById(tabId + '-content');
+            
+            // 🔴 新增防呆檢查：如果找不到對應的 section (例如 day2-content 還沒寫)，就先跳出警告並中斷，避免程式碼當機
+            if (!targetContent) {
+                console.warn('尚未建立對應的區塊: ' + tabId + '-content');
+                showToast('該天行程尚在建置中喔！', 'fa-person-digging', 'text-yellow-400'); // 呼叫你原本寫好的 toast 提示
+                return; 
+            }
+
+            // 2. 隱藏所有內容
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // 3. 顯示點擊的內容
+            targetContent.classList.add('active');
+
+            // 4. 移除所有按鈕的 active 狀態
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'phrase-active', 'currency-active', 'food-active', 'places-active');
             });
 
-            const target = document.getElementById(tabId + '-content');
-            if(target) target.classList.add('active');
-
-            if (btnElement) {
-                if (tabId === 'phrases') btnElement.classList.add('phrase-active');
-                else if (tabId === 'currency') btnElement.classList.add('currency-active');
-                else if (tabId === 'food') btnElement.classList.add('food-active');
-                else if (tabId === 'places') btnElement.classList.add('places-active');
-                else btnElement.classList.add('active');
+            // 5. 為點擊的按鈕加上對應顏色的 active 狀態
+            if (tabId === 'phrases') btnElement.classList.add('phrase-active');
+            else if (tabId === 'currency') btnElement.classList.add('currency-active');
+            else if (tabId === 'food') btnElement.classList.add('food-active');
+            else if (tabId === 'places') btnElement.classList.add('places-active');
+            else btnElement.classList.add('active');
+            
+            // 6. 讓上方導覽列自動捲動到可見範圍
+            const navContainer = document.getElementById('nav-container');
+            if (navContainer && btnElement) {
+                const btnRect = btnElement.getBoundingClientRect();
+                const containerRect = navContainer.getBoundingClientRect();
                 
-                const nav = document.getElementById('nav-container');
-                if(nav && nav.contains(btnElement)) {
-                    nav.scrollTo({ left: btnElement.offsetLeft - 80, behavior: 'smooth' });
+                if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
+                     btnElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 }
             }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function checkAutoDateJump() {
