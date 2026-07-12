@@ -1117,8 +1117,8 @@
                 <!-- 動態填入抽籤結果 -->
             </div>
             
-            <button onclick="closeModal()" class="w-full bg-slate-800 text-white font-bold py-2.5 rounded-xl shadow-md active:scale-95 transition-transform text-sm">
-                太棒了，出發！
+            <button id="dice-action-btn" onclick="closeModal()" class="w-full bg-slate-800 text-white font-bold py-2.5 rounded-xl shadow-md active:scale-95 transition-transform text-sm flex items-center justify-center gap-2">
+                等待開獎...
             </button>
         </div>
     </div>
@@ -1580,6 +1580,47 @@
         }
 
         // --- Dice Roll Animation Logic ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playTickSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800 + Math.random() * 400, audioCtx.currentTime); // 隨機高音
+            
+            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        function playTadaSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            // 播放 C Major 和弦 (C5, E5, G5) 慶祝音效
+            const freqs = [523.25, 659.25, 783.99]; 
+            freqs.forEach(freq => {
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.5);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 1.5);
+            });
+        }
+
         function startDiceRoll() {
             const filteredList = foodDatabase.filter(food => {
                 const matchArea = currentArea === '全部' || food.area === currentArea;
@@ -1596,7 +1637,14 @@
             const modal = document.getElementById('dice-modal');
             const modalContent = document.getElementById('dice-modal-content');
             const resultCard = document.getElementById('dice-result-card');
+            const actionBtn = document.getElementById('dice-action-btn');
             
+            if (actionBtn) {
+                actionBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 抽籤中...';
+                actionBtn.onclick = closeModal;
+                actionBtn.classList.add('opacity-70');
+            }
+
             modal.classList.remove('hidden');
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
@@ -1618,9 +1666,12 @@
                     </div>
                 `;
                 
+                playTickSound(); // 每次跳動播放短促音效
+
                 rolls++;
                 if (rolls >= maxRolls) {
                     clearInterval(rollInterval);
+                    playTadaSound(); // 結束時播放歡呼和弦
                     showFinalWinner(filteredList);
                 }
             }, 100);
@@ -1645,6 +1696,16 @@
                     ${recModalHtml}
                 </div>
             `;
+
+            const actionBtn = document.getElementById('dice-action-btn');
+            if (actionBtn) {
+                actionBtn.innerHTML = `太棒了，出發！ <i class="fa-solid fa-map-location-dot"></i>`;
+                actionBtn.classList.remove('opacity-70');
+                actionBtn.onclick = function() {
+                    window.open(winner.url, '_blank');
+                    closeModal();
+                };
+            }
         }
 
         function closeModal() {
