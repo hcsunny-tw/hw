@@ -44,7 +44,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .compact-card { background-color: white; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); position: relative; z-index: 10; }
+        .compact-card { background-color: white; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); position: relative; z-index: 10; margin-bottom: 12px; }
         .hotel-card { background-color: #eff6ff; border: 1px solid #dbeafe; border-radius: 8px; padding: 6px 12px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; color: #1d4ed8; }
         .nav-icon { color: #22c55e; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background-color: #f0fdf4; border-radius: 50%; }
         
@@ -113,7 +113,6 @@
             50% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(10%); opacity: 0.5; }
         }
-
     </style>
 </head>
 <body class="text-slate-800 flex flex-col min-h-screen">
@@ -210,6 +209,7 @@
                         <button onclick="startDiceRoll()" class="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-rose-400 to-orange-400 text-white rounded-full shadow-md active:scale-90 transition-all" title="選擇困難？隨機抽一家！">
                             <i class="fa-solid fa-dice text-sm"></i>
                         </button>
+                        <!-- 改為 onclick="updateLocation()"，之前可能被覆蓋了 -->
                         <button onclick="updateLocation()" id="location-btn" class="flex items-center justify-center w-8 h-8 bg-slate-800 text-white rounded-full shadow-md active:scale-95 transition-all" title="更新位置，計算距離">
                             <i class="fa-solid fa-location-crosshairs text-xs"></i>
                         </button>
@@ -334,7 +334,7 @@
         <section id="day1-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-blue-600">Day 1 <span class="text-xs font-normal text-slate-400 ml-1">07.15 (週三)</span></h2>
-                <a href="https://map.naver.com/v5/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
+                <a href="https://map.naver.com/p/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
             </div>
 
             <div class="meal-nav">
@@ -455,7 +455,7 @@
         <section id="day2-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-teal-600">Day 2 <span class="text-xs font-normal text-slate-400 ml-1">07.16 (週四)</span></h2>
-                <a href="https://map.naver.com/v5/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
+                <a href="https://map.naver.com/p/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
             </div>
             
             <div class="meal-nav">
@@ -557,7 +557,7 @@
         <section id="day3-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-rose-500">Day 3 <span class="text-xs font-normal text-slate-400 ml-1">07.17 (週五)</span></h2>
-                <a href="https://map.naver.com/v5/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
+                <a href="https://map.naver.com/p/search/트래블라이트 호스텔" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed"></i> Travel Light Hostel</a>
             </div>
             
             <div class="meal-nav">
@@ -736,7 +736,7 @@
         <section id="day4-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-indigo-600">Day 4 <span class="text-xs font-normal text-slate-400 ml-1">07.18 (週六)</span></h2>
-                <a href="https://map.naver.com/v5/search/더블유 레지던스 호텔 해운대" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-indigo-400"></i> 住宿：W Residence Hotel 海雲臺</a>
+                <a href="https://map.naver.com/p/search/더블유 레지던스 호텔 해운대" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-indigo-400"></i> 住宿：W Residence Hotel 海雲臺</a>
             </div>
             
             <div class="meal-nav">
@@ -852,7 +852,7 @@
         <section id="day5-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-violet-600">Day 5 <span class="text-xs font-normal text-slate-400 ml-1">07.19 (週日)</span></h2>
-                <a href="https://map.naver.com/v5/search/호텔1 광안리" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-violet-400"></i> 住宿：Gwanganli Hotel 1 (晴)</a>
+                <a href="https://map.naver.com/p/search/호텔1 광안리" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-violet-400"></i> 住宿：Gwanganli Hotel 1 (晴)</a>
             </div>
 
             <div class="transit-line">
@@ -925,7 +925,7 @@
         <section id="day6-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-slate-700">Day 6 <span class="text-xs font-normal text-slate-400 ml-1">07.20 (週一)</span></h2>
-                <a href="https://map.naver.com/v5/search/에이치에비뉴 서면역점" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-slate-400"></i> 住宿：H-AVENUE Hotel 西面站</a>
+                <a href="https://map.naver.com/p/search/에이치에비뉴 서면역점" target="_blank" class="hotel-card hover:bg-blue-100 transition-colors cursor-pointer"><i class="fa-solid fa-bed text-slate-400"></i> 住宿：H-AVENUE Hotel 西面站</a>
             </div>
             
             <div class="transit-line">
@@ -1036,57 +1036,6 @@
             </div>
         </section>
 
-        <!-- ================= 美食模組 ================= -->
-        <section id="food-content" class="tab-content space-y-4">
-            
-            <div class="flex justify-between items-end mb-2">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shadow-inner">
-                        <i class="fa-solid fa-utensils"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-base font-extrabold text-slate-700">美食口袋名單</h2>
-                        <p class="text-[10px] text-slate-400">距離自動算，美食隨機抽</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center">
-                    <!-- 搜尋列 -->
-                    <div id="search-container" class="bg-white border border-slate-200 rounded-full flex items-center px-3 py-1 shadow-sm">
-                        <input type="text" id="food-search-input" placeholder="搜尋店名..." class="w-full text-xs border-none focus:ring-0 p-0 text-slate-700 bg-transparent" oninput="handleSearch()">
-                        <button onclick="clearSearch()" class="text-slate-400 hover:text-slate-600 focus:outline-none"><i class="fa-solid fa-xmark text-xs"></i></button>
-                    </div>
-                    
-                    <div class="flex gap-1.5">
-                        <button onclick="toggleSearch()" class="flex items-center justify-center w-8 h-8 bg-white text-slate-600 border border-slate-200 rounded-full shadow-sm active:scale-95 transition-all" title="搜尋餐廳">
-                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
-                        </button>
-                        <button onclick="resetFilters()" class="flex items-center justify-center w-8 h-8 bg-slate-100 text-slate-500 border border-slate-200 rounded-full shadow-sm active:scale-95 transition-all" title="清除所有篩選條件">
-                            <i class="fa-solid fa-rotate-right text-xs"></i>
-                        </button>
-                        <button onclick="startDiceRoll()" class="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-rose-400 to-orange-400 text-white rounded-full shadow-md active:scale-90 transition-all" title="選擇困難？隨機抽一家！">
-                            <i class="fa-solid fa-dice text-sm"></i>
-                        </button>
-                        <button onclick="updateLocation()" id="location-btn" class="flex items-center justify-center w-8 h-8 bg-slate-800 text-white rounded-full shadow-md active:scale-95 transition-all" title="更新位置，計算距離">
-                            <i class="fa-solid fa-location-crosshairs text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="space-y-1 mt-4">
-                <p class="text-[10px] font-bold text-slate-400 ml-1">📍 依地區尋找</p>
-                <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="filter-area"></div>
-            </div>
-
-            <div class="space-y-1">
-                <p class="text-[10px] font-bold text-slate-400 ml-1">🍽️ 依種類尋找</p>
-                <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="filter-type"></div>
-            </div>
-
-            <div id="restaurant-list" class="mt-4 pb-10 grid grid-cols-2 gap-3"></div>
-        </section>
-
         <section id="phrases-content" class="tab-content space-y-4">
             
             <div class="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl p-4 text-white shadow-md relative overflow-hidden">
@@ -1164,7 +1113,7 @@
                 <h3 class="text-lg font-black text-slate-800">就決定吃這家了！</h3>
             </div>
             
-            <div id="dice-result-card" class="bg-orange-50 p-4 rounded-xl border border-orange-100 mb-5 relative overflow-hidden flex items-center justify-center min-h-[140px]">
+            <div id="dice-result-card" class="bg-orange-50 p-4 rounded-xl border border-orange-100 mb-5 relative overflow-hidden min-h-[140px] flex items-center justify-center">
                 <!-- 動態填入抽籤結果 -->
             </div>
             
@@ -1369,7 +1318,7 @@
         }
 
 
-        // ================= 美食名單模組 (V20 新增與優化) =================
+        // ================= 美食名單模組 (V20 新增) =================
         const foodDatabase = [
             { id: 1, name: "味贊王鹽烤肉", korName: "맛찬들왕소금구이 서면점", area: "西面", types: ["烤肉"], lat: 35.1534, lng: 129.0578, desc: "3.5cm厚切豬五花，專人代烤", rec: "3.5cm厚切豬五花、烤蝦醬", url: "https://map.naver.com/p/search/맛찬들왕소금구이%20서면점" },
             { id: 2, name: "松亭三代豬肉湯飯", korName: "송정3대국밥", area: "西面", types: ["湯飯"], lat: 35.1541, lng: 129.0577, desc: "西面湯飯街老字號，豬肉軟嫩", rec: "豬肉湯飯、血腸", url: "https://map.naver.com/p/search/송정3대국밥" },
@@ -1401,13 +1350,10 @@
             { id: 25, name: "南浦雪濃湯", korName: "남포설렁탕", area: "南浦洞", types: ["湯飯"], lat: 35.0970, lng: 129.0280, desc: "牛骨熬製濃郁湯頭", rec: "雪濃湯、白切肉", url: "https://map.naver.com/p/search/남포설렁탕" },
             { id: 26, name: "元祖釜山豬腳", korName: "원조부산족발", area: "南浦洞", types: ["韓式料理"], lat: 35.1011, lng: 129.0268, desc: "招牌涼拌豬腳", rec: "招牌涼拌豬腳 (冷盤)", url: "https://map.naver.com/p/search/원조부산족발" },
             { id: 27, name: "廣安里大門", korName: "광안리 대문", area: "廣安里", types: ["烤肉", "海鮮"], lat: 35.1530, lng: 129.1189, desc: "廣安里知名聚餐餐廳", url: "https://map.naver.com/p/search/광안리%20대문" },
-            
-            // 水邊最高豬肉湯飯 (分店擴充)
             { id: 28, name: "水邊最高豬肉湯飯 民樂總店", korName: "수변최고돼지국밥 민락본점", area: "廣安里", types: ["湯飯"], lat: 35.1532, lng: 129.1275, desc: "民樂水邊公園旁濃郁湯頭", rec: "豬頸肉湯飯 (항정국밥)", url: "https://map.naver.com/p/search/수변최고돼지국밥%20민락본점" },
             { id: 72, name: "水邊最高豬肉湯飯 Centum City店", korName: "수변최고돼지국밥 센텀시티점", area: "Centum City", types: ["湯飯"], lat: 35.1685, lng: 129.1302, desc: "逛完新世界百貨可以直接吃", rec: "豬頸肉湯飯", url: "https://map.naver.com/p/search/수변최고돼지국밥%20센텀시티점" },
             { id: 73, name: "水邊最高豬肉湯飯 松亭店", korName: "수변최고돼지국밥 송정점", area: "東釜山", types: ["湯飯"], lat: 35.1802, lng: 129.1995, desc: "松亭海水浴場旁，衝浪後補給", rec: "豬頸肉湯飯", url: "https://map.naver.com/p/search/수변최고돼지국밥%20송정점" },
             { id: 74, name: "水邊最高豬肉湯飯 海雲台店", korName: "수변최고돼지국밥 해운대점", area: "海雲台", types: ["湯飯"], lat: 35.1630, lng: 129.1620, desc: "海雲台市區分店，方便抵達", rec: "豬頸肉湯飯", url: "https://map.naver.com/p/search/수변최고돼지국밥%20해운대점" },
-            
             { id: 29, name: "田浦咖啡街", korName: "전포카페거리", area: "田浦", types: ["網美咖啡"], lat: 35.1557, lng: 129.0637, desc: "文青咖啡廳與甜點店聚集", url: "https://map.naver.com/p/search/전포카페거리" },
             { id: 39, name: "Goof 咖啡", korName: "구프", area: "田浦", types: ["網美咖啡"], lat: 35.1578, lng: 129.0618, desc: "超人氣黑膠唱片復古咖啡廳", rec: "羅勒番茄汽水、冰滴咖啡", url: "https://map.naver.com/p/search/구프" },
             { id: 40, name: "Werk Roasters", korName: "베르크로스터스", area: "田浦", types: ["網美咖啡"], lat: 35.1554, lng: 129.0631, desc: "地下室點餐、復古工業風超酷空間", rec: "拿鐵 (B1點餐)", url: "https://map.naver.com/p/search/베르크로스터스" },
@@ -1448,8 +1394,6 @@
             { id: 69, name: "Handasot 南浦店", korName: "한다솥 남포점", area: "南浦洞", types: ["韓式料理"], lat: 35.1012, lng: 129.0315, desc: "高級精緻的釜飯專賣店", rec: "牛小排釜飯、鮭魚釜飯", url: "https://map.naver.com/p/search/한다솥%20남포점" },
             { id: 70, name: "Samojeong 西面店", korName: "사모정 서면점", area: "西面", types: ["韓式料理"], lat: 35.1552, lng: 129.0581, desc: "傳統韓料與日式豬排的完美結合", rec: "炸豬排、石鍋拌飯", url: "https://map.naver.com/p/search/사모정%20서면점" },
             { id: 71, name: "Chaseonchaek", korName: "차선책 본점", area: "廣安里", types: ["網美咖啡"], lat: 35.1537, lng: 129.1189, desc: "韓國藍絲帶推薦！無敵海景甜點", rec: "黃豆粉慕斯蛋糕、黑芝麻拿鐵", url: "https://map.naver.com/p/search/차선책%20본점" },
-            
-            // 新增強檔名單
             { id: 75, name: "烤肉的男子", korName: "고기굽는남자 서면본점", area: "西面", types: ["烤肉"], lat: 35.1542, lng: 129.0610, desc: "專人代烤服務滿分，厚切肉多汁", rec: "烤豬五花、豬脖子肉", url: "https://map.naver.com/p/search/고기굽는남자%20서면" },
             { id: 76, name: "83獬豸", korName: "83해치 서면점", area: "西面", types: ["烤肉"], lat: 35.1565, lng: 129.0600, desc: "排隊超人氣，店員服務超級熱情", rec: "五花肉、大醬湯", url: "https://map.naver.com/p/search/83해치" },
             { id: 77, name: "海雲台母牛排骨", korName: "해운대암소갈비집", area: "海雲台", types: ["烤肉"], lat: 35.1610, lng: 129.1650, desc: "海雲台高級排骨名店", rec: "韓牛排骨、馬鈴薯麵條", url: "https://map.naver.com/p/search/해운대암소갈비집" }
@@ -1552,19 +1496,19 @@
                 showToast("⚠️ 瀏覽器不支援定位", "fa-triangle-exclamation", "text-yellow-400");
                 return;
             }
-            btnStatus.innerText = "定位中...";
+            if (btnStatus) btnStatus.innerText = "定位中...";
             showToast("📍 正在獲取您的位置...");
 
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
-                    btnStatus.innerText = "已更新";
+                    if (btnStatus) btnStatus.innerText = "已更新";
                     showToast("✅ 位置已更新！名單已依距離排序。");
                     renderList();
-                    setTimeout(() => { btnStatus.innerText = "更新位置"; }, 3000);
+                    if (btnStatus) setTimeout(() => { btnStatus.innerText = "更新位置"; }, 3000);
                 },
                 (error) => {
-                    btnStatus.innerText = "更新位置";
+                    if (btnStatus) btnStatus.innerText = "更新位置";
                     let msg = "❌ 定位失敗";
                     if(error.code === 1) msg = "❌ 請允許位置權限以計算距離";
                     showToast(msg, "fa-circle-xmark", "text-red-400");
@@ -1636,7 +1580,7 @@
         }
 
         // --- Dice Roll Animation Logic ---
-        function pickRandomFood() {
+        function startDiceRoll() {
             const filteredList = foodDatabase.filter(food => {
                 const matchArea = currentArea === '全部' || food.area === currentArea;
                 const matchType = currentType === '全部' || food.types.includes(currentType);
