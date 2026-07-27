@@ -1209,35 +1209,40 @@
             <div id="restaurant-list" class="mt-4 pb-10 grid grid-cols-2 gap-3"></div>
         </section>
 
-        <section id="phrases-content" class="tab-content space-y-4">
+<section id="phrases-content" class="tab-content space-y-4">
             
             <div class="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl p-4 text-white shadow-md relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 opacity-20"><i class="fa-solid fa-language text-8xl"></i></div>
                 <div class="relative z-10">
                     <h3 class="text-sm font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-yellow-300"></i> AI 雙向語音翻譯機</h3>
-                    <p class="text-[10px] text-purple-200 mb-3">使用麥克風辨識語音，或直接輸入文字。翻譯後會自動發音！</p>
+                    <p class="text-[10px] text-purple-200 mb-3">支援即時語音辨識，收音結束後將自動為您翻譯與發音！</p>
                     
-                    <textarea id="translate-input" rows="2" placeholder="輸入中文或韓文..." class="w-full bg-white/10 border border-white/20 rounded-xl p-3 text-sm text-white placeholder-purple-300 focus:ring-2 focus:ring-white/50 focus:outline-none mb-3 resize-none"></textarea>
+                    <div class="relative">
+                        <textarea id="translate-input" rows="2" placeholder="輸入中文或韓文..." class="w-full bg-white/10 border border-white/20 rounded-xl p-3 pr-8 text-sm text-white placeholder-purple-300 focus:ring-2 focus:ring-white/50 focus:outline-none mb-3 resize-none transition-all"></textarea>
+                        <button onclick="document.getElementById('translate-input').value=''" class="absolute right-3 top-3 text-purple-300 hover:text-white transition-colors" title="清除文字">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </button>
+                    </div>
                     
                     <div class="flex gap-2 mb-3">
-                        <button onclick="startDictation('zh-TW')" class="flex-1 bg-blue-500/30 hover:bg-blue-500/50 border border-blue-400/30 text-blue-100 font-bold text-[11px] py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm active:scale-95">
+                        <button onclick="startDictation('cmn-Hant-TW')" class="flex-1 bg-blue-500/30 hover:bg-blue-500/50 border border-blue-400/30 text-blue-100 font-bold text-[11px] py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm active:scale-95" id="dictation-zh-btn">
                             <i class="fa-solid fa-microphone"></i> 說中文
                         </button>
-                        <button onclick="startDictation('ko-KR')" class="flex-1 bg-pink-500/30 hover:bg-pink-500/50 border border-pink-400/30 text-pink-100 font-bold text-[11px] py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm active:scale-95">
-                            <i class="fa-solid fa-microphone"></i> 한국어 (說韓文)
+                        <button onclick="startDictation('ko-KR')" class="flex-1 bg-pink-500/30 hover:bg-pink-500/50 border border-pink-400/30 text-pink-100 font-bold text-[11px] py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm active:scale-95" id="dictation-ko-btn">
+                            <i class="fa-solid fa-microphone"></i> 한국어
                         </button>
                     </div>
 
-                    <button onclick="translateAndPlay(this)" class="w-full bg-white text-purple-700 font-bold text-xs py-3 rounded-xl shadow-sm active:scale-95 transition-transform flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-arrow-right-arrow-left"></i> 文字翻譯並播放語音
+                    <button onclick="translateAndPlay()" id="translate-btn" class="w-full bg-white text-purple-700 font-bold text-xs py-3 rounded-xl shadow-sm active:scale-95 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-language"></i> 一鍵翻譯與發音
                     </button>
 
-                    <div id="translate-result-container" class="mt-3 bg-black/20 rounded-xl p-3 hidden items-start justify-between gap-3">
+                    <div id="translate-result-container" class="mt-3 bg-black/20 rounded-xl p-3 hidden items-start justify-between gap-3 transition-colors duration-300">
                         <div class="flex-grow">
-                            <p class="text-[10px] text-purple-300 mb-1" id="translate-result-label">韓文翻譯結果：</p>
-                            <p id="translate-result-text" class="text-sm font-bold"></p>
+                            <p class="text-[10px] text-purple-300 mb-1" id="translate-result-label">翻譯結果：</p>
+                            <p id="translate-result-text" class="text-sm font-bold leading-relaxed"></p>
                         </div>
-                        <button onclick="playTTS(document.getElementById('translate-result-text').innerText, this)" class="shrink-0 w-10 h-10 rounded-full bg-purple-500/30 text-purple-100 flex items-center justify-center hover:bg-purple-500/50 active:scale-95 transition-all shadow-sm border border-purple-400/30 hidden" id="replay-btn" title="重新播放語音">
+                        <button onclick="playTTS(document.getElementById('translate-result-text').innerText, this)" class="shrink-0 w-10 h-10 rounded-full bg-purple-500/40 text-white flex items-center justify-center hover:bg-purple-500/60 active:scale-95 transition-all shadow-sm border border-purple-400/30 hidden" id="replay-btn" title="播放語音">
                             <i class="fa-solid fa-volume-high"></i>
                         </button>
                     </div>
@@ -1249,6 +1254,7 @@
                 <h2 class="text-sm font-bold text-purple-900">常用求生語句 <span class="text-[10px] font-normal text-slate-400">(點擊播放)</span></h2>
             </div>
             
+            <!-- 原本的常用求生語句按鈕保留 -->
             <div class="grid gap-2">
                 <button onclick="playTTS('영수증 주세요', this)" class="phrase-btn group bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm active:scale-95 transition-all flex items-center justify-between">
                     <div class="text-left">
@@ -1436,78 +1442,123 @@ function switchTab(tabId, btnElement) {
             window.speechSynthesis.speak(utterance);
         }
 
-        async function executeTranslation(text, langpair) {
-            setLoading(true, "翻譯中...");
+async function executeTranslation(text) {
+            // 自動偵測是否包含韓文，以決定翻譯方向
+            const hasKorean = /[\u3131-\uD79D]/.test(text);
+            const sourceLang = hasKorean ? 'ko' : 'zh-TW';
+            const targetLang = hasKorean ? 'zh-TW' : 'ko';
+
+            const btn = document.getElementById('translate-btn');
+            const originalBtnText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> 正在翻譯...';
+            btn.disabled = true;
+
             try {
-                const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langpair}`;
+                // 改用 Google Translate 的快速端點
+                const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
                 const response = await fetch(url);
-                if (!response.ok) throw new Error("Translation API failed");
+                if (!response.ok) throw new Error("Translation failed");
                 const data = await response.json();
-                let resultText = data.responseData.translatedText.trim();
+                
+                let resultText = '';
+                if (data && data[0]) {
+                    data[0].forEach(item => { if (item[0]) resultText += item[0]; });
+                }
+
                 const container = document.getElementById('translate-result-container');
                 const label = document.getElementById('translate-result-label');
                 const resultEl = document.getElementById('translate-result-text');
                 const replayBtn = document.getElementById('replay-btn');
+                
                 container.classList.remove('hidden');
                 container.classList.add('flex');
+                
+                // 新增翻譯完成的短暫視覺回饋
+                container.classList.add('bg-purple-900/40');
+                setTimeout(() => container.classList.remove('bg-purple-900/40'), 300);
+
                 resultEl.innerText = resultText;
-                if (langpair === 'ko|zh-TW') {
-                    label.innerText = "中文翻譯結果：";
-                    replayBtn.classList.add('hidden'); 
-                    showToast("✅ 翻譯成功！");
+                
+                if (targetLang === 'zh-TW') {
+                    label.innerText = "中文翻譯：";
+                    replayBtn.classList.add('hidden');
                 } else {
-                    label.innerText = "韓文翻譯結果：";
-                    replayBtn.classList.remove('hidden'); 
-                    showToast("✅ 翻譯成功，準備播放語音！");
-                    setTimeout(() => playTTS(resultText, replayBtn), 500);
+                    label.innerText = "韓文翻譯：";
+                    replayBtn.classList.remove('hidden');
+                    // 翻譯成韓文後，自動發音
+                    playTTS(resultText, replayBtn);
                 }
-                setLoading(false);
             } catch (err) {
-                setLoading(false);
-                showToast("❌ 翻譯失敗，請檢查網路連線。", "fa-circle-xmark", "text-red-400");
+                console.error(err);
+                showToast("❌ 翻譯失敗，請檢查網路", "fa-circle-xmark", "text-red-400");
+            } finally {
+                btn.innerHTML = originalBtnText;
+                btn.disabled = false;
             }
         }
 
-        async function translateAndPlay(btnElement) {
+        async function translateAndPlay() {
             const input = document.getElementById('translate-input').value.trim();
             if (!input) {
                 showToast("⚠️ 請先輸入要翻譯的文字！", "fa-triangle-exclamation", "text-yellow-400");
                 return;
             }
-            const hasKorean = /[\u3131-\uD79D]/.test(input);
-            const langpair = hasKorean ? 'ko|zh-TW' : 'zh-TW|ko';
-            executeTranslation(input, langpair);
+            executeTranslation(input);
         }
 
         function startDictation(lang) {
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                showToast("⚠️ 不支援語音辨識 (請使用 Chrome/Safari)", "fa-triangle-exclamation", "text-yellow-400");
+                showToast("⚠️ 瀏覽器不支援語音辨識", "fa-triangle-exclamation", "text-yellow-400");
                 return;
             }
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const recognition = new SpeechRecognition();
             recognition.lang = lang;
-            recognition.interimResults = false;
-            recognition.maxAlternatives = 1;
-            setLoading(true, "🎤 聆聽中... 請說話");
+            recognition.interimResults = true; // 開啟即時顯示辨識結果
+            
+            const inputEl = document.getElementById('translate-input');
+            const originalPlaceholder = inputEl.placeholder;
+            inputEl.placeholder = "🎤 聆聽中... (請說話)";
+            inputEl.value = "";
+            
+            // 讓按鈕顯示錄音狀態
+            const btnId = lang === 'ko-KR' ? 'dictation-ko-btn' : 'dictation-zh-btn';
+            const dictBtn = document.getElementById(btnId);
+            dictBtn.classList.add('animate-pulse', 'ring-2', 'ring-white');
+            
             recognition.start();
+            
             recognition.onresult = function(event) {
-                const text = event.results[0][0].transcript;
-                document.getElementById('translate-input').value = text;
-                setLoading(false);
-                showToast("✅ 語音辨識成功！正在翻譯...");
-                const pair = lang === 'ko-KR' ? 'ko|zh-TW' : 'zh-TW|ko';
-                executeTranslation(text, pair);
+                let finalTranscript = '';
+                let interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+                // 將文字即時填入輸入框，讓使用者安心
+                inputEl.value = finalTranscript || interimTranscript;
             };
-            recognition.onerror = function(event) {
-                setLoading(false);
-                if (event.error === 'not-allowed') {
-                    showToast("❌ 請允許瀏覽器使用麥克風權限", "fa-circle-xmark", "text-red-400");
-                } else {
-                    showToast("❌ 辨識失敗或超時，請再試一次", "fa-circle-xmark", "text-red-400");
+            
+            recognition.onend = function() {
+                inputEl.placeholder = originalPlaceholder;
+                dictBtn.classList.remove('animate-pulse', 'ring-2', 'ring-white');
+                
+                // 只要有錄到字，就自動觸發翻譯！不需要多點一次按鈕
+                if (inputEl.value.trim() !== '') {
+                    executeTranslation(inputEl.value.trim());
                 }
             };
-            recognition.onspeechend = function() { recognition.stop(); };
+            
+            recognition.onerror = function(event) {
+                inputEl.placeholder = originalPlaceholder;
+                dictBtn.classList.remove('animate-pulse', 'ring-2', 'ring-white');
+                if (event.error === 'not-allowed') {
+                    showToast("❌ 請允許麥克風權限", "fa-circle-xmark", "text-red-400");
+                }
+            };
         }
 
 
