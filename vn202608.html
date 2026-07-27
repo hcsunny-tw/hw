@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>峴港 6 天 5 夜｜陽光假期 互動手冊</title>
+    <title>峴港｜陽光假期 (V20)</title>
     <!-- 越南國旗 Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇻🇳</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,7 +16,6 @@
         :root {
             --danang-orange: #ea580c;
             --danang-yellow: #f59e0b;
-            --warm-bg: #fffbeb;
         }
         body { 
             font-family: 'Inter', 'Noto Sans TC', sans-serif; 
@@ -37,22 +36,38 @@
         .tab-btn.active { background-color: #ea580c; color: white; border-color: #ea580c; }
         .tab-btn.phrase-active { background-color: #d97706; color: white; border-color: #d97706; }
         .tab-btn.currency-active { background-color: #b45309; color: white; border-color: #b45309; }
+        .tab-btn.food-active { background-color: #f97316; color: white; border-color: #f97316; } 
+        .tab-btn.places-active { background-color: #0ea5e9; color: white; border-color: #0ea5e9; } 
         
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .compact-card { background-color: white; border: 1px solid #ffedd5; border-radius: 12px; padding: 12px; box-shadow: 0 4px 6px -1px rgba(234, 88, 12, 0.03); margin-bottom: 12px; }
+        .compact-card { background-color: white; border: 1px solid #ffedd5; border-radius: 12px; padding: 12px; box-shadow: 0 4px 6px -1px rgba(234, 88, 12, 0.03); position: relative; z-index: 10; margin-bottom: 12px; }
         .hotel-card { background-color: #fff7ed; border: 1px solid #ffedd5; border-radius: 8px; padding: 6px 12px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; color: #c2410c; }
         .nav-icon { color: #ea580c; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background-color: #fff7ed; border-radius: 50%; border: 1px solid #ffedd5; transition: all 0.2s; }
         .nav-icon:active { transform: scale(0.9); background-color: #ffedd5; }
+        
+        .transit-line { margin-left: 28px; border-left: 2px dashed #fed7aa; padding: 10px 0 10px 24px; position: relative; }
         
         .meal-nav { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
         .meal-pill { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9999px; font-size: 10px; font-weight: 700; white-space: nowrap; border: 1px solid; }
         .meal-pill.breakfast { background-color: #fff7ed; color: #ea580c; border-color: #ffedd5; }
         .meal-pill.lunch { background-color: #fefce8; color: #ca8a04; border-color: #fef08a; }
         .meal-pill.dinner { background-color: #fff1f2; color: #e11d48; border-color: #ffe4e6; }
+
+        .food-card {
+            background-color: white; border: 1px solid #ffedd5; border-top: 4px solid #f97316; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px -2px rgba(234, 88, 12, 0.08); display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 10; transition: all 0.2s;
+        }
+        .food-card:active { transform: scale(0.96); }
+        
+        .place-card {
+            background-color: white; border: 1px solid #e0f2fe; border-top: 4px solid #0ea5e9; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px -2px rgba(14, 165, 233, 0.08); display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 10; transition: all 0.2s;
+        }
+        .place-card:active { transform: scale(0.96); }
+
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
         @keyframes pulse-soft {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.4); }
@@ -69,6 +84,39 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.2); white-space: nowrap;
         }
         .toast.show { bottom: 24px; }
+
+        #search-container, #places-search-container {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #search-container.active, #places-search-container.active {
+            max-width: 200px;
+            opacity: 1;
+            margin-right: 8px;
+        }
+
+        #go-to-top {
+            position: fixed;
+            bottom: -50px;
+            right: 20px;
+            z-index: 50;
+            transition: bottom 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #go-to-top.show {
+            bottom: 24px;
+        }
+
+        .slot-machine-text {
+            animation: slot-scroll 0.1s linear infinite;
+        }
+        @keyframes slot-scroll {
+            0% { transform: translateY(-10%); opacity: 0.5; }
+            50% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(10%); opacity: 0.5; }
+        }
     </style>
 </head>
 <body class="text-stone-800 flex flex-col min-h-screen">
@@ -80,15 +128,24 @@
         </div>
     </div>
 
-    <div id="toast" class="toast"><i class="fa-solid fa-circle-check text-amber-400"></i> <span id="toast-msg"></span></div>
+    <div id="toast" class="toast"><i class="fa-solid fa-circle-check text-amber-400" id="toast-icon"></i> <span id="toast-msg"></span></div>
 
     <header class="hero-bg h-36 flex flex-col justify-end p-5 text-white relative">
-        <div class="absolute top-4 right-4 flex gap-1.5">
-            <button onclick="switchTab('currency', document.getElementById('currency-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+        <div class="absolute top-4 right-4 flex gap-1.5 flex-wrap justify-end max-w-[120px]">
+            <a href="https://docs.google.com/spreadsheets/d/13o59SvhyGKnTrMRPYG4CeqIeXkFEGieSj5-C4UjwAMw/edit?usp=sharing" target="_blank" class="w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="Google 試算表行程">
+                <i class="fa-solid fa-file-excel"></i>
+            </a>
+            <button onclick="switchTab('currency', document.getElementById('currency-tab'))" class="w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
                 <i class="fa-solid fa-dong-sign"></i>
             </button>
             <button onclick="switchTab('phrases', document.getElementById('phrase-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-amber-200 hover:bg-white/30 transition-all shadow-lg active:scale-95">
                 <i class="fa-solid fa-language"></i>
+            </button>
+            <button onclick="switchTab('food', document.getElementById('food-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-orange-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+                <i class="fa-solid fa-utensils"></i>
+            </button>
+            <button onclick="switchTab('places', document.getElementById('places-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-sky-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+                <i class="fa-solid fa-bag-shopping"></i>
             </button>
         </div>
         <div class="max-w-md mx-auto w-full">
@@ -96,7 +153,7 @@
                 <i class="fa-solid fa-sun text-yellow-300 text-sm animate-spin-slow"></i> Da Nang Sunshine
             </h1>
             <div class="flex justify-between items-end mt-0.5">
-                <p class="text-[9px] opacity-90 tracking-widest uppercase border-l border-white/30 pl-2">2026 雙人盛夏浪漫行</p>
+                <p class="text-[9px] opacity-90 tracking-widest uppercase border-l border-white/30 pl-2">2026 雙人盛夏浪漫行 (V20)</p>
                 <span class="text-[9px] bg-white/20 border border-white/30 px-2 py-0.5 rounded-full font-bold">Unicard UP 5%</span>
             </div>
         </div>
@@ -113,6 +170,8 @@
             <button onclick="switchTab('day5', this)" id="nav-day5" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-orange-200 text-orange-700 bg-orange-50 transition-all">D5</button>
             <button onclick="switchTab('day6', this)" id="nav-day6" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-orange-200 text-orange-700 bg-orange-50 transition-all">D6</button>
             <div class="w-[1px] h-4 bg-orange-200 shrink-0"></div>
+            <button onclick="switchTab('places', this)" id="places-tab" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-orange-200 text-orange-700 bg-orange-50 transition-all hidden md:block">玩樂</button>
+            <button onclick="switchTab('food', this)" id="food-tab" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-orange-200 text-orange-700 bg-orange-50 transition-all hidden md:block">美食</button>
             <button onclick="switchTab('phrases', this)" id="phrase-tab" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-orange-200 text-orange-700 bg-orange-50 transition-all hidden md:block">越語</button>
             <button onclick="switchTab('currency', this)" id="currency-tab" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-orange-200 text-orange-700 bg-orange-50 transition-all hidden md:block">匯率</button>
         </div>
@@ -120,7 +179,7 @@
 
     <main class="max-w-md mx-auto w-full flex-grow p-4 pb-20">
 
-        <!-- 匯率工具 -->
+        <!-- ================= 其他模組 (匯率、核取) ================= -->
         <section id="currency-content" class="tab-content space-y-4">
             <div class="flex items-center gap-2 mb-2">
                 <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700">
@@ -169,7 +228,6 @@
             </div>
         </section>
 
-        <!-- 行前準備 -->
         <section id="prep-content" class="tab-content active space-y-4">
             <div class="bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-2xl p-4 shadow-lg relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 opacity-10"><i class="fa-solid fa-plane text-8xl"></i></div>
@@ -220,13 +278,13 @@
                 <h3 class="text-[10px] font-black text-orange-600 mb-3 uppercase tracking-widest">核取清單 CheckList</h3>
                 <div class="grid grid-cols-1 gap-3">
                     <label class="flex items-center gap-3 text-[13px] text-stone-600">
-                        <input type="checkbox" id="check1" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 越南 E-Visa 電子簽證 (列印兩份)
+                        <input type="checkbox" id="check1" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 越南 E-Visa 電子簽證 (列印兩份備用)
                     </label>
                     <label class="flex items-center gap-3 text-[13px] text-stone-600">
-                        <input type="checkbox" id="check2" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 玉山 Unicard (UP 選 5% 自動導航已設定)
+                        <input type="checkbox" id="check2" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 玉山 Unicard (UP 選 5% 自動導航已綁定)
                     </label>
                     <label class="flex items-center gap-3 text-[13px] text-stone-600">
-                        <input type="checkbox" id="check3" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 男友開會西裝、白襯衫、泳褲
+                        <input type="checkbox" id="check3" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 男友開會西裝、乾淨白襯衫、泳褲
                     </label>
                     <label class="flex items-center gap-3 text-[13px] text-stone-600">
                         <input type="checkbox" id="check4" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 折疊大旅行袋 (回程 20kg 託運戰力)
@@ -235,15 +293,15 @@
             </div>
         </section>
 
-        <!-- 行程 D1-D6 -->
-        <section id="day1-content" class="tab-content space-y-3">
+        <!-- 行程區塊 (D1 - D6) -->
+        <section id="day1-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-orange-700">Day 1 <span class="text-xs font-normal text-stone-400 ml-1">08.08 (週六)</span></h2>
-                <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Danang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed"></i> Risemount Resort</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Da+Nang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed"></i> 住宿：Risemount Resort</a>
             </div>
 
             <div class="meal-nav">
-                <a href="https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Danang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-shrimp"></i> D: Bé Mặn 海鮮大排檔</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-shrimp"></i> D: Bé Mặn 海鮮大排檔</a>
             </div>
 
             <div class="compact-card">
@@ -259,6 +317,11 @@
                 </div>
             </div>
             
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">機場叫 Grab 前往飯店，車程約 15 分鐘。</p>
+            </div>
+
             <div class="compact-card border-l-4 border-l-orange-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
@@ -268,33 +331,51 @@
                             <p class="text-[10px] text-stone-500">地中海聖托里尼風度假村辦理 Check-in</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Danang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
 
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">20:30</span>
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">20:00</span>
                         <div>
                             <h3 class="font-bold text-sm">Bé Mặn 海鮮晚餐</h3>
                             <p class="text-[10px] text-stone-500">美溪沙灘名店！必點爆炒奶油大蝦 (無牛環境)</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Danang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">吃飽後可散步或搭乘短程 Grab 前往龍橋看秀。</p>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-orange-500">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">21:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">龍橋噴火秀 (Dragon Bridge)</h3>
+                            <p class="text-[10px] text-stone-500 font-bold text-orange-700">🔥 週末 21:00 限定！晚餐後散步看秀消化</p>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
         </section>
 
-        <section id="day2-content" class="tab-content space-y-3">
+        <section id="day2-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-amber-600">Day 2 <span class="text-xs font-normal text-stone-400 ml-1">08.09 (週日)</span></h2>
-                <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Danang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed"></i> Risemount Resort</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Da+Nang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed"></i> 住宿：Risemount Resort</a>
             </div>
             
             <div class="meal-nav">
                 <a href="https://www.google.com/maps/search/?api=1&query=Arapang+Buffet+Ba+Na+Hills" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: Arapang 雲端自助餐</a>
-                <a href="https://www.google.com/maps/search/?api=1&query=Pho+Thin+Danang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-bowl-rice"></i> D: Pho Thin 傳奇河粉</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Pho+Thin+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-bowl-rice"></i> D: Pho Thin 傳奇河粉</a>
             </div>
 
             <div class="compact-card border-l-4 border-l-amber-500">
@@ -323,6 +404,11 @@
                 </div>
             </div>
 
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">下午 4-5 點左右搭乘纜車下山，搭 Grab 回市區晚餐。</p>
+            </div>
+
             <div class="compact-card border-l-4 border-l-amber-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
@@ -332,28 +418,51 @@
                             <p class="text-[10px] text-orange-700 font-bold">💡 分開點：男友吃 Pho Bo (牛) / 妳選 Pho Ga (雞)</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Pho+Thin+Danang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Pho+Thin+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
         </section>
 
-        <section id="day3-content" class="tab-content space-y-3">
+        <section id="day3-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-orange-600">Day 3 <span class="text-xs font-normal text-stone-400 ml-1">08.10 (週一)</span></h2>
-                <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed text-orange-600"></i> Peninsula Hotel</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Da+Nang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed text-orange-600"></i> 住宿：Risemount Resort</a>
+            </div>
+
+            <div class="meal-nav">
+                <a href="https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: Bà Dưỡng 越式煎餅</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=My+Khe+Beach+Restaurants+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-utensils"></i> D: 美溪沙灘周邊餐館</a>
             </div>
 
             <div class="compact-card border-l-4 border-l-orange-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:00</span>
+                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">移宿 Peninsula Hotel</h3>
-                            <p class="text-[10px] text-stone-500">男友研討會主場地！直面一線海景</p>
+                            <h3 class="font-bold text-sm">Risemount 慵懶早晨</h3>
+                            <p class="text-[10px] text-stone-500">在聖托里尼風泳池拍美照，享受不趕行程的度假感</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">12:30</span>
+                        <div>
+                            <h3 class="font-bold text-sm">Bà Dưỡng 越式煎餅老店</h3>
+                            <p class="text-[10px] text-stone-500">搭 Grab 往市區吃在地名店，無牛肉的酥脆煎餅超推</p>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭乘 Grab 回到美溪沙灘周邊。</p>
             </div>
 
             <div class="compact-card">
@@ -361,19 +470,24 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">15:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">飯店 28F 高空下午茶</h3>
-                            <p class="text-[10px] text-stone-500">坐擁頂樓高空環繞視野，看美溪沙灘發呆</p>
+                            <h3 class="font-bold text-sm">海景咖啡廳放空時光</h3>
+                            <p class="text-[10px] text-stone-500">找間美溪沙灘旁的韓系咖啡廳 (如 Reply 1988) 喝椰子咖啡</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Reply+1988+Cafe+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
         </section>
 
-        <section id="day4-content" class="tab-content space-y-3">
+        <section id="day4-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-amber-700">Day 4 <span class="text-xs font-normal text-stone-400 ml-1">08.11 (週二)</span></h2>
-                <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed text-amber-600"></i> Peninsula Hotel</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed text-amber-600"></i> 住宿：Peninsula Hotel</a>
+            </div>
+
+            <div class="meal-nav">
+                <a href="https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Hoang+Van+Thu+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-pizza-slice"></i> L: Pizza 4P's</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-cake-candles"></i> T: 半島酒店下午茶</a>
             </div>
 
             <div class="compact-card border-l-4 border-l-amber-500">
@@ -381,11 +495,11 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">韓市場 Han Market</h3>
-                            <p class="text-[10px] text-stone-500">🔥 藤編包天堂！對半對折砍價，加購編織海灘拖鞋</p>
+                            <h3 class="font-bold text-sm">退房 ➔ 韓市場 Han Market</h3>
+                            <p class="text-[10px] text-stone-500">帶著行李出發！藤編包天堂，對半砍價加購海灘拖</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Han+Market+Danang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Han+Market+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
 
@@ -398,10 +512,15 @@
                             <p class="text-[10px] text-stone-500">神級高CP值布拉塔起司披薩，蟹肉蟹膏義大利麵狂推</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Hoang+Van+Thu+Danang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Hoang+Van+Thu+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
             
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">吃飽後準備去按摩洗頭放鬆。</p>
+            </div>
+
             <div class="compact-card border-l-4 border-l-amber-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
@@ -411,15 +530,55 @@
                             <p class="text-[10px] text-stone-500">包含臉部小黃瓜按摩、掏耳、肩頸全套爽快放鬆</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Lani+Spa+Danang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Lani+Spa+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">洗完頭香噴噴的，搭 Grab 前往半島酒店 Check-in。</p>
+            </div>
+
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">入住 Peninsula Hotel</h3>
+                            <p class="text-[10px] text-stone-500">男友研討會主場地！放好行李擁抱一線海景</p>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:30</span>
+                        <div>
+                            <h3 class="font-bold text-sm">半島酒店 28F 高空下午茶</h3>
+                            <p class="text-[10px] text-stone-500">坐擁頂樓高空視野看海景夕陽，結束完美的市區日</p>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
         </section>
 
-        <section id="day5-content" class="tab-content space-y-3">
+        <section id="day5-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-orange-600">Day 5 <span class="text-xs font-normal text-stone-400 ml-1">08.12 (週三)</span></h2>
-                <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed text-orange-600"></i> Peninsula Hotel</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed text-orange-600"></i> 住宿：Peninsula Hotel</a>
+            </div>
+
+            <div class="meal-nav">
+                <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town+Restaurants" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-leaf"></i> D: 會安隱藏版家庭料理</a>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">中午過後，從飯店叫 Grab 直奔會安古鎮 (車程約 40 分鐘)。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-orange-500">
@@ -427,18 +586,36 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">14:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">會安古鎮：租奧黛體驗</h3>
-                            <p class="text-[10px] text-stone-500">黃牆映襯！挑亮色暖系奧黛，男友穿白襯衫化身文藝情侶</p>
+                            <h3 class="font-bold text-sm">會安古鎮：租奧黛與漫步</h3>
+                            <p class="text-[10px] text-stone-500">保留完整時光拍照！尋找最搭白襯衫的完美黃牆背景</p>
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
-
+            
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">19:30</span>
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">老屋咖啡廳放空</h3>
+                            <p class="text-[10px] text-stone-500">找間二樓有陽台的咖啡廳，由上往下拍古鎮街景與燈籠</p>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Faifo+Coffee+Hoi+An" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-moon text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">夜幕低垂，古鎮燈籠亮起，準備前往河畔。</p>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-orange-500">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">19:30</span>
                         <div>
                             <h3 class="font-bold text-sm">秋盆河放水燈</h3>
                             <p class="text-[10px] text-stone-500">搭乘小木船漂浮在萬千燈籠海中，極致浪漫</p>
@@ -449,11 +626,15 @@
             </div>
         </section>
 
-        <section id="day6-content" class="tab-content space-y-3">
+        <section id="day6-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-stone-600">Day 6 <span class="text-xs font-normal text-stone-400 ml-1">08.13 (週四)</span></h2>
             </div>
             
+            <div class="meal-nav">
+                <a href="https://www.google.com/maps/search/?api=1&query=Lotte+Mart+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-cart-shopping"></i> L: Lotte Mart 美食街</a>
+            </div>
+
             <div class="compact-card border-l-4 border-l-orange-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
@@ -463,10 +644,15 @@
                             <p class="text-[10px] text-stone-500">解鎖 20kg 託運！瘋狂掃貨帶殼腰果、G7與椰子咖啡</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Lotte+Mart+Danang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Lotte+Mart+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
             
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">大包小包搭乘 Grab 前往機場。</p>
+            </div>
+
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
@@ -481,7 +667,102 @@
             </div>
         </section>
 
-        <!-- 翻譯與語音區 -->
+        <!-- ================= 玩樂血拚清單 ================= -->
+        <section id="places-content" class="tab-content space-y-4">
+            <div class="flex justify-between items-end mb-2">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 shadow-inner">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-extrabold text-slate-700">景點與血拚清單</h2>
+                        <p class="text-[10px] text-slate-400">採購、打卡景點一次收錄</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center">
+                    <div id="places-search-container" class="bg-white border border-slate-200 rounded-full flex items-center px-3 py-1 shadow-sm">
+                        <input type="text" id="places-search-input" placeholder="搜尋店名/景點..." class="w-full text-xs border-none focus:ring-0 p-0 text-slate-700 bg-transparent" oninput="handlePlacesSearch()">
+                        <button onclick="clearPlacesSearch()" class="text-slate-400 hover:text-slate-600 focus:outline-none"><i class="fa-solid fa-xmark text-xs"></i></button>
+                    </div>
+                    
+                    <div class="flex gap-1.5">
+                        <button onclick="togglePlacesSearch()" class="flex items-center justify-center w-8 h-8 bg-white text-slate-600 border border-slate-200 rounded-full shadow-sm active:scale-95 transition-all" title="搜尋">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </button>
+                        <button onclick="resetPlacesFilters()" class="flex items-center justify-center w-8 h-8 bg-slate-100 text-slate-500 border border-slate-200 rounded-full shadow-sm active:scale-95 transition-all" title="清除篩選">
+                            <i class="fa-solid fa-rotate-right text-xs"></i>
+                        </button>
+                        <button onclick="updatePlacesLocation()" id="places-location-btn" class="flex items-center justify-center w-8 h-8 bg-stone-800 text-white rounded-full shadow-md active:scale-95 transition-all" title="計算距離">
+                            <i class="fa-solid fa-location-crosshairs text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-1 mt-4">
+                <p class="text-[10px] font-bold text-slate-400 ml-1">📍 依地區尋找</p>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="places-filter-area"></div>
+            </div>
+
+            <div class="space-y-1">
+                <p class="text-[10px] font-bold text-slate-400 ml-1">🛍️ 依種類尋找</p>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="places-filter-type"></div>
+            </div>
+
+            <div id="places-list" class="mt-4 pb-10 grid grid-cols-2 gap-3"></div>
+        </section>
+
+        <!-- ================= 美食模組 ================= -->
+        <section id="food-content" class="tab-content space-y-4">
+            <div class="flex justify-between items-end mb-2">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shadow-inner">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-extrabold text-slate-700">美食口袋名單</h2>
+                        <p class="text-[10px] text-slate-400">距離自動算，美食隨機抽</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center">
+                    <div id="search-container" class="bg-white border border-slate-200 rounded-full flex items-center px-3 py-1 shadow-sm">
+                        <input type="text" id="food-search-input" placeholder="搜尋店名..." class="w-full text-xs border-none focus:ring-0 p-0 text-slate-700 bg-transparent" oninput="handleSearch()">
+                        <button onclick="clearSearch()" class="text-slate-400 hover:text-slate-600 focus:outline-none"><i class="fa-solid fa-xmark text-xs"></i></button>
+                    </div>
+                    
+                    <div class="flex gap-1.5">
+                        <button onclick="toggleSearch()" class="flex items-center justify-center w-8 h-8 bg-white text-slate-600 border border-slate-200 rounded-full shadow-sm active:scale-95 transition-all" title="搜尋餐廳">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </button>
+                        <button onclick="resetFilters()" class="flex items-center justify-center w-8 h-8 bg-slate-100 text-slate-500 border border-slate-200 rounded-full shadow-sm active:scale-95 transition-all" title="清除所有篩選條件">
+                            <i class="fa-solid fa-rotate-right text-xs"></i>
+                        </button>
+                        <button onclick="startDiceRoll()" class="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-rose-400 to-orange-400 text-white rounded-full shadow-md active:scale-90 transition-all" title="選擇困難？隨機抽一家！">
+                            <i class="fa-solid fa-dice text-sm"></i>
+                        </button>
+                        <button onclick="updateLocation()" id="location-btn" class="flex items-center justify-center w-8 h-8 bg-stone-800 text-white rounded-full shadow-md active:scale-95 transition-all" title="更新位置，計算距離">
+                            <i class="fa-solid fa-location-crosshairs text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-1 mt-4">
+                <p class="text-[10px] font-bold text-slate-400 ml-1">📍 依地區尋找</p>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="filter-area"></div>
+            </div>
+
+            <div class="space-y-1">
+                <p class="text-[10px] font-bold text-slate-400 ml-1">🍽️ 依種類尋找</p>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="filter-type"></div>
+            </div>
+
+            <div id="restaurant-list" class="mt-4 pb-10 grid grid-cols-2 gap-3"></div>
+        </section>
+
+        <!-- ================= 越文模組 ================= -->
         <section id="phrases-content" class="tab-content space-y-4">
             
             <div class="bg-gradient-to-br from-orange-600 to-amber-600 rounded-2xl p-4 text-white shadow-md relative overflow-hidden">
@@ -550,36 +831,72 @@
 
     </main>
 
+    <!-- 美食隨機抽籤 Modal -->
+    <div id="dice-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-[300px] w-full mx-4 transform scale-95 transition-transform duration-300" id="dice-modal-content">
+            <div class="text-center mb-5">
+                <div class="w-14 h-14 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
+                    <i class="fa-solid fa-hand-sparkles"></i>
+                </div>
+                <h3 class="text-lg font-black text-stone-800">就決定吃這家了！</h3>
+            </div>
+            
+            <div id="dice-result-card" class="bg-orange-50 p-4 rounded-xl border border-orange-100 mb-5 relative overflow-hidden min-h-[140px] flex items-center justify-center">
+                <!-- 動態填入抽籤結果 -->
+            </div>
+            
+            <button id="dice-action-btn" onclick="closeModal()" class="w-full bg-stone-800 text-white font-bold py-2.5 rounded-xl shadow-md active:scale-95 transition-transform text-sm flex items-center justify-center gap-2">
+                等待開獎...
+            </button>
+        </div>
+    </div>
+
+    <!-- Go to Top Button -->
+    <button id="go-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-10 h-10 bg-stone-800 text-white rounded-full flex items-center justify-center hover:bg-stone-700 transition-colors active:scale-95">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
     <script>
+        // ================= V20 核心邏輯 =================
         const tripDates = {
-            "2026-08-08": "day1",
-            "2026-08-09": "day2",
-            "2026-08-10": "day3",
-            "2026-08-11": "day4",
-            "2026-08-12": "day5",
-            "2026-08-13": "day6"
+            "2026-08-08": "day1", "2026-08-09": "day2", "2026-08-10": "day3",
+            "2026-08-11": "day4", "2026-08-12": "day5", "2026-08-13": "day6"
         };
 
         function switchTab(tabId, btnElement) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('active', 'phrase-active', 'currency-active');
+            const targetContent = document.getElementById(tabId + '-content');
+            
+            if (!targetContent) {
+                console.warn('尚未建立對應的區塊: ' + tabId + '-content');
+                showToast('該天行程尚在建置中喔！', 'fa-person-digging', 'text-yellow-400');
+                return; 
+            }
+
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            targetContent.classList.add('active');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'phrase-active', 'currency-active', 'food-active', 'places-active');
             });
 
-            const target = document.getElementById(tabId + '-content');
-            if(target) target.classList.add('active');
-
-            if (btnElement) {
-                if (tabId === 'phrases') btnElement.classList.add('phrase-active');
-                else if (tabId === 'currency') btnElement.classList.add('currency-active');
-                else btnElement.classList.add('active');
+            if (tabId === 'phrases') btnElement.classList.add('phrase-active');
+            else if (tabId === 'currency') btnElement.classList.add('currency-active');
+            else if (tabId === 'food') btnElement.classList.add('food-active');
+            else if (tabId === 'places') btnElement.classList.add('places-active');
+            else btnElement.classList.add('active');
+            
+            const navContainer = document.getElementById('nav-container');
+            if (navContainer && btnElement) {
+                const btnRect = btnElement.getBoundingClientRect();
+                const containerRect = navContainer.getBoundingClientRect();
                 
-                const nav = document.getElementById('nav-container');
-                if(nav.contains(btnElement)) {
-                    nav.scrollTo({ left: btnElement.offsetLeft - 80, behavior: 'smooth' });
+                if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
+                     btnElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 }
             }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function checkAutoDateJump() {
@@ -599,21 +916,23 @@
             }
         }
 
-        function showToast(msg) {
+        // 共用通知系統 (Toast)
+        function showToast(msg, iconClass = "fa-circle-check", iconColor = "text-amber-400") {
             const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toast-icon');
             document.getElementById('toast-msg').innerText = msg;
+            
+            toastIcon.className = `fa-solid ${iconClass} ${iconColor}`;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // Currency Converter Logic
         const VND_TO_TWD_RATE = 1 / 780; 
         const TWD_TO_VND_RATE = 780;
 
         function convertCurrency(source) {
             const vndInput = document.getElementById('vnd-input');
             const twdInput = document.getElementById('twd-input');
-            
             if (source === 'vnd') {
                 const vnd = parseFloat(vndInput.value) || 0;
                 twdInput.value = (vnd * VND_TO_TWD_RATE).toFixed(0);
@@ -635,7 +954,6 @@
                 localStorage.setItem('danang_check_'+i, document.getElementById('check'+i).checked);
             }
         }
-        
         function loadChecks() {
             for(let i=1; i<=4; i++) {
                 const val = localStorage.getItem('danang_check_'+i);
@@ -652,21 +970,17 @@
 
         function playTTS(text, element) {
             if (element) element.classList.add('playing');
-            
             if (!('speechSynthesis' in window)) {
-                showToast("⚠️ 您的瀏覽器不支援語音播放");
+                showToast("⚠️ 您的瀏覽器不支援語音播放", "fa-triangle-exclamation", "text-yellow-400");
                 if (element) element.classList.remove('playing');
                 return;
             }
-
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'vi-VN'; 
             utterance.rate = 0.85; 
-
             utterance.onend = () => { if (element) element.classList.remove('playing'); };
             utterance.onerror = () => { if (element) element.classList.remove('playing'); };
-            
             window.speechSynthesis.speak(utterance);
         }
 
@@ -676,19 +990,15 @@
                 const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langpair}`;
                 const response = await fetch(url);
                 if (!response.ok) throw new Error("Translation API failed");
-                
                 const data = await response.json();
                 let resultText = data.responseData.translatedText.trim();
-
                 const container = document.getElementById('translate-result-container');
                 const label = document.getElementById('translate-result-label');
                 const resultEl = document.getElementById('translate-result-text');
                 const replayBtn = document.getElementById('replay-btn');
-                
                 container.classList.remove('hidden');
                 container.classList.add('flex');
                 resultEl.innerText = resultText;
-                
                 if (langpair === 'vi|zh-TW') {
                     label.innerText = "中文翻譯結果：";
                     replayBtn.classList.add('hidden'); 
@@ -701,69 +1011,587 @@
                 }
                 setLoading(false);
             } catch (err) {
-                console.error("Translation Error:", err);
                 setLoading(false);
-                showToast("❌ 翻譯失敗，請檢查網路連線。");
+                showToast("❌ 翻譯失敗，請檢查網路連線。", "fa-circle-xmark", "text-red-400");
             }
         }
 
         async function translateAndPlay(btnElement) {
             const input = document.getElementById('translate-input').value.trim();
             if (!input) {
-                showToast("⚠️ 請先輸入要翻譯的文字！");
+                showToast("⚠️ 請先輸入要翻譯的文字！", "fa-triangle-exclamation", "text-yellow-400");
                 return;
             }
             const hasVietnamese = /[\u0102-\u1EF9]/.test(input); 
             const langpair = hasVietnamese ? 'vi|zh-TW' : 'zh-TW|vi';
-            
             executeTranslation(input, langpair);
         }
 
         function startDictation(lang) {
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                showToast("⚠️ 您的瀏覽器不支援語音辨識功能 (請使用 Chrome/Safari)");
+                showToast("⚠️ 不支援語音辨識 (請使用 Chrome/Safari)", "fa-triangle-exclamation", "text-yellow-400");
                 return;
             }
-            
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const recognition = new SpeechRecognition();
-            
             recognition.lang = lang;
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
-            
             setLoading(true, "🎤 聆聽中... 請說話");
-            
             recognition.start();
-            
             recognition.onresult = function(event) {
                 const text = event.results[0][0].transcript;
                 document.getElementById('translate-input').value = text;
                 setLoading(false);
                 showToast("✅ 語音辨識成功！正在翻譯...");
-                
                 const pair = lang === 'vi-VN' ? 'vi|zh-TW' : 'zh-TW|vi';
                 executeTranslation(text, pair);
             };
-            
             recognition.onerror = function(event) {
                 setLoading(false);
                 if (event.error === 'not-allowed') {
-                    showToast("❌ 請允許瀏覽器使用麥克風權限");
+                    showToast("❌ 請允許瀏覽器使用麥克風權限", "fa-circle-xmark", "text-red-400");
                 } else {
-                    showToast("❌ 辨識失敗或超時，請再試一次");
+                    showToast("❌ 辨識失敗或超時，請再試一次", "fa-circle-xmark", "text-red-400");
                 }
             };
-            
-            recognition.onspeechend = function() {
-                recognition.stop();
-            };
+            recognition.onspeechend = function() { recognition.stop(); };
         }
 
+
+        // ================= 景點/血拚名單模組 (峴港版) =================
+        const placesDatabase = [
+            // 血拚採購
+            { id: 101, name: "韓市場 Han Market", korName: "Chợ Hàn", area: "市區", types: ["血拚"], lat: 16.0680, lng: 108.2235, desc: "買藤編包、腰果、編織涼鞋的戰區。記得殺價！", url: "https://www.google.com/maps/search/?api=1&query=Han+Market+Da+Nang" },
+            { id: 102, name: "Lotte Mart (峴港店)", korName: "Lotte Mart Đà Nẵng", area: "市區", types: ["血拚"], lat: 16.0345, lng: 108.2320, desc: "回程爆買 20kg 的好去處，伴手禮零食咖啡齊全", url: "https://www.google.com/maps/search/?api=1&query=Lotte+Mart+Da+Nang" },
+            { id: 103, name: "Con Market (共市場)", korName: "Chợ Cồn", area: "市區", types: ["血拚"], lat: 16.0695, lng: 108.2140, desc: "在地人逛的市場，美食小吃比韓市場更多更道地", url: "https://www.google.com/maps/search/?api=1&query=Con+Market+Da+Nang" },
+            
+            // 景點
+            { id: 501, name: "巴拿山 黃金佛手橋", korName: "Cầu Vàng", area: "郊區", types: ["景點"], lat: 15.9950, lng: 107.9960, desc: "峴港必去打卡點，雲端上的巨手", rec: "盡量早上前往避開人潮", url: "https://www.google.com/maps/search/?api=1&query=Golden+Bridge+Ba+Na+Hills" },
+            { id: 502, name: "峴港粉紅大教堂", korName: "Nhà thờ chính tòa Đà Nẵng", area: "市區", types: ["景點"], lat: 16.0665, lng: 108.2230, desc: "法式哥德風粉紅教堂，少女心噴發", url: "https://www.google.com/maps/search/?api=1&query=Da+Nang+Cathedral" },
+            { id: 503, name: "龍橋 Dragon Bridge", korName: "Cầu Rồng", area: "市區", types: ["景點"], lat: 16.0610, lng: 108.2270, desc: "橫跨瀚江的黃金巨龍", rec: "週五六日晚上 9 點有噴火秀", url: "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang" },
+            { id: 504, name: "山茶半島 靈應寺", korName: "Chùa Linh Ứng", area: "郊區", types: ["景點"], lat: 16.1000, lng: 108.2780, desc: "67公尺高巨大純白觀音像，可俯瞰無敵海景", url: "https://www.google.com/maps/search/?api=1&query=Linh+Ung+Pagoda+Da+Nang" },
+            { id: 505, name: "會安古鎮", korName: "Phố cổ Hội An", area: "會安", types: ["景點"], lat: 15.8770, lng: 108.3280, desc: "世界文化遺產，黃牆老屋與浪漫燈籠", rec: "強烈建議租借奧黛拍照", url: "https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town" },
+            { id: 506, name: "秋盆河水燈夜市", korName: "Chợ Đêm Hội An", area: "會安", types: ["景點"], lat: 15.8750, lng: 108.3260, desc: "夜晚搭船放水燈祈福", url: "https://www.google.com/maps/search/?api=1&query=Hoi+An+Night+Market" },
+            
+            // SPA/洗頭
+            { id: 701, name: "Lani Spa", korName: "Lani Spa", area: "市區", types: ["SPA/洗頭"], lat: 16.0590, lng: 108.2250, desc: "體驗道地越式洗頭與全套理容", url: "https://www.google.com/maps/search/?api=1&query=Lani+Spa+Da+Nang" }
+        ];
+
+        let placesCurrentArea = '全部';
+        let placesCurrentType = '全部';
+        let placesSearchQuery = '';
+        let placesUserLocation = null;
+
+        const placesAllAreas = ['全部', ...new Set(placesDatabase.map(p => p.area))];
+        const placesAllTypes = ['全部', ...new Set(placesDatabase.reduce((acc, p) => acc.concat(p.types), []))];
+
+        function renderPlacesFilters() {
+            const areaContainer = document.getElementById('places-filter-area');
+            const typeContainer = document.getElementById('places-filter-type');
+            
+            const validAreas = placesCurrentType === '全部' ? placesAllAreas : ['全部', ...new Set(placesDatabase.filter(f => f.types.includes(placesCurrentType)).map(f => f.area))];
+            const validTypes = placesCurrentArea === '全部' ? placesAllTypes : ['全部', ...new Set(placesDatabase.filter(f => f.area === placesCurrentArea).flatMap(f => f.types))];
+
+            const displayAreas = placesAllAreas.filter(a => validAreas.includes(a));
+            const displayTypes = placesAllTypes.filter(t => validTypes.includes(t));
+
+            areaContainer.innerHTML = displayAreas.map(area => `
+                <button onclick="setPlacesFilter('area', '${area}')" 
+                        class="px-3 py-1.5 text-xs font-bold rounded-full whitespace-nowrap transition-colors shadow-sm ${placesCurrentArea === area ? 'bg-stone-800 text-white' : 'bg-white border border-stone-200 text-stone-500 hover:bg-stone-100'}">
+                    ${area}
+                </button>
+            `).join('');
+
+            typeContainer.innerHTML = displayTypes.map(type => `
+                <button onclick="setPlacesFilter('type', '${type}')" 
+                        class="px-3 py-1.5 text-xs font-bold rounded-full whitespace-nowrap transition-colors shadow-sm ${placesCurrentType === type ? 'bg-sky-500 text-white' : 'bg-sky-50 border border-sky-200 text-sky-600 hover:bg-sky-100'}">
+                    ${type}
+                </button>
+            `).join('');
+        }
+
+        function setPlacesFilter(category, value) {
+            if (category === 'area') {
+                placesCurrentArea = value;
+                const validTypes = placesCurrentArea === '全部' ? placesAllTypes : placesDatabase.filter(f => f.area === placesCurrentArea).flatMap(f => f.types);
+                if (placesCurrentType !== '全部' && !validTypes.includes(placesCurrentType)) placesCurrentType = '全部';
+            }
+            if (category === 'type') {
+                placesCurrentType = value;
+                const validAreas = placesCurrentType === '全部' ? placesAllAreas : placesDatabase.filter(f => f.types.includes(placesCurrentType)).map(f => f.area);
+                if (placesCurrentArea !== '全部' && !validAreas.includes(placesCurrentArea)) placesCurrentArea = '全部';
+            }
+            renderPlacesFilters();
+            renderPlacesList();
+        }
+
+        function togglePlacesSearch() {
+            const container = document.getElementById('places-search-container');
+            const input = document.getElementById('places-search-input');
+            container.classList.toggle('active');
+            if (container.classList.contains('active')) {
+                setTimeout(() => input.focus(), 300);
+            } else {
+                clearPlacesSearch();
+            }
+        }
+
+        function handlePlacesSearch() {
+            placesSearchQuery = document.getElementById('places-search-input').value.toLowerCase();
+            renderPlacesList();
+        }
+
+        function clearPlacesSearch() {
+            document.getElementById('places-search-input').value = '';
+            placesSearchQuery = '';
+            renderPlacesList();
+        }
+
+        function resetPlacesFilters() {
+            placesCurrentArea = '全部';
+            placesCurrentType = '全部';
+            clearPlacesSearch();
+            document.getElementById('places-search-container').classList.remove('active');
+            renderPlacesFilters();
+            showToast("🧹 已清除所有篩選條件", "fa-rotate-right", "text-stone-400");
+        }
+
+        function updatePlacesLocation() {
+            if (!navigator.geolocation) {
+                showToast("⚠️ 瀏覽器不支援定位", "fa-triangle-exclamation", "text-yellow-400");
+                return;
+            }
+            showToast("📍 正在獲取您的位置...");
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    placesUserLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
+                    showToast("✅ 位置已更新！名單已依距離排序。");
+                    renderPlacesList();
+                },
+                (error) => {
+                    let msg = "❌ 定位失敗";
+                    if(error.code === 1) msg = "❌ 請允許位置權限以計算距離";
+                    showToast(msg, "fa-circle-xmark", "text-red-400");
+                },
+                { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+            );
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            if (!lat1 || !lon1 || !lat2 || !lon2) return Infinity;
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        function renderPlacesList() {
+            const listContainer = document.getElementById('places-list');
+            let filteredList = placesDatabase.filter(item => {
+                const matchArea = placesCurrentArea === '全部' || item.area === placesCurrentArea;
+                const matchType = placesCurrentType === '全部' || item.types.includes(placesCurrentType);
+                
+                const matchSearch = placesSearchQuery === '' || 
+                                    item.name.toLowerCase().includes(placesSearchQuery) ||
+                                    (item.korName && item.korName.toLowerCase().includes(placesSearchQuery)) ||
+                                    item.area.toLowerCase().includes(placesSearchQuery) ||
+                                    item.types.some(t => t.toLowerCase().includes(placesSearchQuery));
+
+                return matchArea && matchType && matchSearch;
+            });
+
+            if (placesUserLocation) {
+                filteredList = filteredList.map(item => {
+                    if(!item.lat) return { ...item, distance: Infinity };
+                    const dist = calculateDistance(placesUserLocation.lat, placesUserLocation.lng, item.lat, item.lng);
+                    return { ...item, distance: dist };
+                }).sort((a, b) => a.distance - b.distance);
+            }
+
+            if (filteredList.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="col-span-2 text-center py-10 text-stone-400 text-sm">
+                        <i class="fa-solid fa-face-frown text-2xl mb-2 block"></i>
+                        沒有符合的景點，換個條件吧！
+                    </div>`;
+                return;
+            }
+
+            listContainer.innerHTML = filteredList.map(item => {
+                let distanceHtml = '';
+                if(item.lat) {
+                    distanceHtml = '<span class="inline-block mt-2 text-[10px] bg-stone-100 text-stone-400 px-1.5 py-0.5 rounded font-medium"><i class="fa-solid fa-location-arrow"></i> 未定位</span>';
+                    if (item.distance !== undefined && item.distance !== Infinity) {
+                        const distText = item.distance < 1 ? `${Math.round(item.distance * 1000)}m` : `${item.distance.toFixed(1)}km`;
+                        distanceHtml = `<span class="inline-block mt-2 text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-person-walking"></i> 約 ${distText}</span>`;
+                    }
+                }
+
+                let recHtml = item.rec ? `<div class="mt-1.5 text-[10px] text-sky-600 font-bold bg-sky-50 px-1.5 py-0.5 rounded inline-block"><i class="fa-solid fa-star text-sky-500 mr-0.5"></i>${item.rec}</div>` : '';
+
+                return `
+                <div class="place-card">
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-bold text-sm text-stone-800 leading-tight">${item.name}</h3>
+                            <a href="${item.url}" target="_blank" class="text-sky-500 bg-sky-50 w-7 h-7 rounded-full flex items-center justify-center shrink-0 ml-1 mb-1 active:scale-95 transition-transform" title="開啟地圖">
+                                <i class="fa-solid fa-map-location-dot text-xs"></i>
+                            </a>
+                        </div>
+                        <p class="text-[9px] text-stone-400 mb-1 line-clamp-1" title="${item.korName || ''}">${item.korName || ''}</p>
+                        <p class="text-[10px] text-stone-600 font-medium mb-1">📍 ${item.area} | ${item.types[0]}</p>
+                        <p class="text-[10px] text-stone-500 line-clamp-2 leading-snug">${item.desc}</p>
+                        ${recHtml}
+                    </div>
+                    <div class="text-right border-t border-stone-50 pt-1 mt-1">
+                        ${distanceHtml}
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // ================= 美食名單模組 (峴港版) =================
+        const foodDatabase = [
+            { id: 1, name: "Pizza 4P's", korName: "Pizza 4P's", area: "市區", types: ["異國料理"], lat: 16.0645, lng: 108.2230, desc: "神級高CP值布拉塔起司披薩，蟹肉蟹膏義大利麵狂推", rec: "布拉塔起司披薩、蟹肉義大利麵", url: "https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Hoang+Van+Thu+Da+Nang" },
+            { id: 2, name: "Pho Thin 13 Lò Đúc", korName: "Phở Thìn", area: "市區", types: ["小吃/粉"], lat: 16.0620, lng: 108.2250, desc: "北越傳奇河粉開來中越！湯頭清甜。妳吃雞，他吃牛。", rec: "雞肉河粉 (Phở Gà)、油條", url: "https://www.google.com/maps/search/?api=1&query=Pho+Thin+Da+Nang" },
+            { id: 3, name: "Bé Mặn 海鮮", korName: "Hải sản Bé Mặn", area: "美溪沙灘", types: ["海鮮"], lat: 16.0820, lng: 108.2460, desc: "美溪沙灘人氣最旺的活海鮮大排檔", rec: "奶油大蝦、烤大蛤蜊", url: "https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Da+Nang" },
+            { id: 4, name: "Bà Dưỡng 煎餅", korName: "Bánh xèo Bà Dưỡng", area: "市區", types: ["小吃/粉"], lat: 16.0595, lng: 108.2140, desc: "巷弄裡的排隊名店，酥脆越式煎餅包菜沾醬超好吃", rec: "越式煎餅 (Bánh Xèo)", url: "https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang" },
+            { id: 5, name: "Mi Quang 250", korName: "Mì Quảng 250", area: "市區", types: ["小吃/粉"], lat: 16.0600, lng: 108.2200, desc: "廣南麵 (Mi Quang) 是中越特色乾拌麵，麵條Q彈", rec: "廣南麵", url: "https://www.google.com/maps/search/?api=1&query=Mi+Quang+Da+Nang" },
+            { id: 6, name: "Bánh Mì Phượng", korName: "Bánh Mì Phượng", area: "會安", types: ["小吃/粉"], lat: 15.8785, lng: 108.3300, desc: "波登讚譽『世界最好吃的法國麵包』，會安必排美食", rec: "綜合越式法棍", url: "https://www.google.com/maps/search/?api=1&query=Banh+Mi+Phuong+Hoi+An" },
+            { id: 7, name: "Morning Glory Original", korName: "Morning Glory Original", area: "會安", types: ["傳統越菜"], lat: 15.8775, lng: 108.3285, desc: "會安極具盛名的越式餐館，適合體驗會安三寶", rec: "白玫瑰、高樓麵", url: "https://www.google.com/maps/search/?api=1&query=Morning+Glory+Original+Hoi+An" },
+            { id: 8, name: "Faifo Coffee", korName: "Faifo Coffee", area: "會安", types: ["咖啡/甜點"], lat: 15.8770, lng: 108.3275, desc: "會安最知名的老屋咖啡，二樓陽台可拍古鎮全景", rec: "椰子咖啡", url: "https://www.google.com/maps/search/?api=1&query=Faifo+Coffee+Hoi+An" },
+            { id: 9, name: "Reply 1988 Cafe", korName: "Reply 1988 Cafe", area: "美溪沙灘", types: ["咖啡/甜點"], lat: 16.0600, lng: 108.2450, desc: "美溪沙灘旁的韓系咖啡廳，適合慵懶放空", rec: "特調咖啡", url: "https://www.google.com/maps/search/?api=1&query=Reply+1988+Cafe+Da+Nang" },
+            { id: 10, name: "Cong Caphe (峴港店)", korName: "Cộng Cà Phê", area: "市區", types: ["咖啡/甜點"], lat: 16.0685, lng: 108.2235, desc: "越共主題連鎖咖啡，就在韓市場旁邊", rec: "招牌椰子咖啡冰沙", url: "https://www.google.com/maps/search/?api=1&query=Cong+Caphe+Da+Nang" }
+        ];
+
+        let currentArea = '全部';
+        let currentType = '全部';
+        let userLocation = null;
+        let searchQuery = '';
+
+        const allAreas = ['全部', ...new Set(foodDatabase.map(food => food.area))];
+        const allTypes = ['全部', ...new Set(foodDatabase.reduce((acc, food) => acc.concat(food.types), []))];
+
+        function renderFilters() {
+            const areaContainer = document.getElementById('filter-area');
+            const typeContainer = document.getElementById('filter-type');
+            
+            const validAreas = currentType === '全部' ? allAreas : ['全部', ...new Set(foodDatabase.filter(f => f.types.includes(currentType)).map(f => f.area))];
+            const validTypes = currentArea === '全部' ? allTypes : ['全部', ...new Set(foodDatabase.filter(f => f.area === currentArea).flatMap(f => f.types))];
+
+            const displayAreas = allAreas.filter(a => validAreas.includes(a));
+            const displayTypes = allTypes.filter(t => validTypes.includes(t));
+
+            areaContainer.innerHTML = displayAreas.map(area => `
+                <button onclick="setFilter('area', '${area}')" 
+                        class="px-3 py-1.5 text-xs font-bold rounded-full whitespace-nowrap transition-colors shadow-sm ${currentArea === area ? 'bg-stone-800 text-white' : 'bg-white border border-stone-200 text-stone-500 hover:bg-stone-100'}">
+                    ${area}
+                </button>
+            `).join('');
+
+            typeContainer.innerHTML = displayTypes.map(type => `
+                <button onclick="setFilter('type', '${type}')" 
+                        class="px-3 py-1.5 text-xs font-bold rounded-full whitespace-nowrap transition-colors shadow-sm ${currentType === type ? 'bg-orange-500 text-white' : 'bg-orange-50 border border-orange-200 text-orange-500 hover:bg-orange-100'}">
+                    ${type}
+                </button>
+            `).join('');
+        }
+
+        function setFilter(category, value) {
+            if (category === 'area') {
+                currentArea = value;
+                const validTypes = currentArea === '全部' ? allTypes : foodDatabase.filter(f => f.area === currentArea).flatMap(f => f.types);
+                if (currentType !== '全部' && !validTypes.includes(currentType)) currentType = '全部';
+            }
+            if (category === 'type') {
+                currentType = value;
+                const validAreas = currentType === '全部' ? allAreas : foodDatabase.filter(f => f.types.includes(currentType)).map(f => f.area);
+                if (currentArea !== '全部' && !validAreas.includes(currentArea)) currentArea = '全部';
+            }
+            renderFilters();
+            renderList();
+        }
+
+        function toggleSearch() {
+            const container = document.getElementById('search-container');
+            const input = document.getElementById('food-search-input');
+            container.classList.toggle('active');
+            if (container.classList.contains('active')) {
+                setTimeout(() => input.focus(), 300);
+            } else {
+                clearSearch();
+            }
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('food-search-input').value.toLowerCase();
+            renderList();
+        }
+
+        function clearSearch() {
+            document.getElementById('food-search-input').value = '';
+            searchQuery = '';
+            renderList();
+        }
+
+        function resetFilters() {
+            currentArea = '全部';
+            currentType = '全部';
+            clearSearch();
+            document.getElementById('search-container').classList.remove('active');
+            renderFilters();
+            showToast("🧹 已清除所有篩選條件", "fa-rotate-right", "text-stone-400");
+        }
+
+        function updateLocation() {
+            const btnStatus = document.getElementById('location-status');
+            if (!navigator.geolocation) {
+                showToast("⚠️ 瀏覽器不支援定位", "fa-triangle-exclamation", "text-yellow-400");
+                return;
+            }
+            if (btnStatus) btnStatus.innerText = "定位中...";
+            showToast("📍 正在獲取您的位置...");
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
+                    if (btnStatus) btnStatus.innerText = "已更新";
+                    showToast("✅ 位置已更新！名單已依距離排序。");
+                    renderList();
+                    if (btnStatus) setTimeout(() => { btnStatus.innerText = "更新位置"; }, 3000);
+                },
+                (error) => {
+                    if (btnStatus) btnStatus.innerText = "更新位置";
+                    let msg = "❌ 定位失敗";
+                    if(error.code === 1) msg = "❌ 請允許位置權限以計算距離";
+                    showToast(msg, "fa-circle-xmark", "text-red-400");
+                },
+                { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+            );
+        }
+
+        function renderList() {
+            const listContainer = document.getElementById('restaurant-list');
+            let filteredList = foodDatabase.filter(food => {
+                const matchArea = currentArea === '全部' || food.area === currentArea;
+                const matchType = currentType === '全部' || food.types.includes(currentType);
+                
+                const matchSearch = searchQuery === '' || 
+                                    food.name.toLowerCase().includes(searchQuery) ||
+                                    food.korName.toLowerCase().includes(searchQuery) ||
+                                    food.area.toLowerCase().includes(searchQuery) ||
+                                    food.types.some(t => t.toLowerCase().includes(searchQuery));
+
+                return matchArea && matchType && matchSearch;
+            });
+
+            if (userLocation) {
+                filteredList = filteredList.map(food => {
+                    const dist = calculateDistance(userLocation.lat, userLocation.lng, food.lat, food.lng);
+                    return { ...food, distance: dist };
+                }).sort((a, b) => a.distance - b.distance);
+            }
+
+            if (filteredList.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="col-span-2 text-center py-10 text-stone-400 text-sm">
+                        <i class="fa-solid fa-face-frown text-2xl mb-2 block"></i>
+                        沒有符合的餐廳，換個篩選條件吧！
+                    </div>`;
+                return;
+            }
+
+            listContainer.innerHTML = filteredList.map(food => {
+                let distanceHtml = '<span class="inline-block mt-2 text-[10px] bg-stone-100 text-stone-400 px-1.5 py-0.5 rounded font-medium"><i class="fa-solid fa-location-arrow"></i> 未定位</span>';
+                if (food.distance !== undefined) {
+                    const distText = food.distance < 1 ? `${Math.round(food.distance * 1000)}m` : `${food.distance.toFixed(1)}km`;
+                    distanceHtml = `<span class="inline-block mt-2 text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-person-walking"></i> 約 ${distText}</span>`;
+                }
+
+                let recHtml = food.rec ? `<div class="mt-1.5 text-[10px] text-red-500 font-bold bg-red-50/80 px-1.5 py-0.5 rounded inline-block"><i class="fa-solid fa-fire text-red-500 mr-0.5"></i>激推: ${food.rec}</div>` : '';
+
+                return `
+                <div class="food-card">
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="font-bold text-sm text-stone-800 leading-tight">${food.name}</h3>
+                            <a href="${food.url}" target="_blank" class="text-green-500 bg-green-50 w-7 h-7 rounded-full flex items-center justify-center shrink-0 ml-1 mb-1 active:scale-95 transition-transform" title="開啟地圖">
+                                <i class="fa-solid fa-map-location-dot text-xs"></i>
+                            </a>
+                        </div>
+                        <p class="text-[9px] text-stone-400 mb-1 line-clamp-1" title="${food.korName}">${food.korName}</p>
+                        <p class="text-[10px] text-stone-600 font-medium mb-1">📍 ${food.area} | ${food.types[0]}</p>
+                        <p class="text-[10px] text-stone-500 line-clamp-2 leading-snug">${food.desc}</p>
+                        ${recHtml}
+                    </div>
+                    <div class="text-right border-t border-stone-50 pt-1 mt-1">
+                        ${distanceHtml}
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playTickSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800 + Math.random() * 400, audioCtx.currentTime);
+            
+            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        function playTadaSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const freqs = [523.25, 659.25, 783.99]; 
+            freqs.forEach(freq => {
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.5);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 1.5);
+            });
+        }
+
+        function startDiceRoll() {
+            const filteredList = foodDatabase.filter(food => {
+                const matchArea = currentArea === '全部' || food.area === currentArea;
+                const matchType = currentType === '全部' || food.types.includes(currentType);
+                const matchSearch = searchQuery === '' || food.name.toLowerCase().includes(searchQuery) || food.korName.toLowerCase().includes(searchQuery);
+                return matchArea && matchType && matchSearch;
+            });
+
+            if (filteredList.length === 0) {
+                showToast("⚠️ 目前篩選下沒有餐廳可以抽喔！", "fa-triangle-exclamation", "text-yellow-400");
+                return;
+            }
+
+            const modal = document.getElementById('dice-modal');
+            const modalContent = document.getElementById('dice-modal-content');
+            const resultCard = document.getElementById('dice-result-card');
+            const actionBtn = document.getElementById('dice-action-btn');
+            
+            if (actionBtn) {
+                actionBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 抽籤中...';
+                actionBtn.onclick = null;
+                actionBtn.classList.add('opacity-70');
+            }
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+
+            let rolls = 0;
+            const maxRolls = 15;
+            const rollInterval = setInterval(() => {
+                const randomTempIndex = Math.floor(Math.random() * filteredList.length);
+                const tempFood = filteredList[randomTempIndex];
+                
+                resultCard.innerHTML = `
+                    <div class="slot-machine-text text-center w-full">
+                        <i class="fa-solid fa-spinner fa-spin text-orange-300 text-3xl mb-2"></i>
+                        <h4 class="font-black text-xl text-stone-400">${tempFood.name}</h4>
+                    </div>
+                `;
+                
+                playTickSound();
+
+                rolls++;
+                if (rolls >= maxRolls) {
+                    clearInterval(rollInterval);
+                    playTadaSound();
+                    showFinalWinner(filteredList);
+                }
+            }, 100);
+        }
+
+        function showFinalWinner(list) {
+            const randomIndex = Math.floor(Math.random() * list.length);
+            const winner = list[randomIndex];
+            const resultCard = document.getElementById('dice-result-card');
+            
+            const recModalHtml = winner.rec ? `<div class="mt-2 text-[11px] font-bold text-red-500 bg-red-100/50 px-2 py-1 rounded-lg inline-block border border-red-100"><i class="fa-solid fa-fire"></i> 行家必點：${winner.rec}</div>` : '';
+
+            resultCard.innerHTML = `
+                <div class="absolute -right-4 -top-4 text-orange-200 opacity-30 text-6xl rotate-12">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <div class="relative z-10 w-full text-left animation-fadeIn">
+                    <p class="text-[10px] font-bold text-orange-500 mb-1">📍 ${winner.area} · 🏷️ ${winner.types[0]}</p>
+                    <h4 class="font-black text-lg text-stone-800 mb-1">${winner.name}</h4>
+                    <p class="text-xs text-stone-500 mb-2">${winner.korName}</p>
+                    <p class="text-xs text-stone-700 bg-white/60 p-2 rounded-lg font-medium leading-snug">${winner.desc}</p>
+                    ${recModalHtml}
+                </div>
+            `;
+
+            const actionBtn = document.getElementById('dice-action-btn');
+            if (actionBtn) {
+                actionBtn.innerHTML = `太棒了，出發！ <i class="fa-solid fa-map-location-dot"></i>`;
+                actionBtn.classList.remove('opacity-70');
+                actionBtn.onclick = function() {
+                    window.open(winner.url, '_blank');
+                    closeModal();
+                };
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('dice-modal');
+            const modalContent = document.getElementById('dice-modal-content');
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        // ================= 頁面初始化 =================
         window.onload = () => {
             loadChecks();
             checkAutoDateJump();
+            renderFilters();
+            renderList();
+            renderPlacesFilters();
+            renderPlacesList();
         };
+
+        window.addEventListener('scroll', () => {
+            const topBtn = document.getElementById('go-to-top');
+            if (window.scrollY > 300) {
+                topBtn.classList.add('show');
+            } else {
+                topBtn.classList.remove('show');
+            }
+        });
+
     </script>
 </body>
 </html>
