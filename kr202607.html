@@ -1441,12 +1441,14 @@ function switchTab(tabId, btnElement) {
             utterance.onerror = () => { if (element) element.classList.remove('playing'); };
             window.speechSynthesis.speak(utterance);
         }
-
-async function executeTranslation(text) {
-            // 自動偵測是否包含韓文，以決定翻譯方向
-            const hasKorean = /[\u3131-\uD79D]/.test(text);
-            const sourceLang = hasKorean ? 'ko' : 'zh-TW';
-            const targetLang = hasKorean ? 'zh-TW' : 'ko';
+// 新增了 forceTargetLang 參數，用來接收語音按鈕的強制指令
+        async function executeTranslation(text, forceTargetLang = null) {
+            // 如果有強制指定目標語言（來自語音），就用指定的；否則（手動輸入）才用正則表達式自動偵測
+            let targetLang = forceTargetLang;
+            if (!targetLang) {
+                const hasKorean = /[\u3131-\uD79D]/.test(text);
+                targetLang = hasKorean ? 'zh-TW' : 'ko';
+            }
 
             const btn = document.getElementById('translate-btn');
             const originalBtnText = btn.innerHTML;
@@ -1454,8 +1456,9 @@ async function executeTranslation(text) {
             btn.disabled = true;
 
             try {
-                // 改用 Google Translate 的快速端點
-                const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+                // 來源語言維持 auto，目標語言根據上方邏輯決定
+                const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+                
                 const response = await fetch(url);
                 if (!response.ok) throw new Error("Translation failed");
                 const data = await response.json();
@@ -1473,7 +1476,6 @@ async function executeTranslation(text) {
                 container.classList.remove('hidden');
                 container.classList.add('flex');
                 
-                // 新增翻譯完成的短暫視覺回饋
                 container.classList.add('bg-purple-900/40');
                 setTimeout(() => container.classList.remove('bg-purple-900/40'), 300);
 
@@ -1485,7 +1487,7 @@ async function executeTranslation(text) {
                 } else {
                     label.innerText = "韓文翻譯：";
                     replayBtn.classList.remove('hidden');
-                    // 翻譯成韓文後，自動發音
+                    // 翻譯成韓文後自動發音
                     playTTS(resultText, replayBtn);
                 }
             } catch (err) {
@@ -1497,6 +1499,7 @@ async function executeTranslation(text) {
             }
         }
 
+        // 翻譯按鈕（手動打字時觸發，不帶強制參數，讓系統自己偵測）
         async function translateAndPlay() {
             const input = document.getElementById('translate-input').value.trim();
             if (!input) {
@@ -1514,14 +1517,13 @@ async function executeTranslation(text) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const recognition = new SpeechRecognition();
             recognition.lang = lang;
-            recognition.interimResults = true; // 開啟即時顯示辨識結果
+            recognition.interimResults = true; 
             
             const inputEl = document.getElementById('translate-input');
             const originalPlaceholder = inputEl.placeholder;
             inputEl.placeholder = "🎤 聆聽中... (請說話)";
             inputEl.value = "";
             
-            // 讓按鈕顯示錄音狀態
             const btnId = lang === 'ko-KR' ? 'dictation-ko-btn' : 'dictation-zh-btn';
             const dictBtn = document.getElementById(btnId);
             dictBtn.classList.add('animate-pulse', 'ring-2', 'ring-white');
@@ -1538,7 +1540,6 @@ async function executeTranslation(text) {
                         interimTranscript += event.results[i][0].transcript;
                     }
                 }
-                // 將文字即時填入輸入框，讓使用者安心
                 inputEl.value = finalTranscript || interimTranscript;
             };
             
@@ -1546,9 +1547,10 @@ async function executeTranslation(text) {
                 inputEl.placeholder = originalPlaceholder;
                 dictBtn.classList.remove('animate-pulse', 'ring-2', 'ring-white');
                 
-                // 只要有錄到字，就自動觸發翻譯！不需要多點一次按鈕
                 if (inputEl.value.trim() !== '') {
-                    executeTranslation(inputEl.value.trim());
+                    // 【關鍵修改】：根據使用者按下的按鈕，強制指定翻譯目標語言
+                    const targetLang = (lang === 'ko-KR') ? 'zh-TW' : 'ko';
+                    executeTranslation(inputEl.value.trim(), targetLang);
                 }
             };
             
