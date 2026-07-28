@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>峴港｜陽光假期 (V23.1)</title>
+    <title>峴港｜陽光假期 (V24)</title>
     <!-- 越南國旗 Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇻🇳</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -38,6 +38,7 @@
         .tab-btn.currency-active { background-color: #b45309; color: white; border-color: #b45309; }
         .tab-btn.food-active { background-color: #f97316; color: white; border-color: #f97316; } 
         .tab-btn.places-active { background-color: #0ea5e9; color: white; border-color: #0ea5e9; } 
+        .hotel-active { background-color: #0d9488 !important; color: white !important; border-color: #0d9488 !important; }
         
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
@@ -131,10 +132,14 @@
     <div id="toast" class="toast"><i class="fa-solid fa-circle-check text-amber-400" id="toast-icon"></i> <span id="toast-msg"></span></div>
 
     <header class="hero-bg h-36 flex flex-col justify-end p-5 text-white relative">
-        <div class="absolute top-4 right-4 flex gap-1.5 flex-wrap justify-end max-w-[120px]">
+        <div class="absolute top-4 right-4 flex gap-1.5 flex-wrap justify-end max-w-[150px]">
             <a href="https://docs.google.com/spreadsheets/d/13o59SvhyGKnTrMRPYG4CeqIeXkFEGieSj5-C4UjwAMw/edit?usp=sharing" target="_blank" class="w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="Google 試算表行程">
                 <i class="fa-solid fa-file-excel"></i>
             </a>
+            <!-- 飯店簡介按鈕 -->
+            <button onclick="switchTab('hotels', this)" class="w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-teal-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="飯店簡介與設施">
+                <i class="fa-solid fa-bed"></i>
+            </button>
             <button onclick="switchTab('currency', document.getElementById('currency-tab'))" class="w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
                 <i class="fa-solid fa-dong-sign"></i>
             </button>
@@ -153,7 +158,7 @@
                 <i class="fa-solid fa-sun text-yellow-300 text-sm animate-spin-slow"></i> Da Nang Sunshine
             </h1>
             <div class="flex justify-between items-end mt-0.5">
-                <p class="text-[9px] opacity-90 tracking-widest uppercase border-l border-white/30 pl-2">2026研討漫遊(V23.1)</p>
+                <p class="text-[9px] opacity-90 tracking-widest uppercase border-l border-white/30 pl-2">2026研討漫遊(V24)</p>
             </div>
         </div>
     </header>
@@ -177,6 +182,75 @@
     </nav>
 
     <main class="max-w-md mx-auto w-full flex-grow p-4 pb-20">
+
+        <!-- ================= 飯店簡介模組 ================= -->
+        <section id="hotels-content" class="tab-content space-y-4">
+            <div class="flex items-center gap-2 mb-2">
+                <div class="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 shadow-inner">
+                    <i class="fa-solid fa-bed"></i>
+                </div>
+                <div>
+                    <h2 class="text-base font-extrabold text-stone-700">飯店簡介與設施</h2>
+                    <p class="text-[10px] text-stone-400">專屬放空：聖托里尼與頂級高空海景</p>
+                </div>
+            </div>
+
+            <!-- 飯店 1: Risemount -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-orange-100">
+                <div class="h-32 bg-blue-100 relative" style="background-image: url('https://images.unsplash.com/photo-1522798514352-2a8d0f02377c?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-3 left-3 text-white">
+                        <div class="flex text-amber-400 text-[10px] mb-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <h3 class="font-bold text-lg leading-tight">Risemount Premier Resort</h3>
+                        <p class="text-[10px] opacity-90">Day 1 - Day 3 住宿</p>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3">
+                    <p class="text-[11px] text-stone-600 leading-relaxed">以希臘聖托里尼為靈感的純白與湛藍設計，充滿濃厚地中海度假風情，隨處都極度好拍。</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="bg-blue-50/50 p-2 rounded-lg border border-blue-50">
+                            <p class="text-[10px] font-bold text-blue-800 mb-0.5"><i class="fa-solid fa-water text-blue-500 mr-1"></i>雙層庭園泳池</p>
+                            <p class="text-[9px] text-stone-500">網美必拍的絕美中庭泳池，超級放鬆</p>
+                        </div>
+                        <div class="bg-orange-50/50 p-2 rounded-lg border border-orange-50">
+                            <p class="text-[10px] font-bold text-orange-800 mb-0.5"><i class="fa-solid fa-utensils text-orange-500 mr-1"></i>La Maison 餐廳</p>
+                            <p class="text-[9px] text-stone-500">享用豐盛的自助晨間陽光早餐</p>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Da+Nang" target="_blank" class="block text-center w-full bg-stone-50 hover:bg-stone-100 text-stone-600 text-xs font-bold py-2 rounded-xl transition-colors border border-stone-200">
+                        <i class="fa-solid fa-map-location-dot mr-1 text-orange-500"></i> 查看地圖位置
+                    </a>
+                </div>
+            </div>
+
+            <!-- 飯店 2: Peninsula -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-200 mt-4">
+                <div class="h-32 bg-stone-100 relative" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-3 left-3 text-white">
+                        <div class="flex text-amber-400 text-[10px] mb-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <h3 class="font-bold text-lg leading-tight">Peninsula Hotel Da Nang</h3>
+                        <p class="text-[10px] opacity-90">Day 4 - Day 5 住宿 (研討會場地)</p>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3">
+                    <p class="text-[11px] text-stone-600 leading-relaxed">李研討會的舉辦場地！位於優越位置的現代化高級酒店，擁有俯瞰大海與市區的無敵高空視野。</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="bg-cyan-50/50 p-2 rounded-lg border border-cyan-50">
+                            <p class="text-[10px] font-bold text-cyan-800 mb-0.5"><i class="fa-solid fa-water text-cyan-500 mr-1"></i>頂樓無邊際泳池</p>
+                            <p class="text-[9px] text-stone-500">28F 高空絕美海景盡收眼底</p>
+                        </div>
+                        <div class="bg-stone-50/50 p-2 rounded-lg border border-stone-100">
+                            <p class="text-[10px] font-bold text-stone-800 mb-0.5"><i class="fa-solid fa-martini-glass-citrus text-stone-500 mr-1"></i>高空下午茶/酒吧</p>
+                            <p class="text-[9px] text-stone-500">傍晚賞夕陽的最佳 VIP 席</p>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="block text-center w-full bg-stone-50 hover:bg-stone-100 text-stone-600 text-xs font-bold py-2 rounded-xl transition-colors border border-stone-200">
+                        <i class="fa-solid fa-map-location-dot mr-1 text-teal-600"></i> 查看地圖位置
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <!-- ================= 匯率工具 ================= -->
         <section id="currency-content" class="tab-content space-y-4">
@@ -279,7 +353,7 @@
                     </label>
                     <label class="flex items-start gap-3 text-[12px] text-stone-600">
                         <input type="checkbox" id="check4" onchange="saveChecks()" class="w-4 h-4 mt-0.5 rounded text-orange-600 border-orange-300 focus:ring-orange-500 shrink-0"> 
-                        <span>夏日戰袍 (晴：明亮暖色系服飾 / 李：開會西裝、乾淨白襯衫)</span>
+                        <span>服飾 (晴：明亮暖色系服飾 / 李：開會西裝、乾淨白襯衫)</span>
                     </label>
                     <label class="flex items-start gap-3 text-[12px] text-stone-600">
                         <input type="checkbox" id="check5" onchange="saveChecks()" class="w-4 h-4 mt-0.5 rounded text-orange-600 border-orange-300 focus:ring-orange-500 shrink-0"> 
@@ -531,8 +605,8 @@
             </div>
 
             <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-motorcycle text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 回飯店放戰利品。15:30 飯店租半天機車兜風。</p>
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 回飯店放戰利品，稍微休息後，搭 Grab 前往咖啡廳。</p>
             </div>
 
             <div class="compact-card">
@@ -540,8 +614,8 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">Login Coffee 看水豚</h3>
-                            <p class="text-[10px] text-stone-500">機車浪漫約會，尋找呆萌水豚君療癒放空</p>
+                            <h3 class="font-bold text-sm">Login Coffee 下午茶</h3>
+                            <p class="text-[10px] text-stone-500">明亮韓系網美海景咖啡廳，享受悠閒的午後時光</p>
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
@@ -549,8 +623,8 @@
             </div>
             
             <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-motorcycle text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">17:30 騎機車返回 Risemount 還車、換裝。</p>
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 返回 Risemount 換裝。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-orange-500">
@@ -575,6 +649,18 @@
             <div class="meal-nav">
                 <a href="https://www.google.com/maps/search/?api=1&query=Bikini+Bottom+Express+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-burger"></i> L: Bikini Bottom</a>
                 <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-cake-candles"></i> T: 半島酒店下午茶</a>
+            </div>
+
+            <div class="compact-card bg-cyan-50/50 border border-cyan-100 mb-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-cyan-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">08:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm text-cyan-800">🏊‍♂️ 退房前的最後晨泳</h3>
+                            <p class="text-[10px] text-cyan-600">把握 Risemount 的度假氛圍</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="compact-card border-l-4 border-l-amber-500">
@@ -618,7 +704,7 @@
                         <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:30</span>
                         <div>
                             <h3 class="font-bold text-sm">Bikini Bottom Express 慶祝</h3>
-                            <p class="text-[10px] text-stone-500 font-bold">慶祝解脫！推道地美式 Smash Burger 與炸雞堡</p>
+                            <p class="text-[10px] text-stone-500">慶祝解脫！推道地美式 Smash Burger 與炸雞堡</p>
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Bikini+Bottom+Express+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
@@ -781,7 +867,7 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">Lotte Mart 爆買收尾</h3>
+                            <h3 class="font-bold text-sm">Lotte Mart 採購</h3>
                             <p class="text-[10px] text-stone-500">把託運額度塞滿腰果與 G7 咖啡</p>
                         </div>
                     </div>
@@ -813,7 +899,7 @@
                 <div class="relative z-10">
                     <div class="flex justify-between items-center mb-3">
                         <span class="text-[10px] bg-amber-500 text-white px-2 py-0.5 rounded font-black border border-amber-400">回程 IT 552</span>
-                        <span class="text-[10px] text-stone-300">08.13 (週四)</span>
+                        <span class="text-[10px] text-stone-300">08.13 (四)</span>
                     </div>
                     <div class="flex justify-between items-center mb-3">
                         <div class="text-left">
@@ -1060,15 +1146,21 @@
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active', 'phrase-active', 'currency-active', 'food-active', 'places-active');
             });
+            
+            // 處理右上角飯店按鈕的特別狀態
+            document.querySelectorAll('.hotel-active').forEach(btn => {
+                btn.classList.remove('hotel-active');
+            });
 
-            if (tabId === 'phrases') btnElement.classList.add('phrase-active');
-            else if (tabId === 'currency') btnElement.classList.add('currency-active');
-            else if (tabId === 'food') btnElement.classList.add('food-active');
-            else if (tabId === 'places') btnElement.classList.add('places-active');
-            else btnElement.classList.add('active');
+            if (tabId === 'phrases' && btnElement) btnElement.classList.add('phrase-active');
+            else if (tabId === 'currency' && btnElement) btnElement.classList.add('currency-active');
+            else if (tabId === 'food' && btnElement) btnElement.classList.add('food-active');
+            else if (tabId === 'places' && btnElement) btnElement.classList.add('places-active');
+            else if (tabId === 'hotels' && btnElement) btnElement.classList.add('hotel-active');
+            else if (btnElement) btnElement.classList.add('active');
             
             const navContainer = document.getElementById('nav-container');
-            if (navContainer && btnElement) {
+            if (navContainer && btnElement && !btnElement.classList.contains('hotel-active')) {
                 const btnRect = btnElement.getBoundingClientRect();
                 const containerRect = navContainer.getBoundingClientRect();
                 
@@ -1260,7 +1352,7 @@
             { id: 701, name: "Herbal Spa", korName: "Herbal Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: 16.0620, lng: 108.2430, desc: "評價極高的全身精油/深層按摩，同房可選不同方案", url: "https://www.google.com/maps/search/?api=1&query=Herbal+Spa+Da+Nang" },
             
             // 咖啡/放空
-            { id: 801, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/放空"], lat: 16.0650, lng: 108.2450, desc: "有可愛呆萌水豚君駐店的網美咖啡廳", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" }
+            { id: 801, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/放空"], lat: 16.0650, lng: 108.2450, desc: "空間明亮好拍的網美海景咖啡廳", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" }
         ];
 
         let placesCurrentArea = '全部';
@@ -1461,7 +1553,7 @@
             { id: 16, name: "Bà Dưỡng 煎餅", korName: "Bánh xèo Bà Dưỡng", area: "市區", types: ["小吃/粉"], lat: 16.0595, lng: 108.2140, desc: "巷弄裡的排隊老店，餅緣裹滿香濃蛋液，搭配靈魂秘製蘸醬。", rec: "越式煎餅 (Bánh Xèo)", url: "https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang" },
             { id: 17, name: "Morning Glory Original", korName: "Morning Glory Original", area: "會安", types: ["傳統越菜"], lat: 15.8775, lng: 108.3285, desc: "會安極具盛名的越式餐館，適合體驗會安三寶", rec: "白玫瑰、高樓麵", url: "https://www.google.com/maps/search/?api=1&query=Morning+Glory+Original+Hoi+An" },
             { id: 18, name: "Faifo Coffee", korName: "Faifo Coffee", area: "會安", types: ["咖啡/甜點"], lat: 15.8770, lng: 108.3275, desc: "會安最知名的老屋咖啡，二樓陽台可拍古鎮全景", rec: "椰子咖啡", url: "https://www.google.com/maps/search/?api=1&query=Faifo+Coffee+Hoi+An" },
-            { id: 19, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/甜點"], lat: 16.0650, lng: 108.2450, desc: "療癒水豚君駐店！空間明亮好拍，喝咖啡看呆萌水豚吃草。", rec: "特調咖啡", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" },
+            { id: 19, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/甜點"], lat: 16.0650, lng: 108.2450, desc: "空間明亮好拍，喝咖啡享受海風與悠閒午後。", rec: "特調咖啡", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" },
             { id: 20, name: "Gỏi cá Nam Ô (Nam O 涼拌魚)", korName: "Gỏi cá Nam Ô", area: "市區", types: ["傳統越菜"], lat: 16.0715, lng: 108.2155, desc: "峴港在地特色，必試的道地涼拌生魚片，酸辣開胃超特別！", rec: "在地酸辣涼拌生魚片", url: "https://www.google.com/maps/search/?api=1&query=Goi+ca+Nam+O+Da+Nang" }
         ];
 
