@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>峴港｜陽光假期 (V20)</title>
+    <title>峴港｜陽光假期 (V22)</title>
     <!-- 越南國旗 Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇻🇳</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -153,7 +153,7 @@
                 <i class="fa-solid fa-sun text-yellow-300 text-sm animate-spin-slow"></i> Da Nang Sunshine
             </h1>
             <div class="flex justify-between items-end mt-0.5">
-                <p class="text-[9px] opacity-90 tracking-widest uppercase border-l border-white/30 pl-2">2026 雙人盛夏浪漫行 (V20)</p>
+                <p class="text-[9px] opacity-90 tracking-widest uppercase border-l border-white/30 pl-2">2026 雙人盛夏浪漫行 (V22)</p>
                 <span class="text-[9px] bg-white/20 border border-white/30 px-2 py-0.5 rounded-full font-bold">Unicard UP 5%</span>
             </div>
         </div>
@@ -179,7 +179,7 @@
 
     <main class="max-w-md mx-auto w-full flex-grow p-4 pb-20">
 
-        <!-- ================= 其他模組 (匯率、核取) ================= -->
+        <!-- ================= 匯率工具 ================= -->
         <section id="currency-content" class="tab-content space-y-4">
             <div class="flex items-center gap-2 mb-2">
                 <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700">
@@ -228,6 +228,7 @@
             </div>
         </section>
 
+        <!-- 行前準備 -->
         <section id="prep-content" class="tab-content active space-y-4">
             <div class="bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-2xl p-4 shadow-lg relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 opacity-10"><i class="fa-solid fa-plane text-8xl"></i></div>
@@ -284,7 +285,7 @@
                         <input type="checkbox" id="check2" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 玉山 Unicard (UP 選 5% 自動導航已綁定)
                     </label>
                     <label class="flex items-center gap-3 text-[13px] text-stone-600">
-                        <input type="checkbox" id="check3" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 男友開會西裝、乾淨白襯衫、泳褲
+                        <input type="checkbox" id="check3" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 李開會西裝、乾淨白襯衫、泳褲
                     </label>
                     <label class="flex items-center gap-3 text-[13px] text-stone-600">
                         <input type="checkbox" id="check4" onchange="saveChecks()" class="w-4 h-4 rounded text-orange-600 border-orange-300 focus:ring-orange-500"> 折疊大旅行袋 (回程 20kg 託運戰力)
@@ -293,7 +294,7 @@
             </div>
         </section>
 
-        <!-- 行程區塊 (D1 - D6) -->
+        <!-- 行程區塊 -->
         <section id="day1-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-orange-700">Day 1 <span class="text-xs font-normal text-stone-400 ml-1">08.08 (週六)</span></h2>
@@ -415,7 +416,7 @@
                         <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:30</span>
                         <div>
                             <h3 class="font-bold text-sm">Pho Thin 經典晚餐</h3>
-                            <p class="text-[10px] text-orange-700 font-bold">💡 分開點：男友吃 Pho Bo (牛) / 妳選 Pho Ga (雞)</p>
+                            <p class="text-[10px] text-orange-700 font-bold">💡 李吃牛 (Phở Bò)，晴吃雞 (Phở Gà)</p>
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Pho+Thin+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
@@ -431,19 +432,31 @@
 
             <div class="meal-nav">
                 <a href="https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: Bà Dưỡng 越式煎餅</a>
-                <a href="https://www.google.com/maps/search/?api=1&query=My+Khe+Beach+Restaurants+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-utensils"></i> D: 美溪沙灘周邊餐館</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-mug-hot"></i> T: Login Coffee</a>
             </div>
 
             <div class="compact-card border-l-4 border-l-orange-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
+                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">Risemount 慵懶早晨</h3>
-                            <p class="text-[10px] text-stone-500">在聖托里尼風泳池拍美照，享受不趕行程的度假感</p>
+                            <h3 class="font-bold text-sm">李前往半島酒店</h3>
+                            <p class="text-[10px] text-stone-500">搭 Grab 10 分鐘，領取研討會號碼牌與會前準備</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">共市場 (Con Market) 買奧黛</h3>
+                            <p class="text-[10px] text-stone-500">挑選淨春型超搭的明亮暖色系現成戰袍</p>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Con+Market+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
 
@@ -453,7 +466,7 @@
                         <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">12:30</span>
                         <div>
                             <h3 class="font-bold text-sm">Bà Dưỡng 越式煎餅老店</h3>
-                            <p class="text-[10px] text-stone-500">搭 Grab 往市區吃在地名店，無牛肉的酥脆煎餅超推</p>
+                            <p class="text-[10px] text-stone-500">無牛友善，酥脆煎餅配靈魂蘸醬</p>
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
@@ -461,8 +474,8 @@
             </div>
 
             <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭乘 Grab 回到美溪沙灘周邊。</p>
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-motorcycle text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">下午 14:30 飯店租半天機車兜風，迎著海風浪漫約會。</p>
             </div>
 
             <div class="compact-card">
@@ -470,11 +483,28 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">15:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">海景咖啡廳放空時光</h3>
-                            <p class="text-[10px] text-stone-500">找間美溪沙灘旁的韓系咖啡廳 (如 Reply 1988) 喝椰子咖啡</p>
+                            <h3 class="font-bold text-sm">Login Coffee 看水豚</h3>
+                            <p class="text-[10px] text-stone-500">尋找呆萌水豚君療癒放空</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Reply+1988+Cafe+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-motorcycle text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">17:30 返回 Risemount 還機車、換裝。</p>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-orange-500">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:15</span>
+                        <div>
+                            <h3 class="font-bold text-sm">李搭 Grab 赴晚宴，晴享 Me Time</h3>
+                            <p class="text-[10px] text-stone-500">李搭車前往半島晚宴，晴可叫外送悠閒敷面膜休息</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -486,7 +516,7 @@
             </div>
 
             <div class="meal-nav">
-                <a href="https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Hoang+Van+Thu+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-pizza-slice"></i> L: Pizza 4P's</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Bikini+Bottom+Express+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-burger"></i> L: Bikini Bottom</a>
                 <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-cake-candles"></i> T: 半島酒店下午茶</a>
             </div>
 
@@ -496,11 +526,16 @@
                         <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
                         <div>
                             <h3 class="font-bold text-sm">退房 ➔ 韓市場 Han Market</h3>
-                            <p class="text-[10px] text-stone-500">帶著行李出發！藤編包天堂，對半砍價加購海灘拖</p>
+                            <p class="text-[10px] text-stone-500">瘋狂殺價買藤編包、編織海灘拖</p>
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Han+Market+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">11:30 前往半島酒店寄放行李，李進入備戰狀態。</p>
             </div>
 
             <div class="compact-card">
@@ -508,57 +543,51 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">12:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">Pizza 4P's (Hoang Van Thu)</h3>
-                            <p class="text-[10px] text-stone-500">神級高CP值布拉塔起司披薩，蟹肉蟹膏義大利麵狂推</p>
+                            <h3 class="font-bold text-sm text-amber-700">💼 李研討會報告時間</h3>
+                            <p class="text-[10px] text-stone-500">辛苦了！報告結束後就是真正的海闊天空</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Hoang+Van+Thu+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
             
             <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">吃飽後準備去按摩洗頭放鬆。</p>
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">報告完畢！大肆慶祝，搭 Grab 去吃漢堡！</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-amber-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">14:00</span>
+                        <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">Lani Spa 越式極致洗頭</h3>
-                            <p class="text-[10px] text-stone-500">包含臉部小黃瓜按摩、掏耳、肩頸全套爽快放鬆</p>
+                            <h3 class="font-bold text-sm text-red-600">Bikini Bottom Express 慶祝</h3>
+                            <p class="text-[10px] text-stone-500 font-bold">🍔 慶祝解脫！李吃 Smash Burger，晴吃炸雞堡</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Lani+Spa+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Bikini+Bottom+Express+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
-            </div>
-
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">洗完頭香噴噴的，搭 Grab 前往半島酒店 Check-in。</p>
             </div>
 
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:00</span>
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">15:30</span>
+                        <div>
+                            <h3 class="font-bold text-sm">Herbal Spa 全身精油 SPA 放鬆</h3>
+                            <p class="text-[10px] text-stone-500 font-bold">💡 同房客製！李選深層指壓，晴選熱石精油</p>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Herbal+Spa+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">17:30</span>
                         <div>
                             <h3 class="font-bold text-sm">入住 Peninsula Hotel</h3>
-                            <p class="text-[10px] text-stone-500">男友研討會主場地！放好行李擁抱一線海景</p>
-                        </div>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
-                </div>
-            </div>
-
-            <div class="compact-card">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:30</span>
-                        <div>
-                            <h3 class="font-bold text-sm">半島酒店 28F 高空下午茶</h3>
-                            <p class="text-[10px] text-stone-500">坐擁頂樓高空視野看海景夕陽，結束完美的市區日</p>
+                            <p class="text-[10px] text-stone-500">高空下午茶/看夕陽海景，18:00 李出席研討會晚宴</p>
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
@@ -573,56 +602,67 @@
             </div>
 
             <div class="meal-nav">
-                <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town+Restaurants" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-leaf"></i> D: 會安隱藏版家庭料理</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town+Restaurants" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-leaf"></i> D: 會安隱藏版料理</a>
             </div>
 
             <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">中午過後，從飯店叫 Grab 直奔會安古鎮 (車程約 40 分鐘)。</p>
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-bus text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">💡 記得先確認眷屬能否一同搭乘接駁車喔！</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-orange-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">14:00</span>
+                        <span class="text-[9px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">會安古鎮：租奧黛與漫步</h3>
-                            <p class="text-[10px] text-stone-500">保留完整時光拍照！尋找最搭白襯衫的完美黃牆背景</p>
+                            <h3 class="font-bold text-sm">搭乘研討會專車前往會安</h3>
+                            <p class="text-[10px] text-stone-500">前往會安古鎮，輕鬆省車資</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
             </div>
             
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:00</span>
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">14:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">老屋咖啡廳放空</h3>
-                            <p class="text-[10px] text-stone-500">找間二樓有陽台的咖啡廳，由上往下拍古鎮街景與燈籠</p>
+                            <h3 class="font-bold text-sm">會安古鎮換奧黛、拍美照</h3>
+                            <p class="text-[10px] text-stone-500">白襯衫配暖色奧黛，尋找絕美黃牆背景</p>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Faifo+Coffee+Hoi+An" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
-            </div>
-
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-moon text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">夜幕低垂，古鎮燈籠亮起，準備前往河畔。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-orange-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">19:30</span>
+                        <span class="text-[9px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">秋盆河放水燈</h3>
-                            <p class="text-[10px] text-stone-500">搭乘小木船漂浮在萬千燈籠海中，極致浪漫</p>
+                            <h3 class="font-bold text-sm">會安在地隱藏版美食晚餐</h3>
+                            <p class="text-[10px] text-stone-500">白玫瑰、高樓麵 (完美避開牛肉)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="compact-card">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">19:30</span>
+                        <div>
+                            <h3 class="font-bold text-sm">秋盆河搭船放水燈</h3>
+                            <p class="text-[10px] text-stone-500">夜晚的萬千燈籠海極致浪漫</p>
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Night+Market" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                 </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-300"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">20:30 放生提早回程的專車，自己搭 Grab 返回半島酒店。</p>
             </div>
         </section>
 
@@ -641,7 +681,7 @@
                         <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
                         <div>
                             <h3 class="font-bold text-sm">Lotte Mart 爆買收尾</h3>
-                            <p class="text-[10px] text-stone-500">解鎖 20kg 託運！瘋狂掃貨帶殼腰果、G7與椰子咖啡</p>
+                            <p class="text-[10px] text-stone-500">把 20kg 託運額度塞滿腰果與 G7 咖啡</p>
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Lotte+Mart+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
@@ -659,10 +699,17 @@
                         <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:00</span>
                         <div>
                             <h3 class="font-bold text-sm">前往機場國際航廈</h3>
-                            <p class="text-[10px] text-stone-500">提早 3 小時抵達，預留海關處理退稅手續時間</p>
+                            <p class="text-[10px] text-stone-500">提早 3 小時抵達，辦理退稅與報到手續</p>
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Airport" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+            </div>
+            
+            <div class="compact-card bg-orange-50 border-orange-200 mt-4">
+                <div class="text-center py-4">
+                    <h3 class="font-black text-orange-700 text-lg">19:00 🛫 峴港起飛 (IT 552)</h3>
+                    <p class="text-xs text-orange-600 mt-1">22:40 抵達桃園 TPE，帶著滿滿電力回家！</p>
                 </div>
             </div>
         </section>
@@ -814,14 +861,14 @@
                 </button>
                 <button onclick="playTTS('Cho tôi một phở gà', this)" class="phrase-btn group bg-white p-3.5 rounded-2xl border border-orange-100 shadow-sm active:scale-95 transition-all flex items-center justify-between">
                     <div class="text-left">
-                        <p class="text-[10px] text-orange-500">請給我一碗雞肉河粉 (妳點的)</p>
+                        <p class="text-[10px] text-orange-500">請給我一碗雞肉河粉 (晴點的)</p>
                         <p class="text-sm font-bold text-stone-700">Cho tôi một phở gà</p>
                     </div>
                     <i class="fa-solid fa-circle-play text-orange-300 text-xl group-hover:text-orange-500 transition-colors"></i>
                 </button>
                 <button onclick="playTTS('Cho tôi một phở bò', this)" class="phrase-btn group bg-white p-3.5 rounded-2xl border border-orange-100 shadow-sm active:scale-95 transition-all flex items-center justify-between">
                     <div class="text-left">
-                        <p class="text-[10px] text-amber-600">請給我一碗牛肉河粉 (男友點的)</p>
+                        <p class="text-[10px] text-amber-600">請給我一碗牛肉河粉 (李點的)</p>
                         <p class="text-sm font-bold text-stone-700">Cho tôi một phở bò</p>
                     </div>
                     <i class="fa-solid fa-circle-play text-orange-300 text-xl group-hover:text-orange-500 transition-colors"></i>
@@ -857,7 +904,7 @@
     </button>
 
     <script>
-        // ================= V20 核心邏輯 =================
+        // ================= V22 核心邏輯 =================
         const tripDates = {
             "2026-08-08": "day1", "2026-08-09": "day2", "2026-08-10": "day3",
             "2026-08-11": "day4", "2026-08-12": "day5", "2026-08-13": "day6"
@@ -1064,7 +1111,7 @@
             // 血拚採購
             { id: 101, name: "韓市場 Han Market", korName: "Chợ Hàn", area: "市區", types: ["血拚"], lat: 16.0680, lng: 108.2235, desc: "買藤編包、腰果、編織涼鞋的戰區。記得殺價！", url: "https://www.google.com/maps/search/?api=1&query=Han+Market+Da+Nang" },
             { id: 102, name: "Lotte Mart (峴港店)", korName: "Lotte Mart Đà Nẵng", area: "市區", types: ["血拚"], lat: 16.0345, lng: 108.2320, desc: "回程爆買 20kg 的好去處，伴手禮零食咖啡齊全", url: "https://www.google.com/maps/search/?api=1&query=Lotte+Mart+Da+Nang" },
-            { id: 103, name: "Con Market (共市場)", korName: "Chợ Cồn", area: "市區", types: ["血拚"], lat: 16.0695, lng: 108.2140, desc: "在地人逛的市場，美食小吃比韓市場更多更道地", url: "https://www.google.com/maps/search/?api=1&query=Con+Market+Da+Nang" },
+            { id: 103, name: "Con Market (共市場)", korName: "Chợ Cồn", area: "市區", types: ["血拚"], lat: 16.0695, lng: 108.2140, desc: "在地人逛的市場，買奧黛與吃道地小吃首選", url: "https://www.google.com/maps/search/?api=1&query=Con+Market+Da+Nang" },
             
             // 景點
             { id: 501, name: "巴拿山 黃金佛手橋", korName: "Cầu Vàng", area: "郊區", types: ["景點"], lat: 15.9950, lng: 107.9960, desc: "峴港必去打卡點，雲端上的巨手", rec: "盡量早上前往避開人潮", url: "https://www.google.com/maps/search/?api=1&query=Golden+Bridge+Ba+Na+Hills" },
@@ -1074,8 +1121,11 @@
             { id: 505, name: "會安古鎮", korName: "Phố cổ Hội An", area: "會安", types: ["景點"], lat: 15.8770, lng: 108.3280, desc: "世界文化遺產，黃牆老屋與浪漫燈籠", rec: "強烈建議租借奧黛拍照", url: "https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town" },
             { id: 506, name: "秋盆河水燈夜市", korName: "Chợ Đêm Hội An", area: "會安", types: ["景點"], lat: 15.8750, lng: 108.3260, desc: "夜晚搭船放水燈祈福", url: "https://www.google.com/maps/search/?api=1&query=Hoi+An+Night+Market" },
             
-            // SPA/洗頭
-            { id: 701, name: "Lani Spa", korName: "Lani Spa", area: "市區", types: ["SPA/洗頭"], lat: 16.0590, lng: 108.2250, desc: "體驗道地越式洗頭與全套理容", url: "https://www.google.com/maps/search/?api=1&query=Lani+Spa+Da+Nang" }
+            // SPA
+            { id: 701, name: "Herbal Spa", korName: "Herbal Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: 16.0620, lng: 108.2430, desc: "評價極高的全身精油/深層按摩，同房可選不同方案", url: "https://www.google.com/maps/search/?api=1&query=Herbal+Spa+Da+Nang" },
+            
+            // 咖啡/放空
+            { id: 801, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/放空"], lat: 16.0650, lng: 108.2450, desc: "有可愛呆萌水豚君駐店的網美咖啡廳", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" }
         ];
 
         let placesCurrentArea = '全部';
@@ -1256,18 +1306,27 @@
             }).join('');
         }
 
-        // ================= 美食名單模組 (峴港版) =================
+        // ================= 美食名單模組 (V22 更新清單) =================
         const foodDatabase = [
-            { id: 1, name: "Pizza 4P's", korName: "Pizza 4P's", area: "市區", types: ["異國料理"], lat: 16.0645, lng: 108.2230, desc: "神級高CP值布拉塔起司披薩，蟹肉蟹膏義大利麵狂推", rec: "布拉塔起司披薩、蟹肉義大利麵", url: "https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Hoang+Van+Thu+Da+Nang" },
-            { id: 2, name: "Pho Thin 13 Lò Đúc", korName: "Phở Thìn", area: "市區", types: ["小吃/粉"], lat: 16.0620, lng: 108.2250, desc: "北越傳奇河粉開來中越！湯頭清甜。妳吃雞，他吃牛。", rec: "雞肉河粉 (Phở Gà)、油條", url: "https://www.google.com/maps/search/?api=1&query=Pho+Thin+Da+Nang" },
-            { id: 3, name: "Bé Mặn 海鮮", korName: "Hải sản Bé Mặn", area: "美溪沙灘", types: ["海鮮"], lat: 16.0820, lng: 108.2460, desc: "美溪沙灘人氣最旺的活海鮮大排檔", rec: "奶油大蝦、烤大蛤蜊", url: "https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Da+Nang" },
-            { id: 4, name: "Bà Dưỡng 煎餅", korName: "Bánh xèo Bà Dưỡng", area: "市區", types: ["小吃/粉"], lat: 16.0595, lng: 108.2140, desc: "巷弄裡的排隊名店，酥脆越式煎餅包菜沾醬超好吃", rec: "越式煎餅 (Bánh Xèo)", url: "https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang" },
-            { id: 5, name: "Mi Quang 250", korName: "Mì Quảng 250", area: "市區", types: ["小吃/粉"], lat: 16.0600, lng: 108.2200, desc: "廣南麵 (Mi Quang) 是中越特色乾拌麵，麵條Q彈", rec: "廣南麵", url: "https://www.google.com/maps/search/?api=1&query=Mi+Quang+Da+Nang" },
-            { id: 6, name: "Bánh Mì Phượng", korName: "Bánh Mì Phượng", area: "會安", types: ["小吃/粉"], lat: 15.8785, lng: 108.3300, desc: "波登讚譽『世界最好吃的法國麵包』，會安必排美食", rec: "綜合越式法棍", url: "https://www.google.com/maps/search/?api=1&query=Banh+Mi+Phuong+Hoi+An" },
-            { id: 7, name: "Morning Glory Original", korName: "Morning Glory Original", area: "會安", types: ["傳統越菜"], lat: 15.8775, lng: 108.3285, desc: "會安極具盛名的越式餐館，適合體驗會安三寶", rec: "白玫瑰、高樓麵", url: "https://www.google.com/maps/search/?api=1&query=Morning+Glory+Original+Hoi+An" },
-            { id: 8, name: "Faifo Coffee", korName: "Faifo Coffee", area: "會安", types: ["咖啡/甜點"], lat: 15.8770, lng: 108.3275, desc: "會安最知名的老屋咖啡，二樓陽台可拍古鎮全景", rec: "椰子咖啡", url: "https://www.google.com/maps/search/?api=1&query=Faifo+Coffee+Hoi+An" },
-            { id: 9, name: "Reply 1988 Cafe", korName: "Reply 1988 Cafe", area: "美溪沙灘", types: ["咖啡/甜點"], lat: 16.0600, lng: 108.2450, desc: "美溪沙灘旁的韓系咖啡廳，適合慵懶放空", rec: "特調咖啡", url: "https://www.google.com/maps/search/?api=1&query=Reply+1988+Cafe+Da+Nang" },
-            { id: 10, name: "Cong Caphe (峴港店)", korName: "Cộng Cà Phê", area: "市區", types: ["咖啡/甜點"], lat: 16.0685, lng: 108.2235, desc: "越共主題連鎖咖啡，就在韓市場旁邊", rec: "招牌椰子咖啡冰沙", url: "https://www.google.com/maps/search/?api=1&query=Cong+Caphe+Da+Nang" }
+            { id: 1, name: "Bánh Xèo Tôm Nhảy Năm Hiền", korName: "南賢餐廳", area: "市區", types: ["小吃/粉"], lat: 16.0620, lng: 108.2160, desc: "外酥內Q的層次感！⚠️ 李可吃牛肉煎餅，晴吃蝦子或魷魚煎餅！", rec: "魷魚/蝦子煎餅 59K", url: "https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Tom+Nhay+Nam+Hien+Da+Nang" },
+            { id: 2, name: "Quán Phú Hồng", korName: "Phú Hồng 烤肉", area: "市區", types: ["烤肉"], lat: 16.0650, lng: 108.2200, desc: "⚠️ 李專屬/含牛！主打醬烤牛肉，晴可以安心吃檳榔葉肉捲。", rec: "醬烤牛肉 130K、檳榔葉肉捲 90K", url: "https://www.google.com/maps/search/?api=1&query=Quan+Phu+Hong+Da+Nang" },
+            { id: 3, name: "Mỳ Quảng Hồng Vân", korName: "Hồng Vân 廣南麵", area: "市區", types: ["小吃/粉"], lat: 16.0660, lng: 108.2210, desc: "中越特色廣南麵，麵條Q彈，吃得到道地風味。", rec: "招牌廣南麵 40K", url: "https://www.google.com/maps/search/?api=1&query=My+Quang+Hong+Van+Da+Nang" },
+            { id: 4, name: "Mỳ Quảng Quê Xưa", korName: "Quê Xưa", area: "市區", types: ["小吃/粉"], lat: 16.0590, lng: 108.2190, desc: "在地超人氣，米紙豬肉捲清爽又飽足，無牛安心吃！", rec: "米紙豬肉捲 85K", url: "https://www.google.com/maps/search/?api=1&query=My+Quang+Que+Xua+Da+Nang" },
+            { id: 5, name: "Bún Bò Bà Rơi", korName: "Bà Rơi 牛肉米粉", area: "會安", types: ["小吃/粉"], lat: 15.8800, lng: 108.3300, desc: "⚠️ 李專屬/含牛！這家是經典的牛肉米粉，讓李獨享大餐。", rec: "綜合牛肉米粉 80K", url: "https://www.google.com/maps/search/?api=1&query=Bun+Bo+Ba+Roi+Hoi+An" },
+            { id: 6, name: "Bánh Xèo 76", korName: "Bánh Xèo 76", area: "市區", types: ["小吃/粉"], lat: 16.0630, lng: 108.2180, desc: "高CP值平價美味，玉米煎餅和烤肉米線絕配。", rec: "玉米煎餅 32K、烤肉米線 45K", url: "https://www.google.com/maps/search/?api=1&query=Banh+Xeo+76+Da+Nang" },
+            { id: 7, name: "Quán nhân - Cháo Vịt", korName: "鴨肉專賣", area: "市區", types: ["傳統越菜"], lat: 16.0640, lng: 108.2250, desc: "鴨肉沙拉配上溫潤的鴨肉粥，清爽又滿足。", rec: "鴨肉沙拉 60K、鴨肉粥 30K", url: "https://www.google.com/maps/search/?api=1&query=Quan+nhan+Chao+Vit+Da+Nang" },
+            { id: 8, name: "Bé Ni 2", korName: "Bé Ni 2 海鮮", area: "美溪沙灘", types: ["海鮮"], lat: 16.0830, lng: 108.2450, desc: "活海鮮大排檔，清蒸龍蝦與奶油虎蝦太罪惡啦！", rec: "清蒸龍蝦、奶油虎蝦", url: "https://www.google.com/maps/search/?api=1&query=Hai+san+Be+Ni+2+Da+Nang" },
+            { id: 9, name: "Bánh xèo Cô Ba", korName: "Co Ba 蝦餅店", area: "市區", types: ["小吃/粉"], lat: 16.0610, lng: 108.2220, desc: "餅皮薄脆如紙，採用鮮磨米粉製成，口感細膩順滑。", rec: "招牌蝦餅", url: "https://www.google.com/maps/search/?api=1&query=Banh+xeo+Co+Ba+Da+Nang" },
+            { id: 10, name: "Bánh xèo Bé Uyên", korName: "Be Uyen 蝦餅店", area: "市區", types: ["小吃/粉"], lat: 16.0600, lng: 108.2210, desc: "⚠️含牛預警！分量十足的大尺寸煎餅，餡料涵蓋海鮮與牛肉。", rec: "綜合大煎餅", url: "https://www.google.com/maps/search/?api=1&query=Banh+xeo+Be+Uyen+Da+Nang" },
+            { id: 11, name: "Bánh mì Happy Bread (Mì AA)", korName: "Happy Bread 法棍", area: "市區", types: ["小吃/粉"], lat: 16.0685, lng: 108.2240, desc: "網美最愛文青法棍店，口味多且環境乾淨有冷氣，就在韓市場旁。", rec: "招牌越式法棍", url: "https://www.google.com/maps/search/?api=1&query=Banh+mi+Happy+Bread+Da+Nang" },
+            { id: 12, name: "Bikini Bottom Express", korName: "Bikini Bottom", area: "美溪沙灘", types: ["異國料理"], lat: 16.0520, lng: 108.2450, desc: "慶祝報告解脫必吃！李吃 Smash Burger (牛)，晴吃炸雞堡。", rec: "美式手壓漢堡、炸雞堡", url: "https://www.google.com/maps/search/?api=1&query=Bikini+Bottom+Express+Da+Nang" },
+            { id: 13, name: "Pizza 4P's", korName: "Pizza 4P's", area: "市區", types: ["異國料理"], lat: 16.0645, lng: 108.2230, desc: "神級高CP值布拉塔起司披薩，蟹肉蟹膏義大利麵狂推", rec: "布拉塔起司披薩、蟹肉義大利麵", url: "https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Hoang+Van+Thu+Da+Nang" },
+            { id: 14, name: "Pho Thin 13 Lò Đúc", korName: "Phở Thìn", area: "市區", types: ["小吃/粉"], lat: 16.0620, lng: 108.2250, desc: "北越傳奇河粉開來中越！湯頭清甜。晴吃雞，李吃牛。", rec: "雞肉河粉 (Phở Gà)、油條", url: "https://www.google.com/maps/search/?api=1&query=Pho+Thin+Da+Nang" },
+            { id: 15, name: "Bé Mặn 海鮮", korName: "Hải sản Bé Mặn", area: "美溪沙灘", types: ["海鮮"], lat: 16.0820, lng: 108.2460, desc: "美溪沙灘人氣最旺的活海鮮大排檔", rec: "奶油大蝦、烤大蛤蜊", url: "https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Da+Nang" },
+            { id: 16, name: "Bà Dưỡng 煎餅", korName: "Bánh xèo Bà Dưỡng", area: "市區", types: ["小吃/粉"], lat: 16.0595, lng: 108.2140, desc: "巷弄裡的排隊老店，餅緣裹滿香濃蛋液，搭配靈魂秘製蘸醬。", rec: "越式煎餅 (Bánh Xèo)", url: "https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang" },
+            { id: 17, name: "Morning Glory Original", korName: "Morning Glory Original", area: "會安", types: ["傳統越菜"], lat: 15.8775, lng: 108.3285, desc: "會安極具盛名的越式餐館，適合體驗會安三寶", rec: "白玫瑰、高樓麵", url: "https://www.google.com/maps/search/?api=1&query=Morning+Glory+Original+Hoi+An" },
+            { id: 18, name: "Faifo Coffee", korName: "Faifo Coffee", area: "會安", types: ["咖啡/甜點"], lat: 15.8770, lng: 108.3275, desc: "會安最知名的老屋咖啡，二樓陽台可拍古鎮全景", rec: "椰子咖啡", url: "https://www.google.com/maps/search/?api=1&query=Faifo+Coffee+Hoi+An" },
+            { id: 19, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/甜點"], lat: 16.0650, lng: 108.2450, desc: "療癒水豚君駐店！空間明亮好拍，喝咖啡看呆萌水豚吃草。", rec: "特調咖啡", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" }
         ];
 
         let currentArea = '全部';
@@ -1414,7 +1473,7 @@
                     distanceHtml = `<span class="inline-block mt-2 text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-person-walking"></i> 約 ${distText}</span>`;
                 }
 
-                let recHtml = food.rec ? `<div class="mt-1.5 text-[10px] text-red-500 font-bold bg-red-50/80 px-1.5 py-0.5 rounded inline-block"><i class="fa-solid fa-fire text-red-500 mr-0.5"></i>激推: ${food.rec}</div>` : '';
+                let recHtml = food.rec ? `<div class="mt-1.5 text-[10px] text-red-500 font-bold bg-red-50/80 px-1.5 py-0.5 rounded inline-block"><i class="fa-solid fa-fire text-red-500 mr-0.5"></i>推: ${food.rec}</div>` : '';
 
                 return `
                 <div class="food-card">
