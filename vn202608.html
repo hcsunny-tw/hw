@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>峴港｜陽光假期 (V24.1)</title>
+    <title>峴港｜陽光假期 (V6.2)</title>
     <!-- 越南國旗 Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇻🇳</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -118,6 +118,14 @@
             50% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(10%); opacity: 0.5; }
         }
+        /* 右上角選單按鈕的專屬 Active 樣式 */
+        .header-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .header-hotel-active { background-color: #0d9488 !important; color: white !important; border-color: #0d9488 !important; }
+        .header-currency-active { background-color: #ca8a04 !important; color: white !important; border-color: #ca8a04 !important; }
+        .header-tips-active { background-color: #4f46e5 !important; color: white !important; border-color: #4f46e5 !important; }
+        .header-phrase-active { background-color: #d97706 !important; color: white !important; border-color: #d97706 !important; }
+        .header-food-active { background-color: #ea580c !important; color: white !important; border-color: #ea580c !important; }
+        .header-places-active { background-color: #0284c7 !important; color: white !important; border-color: #0284c7 !important; }
     </style>
 </head>
 <body class="text-stone-800 flex flex-col min-h-screen">
@@ -132,27 +140,29 @@
     <div id="toast" class="toast"><i class="fa-solid fa-circle-check text-amber-400" id="toast-icon"></i> <span id="toast-msg"></span></div>
 
     <header class="hero-bg h-36 flex flex-col justify-end p-5 text-white relative">
-        <div class="absolute top-4 right-4 flex gap-1.5 flex-wrap justify-end max-w-[150px]">
+ <div class="absolute top-4 right-4 flex gap-1.5 flex-wrap justify-end max-w-[150px]">
             <a href="https://docs.google.com/spreadsheets/d/13o59SvhyGKnTrMRPYG4CeqIeXkFEGieSj5-C4UjwAMw/edit?usp=sharing" target="_blank" class="w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="Google 試算表行程">
                 <i class="fa-solid fa-file-excel"></i>
             </a>
-            <!-- 飯店簡介按鈕 -->
-            <button onclick="switchTab('hotels', this)" class="w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-teal-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="飯店簡介與設施">
+            <button onclick="switchTab('hotels', document.getElementById('hotels-tab'))" id="header-hotels-btn" class="header-btn w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-teal-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="飯店簡介與設施">
                 <i class="fa-solid fa-bed"></i>
             </button>
-            <button onclick="switchTab('currency', document.getElementById('currency-tab'))" class="w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+            <button onclick="switchTab('currency', document.getElementById('currency-tab'))" id="header-currency-btn" class="header-btn w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="匯率換算">
                 <i class="fa-solid fa-dong-sign"></i>
             </button>
-            <button onclick="switchTab('phrases', document.getElementById('phrase-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-amber-200 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+            <button onclick="switchTab('tips', document.getElementById('tips-tab'))" id="header-tips-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-indigo-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="旅遊注意事項">
+                <i class="fa-solid fa-book-open"></i>
+            </button>
+            <button onclick="switchTab('phrases', document.getElementById('phrase-tab'))" id="header-phrases-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-amber-200 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="越語翻譯">
                 <i class="fa-solid fa-language"></i>
             </button>
-            <button onclick="switchTab('food', document.getElementById('food-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-orange-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+            <button onclick="switchTab('food', document.getElementById('food-tab'))" id="header-food-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-orange-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="美食名單">
                 <i class="fa-solid fa-utensils"></i>
             </button>
-            <button onclick="switchTab('places', document.getElementById('places-tab'))" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-sky-300 hover:bg-white/30 transition-all shadow-lg active:scale-95">
+            <button onclick="switchTab('places', document.getElementById('places-tab'))" id="header-places-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-sky-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="景點清單">
                 <i class="fa-solid fa-bag-shopping"></i>
             </button>
-        </div>
+           </div>
         <div class="max-w-md mx-auto w-full">
             <h1 class="text-xl font-black font-[Montserrat] uppercase tracking-tighter flex items-center gap-1.5">
                 <i class="fa-solid fa-sun text-yellow-300 text-sm animate-spin-slow"></i> Da Nang Sunshine
@@ -1138,7 +1148,7 @@
             "2026-08-11": "day4", "2026-08-12": "day5", "2026-08-13": "day6"
         };
 
-        function switchTab(tabId, btnElement) {
+      function switchTab(tabId, btnElement) {
             const targetContent = document.getElementById(tabId + '-content');
             
             if (!targetContent) {
@@ -1147,30 +1157,49 @@
                 return; 
             }
 
+            // 隱藏所有內容區塊
             document.querySelectorAll('.tab-content').forEach(el => {
                 el.classList.remove('active');
             });
-            
             targetContent.classList.add('active');
 
+            // 1. 清除「下方導航列按鈕」的 active 狀態
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active', 'phrase-active', 'currency-active', 'food-active', 'places-active');
+                btn.classList.remove('active', 'phrase-active', 'currency-active', 'food-active', 'places-active', 'hotel-active', 'tips-active');
             });
             
-            // 處理右上角飯店按鈕的特別狀態
-            document.querySelectorAll('.hotel-active').forEach(btn => {
-                btn.classList.remove('hotel-active');
+            // 2. 清除「右上角 Header 按鈕」的 active 狀態
+            document.querySelectorAll('.header-btn').forEach(btn => {
+                btn.classList.remove('header-hotel-active', 'header-currency-active', 'header-tips-active', 'header-phrase-active', 'header-food-active', 'header-places-active');
             });
 
+            // 3. 點亮「下方導航列按鈕」
             if (tabId === 'phrases' && btnElement) btnElement.classList.add('phrase-active');
             else if (tabId === 'currency' && btnElement) btnElement.classList.add('currency-active');
             else if (tabId === 'food' && btnElement) btnElement.classList.add('food-active');
             else if (tabId === 'places' && btnElement) btnElement.classList.add('places-active');
             else if (tabId === 'hotels' && btnElement) btnElement.classList.add('hotel-active');
+            else if (tabId === 'tips' && btnElement) btnElement.classList.add('tips-active');
             else if (btnElement) btnElement.classList.add('active');
             
+            // 4. 同步點亮「右上角 Header 按鈕」
+            const headerBtnMapping = {
+                'hotels': { id: 'header-hotels-btn', class: 'header-hotel-active' },
+                'currency': { id: 'header-currency-btn', class: 'header-currency-active' },
+                'tips': { id: 'header-tips-btn', class: 'header-tips-active' },
+                'phrases': { id: 'header-phrases-btn', class: 'header-phrase-active' },
+                'food': { id: 'header-food-btn', class: 'header-food-active' },
+                'places': { id: 'header-places-btn', class: 'header-places-active' }
+            };
+
+            if (headerBtnMapping[tabId]) {
+                const hBtn = document.getElementById(headerBtnMapping[tabId].id);
+                if (hBtn) hBtn.classList.add(headerBtnMapping[tabId].class);
+            }
+            
+            // 5. 確保下方導航列捲動對齊
             const navContainer = document.getElementById('nav-container');
-            if (navContainer && btnElement && !btnElement.classList.contains('hotel-active')) {
+            if (navContainer && btnElement && btnElement.classList.contains('tab-btn')) {
                 const btnRect = btnElement.getBoundingClientRect();
                 const containerRect = navContainer.getBoundingClientRect();
                 
@@ -1180,6 +1209,7 @@
             }
         }
 
+        
         function checkAutoDateJump() {
             const today = new Date();
             const yyyy = today.getFullYear();
