@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>峴港｜陽光假期 (V25)</title>
+    <title>峴港｜陽光假期 (V25.2)</title>
     <!-- 越南國旗 Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇻🇳</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,6 +33,7 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease-out; }
         
+        /* 下方導航列 Active 樣式 */
         .tab-btn.active { background-color: #ea580c; color: white; border-color: #ea580c; }
         .tab-btn.phrase-active { background-color: #d97706; color: white; border-color: #d97706; }
         .tab-btn.currency-active { background-color: #b45309; color: white; border-color: #b45309; }
@@ -42,6 +43,18 @@
         .tips-active { background-color: #6366f1 !important; color: white !important; border-color: #6366f1 !important; }
         .overview-active { background-color: #10b981 !important; color: white !important; border-color: #10b981 !important; }
         
+        /* 右上角選單按鈕專屬 Active 樣式 */
+        .header-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .header-overview-active { background-color: #10b981 !important; color: white !important; border-color: #10b981 !important; }
+        .header-hotel-active { background-color: #0d9488 !important; color: white !important; border-color: #0d9488 !important; }
+        .header-currency-active { background-color: #ca8a04 !important; color: white !important; border-color: #ca8a04 !important; }
+        .header-tips-active { background-color: #4f46e5 !important; color: white !important; border-color: #4f46e5 !important; }
+        .header-phrase-active { background-color: #d97706 !important; color: white !important; border-color: #d97706 !important; }
+        .header-food-active { background-color: #ea580c !important; color: white !important; border-color: #ea580c !important; }
+        .header-places-active { background-color: #0284c7 !important; color: white !important; border-color: #0284c7 !important; }
+        
+        .note-has-content { color: #f97316 !important; background-color: #ffedd5 !important; border-color: #fdba74 !important;}
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
@@ -60,16 +73,10 @@
         .meal-pill.lunch { background-color: #fefce8; color: #ca8a04; border-color: #fef08a; }
         .meal-pill.dinner { background-color: #fff1f2; color: #e11d48; border-color: #ffe4e6; }
 
-        .food-card {
-            background-color: white; border: 1px solid #ffedd5; border-top: 4px solid #f97316; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px -2px rgba(234, 88, 12, 0.08); display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 10; transition: all 0.2s;
-        }
+        .food-card { background-color: white; border: 1px solid #ffedd5; border-top: 4px solid #f97316; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px -2px rgba(234, 88, 12, 0.08); display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 10; transition: all 0.2s; }
         .food-card:active { transform: scale(0.96); }
-        
-        .place-card {
-            background-color: white; border: 1px solid #e0f2fe; border-top: 4px solid #0ea5e9; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px -2px rgba(14, 165, 233, 0.08); display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 10; transition: all 0.2s;
-        }
+        .place-card { background-color: white; border: 1px solid #e0f2fe; border-top: 4px solid #0ea5e9; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px -2px rgba(14, 165, 233, 0.08); display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 10; transition: all 0.2s; }
         .place-card:active { transform: scale(0.96); }
-
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
         @keyframes pulse-soft {
@@ -88,50 +95,17 @@
         }
         .toast.show { bottom: 24px; }
 
-        #search-container, #places-search-container {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            max-width: 0;
-            opacity: 0;
-            overflow: hidden;
-        }
-        #search-container.active, #places-search-container.active {
-            max-width: 200px;
-            opacity: 1;
-            margin-right: 8px;
-        }
+        #search-container, #places-search-container { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); max-width: 0; opacity: 0; overflow: hidden; }
+        #search-container.active, #places-search-container.active { max-width: 200px; opacity: 1; margin-right: 8px; }
+        #go-to-top { position: fixed; bottom: -50px; right: 20px; z-index: 50; transition: bottom 0.3s ease-in-out; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        #go-to-top.show { bottom: 24px; }
 
-        #go-to-top {
-            position: fixed;
-            bottom: -50px;
-            right: 20px;
-            z-index: 50;
-            transition: bottom 0.3s ease-in-out;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        #go-to-top.show {
-            bottom: 24px;
-        }
-
-        .slot-machine-text {
-            animation: slot-scroll 0.1s linear infinite;
-        }
+        .slot-machine-text { animation: slot-scroll 0.1s linear infinite; }
         @keyframes slot-scroll {
             0% { transform: translateY(-10%); opacity: 0.5; }
             50% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(10%); opacity: 0.5; }
         }
-
-        /* 右上角選單按鈕的專屬 Active 樣式 */
-        .header-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .header-overview-active { background-color: #10b981 !important; color: white !important; border-color: #10b981 !important; }
-        .header-hotel-active { background-color: #0d9488 !important; color: white !important; border-color: #0d9488 !important; }
-        .header-currency-active { background-color: #ca8a04 !important; color: white !important; border-color: #ca8a04 !important; }
-        .header-tips-active { background-color: #4f46e5 !important; color: white !important; border-color: #4f46e5 !important; }
-        .header-phrase-active { background-color: #d97706 !important; color: white !important; border-color: #d97706 !important; }
-        .header-food-active { background-color: #ea580c !important; color: white !important; border-color: #ea580c !important; }
-        .header-places-active { background-color: #0284c7 !important; color: white !important; border-color: #0284c7 !important; }
-        
-        .note-has-content { color: #f97316 !important; background-color: #ffedd5 !important; border-color: #fdba74 !important;}
     </style>
 </head>
 <body class="text-stone-800 flex flex-col min-h-screen">
@@ -178,14 +152,14 @@
                 <i class="fa-solid fa-sun text-yellow-300 text-sm animate-spin-slow"></i> Da Nang Sunshine
             </h1>
             <div class="flex justify-between items-end mt-0.5">
-                <p class="text-[9px] opacity-90 tracking-widest uppercase border-l border-white/30 pl-2">2026研討漫遊(V25)</p>
+                <p class="text-[9px] opacity-90 tracking-widest uppercase border-l border-white/30 pl-2">2026研討漫遊(V25.2)</p>
             </div>
         </div>
     </header>
 
     <nav class="sticky top-0 z-50 bg-white shadow-md border-b border-orange-100">
         <div class="max-w-md mx-auto flex items-center px-3 py-2.5 gap-1.5 overflow-x-auto no-scrollbar snap-x" id="nav-container">
-            <button onclick="switchTab('prep', this)" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-orange-200 text-orange-700 bg-orange-50 transition-all active">準備</button>
+            <button onclick="switchTab('prep', this)" id="nav-prep" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-orange-200 text-orange-700 bg-orange-50 transition-all active">準備</button>
             <div class="w-[1px] h-4 bg-orange-200 shrink-0"></div>
             <button onclick="switchTab('day1', this)" id="nav-day1" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-orange-200 text-orange-700 bg-orange-50 transition-all">D1</button>
             <button onclick="switchTab('day2', this)" id="nav-day2" class="tab-btn snap-align-none shrink-0 px-3.5 py-2 text-xs font-black rounded-full border border-orange-200 text-orange-700 bg-orange-50 transition-all">D2</button>
@@ -239,8 +213,8 @@
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                     <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-white bg-rose-500 text-white shadow shrink-0 z-10 font-black text-[10px] ml-2 md:ml-0 md:absolute md:left-1/2 md:-translate-x-1/2">D3</div>
                     <div class="w-[calc(100%-3rem)] md:w-[calc(50%-1.5rem)] p-3 rounded-xl bg-white border border-stone-100 shadow-sm ml-4 md:ml-0">
-                        <h3 class="font-bold text-sm text-stone-800">市區採購與水豚君</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">李研討會報到 ➔ 晴共市場買奧黛 ➔ GO! 大賣場 ➔ Login Coffee ➔ 李出席晚宴</p>
+                        <h3 class="font-bold text-sm text-stone-800">市區嚐鮮與水豚君</h3>
+                        <p class="text-[10px] text-stone-500 mt-1">李研討會報到 ➔ 晴共市場買奧黛 ➔ GO! 試吃採買 ➔ Login Coffee ➔ 李出席晚宴</p>
                     </div>
                 </div>
 
@@ -264,7 +238,7 @@
                     <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-white bg-sky-500 text-white shadow shrink-0 z-10 font-black text-[10px] ml-2 md:ml-0 md:absolute md:left-1/2 md:-translate-x-1/2">D6</div>
                     <div class="w-[calc(100%-3rem)] md:w-[calc(50%-1.5rem)] p-3 rounded-xl bg-white border border-stone-100 shadow-sm ml-4 md:ml-0">
                         <h3 class="font-bold text-sm text-stone-800">最後掃貨與賦歸</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">Lotte Mart 超市血拚 ➔ Nam O 涼拌魚 ➔ 前往機場 (19:00 班機返回台灣)</p>
+                        <p class="text-[10px] text-stone-500 mt-1">Lotte Mart 伴手禮爆買 ➔ Nam O 涼拌魚 ➔ 前往機場 (19:00 班機返回台灣)</p>
                     </div>
                 </div>
             </div>
@@ -347,7 +321,7 @@
 
             <!-- 卡片 5: 兩大採買聖地攻略 -->
             <div class="compact-card border-l-4 border-l-fuchsia-500">
-                <h3 class="font-bold text-sm text-fuchsia-800 mb-2 border-b border-fuchsia-50 pb-1 flex items-center"><i class="fa-solid fa-store mr-1.5 w-4 text-center"></i> 兩大採買聖地攻略：韓市場 vs Lotte Mart</h3>
+                <h3 class="font-bold text-sm text-fuchsia-800 mb-2 border-b border-fuchsia-50 pb-1 flex items-center"><i class="fa-solid fa-store mr-1.5 w-4 text-center"></i> 三大採買聖地攻略：韓市場、GO! 與 Lotte Mart</h3>
                 
                 <div class="mt-2 space-y-3">
                     <div>
@@ -359,9 +333,18 @@
                             <li class="text-red-600 font-medium"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i>實戰提醒：一定要「殺價」(從 5-6 折砍)！且走道擁擠，背包務必往前背防扒手。</li>
                         </ul>
                     </div>
+
+                    <div>
+                        <p class="text-[11px] font-bold text-green-700 mb-1 bg-green-50 inline-block px-1.5 py-0.5 rounded">GO! Đà Nẵng 主攻：在地特產試吃與宵夜</p>
+                        <ul class="space-y-1.5 text-[10px] text-stone-600 pl-1">
+                            <li><strong class="text-stone-700">熱帶新鮮水果：</strong>紅毛丹、山竹、在地香蕉，價格實惠且新鮮。</li>
+                            <li><strong class="text-stone-700">越南風味泡麵：</strong>Vifon (皇冠) 河粉、Hao Hao 泡麵，買幾包回飯店當宵夜。</li>
+                            <li><strong class="text-stone-700">在地限定零嘴與啤酒：</strong>Larue 啤酒、第一排排骨餅乾，適合買小包裝嚐鮮。</li>
+                        </ul>
+                    </div>
                     
                     <div>
-                        <p class="text-[11px] font-bold text-fuchsia-700 mb-1 bg-fuchsia-50 inline-block px-1.5 py-0.5 rounded">Lotte Mart 主攻：食品伴手禮</p>
+                        <p class="text-[11px] font-bold text-blue-700 mb-1 bg-blue-50 inline-block px-1.5 py-0.5 rounded">Lotte Mart 主攻：終極食品伴手禮</p>
                         <ul class="space-y-1.5 text-[10px] text-stone-600 pl-1">
                             <li><strong class="text-stone-700">帶皮腰果/夏威夷豆：</strong>超市真空包裝不易受潮，衛生有保障，送禮自用都安心。</li>
                             <li><strong class="text-stone-700">越南特色咖啡：</strong>G7 咖啡、Archcafé (推薦藍盒椰奶口味)，種類最齊全。</li>
@@ -449,6 +432,55 @@
                         <i class="fa-solid fa-map-location-dot mr-1 text-teal-600"></i> 開啟地圖導航
                     </a>
                 </div>
+            </div>
+        </section>
+
+        <!-- 匯率工具 -->
+        <section id="currency-content" class="tab-content space-y-4">
+            <div class="flex items-center gap-2 mb-2">
+                <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                </div>
+                <div>
+                    <h2 class="text-base font-extrabold text-orange-950">即時匯率換算</h2>
+                    <p class="text-[10px] text-orange-600">參考匯率: 1 TWD ≈ 780 VND</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-orange-100 relative">
+                <div class="absolute left-6 top-[60px] bottom-[60px] w-0.5 bg-orange-100 z-0"></div>
+                <div class="absolute left-[13px] top-1/2 -translate-y-1/2 w-7 h-7 bg-white border border-orange-200 rounded-full flex items-center justify-center text-orange-400 z-10 shadow-sm">
+                    <i class="fa-solid fa-arrow-right-arrow-left rotate-90 text-[10px]"></i>
+                </div>
+
+                <div class="relative z-10 space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-orange-50 border border-orange-200 flex items-center justify-center shrink-0">
+                            <span class="font-black text-sm">🇻🇳</span>
+                        </div>
+                        <div class="flex-grow">
+                            <label class="text-[10px] font-bold text-orange-500 uppercase tracking-wider block mb-1">越南盾 (VND) ₫</label>
+                            <input type="number" id="vnd-input" placeholder="0" class="w-full text-2xl font-black text-orange-900 bg-transparent border-none p-0 focus:ring-0 placeholder-orange-200" oninput="convertCurrency('vnd')">
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-orange-50 border border-orange-200 flex items-center justify-center shrink-0">
+                            <span class="font-black text-sm">🇹🇼</span>
+                        </div>
+                        <div class="flex-grow">
+                            <label class="text-[10px] font-bold text-orange-500 uppercase tracking-wider block mb-1">新台幣 (TWD) $</label>
+                            <input type="number" id="twd-input" placeholder="0" class="w-full text-2xl font-black text-orange-900 bg-transparent border-none p-0 focus:ring-0 placeholder-orange-200" oninput="convertCurrency('twd')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-2 mt-4">
+                <button onclick="setVND(10000)" class="bg-amber-50 text-amber-800 py-2 rounded-xl text-xs font-bold border border-amber-100 active:scale-95 transition-transform">1 萬</button>
+                <button onclick="setVND(50000)" class="bg-amber-50 text-amber-800 py-2 rounded-xl text-xs font-bold border border-amber-100 active:scale-95 transition-transform">5 萬</button>
+                <button onclick="setVND(100000)" class="bg-amber-50 text-amber-800 py-2 rounded-xl text-xs font-bold border border-amber-100 active:scale-95 transition-transform">10 萬</button>
+                <button onclick="setVND(500000)" class="bg-amber-50 text-amber-800 py-2 rounded-xl text-xs font-bold border border-amber-100 active:scale-95 transition-transform">50 萬</button>
             </div>
         </section>
 
@@ -605,15 +637,40 @@
             </div>
 
             <div class="compact-card border-l-4 border-l-orange-500">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-start">
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">21:00</span>
-                        <div>
+                        <div class="w-full">
                             <h3 class="font-bold text-sm">龍橋噴火秀 (Dragon Bridge)</h3>
                             <p class="text-[10px] text-stone-500 font-bold text-orange-700">🔥 週末 21:00 限定！晚餐後散步看秀消化</p>
+                            
+                            <!-- 龍橋攻略區塊 -->
+                            <div class="mt-3 bg-orange-50/80 border border-orange-100 rounded-lg p-2.5">
+                                <p class="text-[11px] font-bold text-orange-800 mb-1.5 border-b border-orange-200/50 pb-1"><i class="fa-solid fa-book-open-reader mr-1"></i> 2026 觀賞終極攻略</p>
+                                
+                                <div class="space-y-2 text-[10px] text-stone-600">
+                                    <div>
+                                        <strong class="text-orange-700"><i class="fa-solid fa-clock w-3"></i> 盛演時刻：</strong>
+                                        <p class="pl-4 leading-snug">每週五六日 21:00 準時開啟。火龍先咆哮 (2輪共18次)，後接水幕秀 (3次)。週六 23:00 還可至漢江橋看旋轉奇蹟！</p>
+                                    </div>
+                                    <div>
+                                        <strong class="text-orange-700"><i class="fa-solid fa-eye w-3"></i> 絕佳視角：</strong>
+                                        <ul class="pl-4 list-disc marker:text-orange-300 leading-snug space-y-0.5">
+                                            <li><span class="font-bold text-stone-700">近距震撼：</span>橋東端「陳興道街」(靠近龍頭)。</li>
+                                            <li><span class="font-bold text-stone-700">上帝全景：</span>「白藤街」沿岸景觀咖啡館二樓。</li>
+                                            <li><span class="font-bold text-stone-700">靜謐遠眺：</span>相鄰的「陳氏理橋」或漢江大橋。</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <strong class="text-orange-700"><i class="fa-solid fa-lightbulb w-3"></i> 實用貼士：</strong>
+                                        <p class="pl-4 leading-snug">周邊實施交通管制，車輛難靠近，叫車需久候或建議包車。務必<strong class="text-red-500">提前30分鐘卡位</strong>。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
-                    <div class="flex gap-1.5">
+                    <div class="flex gap-1.5 shrink-0 ml-2">
                         <button onclick="openNoteModal('d1-bridge')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d1-bridge"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
                         <a href="https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
@@ -776,7 +833,7 @@
             
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 前往大賣場採購伴手禮。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 前往大賣場。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-green-500">
@@ -785,10 +842,10 @@
                         <span class="text-[9px] font-bold bg-green-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">14:00</span>
                         <div>
                             <h3 class="font-bold text-sm text-green-700">GO! Đà Nẵng 大賣場</h3>
-                            <p class="text-[10px] text-stone-500">吹冷氣採買果乾、咖啡等伴手禮的好去處</p>
+                            <p class="text-[10px] text-stone-500">試吃探路：先買些回飯店當宵夜的零食、水果或啤酒，不用搬重物！</p>
                         </div>
                     </div>
-                    <div class="flex gap-1.5">
+                    <div class="flex gap-1.5 shrink-0 ml-2">
                         <button onclick="openNoteModal('d3-godanang')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-godanang"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
                         <a href="https://maps.app.goo.gl/BVgVwomJ1rUk82qQ6" target="_blank" class="nav-icon border-green-100 bg-green-50 text-green-600"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
@@ -842,8 +899,8 @@
             </div>
 
             <div class="meal-nav">
-                <a href="https://www.google.com/maps/search/?api=1&query=Bikini+Bottom+Express+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-burger"></i> L: Bikini Bottom</a>
-                <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-cake-candles"></i> T: 半島酒店下午茶</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Goi+ca+Nam+O+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-fish"></i> L: Nam O 涼拌魚</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Bikini+Bottom+Express+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-burger"></i> T: Bikini Bottom</a>
             </div>
 
             <div class="compact-card bg-cyan-50/50 border border-cyan-100 mb-4">
@@ -1392,7 +1449,7 @@
     </button>
 
     <script>
-        // ================= V25 核心邏輯 =================
+        // ================= V25.2 核心邏輯 =================
         const tripDates = {
             "2026-08-08": "day1", "2026-08-09": "day2", "2026-08-10": "day3",
             "2026-08-11": "day4", "2026-08-12": "day5", "2026-08-13": "day6"
@@ -1400,67 +1457,61 @@
 
         function switchTab(tabId, btnElement) {
             const targetContent = document.getElementById(tabId + '-content');
-            
-            if (!targetContent) {
-                console.warn('尚未建立對應的區塊: ' + tabId + '-content');
-                showToast('該天行程尚在建置中喔！', 'fa-person-digging', 'text-yellow-400');
-                return; 
-            }
+            if (!targetContent) return;
 
-            // 隱藏所有內容區塊
-            document.querySelectorAll('.tab-content').forEach(el => {
-                el.classList.remove('active');
-            });
+            // 1. Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             targetContent.classList.add('active');
 
-            // 1. 清除「下方導航列按鈕」的 active 狀態
+            // 2. Reset ALL bottom nav buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active', 'phrase-active', 'currency-active', 'food-active', 'places-active', 'hotel-active', 'tips-active', 'overview-active');
             });
-            
-            // 2. 清除「右上角 Header 按鈕」的 active 狀態
+
+            // 3. Reset ALL header buttons
             document.querySelectorAll('.header-btn').forEach(btn => {
                 btn.classList.remove('header-overview-active', 'header-hotel-active', 'header-currency-active', 'header-tips-active', 'header-phrase-active', 'header-food-active', 'header-places-active');
             });
 
-            // 3. 點亮「下方導航列按鈕」
-            if (tabId === 'phrases' && btnElement) btnElement.classList.add('phrase-active');
-            else if (tabId === 'currency' && btnElement) btnElement.classList.add('currency-active');
-            else if (tabId === 'food' && btnElement) btnElement.classList.add('food-active');
-            else if (tabId === 'places' && btnElement) btnElement.classList.add('places-active');
-            else if (tabId === 'hotels' && btnElement) btnElement.classList.add('hotel-active');
-            else if (tabId === 'tips' && btnElement) btnElement.classList.add('tips-active');
-            else if (tabId === 'overview' && btnElement) btnElement.classList.add('overview-active');
-            else if (btnElement) btnElement.classList.add('active');
-            
-            // 4. 同步點亮「右上角 Header 按鈕」
-            const headerBtnMapping = {
-                'overview': { id: 'header-overview-btn', class: 'header-overview-active' },
-                'hotels': { id: 'header-hotels-btn', class: 'header-hotel-active' },
-                'currency': { id: 'header-currency-btn', class: 'header-currency-active' },
-                'tips': { id: 'header-tips-btn', class: 'header-tips-active' },
-                'phrases': { id: 'header-phrases-btn', class: 'header-phrase-active' },
-                'food': { id: 'header-food-btn', class: 'header-food-active' },
-                'places': { id: 'header-places-btn', class: 'header-places-active' }
-            };
+            // 4. Activate bottom nav button (if exists)
+            const bottomBtn = document.getElementById(tabId + '-tab') || document.getElementById('nav-' + tabId);
+            if (bottomBtn) {
+                if (tabId === 'phrases') bottomBtn.classList.add('phrase-active');
+                else if (tabId === 'currency') bottomBtn.classList.add('currency-active');
+                else if (tabId === 'food') bottomBtn.classList.add('food-active');
+                else if (tabId === 'places') bottomBtn.classList.add('places-active');
+                else if (tabId === 'hotels') bottomBtn.classList.add('hotel-active');
+                else if (tabId === 'tips') bottomBtn.classList.add('tips-active');
+                else if (tabId === 'overview') bottomBtn.classList.add('overview-active');
+                else bottomBtn.classList.add('active');
 
-            if (headerBtnMapping[tabId]) {
-                const hBtn = document.getElementById(headerBtnMapping[tabId].id);
-                if (hBtn) hBtn.classList.add(headerBtnMapping[tabId].class);
-            }
-            
-            // 5. 確保下方導航列捲動對齊
-            const navContainer = document.getElementById('nav-container');
-            if (navContainer && btnElement && btnElement.classList.contains('tab-btn')) {
-                const btnRect = btnElement.getBoundingClientRect();
-                const containerRect = navContainer.getBoundingClientRect();
-                
-                if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
-                     btnElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                // Scroll alignment for bottom nav
+                const navContainer = document.getElementById('nav-container');
+                if (navContainer) {
+                    const btnRect = bottomBtn.getBoundingClientRect();
+                    const containerRect = navContainer.getBoundingClientRect();
+                    if (btnRect.left < containerRect.left || btnRect.right > containerRect.right) {
+                        bottomBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
                 }
             }
-        }
 
+            // 5. Activate header button (if exists)
+            const headerBtnMapping = {
+                'overview': 'header-overview-active',
+                'hotels': 'header-hotel-active',
+                'currency': 'header-currency-active',
+                'tips': 'header-tips-active',
+                'phrases': 'header-phrase-active',
+                'food': 'header-food-active',
+                'places': 'header-places-active'
+            };
+            if (headerBtnMapping[tabId]) {
+                const hBtn = document.getElementById('header-' + tabId + '-btn');
+                if (hBtn) hBtn.classList.add(headerBtnMapping[tabId]);
+            }
+        }
+        
         function checkAutoDateJump() {
             const today = new Date();
             const yyyy = today.getFullYear();
