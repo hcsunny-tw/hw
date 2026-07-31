@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="zh-Hant" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>峴港｜陽光假期 (V25.2)</title>
+    <title>峴港｜陽光假期 (V25.3)</title>
     <!-- 越南國旗 Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇻🇳</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,7 +34,6 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease-out; }
         
-        /* 下方導航列 Active 樣式 */
         .tab-btn.active { background-color: #ea580c; color: white; border-color: #ea580c; }
         .tab-btn.phrase-active { background-color: #d97706; color: white; border-color: #d97706; }
         .tab-btn.currency-active { background-color: #b45309; color: white; border-color: #b45309; }
@@ -43,7 +43,6 @@
         .tips-active { background-color: #6366f1 !important; color: white !important; border-color: #6366f1 !important; }
         .overview-active { background-color: #10b981 !important; color: white !important; border-color: #10b981 !important; }
         
-        /* 右上角選單按鈕專屬 Active 樣式 */
         .header-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .header-overview-active { background-color: #10b981 !important; color: white !important; border-color: #10b981 !important; }
         .header-hotel-active { background-color: #0d9488 !important; color: white !important; border-color: #0d9488 !important; }
@@ -74,6 +73,7 @@
         .meal-pill.dinner { background-color: #fff1f2; color: #e11d48; border-color: #ffe4e6; }
 
         .food-card { background-color: white; border: 1px solid #ffedd5; border-top: 4px solid #f97316; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px -2px rgba(234, 88, 12, 0.08); display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 10; transition: all 0.2s; }
+        .food-card.checked-food { background-color: #f8fafc !important; border-color: #e2e8f0 !important; border-top: 4px solid #94a3b8 !important; opacity: 0.7; }
         .food-card:active { transform: scale(0.96); }
         .place-card { background-color: white; border: 1px solid #e0f2fe; border-top: 4px solid #0ea5e9; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px -2px rgba(14, 165, 233, 0.08); display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 10; transition: all 0.2s; }
         .place-card:active { transform: scale(0.96); }
@@ -124,7 +124,6 @@
             <a href="https://docs.google.com/spreadsheets/d/13o59SvhyGKnTrMRPYG4CeqIeXkFEGieSj5-C4UjwAMw/edit?usp=sharing" target="_blank" class="w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="Google 試算表行程">
                 <i class="fa-solid fa-file-excel"></i>
             </a>
-            <!-- 行程概覽按鈕 -->
             <button onclick="switchTab('overview', this)" id="header-overview-btn" class="header-btn w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-emerald-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="行程概覽">
                 <i class="fa-solid fa-calendar-days"></i>
             </button>
@@ -152,7 +151,7 @@
                 <i class="fa-solid fa-sun text-yellow-300 text-sm animate-spin-slow"></i> Da Nang Sunshine
             </h1>
             <div class="flex justify-between items-end mt-0.5">
-                <p class="text-[9px] opacity-90 tracking-widest uppercase border-l border-white/30 pl-2">2026研討漫遊(V25.2)</p>
+                <p class="text-[9px] opacity-90 tracking-widest uppercase border-l border-white/30 pl-2">2026研討漫遊(V25.3)</p>
             </div>
         </div>
     </header>
@@ -206,7 +205,7 @@
                     <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-white bg-amber-500 text-white shadow shrink-0 z-10 font-black text-[10px] ml-2 md:ml-0 md:absolute md:left-1/2 md:-translate-x-1/2">D2</div>
                     <div class="w-[calc(100%-3rem)] md:w-[calc(50%-1.5rem)] p-3 rounded-xl bg-white border border-stone-100 shadow-sm ml-4 md:ml-0">
                         <h3 class="font-bold text-sm text-stone-800">巴拿山雲端一日遊</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">聖托里尼晨泳 ➔ 佛手橋與法國村 ➔ 四季餐廳百匯 ➔ 晚上吃 Pho Thin 傳奇河粉</p>
+                        <p class="text-[10px] text-stone-500 mt-1">聖托里尼晨泳 ➔ 佛手橋與過山車暢玩 ➔ 下山享用 Pho Thin 傳奇河粉</p>
                     </div>
                 </div>
 
@@ -214,15 +213,15 @@
                     <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-white bg-rose-500 text-white shadow shrink-0 z-10 font-black text-[10px] ml-2 md:ml-0 md:absolute md:left-1/2 md:-translate-x-1/2">D3</div>
                     <div class="w-[calc(100%-3rem)] md:w-[calc(50%-1.5rem)] p-3 rounded-xl bg-white border border-stone-100 shadow-sm ml-4 md:ml-0">
                         <h3 class="font-bold text-sm text-stone-800">市區嚐鮮與水豚君</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">李研討會報到 ➔ 晴共市場買奧黛 ➔ GO! 試吃採買 ➔ Login Coffee ➔ 李出席晚宴</p>
+                        <p class="text-[10px] text-stone-500 mt-1">李研討會報到 ➔ 共市場買奧黛 ➔ GO! 試吃採買 ➔ Login Coffee ➔ 李出席晚宴</p>
                     </div>
                 </div>
 
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                     <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-white bg-purple-500 text-white shadow shrink-0 z-10 font-black text-[10px] ml-2 md:ml-0 md:absolute md:left-1/2 md:-translate-x-1/2">D4</div>
                     <div class="w-[calc(100%-3rem)] md:w-[calc(50%-1.5rem)] p-3 rounded-xl bg-white border border-stone-100 shadow-sm ml-4 md:ml-0">
-                        <h3 class="font-bold text-sm text-stone-800">學術報告與徹底解脫</h3>
-                        <p class="text-[10px] text-stone-500 mt-1">粉紅教堂 & 韓市場 ➔ 李發表報告 ➔ Bikini Bottom 慶祝 ➔ Herbal Spa ➔ 入住半島酒店</p>
+                        <h3 class="font-bold text-sm text-stone-800">學術報告與龍蝦大餐</h3>
+                        <p class="text-[10px] text-stone-500 mt-1">粉紅教堂 & 韓市場 ➔ 李發表報告 ➔ Herbal Spa 按摩 ➔ All Seasons 17:00 龍蝦百匯 ➔ 入住半島酒店</p>
                     </div>
                 </div>
 
@@ -260,7 +259,6 @@
                 </div>
             </div>
 
-            <!-- 卡片 1: 基礎必備 -->
             <div class="compact-card border-l-4 border-l-blue-500">
                 <h3 class="font-bold text-sm text-blue-800 mb-2 border-b border-blue-50 pb-1 flex items-center"><i class="fa-solid fa-suitcase-rolling mr-1.5 w-4 text-center"></i> 峴港自由行：行前準備與基礎必備</h3>
                 <ul class="space-y-2.5 text-[11px] text-stone-600 mt-2">
@@ -272,7 +270,6 @@
                 </ul>
             </div>
 
-            <!-- 卡片 2: 金錢消費 -->
             <div class="compact-card border-l-4 border-l-amber-500">
                 <h3 class="font-bold text-sm text-amber-800 mb-2 border-b border-amber-50 pb-1 flex items-center"><i class="fa-solid fa-coins mr-1.5 w-4 text-center"></i> 金錢、消費與小費攻略</h3>
                 <ul class="space-y-2.5 text-[11px] text-stone-600 mt-2">
@@ -296,7 +293,6 @@
                 </ul>
             </div>
 
-            <!-- 卡片 3: 交通治安 -->
             <div class="compact-card border-l-4 border-l-rose-500">
                 <h3 class="font-bold text-sm text-rose-800 mb-2 border-b border-rose-50 pb-1 flex items-center"><i class="fa-solid fa-shield-halved mr-1.5 w-4 text-center"></i> 交通與治安防範 (峴港專屬)</h3>
                 <ul class="space-y-2.5 text-[11px] text-stone-600 mt-2">
@@ -307,7 +303,6 @@
                 </ul>
             </div>
 
-            <!-- 卡片 4: 飲食與文化 -->
             <div class="compact-card border-l-4 border-l-emerald-500">
                 <h3 class="font-bold text-sm text-emerald-800 mb-2 border-b border-emerald-50 pb-1 flex items-center"><i class="fa-solid fa-bowl-rice mr-1.5 w-4 text-center"></i> 飲食衛生與文化禁忌</h3>
                 <ul class="space-y-2.5 text-[11px] text-stone-600 mt-2">
@@ -319,10 +314,8 @@
                 </ul>
             </div>
 
-            <!-- 卡片 5: 兩大採買聖地攻略 -->
             <div class="compact-card border-l-4 border-l-fuchsia-500">
                 <h3 class="font-bold text-sm text-fuchsia-800 mb-2 border-b border-fuchsia-50 pb-1 flex items-center"><i class="fa-solid fa-store mr-1.5 w-4 text-center"></i> 三大採買聖地攻略：韓市場、GO! 與 Lotte Mart</h3>
-                
                 <div class="mt-2 space-y-3">
                     <div>
                         <p class="text-[11px] font-bold text-fuchsia-700 mb-1 bg-fuchsia-50 inline-block px-1.5 py-0.5 rounded">韓市場 (Han Market) 主攻：穿搭配件</p>
@@ -333,7 +326,6 @@
                             <li class="text-red-600 font-medium"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i>實戰提醒：一定要「殺價」(從 5-6 折砍)！且走道擁擠，背包務必往前背防扒手。</li>
                         </ul>
                     </div>
-
                     <div>
                         <p class="text-[11px] font-bold text-green-700 mb-1 bg-green-50 inline-block px-1.5 py-0.5 rounded">GO! Đà Nẵng 主攻：在地特產試吃與宵夜</p>
                         <ul class="space-y-1.5 text-[10px] text-stone-600 pl-1">
@@ -342,7 +334,6 @@
                             <li><strong class="text-stone-700">在地限定零嘴與啤酒：</strong>Larue 啤酒、第一排排骨餅乾，適合買小包裝嚐鮮。</li>
                         </ul>
                     </div>
-                    
                     <div>
                         <p class="text-[11px] font-bold text-blue-700 mb-1 bg-blue-50 inline-block px-1.5 py-0.5 rounded">Lotte Mart 主攻：終極食品伴手禮</p>
                         <ul class="space-y-1.5 text-[10px] text-stone-600 pl-1">
@@ -368,14 +359,12 @@
                 </div>
             </div>
 
-            <!-- 飯店 1: Risemount -->
             <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-blue-100">
                 <div class="bg-gradient-to-r from-blue-500 to-blue-400 p-4">
                     <div class="flex text-amber-300 text-[10px] mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                     <h3 class="font-bold text-lg text-white leading-tight">Risemount Premier Resort Danang</h3>
                     <p class="text-[10px] text-blue-50 mt-1"><i class="fa-solid fa-location-dot mr-1"></i>120 Nguyễn Văn Thoại, Phường Ngũ Hành Sơn, 峴港, 越南</p>
                 </div>
-                
                 <div class="p-4 space-y-3">
                     <div class="bg-blue-50 p-3 rounded-xl border border-blue-100">
                         <h4 class="text-sm font-bold text-blue-800 mb-1">Superior Double (無窗)</h4>
@@ -385,7 +374,6 @@
                             <span class="bg-white px-2 py-1 rounded-md border border-stone-200">🕒 12:00 前退房</span>
                         </div>
                     </div>
-                    
                     <div>
                         <p class="text-[11px] font-bold text-stone-700 mb-1">✨ 專屬禮遇與設施</p>
                         <p class="text-[11px] text-stone-600 leading-relaxed font-medium pl-1">
@@ -395,27 +383,23 @@
                             <i class="fa-solid fa-check text-green-500 mr-1 w-3"></i>免費高級 Wi-Fi、咖啡/茶、飲用水、電視頻道
                         </p>
                     </div>
-
                     <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Danang" target="_blank" class="block text-center w-full bg-stone-50 hover:bg-stone-100 text-stone-600 text-xs font-bold py-2 rounded-xl transition-colors border border-stone-200 mt-2">
                         <i class="fa-solid fa-map-location-dot mr-1 text-orange-500"></i> 開啟地圖導航
                     </a>
                 </div>
             </div>
 
-            <!-- 飯店 2: Peninsula -->
             <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-teal-100 mt-4">
                 <div class="bg-gradient-to-r from-teal-600 to-teal-500 p-4">
                     <div class="flex text-amber-300 text-[10px] mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                     <h3 class="font-bold text-lg text-white leading-tight">Peninsula Hotel Danang</h3>
                     <p class="text-[10px] text-teal-50 mt-1"><i class="fa-solid fa-location-dot mr-1"></i>84 Vo Nguyen Giap, Man Thai Ward, Son Tra District, 峴港, 越南</p>
                 </div>
-                
                 <div class="p-4 space-y-3">
                     <div class="bg-teal-50 p-3 rounded-xl border border-teal-100">
                         <h4 class="text-sm font-bold text-teal-800 mb-1">Deluxe Twin Room with Partial Ocean View</h4>
                         <p class="text-[11px] text-teal-600 font-bold mb-2">🍰 專案包含：免費早餐 & 下午茶 (Afternoon Tea Included)</p>
                     </div>
-                    
                     <div>
                         <p class="text-[11px] font-bold text-stone-700 mb-1">✨ 房內精選設施</p>
                         <p class="text-[11px] text-stone-600 leading-relaxed font-medium pl-1">
@@ -427,7 +411,6 @@
                             <i class="fa-solid fa-check text-green-500 mr-1 w-3"></i>保險箱、喚醒服務、可搭電梯上樓、可安排連通室
                         </p>
                     </div>
-
                     <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="block text-center w-full bg-stone-50 hover:bg-stone-100 text-stone-600 text-xs font-bold py-2 rounded-xl transition-colors border border-stone-200 mt-2">
                         <i class="fa-solid fa-map-location-dot mr-1 text-teal-600"></i> 開啟地圖導航
                     </a>
@@ -644,10 +627,8 @@
                             <h3 class="font-bold text-sm">龍橋噴火秀 (Dragon Bridge)</h3>
                             <p class="text-[10px] text-stone-500 font-bold text-orange-700">🔥 週末 21:00 限定！晚餐後散步看秀消化</p>
                             
-                            <!-- 龍橋攻略區塊 -->
                             <div class="mt-3 bg-orange-50/80 border border-orange-100 rounded-lg p-2.5">
                                 <p class="text-[11px] font-bold text-orange-800 mb-1.5 border-b border-orange-200/50 pb-1"><i class="fa-solid fa-book-open-reader mr-1"></i> 2026 觀賞終極攻略</p>
-                                
                                 <div class="space-y-2 text-[10px] text-stone-600">
                                     <div>
                                         <strong class="text-orange-700"><i class="fa-solid fa-clock w-3"></i> 盛演時刻：</strong>
@@ -667,7 +648,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                     <div class="flex gap-1.5 shrink-0 ml-2">
@@ -678,6 +658,7 @@
             </div>
         </section>
 
+        <!-- D2 行程更新：巴拿山純玩 + 下山 Pho Thin 河粉 -->
         <section id="day2-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-amber-600">Day 2 <span class="text-xs font-normal text-stone-400 ml-1">08.09 (日)</span></h2>
@@ -685,7 +666,6 @@
             </div>
             
             <div class="meal-nav">
-                <a href="https://www.google.com/maps/search/?api=1&query=All+Seasons+Buffet+Ba+Na+Hills" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: 四季餐廳</a>
                 <a href="https://www.google.com/maps/search/?api=1&query=Pho+Thin+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-bowl-rice"></i> D: Pho Thin 傳奇河粉</a>
             </div>
 
@@ -704,7 +684,7 @@
 
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 前往巴拿山，車程約 45 分鐘。建議包車或叫車。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 前往巴拿山，車程約 45 分鐘。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-amber-500">
@@ -712,11 +692,11 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">巴拿山 Ba Na Hills</h3>
+                            <h3 class="font-bold text-sm">巴拿山 Ba Na Hills 深度暢玩</h3>
                             <p class="text-[10px] text-stone-500 mt-1 leading-snug">
-                                <span class="bg-amber-100 text-amber-800 px-1 rounded font-bold">KKday買 門票+纜車+午餐+wowpass-silver</span> 纜車快速通關！<br>
-                                🎢 <span class="font-bold text-amber-700">過山車首推 2024 建的最長 3 號軌道！</span><br>
-                                必拍黃金佛手橋與法國村。
+                                <span class="bg-amber-100 text-amber-800 px-1 rounded font-bold">KKday 快速通關門票</span> 上山！<br>
+                                🎢 <span class="font-bold text-amber-700">過山車首推最新 3 號軌道！</span><br>
+                                必拍黃金佛手橋、百年酒窖與法式夢幻城堡。下午於園區簡單吃小吃點心墊胃。
                             </p>
                         </div>
                     </div>
@@ -727,34 +707,18 @@
                 </div>
             </div>
 
-            <div class="compact-card">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:00</span>
-                        <div>
-                            <h3 class="font-bold text-sm">四季餐廳 (All Seasons Buffet)</h3>
-                            <p class="text-[10px] text-stone-500">多國籍大容量百匯 (用餐時間 13:00~15:00)</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-1.5">
-                        <button onclick="openNoteModal('d2-lunch')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d2-lunch"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=All+Seasons+Buffet+Ba+Na+Hills" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                </div>
-            </div>
-
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">下午 4-5 點搭纜車下山，搭 Grab 回市區晚餐，約 45 分鐘。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">下午 15:30 搭纜車下山，搭 Grab 返回市區飯店洗澡休息。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-amber-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:30</span>
+                        <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">Pho Thin 經典晚餐</h3>
-                            <p class="text-[10px] text-stone-500">北越傳奇河粉！招牌生牛肉河粉必點</p>
+                            <h3 class="font-bold text-sm">Pho Thin 傳奇生牛肉河粉</h3>
+                            <p class="text-[10px] text-stone-500">以濃郁溫暖的河粉好好慰勞飢腸轆轆的胃，簡單滿足</p>
                         </div>
                     </div>
                     <div class="flex gap-1.5">
@@ -892,6 +856,7 @@
             </div>
         </section>
 
+        <!-- D4 行程更新：All Seasons 改至 17:00 龍蝦大餐 -->
         <section id="day4-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-amber-700">Day 4 <span class="text-xs font-normal text-stone-400 ml-1">08.11 (二)</span></h2>
@@ -899,8 +864,7 @@
             </div>
 
             <div class="meal-nav">
-                <a href="https://www.google.com/maps/search/?api=1&query=Goi+ca+Nam+O+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-fish"></i> L: Nam O 涼拌魚</a>
-                <a href="https://www.google.com/maps/search/?api=1&query=Bikini+Bottom+Express+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-burger"></i> T: Bikini Bottom</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=All+Seasons+Buffet+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-shrimp"></i> D: All Seasons 龍蝦百匯</a>
             </div>
 
             <div class="compact-card bg-cyan-50/50 border border-cyan-100 mb-4">
@@ -973,28 +937,7 @@
             
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">報告完畢！搭 Grab 沿著海岸線去吃慶祝大餐 (約 15 分鐘)。</p>
-            </div>
-
-            <div class="compact-card border-l-4 border-l-amber-500">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:30</span>
-                        <div>
-                            <h3 class="font-bold text-sm">Bikini Bottom Express 慶祝</h3>
-                            <p class="text-[10px] text-stone-500 font-bold">大口吃招牌美式 Smash Burger 與炸雞堡</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-1.5">
-                        <button onclick="openNoteModal('d4-burger')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d4-burger"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Bikini+Bottom+Express+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 前往 SPA 放鬆 (約 10 分鐘)。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">報告完畢！前往 SPA 放鬆。</p>
             </div>
 
             <div class="compact-card">
@@ -1012,6 +955,27 @@
                     </div>
                 </div>
             </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">按摩完直接無縫接軌前往 All Seasons。</p>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-orange-500">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">17:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">🔥 All Seasons 頂級海鮮龍蝦百匯 (17:00 黃金場次)</h3>
+                            <p class="text-[10px] text-stone-500 font-bold text-orange-700">開餐第一刻享用最新鮮、補好補滿的大龍蝦與生蠔！</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1.5">
+                        <button onclick="openNoteModal('d4-allseasons')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d4-allseasons"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
+                        <a href="https://www.google.com/maps/search/?api=1&query=All+Seasons+Buffet+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    </div>
+                </div>
+            </div>
             
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
@@ -1021,10 +985,10 @@
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">17:30</span>
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">19:30</span>
                         <div>
                             <h3 class="font-bold text-sm">入住 Peninsula Hotel</h3>
-                            <p class="text-[10px] text-stone-500">高空下午茶/看夕陽海景，18:00 李出席研討會晚宴</p>
+                            <p class="text-[10px] text-stone-500">享受高空下午茶/看夕陽海景，完美結束這一天</p>
                         </div>
                     </div>
                     <div class="flex gap-1.5">
@@ -1202,7 +1166,6 @@
                 </div>
             </div>
             
-            <!-- 回程機票與行李資訊 -->
             <div class="bg-gradient-to-r from-stone-800 to-stone-900 text-white rounded-2xl p-4 shadow-lg relative overflow-hidden mt-6">
                 <div class="absolute -right-4 -top-4 opacity-10"><i class="fa-solid fa-plane text-8xl rotate-180"></i></div>
                 <div class="relative z-10">
@@ -1223,7 +1186,6 @@
                             <p class="text-[9px] text-stone-400 mt-1">桃園 TPE</p>
                         </div>
                     </div>
-                    
                     <div class="mt-3 bg-white/10 p-2.5 rounded-lg border border-white/20">
                         <p class="text-[10px] text-yellow-300 mb-1 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> 虎航手提行李極嚴格</p>
                         <p class="text-[9px] text-stone-200 leading-tight mb-2">1件手提 + 1件隨身物品 = 合計不超過 10kg。<br>尺寸限制：54 x 38 x 23 cm (含輪把)。</p>
@@ -1287,7 +1249,7 @@
             <div id="places-list" class="mt-4 pb-10 grid grid-cols-2 gap-3"></div>
         </section>
 
-        <!-- ================= 美食模組 ================= -->
+        <!-- ================= 美食模組 (升級：精準評分與吃過自動沉底+筆記UX) ================= -->
         <section id="food-content" class="tab-content space-y-4">
             <div class="flex justify-between items-end mb-2">
                 <div class="flex items-center gap-2">
@@ -1296,7 +1258,7 @@
                     </div>
                     <div>
                         <h2 class="text-base font-extrabold text-slate-700">美食口袋名單</h2>
-                        <p class="text-[10px] text-slate-400">距離自動算，美食隨機抽</p>
+                        <p class="text-[10px] text-slate-400">吃過打卡自動沉底，筆記隨手記</p>
                     </div>
                 </div>
                 
@@ -1338,7 +1300,6 @@
 
         <!-- ================= 越文模組 ================= -->
         <section id="phrases-content" class="tab-content space-y-4">
-            
             <div class="bg-gradient-to-br from-orange-600 to-amber-600 rounded-2xl p-4 text-white shadow-md relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 opacity-20"><i class="fa-solid fa-language text-8xl"></i></div>
                 <div class="relative z-10">
@@ -1423,10 +1384,15 @@
         </div>
     </div>
 
-    <!-- 美食隨機抽籤 Modal -->
+    <!-- 美食隨機抽籤 Modal (已加強：右上角小叉叉關閉按鈕) -->
     <div id="dice-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
-        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-[300px] w-full mx-4 transform scale-95 transition-transform duration-300" id="dice-modal-content">
-            <div class="text-center mb-5">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-[300px] w-full mx-4 transform scale-95 transition-transform duration-300 relative" id="dice-modal-content">
+            <!-- 右上角小叉叉關閉按鈕 -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600 bg-stone-100 hover:bg-stone-200 w-8 h-8 rounded-full flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <div class="text-center mb-5 mt-2">
                 <div class="w-14 h-14 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
                     <i class="fa-solid fa-hand-sparkles"></i>
                 </div>
@@ -1449,7 +1415,6 @@
     </button>
 
     <script>
-        // ================= V25.2 核心邏輯 =================
         const tripDates = {
             "2026-08-08": "day1", "2026-08-09": "day2", "2026-08-10": "day3",
             "2026-08-11": "day4", "2026-08-12": "day5", "2026-08-13": "day6"
@@ -1459,21 +1424,17 @@
             const targetContent = document.getElementById(tabId + '-content');
             if (!targetContent) return;
 
-            // 1. Hide all contents
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             targetContent.classList.add('active');
 
-            // 2. Reset ALL bottom nav buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active', 'phrase-active', 'currency-active', 'food-active', 'places-active', 'hotel-active', 'tips-active', 'overview-active');
             });
 
-            // 3. Reset ALL header buttons
             document.querySelectorAll('.header-btn').forEach(btn => {
                 btn.classList.remove('header-overview-active', 'header-hotel-active', 'header-currency-active', 'header-tips-active', 'header-phrase-active', 'header-food-active', 'header-places-active');
             });
 
-            // 4. Activate bottom nav button (if exists)
             const bottomBtn = document.getElementById(tabId + '-tab') || document.getElementById('nav-' + tabId);
             if (bottomBtn) {
                 if (tabId === 'phrases') bottomBtn.classList.add('phrase-active');
@@ -1485,7 +1446,6 @@
                 else if (tabId === 'overview') bottomBtn.classList.add('overview-active');
                 else bottomBtn.classList.add('active');
 
-                // Scroll alignment for bottom nav
                 const navContainer = document.getElementById('nav-container');
                 if (navContainer) {
                     const btnRect = bottomBtn.getBoundingClientRect();
@@ -1496,7 +1456,6 @@
                 }
             }
 
-            // 5. Activate header button (if exists)
             const headerBtnMapping = {
                 'overview': 'header-overview-active',
                 'hotels': 'header-hotel-active',
@@ -1529,7 +1488,6 @@
             }
         }
 
-        // 共用通知系統 (Toast)
         function showToast(msg, iconClass = "fa-circle-check", iconColor = "text-amber-400") {
             const toast = document.getElementById('toast');
             const toastIcon = document.getElementById('toast-icon');
@@ -1673,7 +1631,6 @@
             recognition.onspeechend = function() { recognition.stop(); };
         }
 
-        // ================= 隨身筆記功能 =================
         let currentNoteId = '';
 
         function openNoteModal(id) {
@@ -1730,16 +1687,12 @@
             });
         }
 
-
-        // ================= 景點/血拚名單模組 (峴港版) =================
         const placesDatabase = [
-            // 血拚採購
             { id: 101, name: "韓市場 Han Market", korName: "Chợ Hàn", area: "市區", types: ["血拚"], lat: 16.0680, lng: 108.2235, desc: "買藤編包、腰果、編織涼鞋的戰區。記得殺價！", url: "https://www.google.com/maps/search/?api=1&query=Han+Market+Da+Nang" },
             { id: 102, name: "Lotte Mart (峴港店)", korName: "Lotte Mart Đà Nẵng", area: "市區", types: ["血拚"], lat: 16.0345, lng: 108.2320, desc: "回程爆買 20kg 的好去處，伴手禮零食咖啡齊全", url: "https://www.google.com/maps/search/?api=1&query=Lotte+Mart+Da+Nang" },
             { id: 103, name: "Con Market (共市場)", korName: "Chợ Cồn", area: "市區", types: ["血拚"], lat: 16.0695, lng: 108.2140, desc: "在地人逛的市場，買奧黛與吃道地小吃首選", url: "https://www.google.com/maps/search/?api=1&query=Con+Market+Da+Nang" },
             { id: 104, name: "GO! Đà Nẵng", korName: "GO! Đà Nẵng", area: "市區", types: ["血拚"], lat: 16.0665, lng: 108.2135, desc: "明亮乾淨的大賣場，吹冷氣採買果乾、咖啡等伴手禮的好去處", url: "https://maps.app.goo.gl/BVgVwomJ1rUk82qQ6" },
             
-            // 景點
             { id: 501, name: "巴拿山 黃金佛手橋", korName: "Cầu Vàng", area: "郊區", types: ["景點"], lat: 15.9950, lng: 107.9960, desc: "峴港必去打卡點，雲端上的巨手", rec: "盡量早上前往避開人潮", url: "https://www.google.com/maps/search/?api=1&query=Golden+Bridge+Ba+Na+Hills" },
             { id: 502, name: "峴港粉紅大教堂", korName: "Nhà thờ chính tòa Đà Nẵng", area: "市區", types: ["景點"], lat: 16.0665, lng: 108.2230, desc: "法式哥德風粉紅教堂，少女心噴發", url: "https://www.google.com/maps/search/?api=1&query=Da+Nang+Cathedral" },
             { id: 503, name: "龍橋 Dragon Bridge", korName: "Cầu Rồng", area: "市區", types: ["景點"], lat: 16.0610, lng: 108.2270, desc: "橫跨瀚江的黃金巨龍", rec: "週五六日晚上 9 點有噴火秀", url: "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang" },
@@ -1748,10 +1701,7 @@
             { id: 506, name: "秋盆河水燈夜市", korName: "Chợ Đêm Hội An", area: "會安", types: ["景點"], lat: 15.8750, lng: 108.3260, desc: "夜晚搭船放水燈祈福", url: "https://www.google.com/maps/search/?api=1&query=Hoi+An+Night+Market" },
             { id: 507, name: "美山聖地遺址", korName: "Thánh địa Mỹ Sơn", area: "郊區", types: ["景點"], lat: 15.7640, lng: 108.1240, desc: "占婆王國的世界文化遺產，被譽為小吳哥窟，建議半日遊。", url: "https://www.google.com/maps/search/?api=1&query=My+Son+Sanctuary" },
             
-            // SPA
             { id: 701, name: "Herbal Spa", korName: "Herbal Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: 16.0620, lng: 108.2430, desc: "評價極高的全身精油/深層按摩，同房可選不同方案", url: "https://www.google.com/maps/search/?api=1&query=Herbal+Spa+Da+Nang" },
-            
-            // 咖啡/放空
             { id: 801, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/放空"], lat: 16.0650, lng: 108.2450, desc: "空間明亮好拍的網美海景咖啡廳", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" }
         ];
 
@@ -1872,13 +1822,11 @@
             let filteredList = placesDatabase.filter(item => {
                 const matchArea = placesCurrentArea === '全部' || item.area === placesCurrentArea;
                 const matchType = placesCurrentType === '全部' || item.types.includes(placesCurrentType);
-                
                 const matchSearch = placesSearchQuery === '' || 
                                     item.name.toLowerCase().includes(placesSearchQuery) ||
                                     (item.korName && item.korName.toLowerCase().includes(placesSearchQuery)) ||
                                     item.area.toLowerCase().includes(placesSearchQuery) ||
-                                    item.types.some(t => t.toLowerCase().includes(searchQuery));
-
+                                    item.types.some(t => t.toLowerCase().includes(placesSearchQuery));
                 return matchArea && matchType && matchSearch;
             });
 
@@ -1908,7 +1856,6 @@
                         distanceHtml = `<span class="inline-block mt-2 text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-person-walking"></i> 約 ${distText}</span>`;
                     }
                 }
-
                 let recHtml = item.rec ? `<div class="mt-1.5 text-[10px] text-sky-600 font-bold bg-sky-50 px-1.5 py-0.5 rounded inline-block"><i class="fa-solid fa-star text-sky-500 mr-0.5"></i>${item.rec}</div>` : '';
 
                 return `
@@ -1933,7 +1880,7 @@
             }).join('');
         }
 
-        // ================= 美食名單模組 (V25 更新評價與清單) =================
+        // ================= 美食名單模組 (已更新：真實精準評分、吃過自動沈底 + 筆記狀態) =================
         const foodDatabase = [
             { id: 1, name: "Bánh Xèo Tôm Nhảy Năm Hiền", korName: "南賢餐廳", area: "市區", types: ["小吃/粉"], lat: 16.0620, lng: 108.2160, desc: "外酥內Q的層次感！招牌海鮮與牛肉煎餅必吃。", rec: "魷魚/蝦子煎餅 59K", url: "https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Tom+Nhay+Nam+Hien+Da+Nang", rating: "4.3", reviews: "1,425" },
             { id: 2, name: "Quán Phú Hồng", korName: "Phú Hồng 烤肉", area: "市區", types: ["烤肉"], lat: 16.0650, lng: 108.2200, desc: "主打醬烤牛肉，也有檳榔葉肉捲，香氣逼人。", rec: "醬烤牛肉 130K、檳榔葉肉捲 90K", url: "https://www.google.com/maps/search/?api=1&query=Quan+Phu+Hong+Da+Nang", rating: "4.1", reviews: "890" },
@@ -1948,14 +1895,14 @@
             { id: 11, name: "Bánh mì Happy Bread (Mì AA)", korName: "Happy Bread 法棍", area: "市區", types: ["小吃/粉"], lat: 16.0685, lng: 108.2240, desc: "網美最愛文青法棍店，口味多且環境乾淨有冷氣，就在韓市場旁。", rec: "招牌越式法棍", url: "https://www.google.com/maps/search/?api=1&query=Banh+mi+Happy+Bread+Da+Nang", rating: "4.5", reviews: "4,600" },
             { id: 12, name: "Bikini Bottom Express", korName: "Bikini Bottom", area: "美溪沙灘", types: ["異國料理"], lat: 16.0520, lng: 108.2450, desc: "氣氛極佳！提供多汁的道地美式手壓牛肉漢堡與炸雞堡。", rec: "美式手壓漢堡、炸雞堡", url: "https://www.google.com/maps/search/?api=1&query=Bikini+Bottom+Express+Da+Nang", rating: "4.8", reviews: "1,350" },
             { id: 13, name: "Pizza 4P's", korName: "Pizza 4P's", area: "市區", types: ["異國料理"], lat: 16.0645, lng: 108.2230, desc: "神級高CP值布拉塔起司披薩，蟹肉蟹膏義大利麵狂推", rec: "布拉塔起司披薩、蟹肉義大利麵", url: "https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Hoang+Van+Thu+Da+Nang", rating: "4.8", reviews: "8,400" },
-            { id: 14, name: "Pho Thin 13 Lò Đúc", korName: "Phở Thìn", area: "市區", types: ["小吃/粉"], lat: 16.0620, lng: 108.2250, desc: "北越傳奇河粉開來中越！湯頭清甜，招牌生牛肉必點。", rec: "招牌牛肉河粉、油條", url: "https://www.google.com/maps/search/?api=1&query=Pho+Thin+Da+Nang", rating: "4.1", reviews: "1,550" },
-            { id: 15, name: "Bé Mặn 海鮮", korName: "Hải sản Bé Mặn", area: "美溪沙灘", types: ["海鮮"], lat: 16.0820, lng: 108.2460, desc: "美溪沙灘人氣最旺的活海鮮大排檔，爆炒奶油大蝦絕讚。", rec: "奶油大蝦、烤大蛤蜊", url: "https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Da+Nang", rating: "4.0", reviews: "5,300" },
+            { id: 14, name: "Pho Thin 13 Lò Đúc", korName: "Phở Thìn", area: "市區", types: ["小吃/粉"], lat: 16.0620, lng: 108.2250, desc: "北越傳奇河粉開來中越！湯頭清甜，招牌生牛肉必點。", rec: "招牌牛肉河粉、油條", url: "https://www.google.com/maps/search/?api=1&query=Pho+Thin+Da+Nang", rating: "4.3", reviews: "1,550" },
+            { id: 15, name: "Bé Mặn 海鮮", korName: "Hải sản Bé Mặn", area: "美溪沙灘", types: ["海鮮"], lat: 16.0820, lng: 108.2460, desc: "美溪沙灘人氣最旺的活海鮮大排檔，爆炒奶油大蝦絕讚。", rec: "奶油大蝦、烤大蛤蜊", url: "https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Da+Nang", rating: "4.6", reviews: "5,300" },
             { id: 16, name: "Bà Dưỡng 煎餅", korName: "Bánh xèo Bà Dưỡng", area: "市區", types: ["小吃/粉"], lat: 16.0595, lng: 108.2140, desc: "巷弄裡的排隊老店，餅緣裹滿香濃蛋液，搭配靈魂秘製蘸醬。", rec: "越式煎餅 (Bánh Xèo)", url: "https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang", rating: "4.3", reviews: "6,900" },
             { id: 17, name: "Morning Glory Original", korName: "Morning Glory Original", area: "會安", types: ["傳統越菜"], lat: 15.8775, lng: 108.3285, desc: "會安極具盛名的越式餐館，適合體驗會安三寶", rec: "白玫瑰、高樓麵", url: "https://www.google.com/maps/search/?api=1&query=Morning+Glory+Original+Hoi+An", rating: "4.4", reviews: "7,200" },
             { id: 18, name: "Faifo Coffee", korName: "Faifo Coffee", area: "會安", types: ["咖啡/甜點"], lat: 15.8770, lng: 108.3275, desc: "會安最知名的老屋咖啡，二樓陽台可拍古鎮全景", rec: "椰子咖啡", url: "https://www.google.com/maps/search/?api=1&query=Faifo+Coffee+Hoi+An", rating: "4.2", reviews: "4,400" },
-            { id: 19, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/甜點"], lat: 16.0650, lng: 108.2450, desc: "空間明亮好拍，喝咖啡享受海風與悠閒午後。", rec: "特調咖啡", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang", rating: "4.7", reviews: "280" },
+            { id: 19, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/甜點"], lat: 16.0650, lng: 108.2450, desc: "空間明亮好拍，喝咖啡享受海風與悠閒午後。", rec: "特調咖啡", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang", rating: "4.5", reviews: "280" },
             { id: 20, name: "Gỏi cá Nam Ô (Nam O 涼拌魚)", korName: "Gỏi cá Nam Ô", area: "市區", types: ["傳統越菜"], lat: 16.0715, lng: 108.2155, desc: "峴港在地特色，必試的道地涼拌生魚片，酸辣開胃超特別！", rec: "在地酸辣涼拌生魚片", url: "https://www.google.com/maps/search/?api=1&query=Goi+ca+Nam+O+Da+Nang", rating: "4.3", reviews: "950" },
-            { id: 21, name: "All Seasons Buffet (四季餐廳)", korName: "Nhà hàng Bốn Mùa", area: "巴拿山", types: ["異國料理"], lat: 15.9980, lng: 107.9900, desc: "巴拿山上選擇最豐富的多國籍百匯，海鮮與各國料理應有盡有！", rec: "烤肉區、海鮮冷盤", url: "https://www.google.com/maps/search/?api=1&query=All+Seasons+Buffet+Ba+Na+Hills", rating: "4.5", reviews: "1,120" }
+            { id: 21, name: "All Seasons Buffet (四季餐廳)", korName: "Nhà hàng Bốn Mùa", area: "市區", types: ["異國料理"], lat: 16.0630, lng: 108.2420, desc: "市區頂級龍蝦海鮮百匯，大隻龍蝦現烤現做，評價極高！", rec: "奶油焗烤龍蝦、蒜香大蝦", url: "https://www.google.com/maps/search/?api=1&query=All+Seasons+Buffet+Da+Nang", rating: "4.9", reviews: "1,120" }
         ];
 
         let currentArea = '全部';
@@ -1978,7 +1925,7 @@
 
             areaContainer.innerHTML = displayAreas.map(area => `
                 <button onclick="setFilter('area', '${area}')" 
-                        class="px-3 py-1.5 text-xs font-bold rounded-full whitespace-nowrap transition-colors shadow-sm ${currentArea === area ? 'bg-stone-800 text-white' : 'bg-white border border-stone-200 text-stone-500 hover:bg-stone-100'}">
+                        class="px-3 py-1.5 text-xs font-bold rounded-full whitespace-nowrap transition-colors shadow-sm ${currentArea === area ? 'bg-stone-800 text-white' : 'bg-white border border-stone-200 text-stone-500 hover:bg-slate-100'}">
                     ${area}
                 </button>
             `).join('');
@@ -2064,26 +2011,68 @@
             );
         }
 
+        // 讀取/儲存美食打卡與筆記狀態
+        function getFoodMeta(id) {
+            try {
+                const data = localStorage.getItem('food_meta_' + id);
+                return data ? JSON.parse(data) : { checked: false, note: '' };
+            } catch(e) {
+                return { checked: false, note: '' };
+            }
+        }
+
+        function saveFoodMeta(id, checked, note) {
+            try {
+                localStorage.setItem('food_meta_' + id, JSON.stringify({ checked, note }));
+            } catch(e) {}
+        }
+
+        function toggleFoodCheck(id) {
+            const meta = getFoodMeta(id);
+            meta.checked = !meta.checked;
+            saveFoodMeta(id, meta.checked, meta.note);
+            renderList();
+            showToast(meta.checked ? "✅ 已記錄為吃過，移至底部" : "↩️ 已取消打卡");
+        }
+
+        function updateFoodNote(id, noteText) {
+            const meta = getFoodMeta(id);
+            meta.note = noteText;
+            // 如果輸入了筆記，也順便自動標記為打卡吃過，UX更直覺流暢
+            if(noteText.trim() !== '' && !meta.checked) {
+                meta.checked = true;
+            }
+            saveFoodMeta(id, meta.checked, meta.note);
+            renderList();
+        }
+
         function renderList() {
             const listContainer = document.getElementById('restaurant-list');
             let filteredList = foodDatabase.filter(food => {
                 const matchArea = currentArea === '全部' || food.area === currentArea;
                 const matchType = currentType === '全部' || food.types.includes(currentType);
-                
                 const matchSearch = searchQuery === '' || 
                                     food.name.toLowerCase().includes(searchQuery) ||
                                     food.korName.toLowerCase().includes(searchQuery) ||
                                     food.area.toLowerCase().includes(searchQuery) ||
                                     food.types.some(t => t.toLowerCase().includes(searchQuery));
-
                 return matchArea && matchType && matchSearch;
             });
+
+            // 核心 UX：未打卡的在前，已打卡吃過的自動沉底
+            filteredList = filteredList.map(food => {
+                const meta = getFoodMeta(food.id);
+                return { ...food, checked: meta.checked, note: meta.note };
+            }).sort((a, b) => (a.checked === b.checked) ? 0 : a.checked ? 1 : -1);
 
             if (userLocation) {
                 filteredList = filteredList.map(food => {
                     const dist = calculateDistance(userLocation.lat, userLocation.lng, food.lat, food.lng);
                     return { ...food, distance: dist };
-                }).sort((a, b) => a.distance - b.distance);
+                }).sort((a, b) => {
+                    if (a.checked !== b.checked) return a.checked ? 1 : -1;
+                    return a.distance - b.distance;
+                });
             }
 
             if (filteredList.length === 0) {
@@ -2105,19 +2094,32 @@
                 let recHtml = food.rec ? `<div class="mt-1.5 text-[10px] text-red-500 font-bold bg-red-50/80 px-1.5 py-0.5 rounded inline-block"><i class="fa-solid fa-fire text-red-500 mr-0.5"></i>推: ${food.rec}</div>` : '';
                 let ratingHtml = food.rating ? `<span class="text-[10px] text-amber-500 font-bold ml-1"><i class="fa-solid fa-star text-amber-400"></i> ${food.rating} <span class="text-stone-400 font-normal">(${food.reviews})</span></span>` : '';
 
+                const cardClass = food.checked ? "food-card checked-food" : "food-card";
+                const titleClass = food.checked ? "font-bold text-sm text-stone-400 line-through leading-tight" : "font-bold text-sm text-stone-800 leading-tight";
+                const descClass = food.checked ? "text-[10px] text-stone-400 line-clamp-2 leading-snug" : "text-[10px] text-stone-500 line-clamp-2 leading-snug";
+
                 return `
-                <div class="food-card">
+                <div class="${cardClass}">
                     <div>
                         <div class="flex justify-between items-start mb-1">
-                            <h3 class="font-bold text-sm text-stone-800 leading-tight">${food.name}</h3>
+                            <h3 class="${titleClass}">${food.name}</h3>
                             <a href="${food.url}" target="_blank" class="text-green-500 bg-green-50 w-7 h-7 rounded-full flex items-center justify-center shrink-0 ml-1 mb-1 active:scale-95 transition-transform" title="開啟地圖">
                                 <i class="fa-solid fa-map-location-dot text-xs"></i>
                             </a>
                         </div>
                         <p class="text-[9px] text-stone-400 mb-1 line-clamp-1" title="${food.korName}">${food.korName}</p>
                         <p class="text-[10px] text-stone-600 font-medium mb-1">📍 ${food.area} | ${food.types[0]} ${ratingHtml}</p>
-                        <p class="text-[10px] text-stone-500 line-clamp-2 leading-snug">${food.desc}</p>
+                        <p class="${descClass}">${food.desc}</p>
                         ${recHtml}
+                        
+                        <!-- 美食筆記與打卡輸入區塊 -->
+                        <div class="mt-2.5 pt-2 border-t border-stone-100 flex items-center gap-1.5">
+                            <label class="flex items-center gap-1 text-[10px] font-bold text-stone-600 cursor-pointer shrink-0">
+                                <input type="checkbox" ${food.checked ? 'checked' : ''} onchange="toggleFoodCheck(${food.id})" class="w-3.5 h-3.5 text-orange-600 rounded border-stone-300 focus:ring-orange-500">
+                                <span>吃過</span>
+                            </label>
+                            <input type="text" value="${food.note || ''}" placeholder="寫個小筆記..." onchange="updateFoodNote(${food.id}, this.value)" class="w-full bg-stone-50 border border-stone-200 rounded px-2 py-1 text-[10px] text-stone-700 focus:outline-none focus:border-orange-400">
+                        </div>
                     </div>
                     <div class="text-right border-t border-stone-50 pt-1 mt-1">
                         ${distanceHtml}
@@ -2148,7 +2150,6 @@
 
         function playTadaSound() {
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            
             const freqs = [523.25, 659.25, 783.99]; 
             freqs.forEach(freq => {
                 const osc = audioCtx.createOscillator();
@@ -2210,7 +2211,6 @@
                         <h4 class="font-black text-xl text-stone-400">${tempFood.name}</h4>
                     </div>
                 `;
-                
                 playTickSound();
 
                 rolls++;
@@ -2262,7 +2262,6 @@
             setTimeout(() => { modal.classList.add('hidden'); }, 300);
         }
 
-        // ================= 頁面初始化 =================
         window.onload = () => {
             loadChecks();
             checkAutoDateJump();
@@ -2281,7 +2280,7 @@
                 topBtn.classList.remove('show');
             }
         });
-
     </script>
 </body>
 </html>
+
