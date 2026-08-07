@@ -119,27 +119,10 @@
     <div id="toast" class="toast"><i class="fa-solid fa-circle-check text-amber-400" id="toast-icon"></i> <span id="toast-msg"></span></div>
 
     <header class="hero-bg h-36 flex flex-col justify-end p-5 text-white relative">
-        <div class="absolute top-4 right-4 flex gap-1.5 flex-wrap justify-end max-w-[180px]">
-            <a href="https://docs.google.com/spreadsheets/d/13o59SvhyGKnTrMRPYG4CeqIeXkFEGieSj5-C4UjwAMw/edit?usp=sharing" target="_blank" class="w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="Google 試算表行程">
-                <i class="fa-solid fa-file-excel"></i>
-            </a>
-            <a href="https://maps.app.goo.gl/R28FoNx1fqqmQEei6" target="_blank" class="fixed top-4 right-4 z-50 flex items-center justify-center w-11 h-11 bg-sky-500 text-white rounded-full shadow-md border-2 border-white hover:bg-sky-600 hover:scale-105 transition-all duration-200">
-             <i class="fa-solid fa-map-location-dot text-lg"></i>
-            </a>
-            <button onclick="switchTab('overview', this)" id="header-overview-btn" class="header-btn w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-emerald-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="行程概覽">
-                <i class="fa-solid fa-calendar-days"></i>
-            </button>
-            <button onclick="switchTab('hotels', this)" id="header-hotels-btn" class="header-btn w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-teal-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="飯店簡介與設施">
-                <i class="fa-solid fa-bed"></i>
-            </button>
-            <button onclick="switchTab('currency', this)" id="header-currency-btn" class="header-btn w-8 h-8 mb-1.5 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="匯率換算">
+        <div class="absolute top-4 right-4 grid grid-cols-3 gap-1.5">
+            <!-- 第一排：幣值 / 餐廳 / 購物 -->
+            <button onclick="switchTab('currency', this)" id="header-currency-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-yellow-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="匯率換算">
                 <i class="fa-solid fa-dong-sign"></i>
-            </button>
-            <button onclick="switchTab('tips', this)" id="header-tips-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-indigo-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="旅遊注意事項">
-                <i class="fa-solid fa-book-open"></i>
-            </button>
-            <button onclick="switchTab('phrases', this)" id="header-phrases-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-amber-200 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="越語翻譯">
-                <i class="fa-solid fa-language"></i>
             </button>
             <button onclick="switchTab('food', this)" id="header-food-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-orange-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="美食名單">
                 <i class="fa-solid fa-utensils"></i>
@@ -147,6 +130,28 @@
             <button onclick="switchTab('places', this)" id="header-places-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-sky-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="景點清單">
                 <i class="fa-solid fa-bag-shopping"></i>
             </button>
+
+            <!-- 第二排：翻譯 / 注意事項 / 概覽 -->
+            <button onclick="switchTab('phrases', this)" id="header-phrases-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-amber-200 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="越語翻譯">
+                <i class="fa-solid fa-language"></i>
+            </button>
+            <button onclick="switchTab('tips', this)" id="header-tips-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-indigo-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="旅遊注意事項">
+                <i class="fa-solid fa-book-open"></i>
+            </button>
+            <button onclick="switchTab('overview', this)" id="header-overview-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-emerald-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="行程概覽">
+                <i class="fa-solid fa-calendar-days"></i>
+            </button>
+
+            <!-- 第三排：總覽 / 飯店 / Google Maps -->
+            <a href="https://docs.google.com/spreadsheets/d/13o59SvhyGKnTrMRPYG4CeqIeXkFEGieSj5-C4UjwAMw/edit?usp=sharing" target="_blank" class="w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-green-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="Google 試算表行程">
+                <i class="fa-solid fa-file-excel"></i>
+            </a>
+            <button onclick="switchTab('hotels', this)" id="header-hotels-btn" class="header-btn w-8 h-8 rounded-full bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center text-teal-300 hover:bg-white/30 transition-all shadow-lg active:scale-95" title="飯店簡介與設施">
+                <i class="fa-solid fa-bed"></i>
+            </button>
+            <a href="https://maps.app.goo.gl/R28FoNx1fqqmQEei6" target="_blank" class="w-8 h-8 rounded-full bg-sky-500/40 backdrop-blur border border-white/50 flex items-center justify-center text-white hover:bg-sky-500/60 transition-all shadow-lg active:scale-95" title="Google Maps 口袋名單">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </a>
         </div>
         <div class="max-w-md mx-auto w-full mt-2">
             <h1 class="text-xl font-black font-[Montserrat] uppercase tracking-tighter flex items-center gap-1.5">
@@ -247,6 +252,40 @@
             <button onclick="switchTab('day1', document.getElementById('nav-day1'))" class="w-full mt-4 bg-stone-800 text-white text-xs font-bold py-3 rounded-xl shadow-md active:scale-95 transition-all">
                 開始旅程 <i class="fa-solid fa-arrow-right ml-1"></i>
             </button>
+
+            <!-- 專屬口袋名單區塊 (Notion 極簡風總覽) -->
+            <section id="pocket-list-summary" class="mt-10 mb-4 bg-white p-4 rounded-2xl shadow-sm border border-stone-100">
+                <h2 class="text-sm font-extrabold text-stone-700 mb-3 flex items-center gap-2 pb-2 border-b border-stone-100">
+                    <i class="fa-solid fa-star text-amber-400"></i> 專屬地圖口袋名單總覽
+                </h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="font-bold text-[11px] text-stone-800 mb-2 flex items-center gap-1.5"><i class="fa-solid fa-utensils text-orange-500 w-4"></i> 美食、咖啡與海鮮 Buffet</h3>
+                        <p class="text-[10px] text-stone-500 leading-snug">
+                            Bánh Xèo Bà Dưỡng、Thìa Gỗ 峴港餐廳、Pizza 4P's (Hoang Van Thu & Indochina)、Cô Huế chợ Cồn、Bánh mì Happy Bread、Cửa Ngõ Café<br>
+                            <span class="text-red-500 font-medium">奢華海鮮戰區：</span>All Seasons Buffet、Buffet Hải Sản Mr Mộc、Doc moc buffet、Buffet Poseidon Premium
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-[11px] text-stone-800 mb-2 flex items-center gap-1.5"><i class="fa-solid fa-bag-shopping text-pink-500 w-4"></i> 服飾、涼鞋與購物聖地</h3>
+                        <p class="text-[10px] text-stone-500 leading-snug">
+                            <span class="text-pink-500 font-medium">高評價女裝：</span>Sexy Pieces Shop、CARA CLUB、Dezus、OLV、Rechic Shop、Routine、Havana、Micha Vintage<br>
+                            <span class="text-stone-700 font-medium">鞋包與換匯：</span>Nagashoes (涼鞋)、Khải Hoàn III (換錢所)、韓市場、Lotte Mart、GO MARKET
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-[11px] text-stone-800 mb-2 flex items-center gap-1.5"><i class="fa-solid fa-spa text-teal-500 w-4"></i> 頂級 SPA 與必去景點</h3>
+                        <p class="text-[10px] text-stone-500 leading-snug">
+                            <span class="text-teal-600 font-medium">SPA：</span>Herbal Spa、Luxury Herbal Spa、Luxury Healthy Spa & Massage、RORA Spa<br>
+                            <span class="text-sky-600 font-medium">景點：</span>美溪沙灘、安邦海灘、五行山、美山聖地、3D Museum
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <p class="text-[10px] text-stone-400 mb-2">所有名單已整合至上方導覽列的「玩樂」與「美食」頁籤中，支援即時距離計算與條件篩選！</p>
+                </div>
+            </section>
         </section>
 
         <!-- ================= 注意事項與秘笈模組 ================= -->
@@ -298,7 +337,7 @@
             <div class="compact-card border-l-4 border-l-rose-500">
                 <h3 class="font-bold text-sm text-rose-800 mb-2 border-b border-rose-50 pb-1 flex items-center"><i class="fa-solid fa-shield-halved mr-1.5 w-4 text-center"></i> 交通與治安防範 (峴港專屬)</h3>
                 <ul class="space-y-2.5 text-[11px] text-stone-600 mt-2">
-                    <li class="flex items-start gap-1.5"><i class="fa-solid fa-car text-rose-400 mt-0.5 w-4 text-center shrink-0"></i> <div><strong class="text-stone-800">叫車只用 Grab：</strong>峴港市區移動或前往會安古鎮，請全程使用 Grab 叫車，價格透明。絕對不要搭乘路邊主動攬客的計程車，以免被繞路或坐地起價。</div></li>
+                    <li class="flex items-start gap-1.5"><i class="fa-solid fa-car text-rose-400 mt-0.5 w-4 text-center shrink-0"></i> <div><strong class="text-stone-800">叫車只用 Grab：</strong>峴港市區移動或前往會安古鎮，請全程使用 Grab 叫車，價格透明。絕對不要搭乘路邊主動攬客的計程車，以免被繞路或坐起起價。</div></li>
                     <li class="flex items-start gap-1.5"><i class="fa-solid fa-scale-balanced text-rose-400 mt-0.5 w-4 text-center shrink-0"></i> <div><strong class="text-stone-800">海鮮餐廳「先問價」：</strong>美溪沙灘周邊有許多海鮮大排檔，點餐前一定要先跟店家確認 <span class="font-bold text-rose-600">「計價單位是 1 公斤還是 100 公克」</span>，並看著店家秤重確認總價後再入座。</div></li>
                     <li class="flex items-start gap-1.5"><i class="fa-solid fa-mobile-screen text-rose-400 mt-0.5 w-4 text-center shrink-0"></i> <div><strong class="text-stone-800">手機與包包不離身：</strong>峴港治安雖相對良好，但在路邊喝咖啡或吃河粉時，絕對不要把手機放在桌邊，包包也要往前背，以防飛車搶劫與扒手。</div></li>
                     <li class="flex items-start gap-1.5"><i class="fa-solid fa-person-walking text-rose-400 mt-0.5 w-4 text-center shrink-0"></i> <div><strong class="text-stone-800">過馬路心法：</strong>走斑馬線、舉起手示意、與騎士眼神交會，然後 <span class="bg-rose-50 text-rose-700 px-1 rounded font-bold">「維持固定速度往前走」</span>。千萬不要突然停下或往後退，當地的機車會自動閃避你。</div></li>
@@ -1200,27 +1239,6 @@
                 </div>
             </div>
             
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">吃飽後搭乘 Grab 前往機場，結束美好旅程。</p>
-            </div>
-
-            <div class="compact-card">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:00</span>
-                        <div>
-                            <h3 class="font-bold text-sm">前往機場國際航廈</h3>
-                            <p class="text-[10px] text-stone-500">提早 3 小時抵達，辦理退稅與報到手續</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-1.5">
-                        <button onclick="openNoteModal('d6-airport')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d6-airport"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Da+Nang+International+Airport" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                </div>
-            </div>
-            
             <div class="bg-gradient-to-r from-stone-800 to-stone-900 text-white rounded-2xl p-4 shadow-lg relative overflow-hidden mt-6">
                 <div class="absolute -right-4 -top-4 opacity-10"><i class="fa-solid fa-plane text-8xl rotate-180"></i></div>
                 <div class="relative z-10">
@@ -1304,7 +1322,7 @@
             <div id="places-list" class="mt-4 pb-10 grid grid-cols-2 gap-3"></div>
         </section>
 
-        <!-- ================= 美食模組 (升級：精準評分與吃過自動沉底+筆記UX) ================= -->
+        <!-- ================= 美食模組 ================= -->
         <section id="food-content" class="tab-content space-y-4">
             <div class="flex justify-between items-end mb-2">
                 <div class="flex items-center gap-2">
@@ -1439,10 +1457,9 @@
         </div>
     </div>
 
-    <!-- 美食隨機抽籤 Modal (已加強：右上角小叉叉關閉按鈕) -->
+    <!-- 美食隨機抽籤 Modal -->
     <div id="dice-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
         <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-[300px] w-full mx-4 transform scale-95 transition-transform duration-300 relative" id="dice-modal-content">
-            <!-- 右上角小叉叉關閉按鈕 -->
             <button onclick="closeModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600 bg-stone-100 hover:bg-stone-200 w-8 h-8 rounded-full flex items-center justify-center transition-all">
                 <i class="fa-solid fa-xmark text-sm"></i>
             </button>
@@ -1455,7 +1472,6 @@
             </div>
             
             <div id="dice-result-card" class="bg-orange-50 p-4 rounded-xl border border-orange-100 mb-5 relative overflow-hidden min-h-[140px] flex items-center justify-center">
-                <!-- 動態填入抽籤結果 -->
             </div>
             
             <button id="dice-action-btn" onclick="closeModal()" class="w-full bg-stone-800 text-white font-bold py-2.5 rounded-xl shadow-md active:scale-95 transition-transform text-sm flex items-center justify-center gap-2">
@@ -1747,7 +1763,17 @@
             { id: 102, name: "Lotte Mart (峴港店)", korName: "Lotte Mart Đà Nẵng", area: "市區", types: ["血拚"], lat: 16.0345, lng: 108.2320, desc: "回程爆買 20kg 的好去處，伴手禮零食咖啡齊全", url: "https://www.google.com/maps/search/?api=1&query=Lotte+Mart+Da+Nang" },
             { id: 103, name: "Con Market (共市場)", korName: "Chợ Cồn", area: "市區", types: ["血拚"], lat: 16.0695, lng: 108.2140, desc: "在地人逛的市場，買奧黛與吃道地小吃首選", url: "https://www.google.com/maps/search/?api=1&query=Con+Market+Da+Nang" },
             { id: 104, name: "GO! Đà Nẵng", korName: "GO! Đà Nẵng", area: "市區", types: ["血拚"], lat: 16.0665, lng: 108.2135, desc: "明亮乾淨的大賣場，吹冷氣採買果乾、咖啡等伴手禮的好去處", url: "https://maps.app.goo.gl/BVgVwomJ1rUk82qQ6" },
-            
+            { id: 105, name: "Tiệm vàng Khải Hoàn III", korName: "Khải Hoàn III", area: "市區", types: ["實用"], lat: 16.0680, lng: 108.2230, desc: "換匯首選！高匯率珠寶金店", url: "https://www.google.com/maps/search/?api=1&query=Tiem+vang+Khai+Hoan+III+Da+Nang" },
+            { id: 201, name: "Micha Vintage", korName: "Micha Vintage", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "4.5星復古服裝店", url: "https://www.google.com/maps/search/?api=1&query=Micha+Vintage+Da+Nang" },
+            { id: 202, name: "Routine Đà Nẵng", korName: "Routine", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "4.8星質感時裝店", url: "https://www.google.com/maps/search/?api=1&query=Routine+Da+Nang" },
+            { id: 203, name: "Nagashoes", korName: "Nagashoes", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "買編織涼鞋好去處，4.5星評價", url: "https://www.google.com/maps/search/?api=1&query=Nagashoes+95+Tran+Quang+Dieu+Da+Nang" },
+            { id: 204, name: "Sexy Pieces Shop", korName: "Sexy Pieces", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "5.0星滿分質感女裝店", url: "https://www.google.com/maps/search/?api=1&query=Sexy+Pieces+Shop+Da+Nang" },
+            { id: 205, name: "Havana Lê Duẩn", korName: "Havana", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "在地4.9星時裝店", url: "https://www.google.com/maps/search/?api=1&query=Havana+Le+Duan+Da+Nang" },
+            { id: 206, name: "CARA CLUB", korName: "CARA CLUB", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "4.9星女士服裝店", url: "https://www.google.com/maps/search/?api=1&query=CARA+CLUB+Da+Nang" },
+            { id: 207, name: "Rechic Shop", korName: "Rechic", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "5.0星時髦服飾店", url: "https://www.google.com/maps/search/?api=1&query=Rechic+Shop+Da+Nang" },
+            { id: 208, name: "Dezus Đà Nẵng", korName: "Dezus", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "5.0星高評價時裝店", url: "https://www.google.com/maps/search/?api=1&query=Dezus+Da+Nang" },
+            { id: 209, name: "OLV Đà Nẵng", korName: "OLV", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "5.0星滿分高評價女裝", url: "https://www.google.com/maps/search/?api=1&query=OLV+Da+Nang" },
+
             { id: 501, name: "巴拿山 黃金佛手橋", korName: "Cầu Vàng", area: "郊區", types: ["景點"], lat: 15.9950, lng: 107.9960, desc: "峴港必去打卡點，雲端上的巨手", rec: "盡量早上前往避開人潮", url: "https://www.google.com/maps/search/?api=1&query=Golden+Bridge+Ba+Na+Hills" },
             { id: 502, name: "峴港粉紅大教堂", korName: "Nhà thờ chính tòa Đà Nẵng", area: "市區", types: ["景點"], lat: 16.0665, lng: 108.2230, desc: "法式哥德風粉紅教堂，少女心噴發", url: "https://www.google.com/maps/search/?api=1&query=Da+Nang+Cathedral" },
             { id: 503, name: "龍橋 Dragon Bridge", korName: "Cầu Rồng", area: "市區", types: ["景點"], lat: 16.0610, lng: 108.2270, desc: "橫跨瀚江的黃金巨龍", rec: "週五六日晚上 9 點有噴火秀", url: "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang" },
@@ -1755,9 +1781,19 @@
             { id: 505, name: "會安古鎮", korName: "Phố cổ Hội An", area: "會安", types: ["景點"], lat: 15.8770, lng: 108.3280, desc: "世界文化遺產，黃牆老屋與浪漫燈籠", rec: "強烈建議租借奧黛拍照", url: "https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town" },
             { id: 506, name: "秋盆河水燈夜市", korName: "Chợ Đêm Hội An", area: "會安", types: ["景點"], lat: 15.8750, lng: 108.3260, desc: "夜晚搭船放水燈祈福", url: "https://www.google.com/maps/search/?api=1&query=Hoi+An+Night+Market" },
             { id: 507, name: "美山聖地遺址", korName: "Thánh địa Mỹ Sơn", area: "郊區", types: ["景點"], lat: 15.7640, lng: 108.1240, desc: "占婆王國的世界文化遺產，被譽為小吳哥窟，建議半日遊。", url: "https://www.google.com/maps/search/?api=1&query=My+Son+Sanctuary" },
-            
+            { id: 508, name: "五行山 Marble Mountains", korName: "Ngũ Hành Sơn", area: "郊區", types: ["景點"], lat: 16.0000, lng: 108.2600, desc: "4.4星自然景點，由五座大理石假山組成", url: "https://www.google.com/maps/search/?api=1&query=The+Marble+Mountains+Da+Nang" },
+            { id: 509, name: "美溪沙灘 My Khe Beach", korName: "Biển Mỹ Khê", area: "美溪沙灘", types: ["景點"], lat: 16.0600, lng: 108.2450, desc: "世界最美六大海灘之一，渡假天堂", url: "https://www.google.com/maps/search/?api=1&query=My+Khe+Beach+Da+Nang" },
+            { id: 510, name: "安邦海灘 An Bang Beach", korName: "Biển An Bàng", area: "會安", types: ["景點"], lat: 15.9000, lng: 108.3300, desc: "會安知名公共海灘，氣氛悠閒", url: "https://www.google.com/maps/search/?api=1&query=An+Bang+Beach+Hoi+An" },
+            { id: 511, name: "3D Museum Art in paradise", korName: "Bảo tàng 3D", area: "市區", types: ["景點"], lat: 16.1000, lng: 108.2400, desc: "有趣的室內3D藝術博物館，非常適合躲太陽", url: "https://www.google.com/maps/search/?api=1&query=3D+Museum+Art+in+paradise+Da+Nang" },
+            { id: 512, name: "美溪椰林沙灘", korName: "Bãi tắm hàng dừa", area: "美溪沙灘", types: ["景點"], lat: 16.0500, lng: 108.2450, desc: "充滿熱帶風情的椰林沙灘", url: "https://www.google.com/maps/search/?api=1&query=Bai+tam+hang+dua+My+Khe+Da+Nang" },
+
             { id: 701, name: "Herbal Spa", korName: "Herbal Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: 16.0620, lng: 108.2430, desc: "評價極高的全身精油/深層按摩，同房可選不同方案", url: "https://www.google.com/maps/search/?api=1&query=Herbal+Spa+Da+Nang" },
-            { id: 801, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/放空"], lat: 16.0650, lng: 108.2450, desc: "空間明亮好拍的網美海景咖啡廳", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" }
+            { id: 702, name: "Luxury Herbal Spa", korName: "Luxury Herbal Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: null, lng: null, desc: "4.9星高人氣極致水療中心", url: "https://www.google.com/maps/search/?api=1&query=Luxury+Herbal+Spa+Da+Nang" },
+            { id: 703, name: "Luxury Healthy Spa & Massage", korName: "Luxury Healthy Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: null, lng: null, desc: "4.8星專業按摩治療中心", url: "https://www.google.com/maps/search/?api=1&query=Luxury+Healthy+Spa+and+Massage+Da+Nang" },
+            { id: 704, name: "RORA Spa & Massage", korName: "RORA Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: null, lng: null, desc: "4.7星優質按摩水療，放鬆身心好去處", url: "https://www.google.com/maps/search/?api=1&query=RORA+Spa+and+Massage+Da+Nang" },
+
+            { id: 802, name: "Risemount Premier Resort", korName: "Risemount", area: "美溪沙灘", types: ["住宿"], lat: 16.0550, lng: 108.2400, desc: "聖托里尼絕美風5星級度假村", url: "https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Danang" },
+            { id: 803, name: "Peninsula Hotel Danang", korName: "Peninsula Hotel", area: "山茶半島", types: ["住宿"], lat: 16.0800, lng: 108.2450, desc: "無敵海景5星級高級飯店", url: "https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang" }
         ];
 
         let placesCurrentArea = '全部';
@@ -1935,7 +1971,7 @@
             }).join('');
         }
 
-        // ================= 美食名單模組 (已更新：真實精準評分、吃過自動沈底 + 筆記狀態) =================
+        // ================= 美食名單模組 =================
         const foodDatabase = [
             { id: 1, name: "Bánh Xèo Tôm Nhảy Năm Hiền", korName: "南賢餐廳", area: "市區", types: ["小吃/粉"], lat: 16.0620, lng: 108.2160, desc: "外酥內Q的層次感！招牌海鮮與牛肉煎餅必吃。", rec: "魷魚/蝦子煎餅 59K", url: "https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Tom+Nhay+Nam+Hien+Da+Nang", rating: "4.3", reviews: "1,425" },
             { id: 2, name: "Quán Phú Hồng", korName: "Phú Hồng 烤肉", area: "市區", types: ["烤肉"], lat: 16.0650, lng: 108.2200, desc: "主打醬烤牛肉，也有檳榔葉肉捲，香氣逼人。", rec: "醬烤牛肉 130K、檳榔葉肉捲 90K", url: "https://www.google.com/maps/search/?api=1&query=Quan+Phu+Hong+Da+Nang", rating: "4.1", reviews: "890" },
@@ -1957,7 +1993,14 @@
             { id: 18, name: "Faifo Coffee", korName: "Faifo Coffee", area: "會安", types: ["咖啡/甜點"], lat: 15.8770, lng: 108.3275, desc: "會安最知名的老屋咖啡，二樓陽台可拍古鎮全景", rec: "椰子咖啡", url: "https://www.google.com/maps/search/?api=1&query=Faifo+Coffee+Hoi+An", rating: "4.2", reviews: "4,400" },
             { id: 19, name: "Login Coffee", korName: "Login Coffee", area: "美溪沙灘", types: ["咖啡/甜點"], lat: 16.0650, lng: 108.2450, desc: "空間明亮好拍，喝咖啡享受海風與悠閒午後。", rec: "特調咖啡", url: "https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang", rating: "4.5", reviews: "280" },
             { id: 20, name: "Gỏi cá Nam Ô (Nam O 涼拌魚)", korName: "Gỏi cá Nam Ô", area: "市區", types: ["傳統越菜"], lat: 16.0715, lng: 108.2155, desc: "峴港在地特色，必試的道地涼拌生魚片，酸辣開胃超特別！", rec: "在地酸辣涼拌生魚片", url: "https://www.google.com/maps/search/?api=1&query=Goi+ca+Nam+O+Da+Nang", rating: "4.3", reviews: "950" },
-            { id: 21, name: "All Seasons Buffet (四季餐廳)", korName: "Nhà hàng Bốn Mùa", area: "市區", types: ["異國料理"], lat: 16.0630, lng: 108.2420, desc: "市區頂級龍蝦海鮮百匯，大隻龍蝦現烤現做，評價極高！", rec: "奶油焗烤龍蝦、蒜香大蝦", url: "https://www.google.com/maps/search/?api=1&query=All+Seasons+Buffet+Da+Nang", rating: "4.9", reviews: "1,120" }
+            { id: 21, name: "All Seasons Buffet (四季餐廳)", korName: "Nhà hàng Bốn Mùa", area: "市區", types: ["異國料理"], lat: 16.0630, lng: 108.2420, desc: "市區頂級龍蝦海鮮百匯，大隻龍蝦現烤現做，評價極高！", rec: "奶油焗烤龍蝦、蒜香大蝦", url: "https://www.google.com/maps/search/?api=1&query=All+Seasons+Buffet+Da+Nang", rating: "4.9", reviews: "1,120" },
+            { id: 22, name: "Cửa Ngõ Café", korName: "Cửa Ngõ Café", area: "市區", types: ["咖啡/甜點"], lat: 16.0500, lng: 108.2000, desc: "高評價特色咖啡廳，氣氛極佳", url: "https://www.google.com/maps/search/?api=1&query=Cua+Ngo+Cafe+Da+Nang", rating: "4.7", reviews: "1,580" },
+            { id: 23, name: "Thìa Gỗ 峴港餐廳", korName: "Thìa Gỗ", area: "市區", types: ["傳統越菜"], lat: 16.0600, lng: 108.2200, desc: "精緻乾淨的越式餐廳，美味與衛生兼具，腸胃安全首選", url: "https://www.google.com/maps/search/?api=1&query=Thia+Go+Restaurant+Da+Nang", rating: "4.7", reviews: "7,523" },
+            { id: 24, name: "Cô Huế chợ Cồn", korName: "Cô Huế", area: "市區", types: ["小吃/粉"], lat: 16.0695, lng: 108.2140, desc: "共市場內高評價美食攤位，不可錯過的在地滋味", url: "https://www.google.com/maps/search/?api=1&query=Co+Hue+cho+Con+Da+Nang", rating: "4.6", reviews: "29" },
+            { id: 25, name: "Pizza 4P's (Indochina Mall)", korName: "Pizza 4P's", area: "市區", types: ["異國料理"], lat: 16.0670, lng: 108.2240, desc: "位於百貨公司內的備案分店，有冷氣且客滿率相對較低", url: "https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Indochina+Da+Nang", rating: "4.8", reviews: "2,000" },
+            { id: 26, name: "Buffet Poseidon Premium", korName: "Buffet Poseidon", area: "市區", types: ["海鮮"], lat: 16.0600, lng: 108.2200, desc: "知名海鮮百匯餐廳", url: "https://www.google.com/maps/search/?api=1&query=Buffet+Poseidon+Da+Nang+Premium", rating: "4.2", reviews: "528" },
+            { id: 27, name: "Buffet Hải Sản Mr Mộc", korName: "Mr Mộc", area: "市區", types: ["海鮮"], lat: 16.0600, lng: 108.2400, desc: "評價超高的海鮮吃到飽餐廳，品項豐富", url: "https://www.google.com/maps/search/?api=1&query=Buffet+Hai+San+Da+Nang+Mr+Moc", rating: "4.9", reviews: "2,721" },
+            { id: 28, name: "Doc moc buffet", korName: "Doc moc", area: "市區", types: ["海鮮"], lat: 16.0600, lng: 108.2400, desc: "熱門海鮮 Buffet", url: "https://www.google.com/maps/search/?api=1&query=Doc+moc+buffet+Da+Nang", rating: "4.7", reviews: "3,215" }
         ];
 
         let currentArea = '全部';
@@ -2093,7 +2136,6 @@
         function updateFoodNote(id, noteText) {
             const meta = getFoodMeta(id);
             meta.note = noteText;
-            // 如果輸入了筆記，也順便自動標記為打卡吃過，UX更直覺流暢
             if(noteText.trim() !== '' && !meta.checked) {
                 meta.checked = true;
             }
@@ -2357,4 +2399,3 @@
 
 </body>
 </html>
-
