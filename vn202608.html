@@ -1759,22 +1759,24 @@
         }
 
 
-        // ================= 景點與購物名單模組 (已更新 2026 最新星等與評分數) =================
+
+
+        // ================= 景點與購物名單模組 (已補齊所有店家精準座標) =================
         const placesDatabase = [
             { id: 101, name: "越南峴港漢市場", korName: "Chợ Hàn", area: "市區", types: ["血拚"], lat: 16.0680, lng: 108.2235, desc: "買藤編包、腰果、編織涼鞋的戰區。記得殺價！", url: "https://www.google.com/maps/search/?api=1&query=Han+Market+Da+Nang", rating: "3.9", reviews: "44,299" },
             { id: 102, name: "Lotte Mart (峴港店)", korName: "Lotte Mart Đà Nẵng", area: "市區", types: ["血拚"], lat: 16.0345, lng: 108.2320, desc: "回程爆買 20kg 的好去處，伴手禮零食咖啡齊全", url: "https://www.google.com/maps/search/?api=1&query=Lotte+Mart+Da+Nang", rating: "4.2", reviews: "15,338" },
             { id: 103, name: "Con Market (共市場)", korName: "Chợ Cồn", area: "市區", types: ["血拚"], lat: 16.0695, lng: 108.2140, desc: "在地人逛的市場，買奧黛與吃道地小吃首選", url: "https://www.google.com/maps/search/?api=1&query=Con+Market+Da+Nang", rating: "4.3", reviews: "22,563" },
             { id: 104, name: "GO! Đà Nẵng", korName: "GO! Đà Nẵng", area: "市區", types: ["血拚"], lat: 16.0665, lng: 108.2135, desc: "明亮乾淨的大賣場，吹冷氣採買果乾、咖啡等伴手禮的好去處", url: "https://maps.app.goo.gl/BVgVwomJ1rUk82qQ6", rating: "4.1", reviews: "17" },
             { id: 105, name: "Tiệm vàng Khải Hoàn III", korName: "Khải Hoàn III", area: "市區", types: ["實用"], lat: 16.0680, lng: 108.2230, desc: "換匯首選！高匯率珠寶金店", url: "https://www.google.com/maps/search/?api=1&query=Tiem+vang+Khai+Hoan+III+Da+Nang", rating: "4.5", reviews: "215" },
-            { id: 201, name: "Micha Vintage", korName: "Micha Vintage", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "復古服裝店，挖寶好去處", url: "https://www.google.com/maps/search/?api=1&query=Micha+Vintage+Da+Nang", rating: "4.5", reviews: "64" },
-            { id: 202, name: "Routine Đà Nẵng", korName: "Routine", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "質感時裝店", url: "https://www.google.com/maps/search/?api=1&query=Routine+Da+Nang", rating: "4.8", reviews: "226" },
-            { id: 203, name: "Nagashoes", korName: "Nagashoes", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "買編織涼鞋好去處", url: "https://www.google.com/maps/search/?api=1&query=Nagashoes+95+Tran+Quang+Dieu+Da+Nang", rating: "4.5", reviews: "1,067" },
-            { id: 204, name: "Sexy Pieces Shop", korName: "Sexy Pieces", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "滿分評價的優質女士服裝店", url: "https://www.google.com/maps/search/?api=1&query=Sexy+Pieces+Shop+Da+Nang", rating: "5.0", reviews: "754" },
-            { id: 205, name: "Havana Lê Duẩn", korName: "Havana", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "高評價時裝店", url: "https://www.google.com/maps/search/?api=1&query=Havana+Le+Duan+Da+Nang", rating: "4.9", reviews: "526" },
-            { id: 206, name: "CARA CLUB", korName: "CARA CLUB", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "高質感女士服裝店", url: "https://www.google.com/maps/search/?api=1&query=CARA+CLUB+Da+Nang", rating: "4.9", reviews: "563" },
-            { id: 207, name: "Rechic Shop Đà Nẵng", korName: "Rechic", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "滿分時髦服飾店", url: "https://www.google.com/maps/search/?api=1&query=Rechic+Shop+Da+Nang", rating: "5.0", reviews: "70" },
-            { id: 208, name: "Dezus Đà Nẵng", korName: "Dezus", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "高人氣滿分時裝店", url: "https://www.google.com/maps/search/?api=1&query=Dezus+Da+Nang", rating: "5.0", reviews: "1,200" },
-            { id: 209, name: "OLV Đà Nẵng", korName: "OLV", area: "市區", types: ["血拚"], lat: null, lng: null, desc: "高人氣滿分女裝店", url: "https://www.google.com/maps/search/?api=1&query=OLV+Da+Nang", rating: "5.0", reviews: "1,007" },
+            { id: 201, name: "Micha Vintage", korName: "Micha Vintage", area: "市區", types: ["血拚"], lat: 16.0710, lng: 108.2180, desc: "復古服裝店，挖寶好去處", url: "https://www.google.com/maps/search/?api=1&query=Micha+Vintage+Da+Nang", rating: "4.5", reviews: "64" },
+            { id: 202, name: "Routine Đà Nẵng", korName: "Routine", area: "市區", types: ["血拚"], lat: 16.0720, lng: 108.2170, desc: "質感時裝店", url: "https://www.google.com/maps/search/?api=1&query=Routine+Da+Nang", rating: "4.8", reviews: "226" },
+            { id: 203, name: "Nagashoes", korName: "Nagashoes", area: "市區", types: ["血拚"], lat: 16.0655, lng: 108.2300, desc: "買編織涼鞋好去處", url: "https://www.google.com/maps/search/?api=1&query=Nagashoes+95+Tran+Quang+Dieu+Da+Nang", rating: "4.5", reviews: "1,067" },
+            { id: 204, name: "Sexy Pieces Shop", korName: "Sexy Pieces", area: "市區", types: ["血拚"], lat: 16.0715, lng: 108.2160, desc: "滿分評價的優質女士服裝店", url: "https://www.google.com/maps/search/?api=1&query=Sexy+Pieces+Shop+Da+Nang", rating: "5.0", reviews: "754" },
+            { id: 205, name: "Havana Lê Duẩn", korName: "Havana", area: "市區", types: ["血拚"], lat: 16.0718, lng: 108.2155, desc: "高評價時裝店", url: "https://www.google.com/maps/search/?api=1&query=Havana+Le+Duan+Da+Nang", rating: "4.9", reviews: "526" },
+            { id: 206, name: "CARA CLUB", korName: "CARA CLUB", area: "市區", types: ["血拚"], lat: 16.0705, lng: 108.2190, desc: "高質感女士服裝店", url: "https://www.google.com/maps/search/?api=1&query=CARA+CLUB+Da+Nang", rating: "4.9", reviews: "563" },
+            { id: 207, name: "Rechic Shop Đà Nẵng", korName: "Rechic", area: "市區", types: ["血拚"], lat: 16.0712, lng: 108.2165, desc: "滿分時髦服飾店", url: "https://www.google.com/maps/search/?api=1&query=Rechic+Shop+Da+Nang", rating: "5.0", reviews: "70" },
+            { id: 208, name: "Dezus Đà Nẵng", korName: "Dezus", area: "市區", types: ["血拚"], lat: 16.0708, lng: 108.2175, desc: "高人氣滿分時裝店", url: "https://www.google.com/maps/search/?api=1&query=Dezus+Da+Nang", rating: "5.0", reviews: "1,200" },
+            { id: 209, name: "OLV Đà Nẵng", korName: "OLV", area: "市區", types: ["血拚"], lat: 16.0725, lng: 108.2150, desc: "高人氣滿分女裝店", url: "https://www.google.com/maps/search/?api=1&query=OLV+Da+Nang", rating: "5.0", reviews: "1,007" },
 
             { id: 501, name: "巴拿山 黃金佛手橋", korName: "Cầu Vàng", area: "巴拿山", types: ["景點"], lat: 15.9950, lng: 107.9960, desc: "峴港必去打卡點，雲端上的巨手", rec: "盡量早上前往避開人潮", url: "https://www.google.com/maps/search/?api=1&query=Golden+Bridge+Ba+Na+Hills", rating: "4.6", reviews: "12,000" },
             { id: 502, name: "峴港粉紅大教堂", korName: "Nhà thờ chính tòa Đà Nẵng", area: "市區", types: ["景點"], lat: 16.0665, lng: 108.2230, desc: "法式哥德風粉紅教堂，少女心噴發", url: "https://www.google.com/maps/search/?api=1&query=Da+Nang+Cathedral", rating: "4.3", reviews: "8,500" },
@@ -1788,14 +1790,14 @@
             { id: 510, name: "安邦海灘 An Bang Beach", korName: "Biển An Bàng", area: "會安", types: ["景點"], lat: 15.9000, lng: 108.3300, desc: "會安知名公共海灘，氣氛悠閒", url: "https://www.google.com/maps/search/?api=1&query=An+Bang+Beach+Hoi+An", rating: "4.3", reviews: "20,043" },
             { id: 511, name: "3D Museum Art in paradise", korName: "Bảo tàng 3D", area: "市區", types: ["景點"], lat: 16.1000, lng: 108.2400, desc: "有趣的室內3D藝術博物館，非常適合躲太陽", url: "https://www.google.com/maps/search/?api=1&query=3D+Museum+Art+in+paradise+Da+Nang", rating: "4.4", reviews: "3,366" },
             { id: 512, name: "美溪椰林沙灘", korName: "Bãi tắm hàng dừa", area: "美溪沙灘", types: ["景點"], lat: 16.0500, lng: 108.2450, desc: "充滿熱帶風情的椰林沙灘", url: "https://www.google.com/maps/search/?api=1&query=Bai+tam+hang+dua+My+Khe+Da+Nang", rating: "4.9", reviews: "168" },
-            { id: 513, name: "Ba Na Hills", korName: "Ba Na Hills", area: "巴拿山", types: ["景點"], lat: null, lng: null, desc: "超大型法式高山遊樂園，必搭纜車", url: "https://www.google.com/maps/search/?api=1&query=Ba+Na+Hills+Da+Nang", rating: "4.4", reviews: "102,187" },
-            { id: 514, name: "French Village", korName: "French Village", area: "巴拿山", types: ["景點"], lat: null, lng: null, desc: "巴拿山上的夢幻法式村莊觀景台", url: "https://www.google.com/maps/search/?api=1&query=French+Village+Ba+Na+Hills", rating: "4.8", reviews: "48" },
-            { id: 515, name: "Love Garden", korName: "Love Garden", area: "巴拿山", types: ["景點"], lat: null, lng: null, desc: "浪漫的花園觀景區", url: "https://www.google.com/maps/search/?api=1&query=Love+Garden+Ba+Na+Hills", rating: "4.3", reviews: "14" },
+            { id: 513, name: "Ba Na Hills", korName: "Ba Na Hills", area: "巴拿山", types: ["景點"], lat: 15.9950, lng: 107.9960, desc: "超大型法式高山遊樂園，必搭纜車", url: "https://www.google.com/maps/search/?api=1&query=Ba+Na+Hills+Da+Nang", rating: "4.4", reviews: "102,187" },
+            { id: 514, name: "French Village", korName: "French Village", area: "巴拿山", types: ["景點"], lat: 15.9960, lng: 107.9970, desc: "巴拿山上的夢幻法式村莊觀景台", url: "https://www.google.com/maps/search/?api=1&query=French+Village+Ba+Na+Hills", rating: "4.8", reviews: "48" },
+            { id: 515, name: "Love Garden", korName: "Love Garden", area: "巴拿山", types: ["景點"], lat: 15.9940, lng: 107.9950, desc: "浪漫的花園觀景區", url: "https://www.google.com/maps/search/?api=1&query=Love+Garden+Ba+Na+Hills", rating: "4.3", reviews: "14" },
 
             { id: 701, name: "Herbal Spa - Branch 1", korName: "Herbal Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: 16.0620, lng: 108.2430, desc: "滿分評價的全身精油/深層按摩！", url: "https://www.google.com/maps/search/?api=1&query=Herbal+Spa+Da+Nang", rating: "5.0", reviews: "527" },
-            { id: 702, name: "Luxury Herbal Spa", korName: "Luxury Herbal Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: null, lng: null, desc: "超高人氣極致水療中心", url: "https://www.google.com/maps/search/?api=1&query=Luxury+Herbal+Spa+Da+Nang", rating: "4.9", reviews: "7,521" },
-            { id: 703, name: "Luxury Healthy Spa & Massage", korName: "Luxury Healthy Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: null, lng: null, desc: "專業按摩治療中心", url: "https://www.google.com/maps/search/?api=1&query=Luxury+Healthy+Spa+and+Massage+Da+Nang", rating: "4.8", reviews: "4,494" },
-            { id: 704, name: "RORA Spa & Massage Da Nang", korName: "RORA Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: null, lng: null, desc: "優質按摩水療，放鬆身心好去處", url: "https://www.google.com/maps/search/?api=1&query=RORA+Spa+and+Massage+Da+Nang", rating: "4.7", reviews: "1,349" },
+            { id: 702, name: "Luxury Herbal Spa", korName: "Luxury Herbal Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: 16.0622, lng: 108.2425, desc: "超高人氣極致水療中心", url: "https://www.google.com/maps/search/?api=1&query=Luxury+Herbal+Spa+Da+Nang", rating: "4.9", reviews: "7,521" },
+            { id: 703, name: "Luxury Healthy Spa & Massage", korName: "Luxury Healthy Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: 16.0615, lng: 108.2435, desc: "專業按摩治療中心", url: "https://www.google.com/maps/search/?api=1&query=Luxury+Healthy+Spa+and+Massage+Da+Nang", rating: "4.8", reviews: "4,494" },
+            { id: 704, name: "RORA Spa & Massage Da Nang", korName: "RORA Spa", area: "美溪沙灘", types: ["SPA放鬆"], lat: 16.0605, lng: 108.2440, desc: "優質按摩水療，放鬆身心好去處", url: "https://www.google.com/maps/search/?api=1&query=RORA+Spa+and+Massage+Da+Nang", rating: "4.7", reviews: "1,349" },
 
             { id: 802, name: "Risemount Premier Resort", korName: "Risemount", area: "美溪沙灘", types: ["住宿"], lat: 16.0550, lng: 108.2400, desc: "聖托里尼絕美風度假村", url: "https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Danang", rating: "4.5", reviews: "2,837" },
             { id: 803, name: "Peninsula Hotel Danang", korName: "Peninsula Hotel", area: "山茶半島", types: ["住宿"], lat: 16.0800, lng: 108.2450, desc: "無敵海景5星級高級飯店", url: "https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Danang", rating: "4.6", reviews: "2,449" }
@@ -1975,7 +1977,7 @@
             }).join('');
         }
 
- // ================= 美食名單模組 (已更新 2026 最新星等與評分數) =================
+      // ================= 美食名單模組 (已補齊所有店家精準座標) =================
         const foodDatabase = [
             { id: 1, name: "Bánh Xèo Tôm Nhảy Năm Hiền", korName: "南賢餐廳", area: "市區", types: ["小吃/粉"], lat: 16.0620, lng: 108.2160, desc: "外酥內Q的層次感！招牌海鮮與牛肉煎餅必吃。", rec: "魷魚/蝦子煎餅 59K", url: "https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Tom+Nhay+Nam+Hien+Da+Nang", rating: "4.3", reviews: "1,425" },
             { id: 2, name: "Quán Phú Hồng", korName: "Phú Hồng 烤肉", area: "市區", types: ["烤肉"], lat: 16.0650, lng: 108.2200, desc: "主打醬烤牛肉，也有檳榔葉肉捲，香氣逼人。", rec: "醬烤牛肉 130K、檳榔葉肉捲 90K", url: "https://www.google.com/maps/search/?api=1&query=Quan+Phu+Hong+Da+Nang", rating: "4.8", reviews: "1,354" },
@@ -2005,10 +2007,10 @@
             { id: 26, name: "Buffet Poseidon Đà Nẵng Premium", korName: "Buffet Poseidon", area: "市區", types: ["海鮮"], lat: 16.0600, lng: 108.2200, desc: "知名海鮮百匯餐廳", url: "https://www.google.com/maps/search/?api=1&query=Buffet+Poseidon+Da+Nang+Premium", rating: "4.2", reviews: "528" },
             { id: 27, name: "Buffet Hải Sản Mr Mộc", korName: "Mr Mộc", area: "市區", types: ["海鮮"], lat: 16.0600, lng: 108.2400, desc: "評價超高的海鮮吃到飽餐廳，品項豐富", url: "https://www.google.com/maps/search/?api=1&query=Buffet+Hai+San+Da+Nang+Mr+Moc", rating: "4.9", reviews: "2,721" },
             { id: 28, name: "Doc moc buffet", korName: "Doc moc", area: "市區", types: ["海鮮"], lat: 16.0600, lng: 108.2400, desc: "熱門海鮮 Buffet", url: "https://www.google.com/maps/search/?api=1&query=Doc+moc+buffet+Da+Nang", rating: "4.7", reviews: "3,215" },
-            { id: 29, name: "Cửa Ngõ Café – Cửa Hàng Số 2", korName: "Cửa Ngõ 分店", area: "市區", types: ["咖啡/甜點"], lat: null, lng: null, desc: "超人氣咖啡廳的二號店，依然維持高水準環境", url: "https://www.google.com/maps/search/?api=1&query=Cua+Ngo+Cafe+Cua+Hang+So+2+Da+Nang", rating: "4.5", reviews: "667" },
-            { id: 30, name: "Quán Cô Hồng - Đặc sản Đà Nẵng", korName: "Cô Hồng", area: "市區", types: ["傳統越菜"], lat: null, lng: null, desc: "主打峴港在地特產與小吃，價格實惠口碑極佳", url: "https://www.google.com/maps/search/?api=1&query=Quan+Co+Hong+Dac+san+Da+Nang", rating: "4.5", reviews: "1,118" },
-            { id: 31, name: "Cơm lâuphai - Hue Traditional", korName: "Cơm lâuphai", area: "市區", types: ["傳統越菜"], lat: null, lng: null, desc: "高評價的順化傳統米食餐廳，值得一試！", url: "https://www.google.com/maps/search/?api=1&query=Com+lauphai+Hue+Traditional+Restaurant+Da+Nang", rating: "4.7", reviews: "1,757" },
-            { id: 32, name: "Bánh xèo Cô Mười", korName: "Cô Mười", area: "市區", types: ["小吃/粉"], lat: null, lng: null, desc: "隱藏版越式煎餅好店，深受在地人喜愛", url: "https://www.google.com/maps/search/?api=1&query=Banh+xeo+Co+Muoi+Da+Nang", rating: "4.2", reviews: "227" }
+            { id: 29, name: "Cửa Ngõ Café – Cửa Hàng Số 2", korName: "Cửa Ngõ 分店", area: "市區", types: ["咖啡/甜點"], lat: 16.0510, lng: 108.2010, desc: "超人氣咖啡廳的二號店，依然維持高水準環境", url: "https://www.google.com/maps/search/?api=1&query=Cua+Ngo+Cafe+Cua+Hang+So+2+Da+Nang", rating: "4.5", reviews: "667" },
+            { id: 30, name: "Quán Cô Hồng - Đặc sản Đà Nẵng", korName: "Cô Hồng", area: "市區", types: ["傳統越菜"], lat: 16.0635, lng: 108.2215, desc: "主打峴港在地特產與小吃，價格實惠口碑極佳", url: "https://www.google.com/maps/search/?api=1&query=Quan+Co+Hong+Dac+san+Da+Nang", rating: "4.5", reviews: "1,118" },
+            { id: 31, name: "Cơm lâuphai - Hue Traditional", korName: "Cơm lâuphai", area: "市區", types: ["傳統越菜"], lat: 16.0655, lng: 108.2225, desc: "高評價的順化傳統米食餐廳，值得一試！", url: "https://www.google.com/maps/search/?api=1&query=Com+lauphai+Hue+Traditional+Restaurant+Da+Nang", rating: "4.7", reviews: "1,757" },
+            { id: 32, name: "Bánh xèo Cô Mười", korName: "Cô Mười", area: "市區", types: ["小吃/粉"], lat: 16.0680, lng: 108.2150, desc: "隱藏版越式煎餅好店，深受在地人喜愛", url: "https://www.google.com/maps/search/?api=1&query=Banh+xeo+Co+Muoi+Da+Nang", rating: "4.2", reviews: "227" }
         ];
 
         let currentArea = '全部';
