@@ -321,7 +321,7 @@
                         <ul class="space-y-1.5 text-[10px] text-stone-600 pl-1">
                             <li><strong class="text-stone-700">藤編包與草帽：</strong>充滿海島風情，款式極多，來這買準沒錯。</li>
                             <li><strong class="text-stone-700">訂做 / 現成奧黛：</strong>有多間布莊提供量身訂做或便宜的現成款式，適合穿去會安拍照。</li>
-                            <li><strong class="text-stone-700">度假風花襯衫：</strong>圖案鮮豔輕薄，絕對是海灘必備戰袍。</li>
+                            <li><strong class="text-stone-700">度假風花襯衫：</strong>圖案鮮豔輕薄，絕對是海灘必備XD</li>
                             <li class="text-red-600 font-medium"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i>實戰提醒：一定要「殺價」(從 5-6 折砍)！且走道擁擠，背包務必往前背防扒手。</li>
                         </ul>
                     </div>
@@ -763,7 +763,7 @@
                         <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
                         <div>
                             <h3 class="font-bold text-sm">共市場 (Con Market) 買奧黛</h3>
-                            <p class="text-[10px] text-stone-500">挑選淨春型超搭的明亮暖色系現成戰袍</p>
+                            <p class="text-[10px] text-stone-500">挑選現成奧黛(想要訂做奧黛，去韓市場)</p>
                         </div>
                     </div>
                     <div class="flex gap-1.5">
@@ -998,100 +998,132 @@
             </div>
         </section>
 
-        <section id="day5-content" class="tab-content">
+  <section id="day5-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
-                <h2 class="text-xl font-extrabold text-orange-600">Day 5 <span class="text-xs font-normal text-stone-400 ml-1">08.12 (三)</span></h2>
-                <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed text-orange-600"></i> 住宿：Peninsula Hotel</a>
-            </div>
-
-            <div class="meal-nav">
-                <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town+Restaurants" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-leaf"></i> D: 會安隱藏版料理</a>
+                <h2 class="text-xl font-extrabold text-stone-600">Day 5 <span class="text-xs font-normal text-stone-400 ml-1">08.12 (三)</span></h2>
             </div>
             
-            <div class="compact-card border-l-4 border-l-stone-600">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">08:00</span>
-                        <div>
-                            <h3 class="font-bold text-sm">美山聖地遺址半日遊</h3>
-                            <p class="text-[10px] text-stone-500">占婆王國的世界文化遺產，被譽為小吳哥窟 (可參加 Klook 行程)</p>
+            <!-- 行程切換按鈕 -->
+            <div class="flex gap-2 mb-3 bg-stone-100 p-1 rounded-lg w-fit">
+                <button onclick="toggleD5('shuttle')" id="btn-shuttle" class="px-4 py-1.5 text-sm font-bold rounded-md bg-white text-stone-800 shadow-sm transition-all">研討接駁 (慵懶版)</button>
+                <button onclick="toggleD5('charter')" id="btn-charter" class="px-4 py-1.5 text-sm font-bold rounded-md text-stone-500 hover:text-stone-700 transition-all">自己包車 (遺跡版)</button>
+            </div>
+
+            <!-- 方案 A：研討接駁 (慵懶早晨) -->
+            <div id="d5-shuttle" style="display: block;">
+                <div class="meal-nav">
+                    <span class="meal-pill break"><i class="fa-solid fa-mug-saucer"></i> B: 半島無敵海景早餐</span>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Morning+Glory+Original+Hoi+An" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-utensils"></i> D: Morning Glory</a>
+                </div>
+
+                <div class="compact-card border-l-4 border-l-sky-400 mt-3">
+                    <div class="flex justify-between items-center">
+                        <div class="flex gap-2">
+                            <span class="text-[9px] font-bold bg-sky-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:00</span>
+                            <div>
+                                <h3 class="font-bold text-sm text-sky-800">半島無邊際泳池 & 絕美早晨</h3>
+                                <p class="text-[10px] text-stone-500">睡到自然醒，換上最美泳衣拍大片</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex gap-1.5">
-                        <button onclick="openNoteModal('d5-myson')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d5-myson"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=My+Son+Sanctuary" target="_blank" class="nav-icon bg-stone-100 text-stone-600 border-stone-200"><i class="fa-solid fa-location-dot"></i></a>
+                </div>
+
+                <div class="transit-line">
+                    <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-stone-100 p-1.5 rounded-full text-stone-400"><i class="fa-solid fa-suitcase text-[10px]"></i></div>
+                    <p class="text-[11px] text-stone-500 leading-relaxed font-medium">12:00 優雅退房，可在附近簡單吃個午餐，準備搭車。</p>
+                </div>
+
+                <div class="compact-card border-l-4 border-l-orange-500">
+                    <div class="flex justify-between items-center">
+                        <div class="flex gap-2">
+                            <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:30</span>
+                            <div>
+                                <h3 class="font-bold text-sm">搭乘研討會專車</h3>
+                                <p class="text-[10px] text-stone-500">吹冷氣補眠，輕鬆前往會安古鎮</p>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="transit-line">
+                    <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-stone-100 p-1.5 rounded-full text-stone-400"><i class="fa-solid fa-arrow-down text-[10px]"></i></div>
+                    <p class="text-[11px] text-stone-500 leading-relaxed font-medium">抵達會安，開啟古鎮浪漫模式！</p>
                 </div>
             </div>
 
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">中午 12:30 返回飯店休息，準備前往會安。</p>
-            </div>
+            <!-- 方案 B：自己包車 (美山聖地) -->
+            <div id="d5-charter" style="display: none;">
+                <div class="meal-nav">
+                    <span class="meal-pill break"><i class="fa-solid fa-mug-saucer"></i> B: 飯店早餐</span>
+                    <span class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: 會安古鎮午餐</span>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Morning+Glory+Original+Hoi+An" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-utensils"></i> D: Morning Glory</a>
+                </div>
 
-            <div class="compact-card border-l-4 border-l-orange-500">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:30</span>
-                        <div>
-                            <h3 class="font-bold text-sm">搭乘研討會專車前往會安</h3>
-                            <p class="text-[10px] text-stone-500">前往會安古鎮，輕鬆省車資 (記得確認眷屬可否同行)</p>
+                <div class="compact-card border-l-4 border-l-amber-600 mt-3">
+                    <div class="flex justify-between items-center">
+                        <div class="flex gap-2">
+                            <span class="text-[9px] font-bold bg-amber-700 text-white px-1.5 py-0.5 rounded h-fit mt-1">08:00</span>
+                            <div>
+                                <h3 class="font-bold text-sm text-amber-900">包車出發美山聖地</h3>
+                                <p class="text-[10px] text-stone-500">退房後行李上車，司機全程接送</p>
+                            </div>
                         </div>
                     </div>
-                    <button onclick="openNoteModal('d5-shuttle')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d5-shuttle"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
+                </div>
+
+                <div class="transit-line">
+                    <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-stone-100 p-1.5 rounded-full text-stone-400"><i class="fa-solid fa-car text-[10px]"></i></div>
+                    <p class="text-[11px] text-stone-500 leading-relaxed font-medium">車程約 1.5 小時，抵達小吳哥窟。</p>
+                </div>
+
+                <div class="compact-card border-l-4 border-l-orange-500">
+                    <div class="flex justify-between items-center">
+                        <div class="flex gap-2">
+                            <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:30</span>
+                            <div>
+                                <h3 class="font-bold text-sm">探索美山聖地遺址</h3>
+                                <p class="text-[10px] text-stone-500">占婆王國紅磚遺跡，注意防曬補水</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-1.5">
+                            <a href="https://www.google.com/maps/search/?api=1&query=My+Son+Sanctuary" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transit-line">
+                    <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-stone-100 p-1.5 rounded-full text-stone-400"><i class="fa-solid fa-car text-[10px]"></i></div>
+                    <p class="text-[11px] text-stone-500 leading-relaxed font-medium">11:30 上車吹冷氣，包車直達會安古鎮午餐。</p>
+                </div>
+            </div>
+
+            <!-- 共同行程 (會安古鎮) -->
+            <div class="compact-card mt-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">15:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">會安換奧黛 & 古鎮漫步</h3>
+                            <p class="text-[10px] text-stone-500">穿上明亮色系奧黛，拍出穿越時空美照</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="compact-card">
+            <div class="compact-card mt-3">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">14:30</span>
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">會安古鎮換奧黛、拍美照</h3>
-                            <p class="text-[10px] text-stone-500">白襯衫配暖色奧黛，尋找絕美黃牆背景</p>
+                            <h3 class="font-bold text-sm">會安夜市 & 秋盆河水燈</h3>
+                            <p class="text-[10px] text-stone-500">晚餐後搭小船祈福，享受魔幻時刻</p>
                         </div>
                     </div>
-                    <div class="flex gap-1.5">
-                        <button onclick="openNoteModal('d5-hoian')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d5-hoian"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
                 </div>
-            </div>
-
-            <div class="compact-card border-l-4 border-l-orange-500">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:30</span>
-                        <div>
-                            <h3 class="font-bold text-sm">會安在地隱藏版美食晚餐</h3>
-                            <p class="text-[10px] text-stone-500">推白玫瑰、高樓麵與特色烤肉</p>
-                        </div>
-                    </div>
-                    <button onclick="openNoteModal('d5-dinner')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d5-dinner"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                </div>
-            </div>
-
-            <div class="compact-card">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">19:30</span>
-                        <div>
-                            <h3 class="font-bold text-sm">秋盆河搭船放水燈</h3>
-                            <p class="text-[10px] text-stone-500">夜晚的萬千燈籠海極致浪漫</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-1.5">
-                        <button onclick="openNoteModal('d5-river')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d5-river"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Hoi+An+Night+Market" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">20:30 放生提早回程的專車，自己搭 Grab 返回半島酒店 (約 45 分)。</p>
             </div>
         </section>
+
+
 
         <section id="day6-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
@@ -2300,7 +2332,26 @@
                 topBtn.classList.remove('show');
             }
         });
+          function toggleD5(mode) {
+            const btnShuttle = document.getElementById('btn-shuttle');
+            const btnCharter = document.getElementById('btn-charter');
+            const contentShuttle = document.getElementById('d5-shuttle');
+            const contentCharter = document.getElementById('d5-charter');
+
+            if (mode === 'shuttle') {
+                btnShuttle.className = 'px-4 py-1.5 text-sm font-bold rounded-md bg-white text-stone-800 shadow-sm transition-all';
+                btnCharter.className = 'px-4 py-1.5 text-sm font-bold rounded-md text-stone-500 hover:text-stone-700 transition-all';
+                contentShuttle.style.display = 'block';
+                contentCharter.style.display = 'none';
+            } else {
+                btnCharter.className = 'px-4 py-1.5 text-sm font-bold rounded-md bg-white text-stone-800 shadow-sm transition-all';
+                btnShuttle.className = 'px-4 py-1.5 text-sm font-bold rounded-md text-stone-500 hover:text-stone-700 transition-all';
+                contentCharter.style.display = 'block';
+                contentShuttle.style.display = 'none';
+            }
+        }
     </script>
+
 </body>
 </html>
 
