@@ -106,6 +106,7 @@
             100% { transform: translateY(10%); opacity: 0.5; }
         }
     </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body class="text-stone-800 flex flex-col min-h-screen">
 
@@ -252,6 +253,11 @@
             <button onclick="switchTab('day1', document.getElementById('nav-day1'))" class="w-full mt-4 bg-stone-800 text-white text-xs font-bold py-3 rounded-xl shadow-md active:scale-95 transition-all">
                 開始旅程 <i class="fa-solid fa-arrow-right ml-1"></i>
             </button>
+            
+            <!-- 新增 PDF 匯出按鈕 -->
+            <button onclick="exportToPDF()" class="w-full mt-2 bg-indigo-600 text-white text-xs font-bold py-3 rounded-xl shadow-md active:scale-95 transition-all">
+                <i class="fa-solid fa-file-pdf ml-1"></i> 將行程與筆記匯出為 PDF
+            </button>
 
             <!-- 專屬口袋名單區塊 (Notion 極簡風總覽) -->
             <section id="pocket-list-summary" class="mt-10 mb-4 bg-white p-4 rounded-2xl shadow-sm border border-stone-100">
@@ -342,6 +348,29 @@
                     <li class="flex items-start gap-1.5"><i class="fa-solid fa-mobile-screen text-rose-400 mt-0.5 w-4 text-center shrink-0"></i> <div><strong class="text-stone-800">手機與包包不離身：</strong>峴港治安雖相對良好，但在路邊喝咖啡或吃河粉時，絕對不要把手機放在桌邊，包包也要往前背，以防飛車搶劫與扒手。</div></li>
                     <li class="flex items-start gap-1.5"><i class="fa-solid fa-person-walking text-rose-400 mt-0.5 w-4 text-center shrink-0"></i> <div><strong class="text-stone-800">過馬路心法：</strong>走斑馬線、舉起手示意、與騎士眼神交會，然後 <span class="bg-rose-50 text-rose-700 px-1 rounded font-bold">「維持固定速度往前走」</span>。千萬不要突然停下或往後退，當地的機車會自動閃避你。</div></li>
                 </ul>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-orange-500">
+                <h3 class="font-bold text-sm text-orange-800 mb-2 border-b border-orange-50 pb-1 flex items-center"><i class="fa-solid fa-dragon mr-1.5 w-4 text-center"></i> 龍橋噴火秀 (Dragon Bridge) 觀賞攻略</h3>
+                <p class="text-[10px] text-stone-500 font-bold text-orange-700 mb-2">🔥 週末 21:00 限定！可以安排在晚餐後散步去看。</p>
+                <div class="space-y-2 text-[11px] text-stone-600">
+                    <div>
+                        <strong class="text-orange-700"><i class="fa-solid fa-clock w-3"></i> 盛演時刻：</strong>
+                        <p class="pl-4 leading-snug">每週五六日 21:00 準時開啟。火龍先咆哮 (2輪共18次)，後接水幕秀 (3次)。</p>
+                    </div>
+                    <div>
+                        <strong class="text-orange-700"><i class="fa-solid fa-eye w-3"></i> 絕佳視角：</strong>
+                        <ul class="pl-4 list-disc marker:text-orange-300 leading-snug space-y-0.5">
+                            <li><span class="font-bold text-stone-700">近距震撼：</span>橋東端「陳興道街」(靠近龍頭)。</li>
+                            <li><span class="font-bold text-stone-700">上帝全景：</span>「白藤街」沿岸景觀咖啡館二樓。</li>
+                            <li><span class="font-bold text-stone-700">靜謐遠眺：</span>相鄰的「陳氏理橋」或漢江大橋。</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-orange-700"><i class="fa-solid fa-lightbulb w-3"></i> 實用貼士：</strong>
+                        <p class="pl-4 leading-snug">周邊實施交通管制，車輛難靠近。務必<strong class="text-red-500">提前30分鐘卡位</strong>。</p>
+                    </div>
+                </div>
             </div>
 
             <div class="compact-card border-l-4 border-l-emerald-500">
@@ -586,7 +615,7 @@
             </div>
         </section>
 
-        <!-- 行程區塊 -->
+       <!-- 行程區塊 -->
         <section id="day1-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-orange-700">Day 1 <span class="text-xs font-normal text-stone-400 ml-1">08.08 (六)</span></h2>
@@ -594,7 +623,7 @@
             </div>
 
             <div class="meal-nav">
-                <a href="https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-shrimp"></i> D: Bé Mặn 海鮮大排檔</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Thia+Go+Restaurant+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-utensils"></i> D: Thìa Gỗ 峴港餐廳</a>
             </div>
 
             <div class="compact-card">
@@ -636,7 +665,7 @@
 
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 前往海鮮大排檔，約 5-10 分鐘。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 前往晚餐，約 5-10 分鐘。</p>
             </div>
 
             <div class="compact-card">
@@ -644,62 +673,20 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">20:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">Bé Mặn 海鮮晚餐</h3>
-                            <p class="text-[10px] text-stone-500">美溪沙灘名店！必點爆炒奶油大蝦</p>
+                            <h3 class="font-bold text-sm">Thìa Gỗ 峴港餐廳</h3>
+                            <p class="text-[10px] text-stone-500">精緻乾淨的越式餐廳，用道地美食開啟假期</p>
                         </div>
                     </div>
                     <div class="flex gap-1.5">
                         <button onclick="openNoteModal('d1-dinner')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d1-dinner"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Be+Man+Seafood+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">吃飽後搭乘短程 Grab 前往龍橋看秀。</p>
-            </div>
-
-            <div class="compact-card border-l-4 border-l-orange-500">
-                <div class="flex justify-between items-start">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">21:00</span>
-                        <div class="w-full">
-                            <h3 class="font-bold text-sm">龍橋噴火秀 (Dragon Bridge)</h3>
-                            <p class="text-[10px] text-stone-500 font-bold text-orange-700">🔥 週末 21:00 限定！晚餐後散步看秀消化</p>
-                            
-                            <div class="mt-3 bg-orange-50/80 border border-orange-100 rounded-lg p-2.5">
-                                <p class="text-[11px] font-bold text-orange-800 mb-1.5 border-b border-orange-200/50 pb-1"><i class="fa-solid fa-book-open-reader mr-1"></i> 2026 觀賞終極攻略</p>
-                                <div class="space-y-2 text-[10px] text-stone-600">
-                                    <div>
-                                        <strong class="text-orange-700"><i class="fa-solid fa-clock w-3"></i> 盛演時刻：</strong>
-                                        <p class="pl-4 leading-snug">每週五六日 21:00 準時開啟。火龍先咆哮 (2輪共18次)，後接水幕秀 (3次)。週六 23:00 還可至漢江橋看旋轉奇蹟！</p>
-                                    </div>
-                                    <div>
-                                        <strong class="text-orange-700"><i class="fa-solid fa-eye w-3"></i> 絕佳視角：</strong>
-                                        <ul class="pl-4 list-disc marker:text-orange-300 leading-snug space-y-0.5">
-                                            <li><span class="font-bold text-stone-700">近距震撼：</span>橋東端「陳興道街」(靠近龍頭)。</li>
-                                            <li><span class="font-bold text-stone-700">上帝全景：</span>「白藤街」沿岸景觀咖啡館二樓。</li>
-                                            <li><span class="font-bold text-stone-700">靜謐遠眺：</span>相鄰的「陳氏理橋」或漢江大橋。</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <strong class="text-orange-700"><i class="fa-solid fa-lightbulb w-3"></i> 實用貼士：</strong>
-                                        <p class="pl-4 leading-snug">周邊實施交通管制，車輛難靠近，叫車需久候或建議包車。務必<strong class="text-red-500">提前30分鐘卡位</strong>。</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex gap-1.5 shrink-0 ml-2">
-                        <button onclick="openNoteModal('d1-bridge')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d1-bridge"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Thia+Go+Restaurant+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- D2 行程更新：巴拿山純玩 + 下山 Pho Thin 河粉 -->
+        
+      <!-- D2 行程更新 -->
         <section id="day2-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-amber-600">Day 2 <span class="text-xs font-normal text-stone-400 ml-1">08.09 (日)</span></h2>
@@ -707,6 +694,7 @@
             </div>
             
             <div class="meal-nav">
+                <span class="meal-pill breakfast"><i class="fa-solid fa-mug-saucer"></i> B: 飯店早餐</span>
                 <a href="https://www.google.com/maps/search/?api=1&query=Pho+Thin+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-bowl-rice"></i> D: Pho Thin 傳奇河粉</a>
             </div>
 
@@ -715,23 +703,43 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-cyan-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">08:00</span>
                         <div>
-                            <h3 class="font-bold text-sm text-cyan-800">🏊‍♂️ 晨間泳池放空時光</h3>
-                            <p class="text-[10px] text-cyan-600">享受 Risemount 的聖托里尼泳池與飯店早餐</p>
+                            <h3 class="font-bold text-sm text-cyan-800">☕ 飯店悠閒早餐</h3>
+                            <p class="text-[10px] text-cyan-600">享用 Risemount 豐盛早餐，補足今日體力</p>
                         </div>
                     </div>
-                    <button onclick="openNoteModal('d2-pool')" class="nav-icon bg-white border-stone-100 text-stone-400" id="btn-note-d2-pool"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
+                    <button onclick="openNoteModal('d2-breakfast')" class="nav-icon bg-white border-stone-100 text-stone-400" id="btn-note-d2-breakfast"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
                 </div>
             </div>
 
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 前往巴拿山，車程約 45 分鐘。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 前往市區換錢。</p>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-yellow-500">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-yellow-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm">Tiệm vàng Khải Hoàn III 換錢</h3>
+                            <p class="text-[10px] text-stone-500">匯率極佳的金店，換足越盾準備血拚</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1.5 shrink-0 ml-2">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Tiem+vang+Khai+Hoan+III+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">換完錢後，直接搭 Grab 前往巴拿山，車程約 40 分鐘。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-amber-500">
                 <div class="flex justify-between items-start">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:30</span>
+                        <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:50</span>
                         <div>
                             <h3 class="font-bold text-sm">巴拿山 Ba Na Hills 深度暢玩</h3>
                             <p class="text-[10px] text-stone-500 mt-1 leading-snug">
@@ -750,13 +758,31 @@
 
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">下午 15:30 搭纜車下山，搭 Grab 返回市區飯店洗澡休息。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">下午 15:30 搭纜車下山，搭 Grab 返回市區飯店。</p>
+            </div>
+
+            <div class="compact-card bg-cyan-50/50 border border-cyan-100">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-cyan-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:30</span>
+                        <div>
+                            <h3 class="font-bold text-sm text-cyan-800">🏊‍♂️ 傍晚泳池戲水 (19:00前)</h3>
+                            <p class="text-[10px] text-cyan-600">回到飯店洗掉汗水，在聖托里尼泳池游個泳放鬆</p>
+                        </div>
+                    </div>
+                    <button onclick="openNoteModal('d2-swim')" class="nav-icon bg-white border-stone-100 text-stone-400" id="btn-note-d2-swim"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
+                </div>
+            </div>
+            
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">梳洗完畢後，出發吃晚餐。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-amber-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:00</span>
+                        <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">19:30</span>
                         <div>
                             <h3 class="font-bold text-sm">Pho Thin 傳奇生牛肉河粉</h3>
                             <p class="text-[10px] text-stone-500">以濃郁溫暖的河粉好好慰勞飢腸轆轆的胃，簡單滿足</p>
@@ -770,75 +796,83 @@
             </div>
         </section>
 
-        <section id="day3-content" class="tab-content">
+     <section id="day3-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-orange-600">Day 3 <span class="text-xs font-normal text-stone-400 ml-1">08.10 (一)</span></h2>
                 <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Da+Nang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed text-orange-600"></i> 住宿：Risemount</a>
             </div>
 
             <div class="meal-nav">
-                <a href="https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang" target="_blank" class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: Bà Dưỡng 越式煎餅</a>
+                <span class="meal-pill break"><i class="fa-solid fa-mug-saucer"></i> B: 飯店早餐 (06:30-10:00)</span>
+                <span class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: 市場內道地 Phở (河粉)</span>
                 <a href="https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-mug-hot"></i> T: Login Coffee</a>
             </div>
 
             <div class="compact-card border-l-4 border-l-orange-500">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:00</span>
+                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">08:00</span>
                         <div>
                             <h3 class="font-bold text-sm">李前往半島酒店</h3>
-                            <p class="text-[10px] text-stone-500">搭 Grab 10 分鐘，領取研討會號碼牌與會前準備</p>
+                            <p class="text-[10px] text-stone-500">搭 Grab 領取研討會號碼牌與會前準備</p>
                         </div>
                     </div>
                     <button onclick="openNoteModal('d3-peninsula')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-peninsula"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
                 </div>
             </div>
             
+            <div class="compact-card border-l-4 border-l-pink-400 mt-3">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-pink-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:00</span>
+                        <div>
+                            <h3 class="font-bold text-sm text-pink-700">晴前往 Ciao nail studio</h3>
+                            <p class="text-[10px] text-stone-500">做手和腳的美甲，讓指甲美美的度假</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1.5">
+                        <button onclick="openNoteModal('d3-nail')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-nail"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
+                        <a href="https://maps.app.goo.gl/KkudRKm5TS7bQjXb7?g_st=ic" target="_blank" class="nav-icon bg-pink-50 text-pink-500 border-pink-100"><i class="fa-solid fa-location-dot"></i></a>
+                    </div>
+                </div>
+            </div>
+
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">晴從飯店搭 Grab 前往共市場，約 15 分鐘。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">美甲結束後，搭 Grab 過去韓市場 (Han Market)。</p>
             </div>
 
             <div class="compact-card">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">10:00</span>
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">共市場 (Con Market) 買奧黛</h3>
-                            <p class="text-[10px] text-stone-500">挑選現成奧黛(想要訂做奧黛，去韓市場)</p>
+                            <h3 class="font-bold text-sm">韓市場 114 攤位買奧黛</h3>
+                            <p class="text-[10px] text-stone-500">直奔 114 攤位購買/訂做奧黛！推薦挑選高明度、高對比的清透鮮豔色系（如正白、鮮紅等暖色調），穿起來最亮眼！</p>
                         </div>
                     </div>
-                    <div class="flex gap-1.5">
-                        <button onclick="openNoteModal('d3-conmarket')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-conmarket"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Con+Market+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
+                    <div class="flex gap-1.5 shrink-0 ml-2">
+                        <button onclick="openNoteModal('d3-hanmarket')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-hanmarket"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Han+Market+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
                 </div>
             </div>
             
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">共市場搭 Grab 到煎餅店極近，約 5-8 分鐘。</p>
-            </div>
-
-            <div class="compact-card">
+            <div class="compact-card mt-3">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">12:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">Bà Dưỡng 越式煎餅老店</h3>
-                            <p class="text-[10px] text-stone-500">巷弄人氣老店，酥脆煎餅配靈魂蘸醬</p>
+                            <h3 class="font-bold text-sm">市場內享用 Phở (河粉)</h3>
+                            <p class="text-[10px] text-stone-500">在市場熟食區找間人多的攤位，來碗熱騰騰的在地美味河粉</p>
                         </div>
-                    </div>
-                    <div class="flex gap-1.5">
-                        <button onclick="openNoteModal('d3-baduong')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-baduong"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Banh+Xeo+Ba+Duong+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
                 </div>
             </div>
             
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 前往大賣場。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 帶著戰利品前往大賣場。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-green-500">
@@ -888,8 +922,8 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:15</span>
                         <div>
-                            <h3 class="font-bold text-sm">李搭車赴晚宴，晴享 Me Time</h3>
-                            <p class="text-[10px] text-stone-500">李搭 Grab 10分鐘前往半島，晴在飯店敷面膜休息</p>
+                            <h3 class="font-bold text-sm">李出席晚宴，晴享 Me Time</h3>
+                            <p class="text-[10px] text-stone-500">李在半島出席晚宴，晴在飯店敷面膜休息</p>
                         </div>
                     </div>
                     <button onclick="openNoteModal('d3-dinner')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-dinner"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
@@ -897,6 +931,7 @@
             </div>
         </section>
 
+        
         <!-- D4 行程更新：All Seasons 改至 17:00 龍蝦大餐 -->
         <section id="day4-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
@@ -2404,6 +2439,34 @@
                 contentCharter.style.display = 'block';
                 contentShuttle.style.display = 'none';
             }
+        }
+        async function exportToPDF() {
+            showToast("⏳ 正在產生 PDF，請稍候...");
+            const element = document.querySelector('main');
+            
+            // 暫時將所有隱藏的分頁展開，以利完整匯出
+            const contents = document.querySelectorAll('.tab-content');
+            const originalStates = [];
+            contents.forEach((c, i) => {
+                originalStates[i] = c.style.display;
+                c.style.display = 'block';
+            });
+
+            const opt = {
+                margin:       10,
+                filename:     'DaNang_Itinerary.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            await html2pdf().set(opt).from(element).save();
+
+            // 恢復原本的顯示狀態
+            contents.forEach((c, i) => {
+                c.style.display = originalStates[i];
+            });
+            showToast("✅ PDF 匯出成功！");
         }
     </script>
 
