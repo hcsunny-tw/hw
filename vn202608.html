@@ -2447,12 +2447,11 @@
                 contentShuttle.style.display = 'none';
             }
         }
-       async function exportToPDF() {
+async function exportToPDF() {
             showToast("⏳ 正在為您排版專屬旅行日記，產生 PDF 中...");
             
-            // 1. 建立一個專門給 PDF 用的隱藏排版容器 (獨立於現有 UI)
+            // 1. 建立一個專門給 PDF 用的排版容器
             const printContainer = document.createElement('div');
-            // 設定固定寬度與基礎字體，確保 PDF 比例完美 (A4 比例)
             printContainer.style.width = '794px'; 
             printContainer.style.padding = '40px';
             printContainer.style.fontFamily = "'Noto Sans TC', sans-serif";
@@ -2475,14 +2474,13 @@
                     const parts = key.split('_')[2].split('-');
                     allNotes.push({
                         key: key,
-                        day: parts[0], // e.g., 'd1'
-                        place: parts[1], // e.g., 'airport'
+                        day: parts[0], 
+                        place: parts[1],
                         content: localStorage.getItem(key)
                     });
                 }
             }
 
-            // 地點代號翻譯字典 (讓印出來的標題是好看的中文)
             const titleMap = {
                 'airport': '機場', 'hotel': '飯店', 'dinner': '晚餐', 'bridge': '龍橋',
                 'breakfast': '早餐', 'bana': '巴拿山', 'swim': '泳池', 'pizza': 'Pizza 4P\'s',
@@ -2510,7 +2508,6 @@
                 } else {
                     dayNotes.forEach(note => {
                         const title = titleMap[note.place] || note.place;
-                        // 處理換行符號
                         const formattedContent = note.content.replace(/\n/g, '<br>');
                         html += `
                             <div style="margin-bottom: 20px; margin-left: 16px; border: 1px solid #fed7aa; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 4px rgba(234, 88, 12, 0.05);">
@@ -2536,7 +2533,6 @@
                         const meta = JSON.parse(localStorage.getItem(key));
                         if (meta.note && meta.note.trim() !== '') {
                             const foodId = parseInt(key.replace('food_meta_', ''));
-                            // 從 foodDatabase 查找餐廳名稱
                             const foodItem = foodDatabase.find(f => f.id === foodId); 
                             foodNotes.push({
                                 name: foodItem ? foodItem.name : '美食紀錄',
@@ -2575,26 +2571,35 @@
 
             printContainer.innerHTML = html;
 
-            // 將這個隱藏容器暫時加到 body 中供 html2pdf 擷取 (不會影響現有畫面)
+            // 【除錯關鍵修改】
+            // 將元素放在畫面的左上角 (0,0) 並藏在底層，這樣 html2canvas 才抓得到內容
             printContainer.style.position = 'absolute';
-            printContainer.style.left = '-9999px';
+            printContainer.style.top = '0px';
+            printContainer.style.left = '0px';
+            printContainer.style.zIndex = '-9999';
             document.body.appendChild(printContainer);
 
             // 6. 設定 PDF 匯出選項
             const opt = {
-                margin:       [15, 0, 15, 0], // 上右下左邊距
+                margin:       [15, 0, 15, 0],
                 filename:     'DaNang_Travel_Journal.pdf',
                 image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                // 【除錯關鍵修改】強制 scrollY 和 scrollX 為 0，避免使用者往下捲動導致截圖截到空白
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollY: 0, scrollX: 0 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
             // 7. 執行匯出
-            await html2pdf().set(opt).from(printContainer).save();
-
-            // 匯出後移除暫存容器
-            document.body.removeChild(printContainer);
-            showToast("✅ 旅行日記 PDF 匯出成功！");
+            try {
+                await html2pdf().set(opt).from(printContainer).save();
+                showToast("✅ 旅行日記 PDF 匯出成功！");
+            } catch (error) {
+                console.error("PDF 匯出失敗: ", error);
+                showToast("❌ PDF 匯出發生錯誤，請稍後再試。", "fa-circle-xmark", "text-red-400");
+            } finally {
+                // 匯出後移除暫存容器
+                document.body.removeChild(printContainer);
+            }
         }
     </script>
 
