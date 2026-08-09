@@ -2446,33 +2446,154 @@
                 contentShuttle.style.display = 'none';
             }
         }
-        async function exportToPDF() {
-            showToast("⏳ 正在產生 PDF，請稍候...");
-            const element = document.querySelector('main');
+       async function exportToPDF() {
+            showToast("⏳ 正在為您排版專屬旅行日記，產生 PDF 中...");
             
-            // 暫時將所有隱藏的分頁展開，以利完整匯出
-            const contents = document.querySelectorAll('.tab-content');
-            const originalStates = [];
-            contents.forEach((c, i) => {
-                originalStates[i] = c.style.display;
-                c.style.display = 'block';
+            // 1. 建立一個專門給 PDF 用的隱藏排版容器 (獨立於現有 UI)
+            const printContainer = document.createElement('div');
+            // 設定固定寬度與基礎字體，確保 PDF 比例完美 (A4 比例)
+            printContainer.style.width = '794px'; 
+            printContainer.style.padding = '40px';
+            printContainer.style.fontFamily = "'Noto Sans TC', sans-serif";
+            printContainer.style.color = '#292524';
+            printContainer.style.backgroundColor = '#ffffff';
+
+            // 2. 構建首頁標題
+            let html = `
+                <div style="text-align: center; margin-bottom: 40px; border-bottom: 2px solid #ea580c; padding-bottom: 20px;">
+                    <h1 style="color: #ea580c; font-size: 32px; font-weight: 900; margin: 0; letter-spacing: 2px;">峴港｜陽光假期 旅行回憶錄</h1>
+                    <p style="color: #78716c; font-size: 14px; margin-top: 10px; letter-spacing: 1px;">2026 研討漫遊 - 專屬行程與隨身筆記</p>
+                </div>
+            `;
+
+            // 3. 從 LocalStorage 抓取所有行程筆記
+            const allNotes = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('trip_note_')) {
+                    const parts = key.split('_')[2].split('-');
+                    allNotes.push({
+                        key: key,
+                        day: parts[0], // e.g., 'd1'
+                        place: parts[1], // e.g., 'airport'
+                        content: localStorage.getItem(key)
+                    });
+                }
+            }
+
+            // 地點代號翻譯字典 (讓印出來的標題是好看的中文)
+            const titleMap = {
+                'airport': '機場', 'hotel': '飯店', 'dinner': '晚餐', 'bridge': '龍橋',
+                'breakfast': '早餐', 'bana': '巴拿山', 'swim': '泳池', 'pizza': 'Pizza 4P\'s',
+                'peninsula': '半島酒店', 'nail': 'Ciao 美甲', 'hanmarket': '韓市場', 'pinkchurch': '粉紅教堂',
+                'godanang': 'GO! 大賣場', 'coffee': '咖啡廳', 'report': '研討會報告', 'spa': 'Herbal Spa 按摩',
+                'allseasons': 'All Seasons', 'lotte': 'Lotte Mart', 'pizza4ps': 'Pizza 4P\'s'
+            };
+
+            const days = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'];
+            const dayNames = ['Day 1 (08.08) 抵達與啟程', 'Day 2 (08.09) 巴拿山雲端', 'Day 3 (08.10) 市區嚐鮮與奧黛', 'Day 4 (08.11) 報告與龍蝦大餐', 'Day 5 (08.12) 古城與會安夜燈', 'Day 6 (08.13) 採購與神級披薩'];
+
+            // 4. 依照天數產生行程筆記版面
+            days.forEach((day, index) => {
+                const dayNotes = allNotes.filter(n => n.day === day);
+                
+                html += `
+                    <div style="margin-bottom: 35px; page-break-inside: avoid;">
+                        <h2 style="color: #ea580c; font-size: 20px; font-weight: bold; border-left: 5px solid #ea580c; padding-left: 12px; background: #fff7ed; padding-top: 8px; padding-bottom: 8px; margin-bottom: 20px; border-radius: 0 8px 8px 0;">
+                            ${dayNames[index]}
+                        </h2>
+                `;
+
+                if (dayNotes.length === 0) {
+                    html += `<p style="color: #a8a29e; font-size: 14px; font-style: italic; margin-left: 20px;">(本日無行程筆記紀錄)</p>`;
+                } else {
+                    dayNotes.forEach(note => {
+                        const title = titleMap[note.place] || note.place;
+                        // 處理換行符號
+                        const formattedContent = note.content.replace(/\n/g, '<br>');
+                        html += `
+                            <div style="margin-bottom: 20px; margin-left: 16px; border: 1px solid #fed7aa; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 4px rgba(234, 88, 12, 0.05);">
+                                <div style="background-color: #fff7ed; padding: 10px 16px; font-weight: bold; font-size: 16px; color: #c2410c; border-bottom: 1px solid #ffedd5;">
+                                    📍 ${title}
+                                </div>
+                                <div style="padding: 16px; font-size: 15px; color: #44403c; line-height: 1.8;">
+                                    ${formattedContent}
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                html += `</div>`;
             });
 
+            // 5. 抓取美食名單的打卡與筆記
+            const foodNotes = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('food_meta_')) {
+                    try {
+                        const meta = JSON.parse(localStorage.getItem(key));
+                        if (meta.note && meta.note.trim() !== '') {
+                            const foodId = parseInt(key.replace('food_meta_', ''));
+                            // 從 foodDatabase 查找餐廳名稱
+                            const foodItem = foodDatabase.find(f => f.id === foodId); 
+                            foodNotes.push({
+                                name: foodItem ? foodItem.name : '美食紀錄',
+                                note: meta.note
+                            });
+                        }
+                    } catch(e) {}
+                }
+            }
+
+            if (foodNotes.length > 0) {
+                html += `
+                    <div style="margin-top: 40px; margin-bottom: 30px; page-break-inside: avoid;">
+                        <h2 style="color: #f97316; font-size: 20px; font-weight: bold; border-left: 5px solid #f97316; padding-left: 12px; background: #fff7ed; padding-top: 8px; padding-bottom: 8px; margin-bottom: 20px; border-radius: 0 8px 8px 0;">
+                            🍽️ 專屬美食評鑑與筆記
+                        </h2>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-left: 16px;">
+                `;
+                foodNotes.forEach(fn => {
+                    const formattedNote = fn.note.replace(/\n/g, '<br>');
+                    html += `
+                        <div style="border-left: 3px solid #fdba74; padding-left: 12px; background: #fdf8f2; padding: 12px; border-radius: 8px;">
+                            <div style="font-weight: bold; font-size: 15px; color: #c2410c; margin-bottom: 6px;">${fn.name}</div>
+                            <div style="font-size: 14px; color: #57534e; line-height: 1.6;">${formattedNote}</div>
+                        </div>
+                    `;
+                });
+                html += `</div></div>`;
+            }
+
+            html += `
+                <div style="text-align: center; margin-top: 60px; font-size: 12px; color: #a8a29e; border-top: 1px dashed #e7e5e4; padding-top: 20px;">
+                    Generated by Da Nang Sunshine Itinerary App
+                </div>
+            `;
+
+            printContainer.innerHTML = html;
+
+            // 將這個隱藏容器暫時加到 body 中供 html2pdf 擷取 (不會影響現有畫面)
+            printContainer.style.position = 'absolute';
+            printContainer.style.left = '-9999px';
+            document.body.appendChild(printContainer);
+
+            // 6. 設定 PDF 匯出選項
             const opt = {
-                margin:       10,
-                filename:     'DaNang_Itinerary.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
+                margin:       [15, 0, 15, 0], // 上右下左邊距
+                filename:     'DaNang_Travel_Journal.pdf',
+                image:        { type: 'jpeg', quality: 1.0 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            await html2pdf().set(opt).from(element).save();
+            // 7. 執行匯出
+            await html2pdf().set(opt).from(printContainer).save();
 
-            // 恢復原本的顯示狀態
-            contents.forEach((c, i) => {
-                c.style.display = originalStates[i];
-            });
-            showToast("✅ PDF 匯出成功！");
+            // 匯出後移除暫存容器
+            document.body.removeChild(printContainer);
+            showToast("✅ 旅行日記 PDF 匯出成功！");
         }
     </script>
 
