@@ -2521,8 +2521,8 @@ async function exportToPDF() {
             printContainer.style.position = 'absolute';
             printContainer.style.top = '0px';
             printContainer.style.left = '0px';
-            printContainer.style.zIndex = '-999';
-            printContainer.style.opacity = '0.01'; 
+            printContainer.style.zIndex = '-9999';
+            printContainer.style.opacity = '1'; // 【修復關鍵】：不能設為透明，必須是 1！
             document.body.appendChild(printContainer);
 
             // 等待 DOM 渲染
