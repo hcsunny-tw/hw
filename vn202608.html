@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>峴港｜陽光假期 (V25.3)</title>
-    <!-- 越南國旗 Favicon -->d
+    <!-- 越南國旗 Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇻🇳</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -965,7 +965,7 @@
 
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-arrows-split-up-and-left text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">兵分兩路：李留在飯店準備報告；晴 08:40 出發搭 Grab 去做美甲。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">兵分兩路：李去P飯店準備報告；晴 08:58 走去做美甲。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-pink-400">
@@ -984,10 +984,6 @@
                 </div>
             </div>
 
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-clock text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">11:00 李從飯店出發前往半島酒店會場。</p>
-            </div>
 
             <div class="compact-card mt-3">
                 <div class="flex justify-between items-center">
@@ -1058,7 +1054,7 @@
             
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-suitcase-rolling text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">吃飽喝足後，搭 Grab 回 Risemount 領取行李，再前往 Peninsula Hotel 入住。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">吃飽喝足後，走回 Risemount 領取行李，再搭 grab 前往 Peninsula Hotel 入住。</p>
             </div>
 
             <div class="compact-card">
@@ -2444,22 +2440,28 @@
             }
         }
 async function exportToPDF() {
-            showToast("⏳ 正在為您排版專屬旅行日記，請稍候幾秒鐘...");
+            showToast("⏳ 正在擷取行程與筆記，產生 PDF 中...");
             
+            // 1. 建立專屬 PDF 排版容器，確保不受網頁原有的 UI 影響跑版
             const printContainer = document.createElement('div');
-            printContainer.style.width = '794px'; 
+            printContainer.style.width = '794px'; // 模擬 A4 寬度
             printContainer.style.padding = '40px';
             printContainer.style.fontFamily = "'Noto Sans TC', sans-serif";
             printContainer.style.color = '#292524';
             printContainer.style.backgroundColor = '#ffffff';
 
+            // 2. 抓取網頁標題做為大標題與預設檔名
+            const pageTitle = document.title; // 自動帶入網頁標題
+            const fileName = pageTitle.replace(/[\/\\?%*:|"<>]/g, '-') + '.pdf'; // 過濾非法字元
+
             let html = `
                 <div style="text-align: center; margin-bottom: 40px; border-bottom: 2px solid #ea580c; padding-bottom: 20px;">
-                    <h1 style="color: #ea580c; font-size: 32px; font-weight: 900; margin: 0; letter-spacing: 2px;">峴港｜陽光假期 旅行回憶錄</h1>
-                    <p style="color: #78716c; font-size: 14px; margin-top: 10px; letter-spacing: 1px;">2026 研討漫遊 - 專屬行程與隨身筆記</p>
+                    <h1 style="color: #ea580c; font-size: 32px; font-weight: 900; margin: 0; letter-spacing: 2px;">${pageTitle}</h1>
+                    <p style="color: #78716c; font-size: 14px; margin-top: 10px; letter-spacing: 1px;">專屬行程與隨身筆記總覽</p>
                 </div>
             `;
 
+            // 3. 從 LocalStorage 抓取使用者記錄的筆記內容
             const allNotes = [];
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
@@ -2481,8 +2483,9 @@ async function exportToPDF() {
             };
 
             const days = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'];
-            const dayNames = ['Day 1 (08.08) 抵達與啟程', 'Day 2 (08.09) 巴拿山雲端', 'Day 3 (08.10) 奧黛與泳池時光', 'Day 4 (08.11) 報告與龍蝦大餐', 'Day 5 (08.12) 古城與會安夜燈', 'Day 6 (08.13) 採購與神級披薩'];
+            const dayNames = ['Day 1 抵達與啟程', 'Day 2 巴拿山雲端', 'Day 3 奧黛與泳池時光', 'Day 4 報告與龍蝦大餐', 'Day 5 古城與會安夜燈', 'Day 6 採購與神級披薩'];
 
+            // 4. 將筆記內容渲染進乾淨的 HTML 結構
             days.forEach((day, index) => {
                 const dayNotes = allNotes.filter(n => n.day === day);
                 html += `
@@ -2492,13 +2495,13 @@ async function exportToPDF() {
                         </h2>
                 `;
                 if (dayNotes.length === 0) {
-                    html += `<p style="color: #a8a29e; font-size: 14px; font-style: italic; margin-left: 20px;">(本日無行程筆記紀錄)</p>`;
+                    html += `<p style="color: #a8a29e; font-size: 14px; font-style: italic; margin-left: 20px;">(無隨身筆記)</p>`;
                 } else {
                     dayNotes.forEach(note => {
                         const title = titleMap[note.place] || note.place;
-                        const formattedContent = note.content.replace(/\n/g, '<br>');
+                        const formattedContent = note.content.replace(/\n/g, '<br>'); // 保留換行格式
                         html += `
-                            <div style="margin-bottom: 20px; margin-left: 16px; border: 1px solid #fed7aa; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 4px rgba(234, 88, 12, 0.05);">
+                            <div style="margin-bottom: 20px; margin-left: 16px; border: 1px solid #fed7aa; border-radius: 12px; overflow: hidden;">
                                 <div style="background-color: #fff7ed; padding: 10px 16px; font-weight: bold; font-size: 16px; color: #c2410c; border-bottom: 1px solid #ffedd5;">
                                     📍 ${title}
                                 </div>
@@ -2512,50 +2515,9 @@ async function exportToPDF() {
                 html += `</div>`;
             });
 
-            const foodNotes = [];
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('food_meta_')) {
-                    try {
-                        const meta = JSON.parse(localStorage.getItem(key));
-                        if (meta.note && meta.note.trim() !== '') {
-                            const foodId = parseInt(key.replace('food_meta_', ''));
-                            const foodItem = foodDatabase.find(f => f.id === foodId); 
-                            foodNotes.push({ name: foodItem ? foodItem.name : '美食紀錄', note: meta.note });
-                        }
-                    } catch(e) {}
-                }
-            }
-
-            if (foodNotes.length > 0) {
-                html += `
-                    <div style="margin-top: 40px; margin-bottom: 30px; page-break-inside: avoid;">
-                        <h2 style="color: #f97316; font-size: 20px; font-weight: bold; border-left: 5px solid #f97316; padding-left: 12px; background: #fff7ed; padding-top: 8px; padding-bottom: 8px; margin-bottom: 20px; border-radius: 0 8px 8px 0;">
-                            🍽️ 專屬美食評鑑與筆記
-                        </h2>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-left: 16px;">
-                `;
-                foodNotes.forEach(fn => {
-                    const formattedNote = fn.note.replace(/\n/g, '<br>');
-                    html += `
-                        <div style="border-left: 3px solid #fdba74; padding-left: 12px; background: #fdf8f2; padding: 12px; border-radius: 8px;">
-                            <div style="font-weight: bold; font-size: 15px; color: #c2410c; margin-bottom: 6px;">${fn.name}</div>
-                            <div style="font-size: 14px; color: #57534e; line-height: 1.6;">${formattedNote}</div>
-                        </div>
-                    `;
-                });
-                html += `</div></div>`;
-            }
-
-            html += `
-                <div style="text-align: center; margin-top: 60px; font-size: 12px; color: #a8a29e; border-top: 1px dashed #e7e5e4; padding-top: 20px;">
-                    Generated by Da Nang Sunshine Itinerary App
-                </div>
-            `;
-
             printContainer.innerHTML = html;
 
-            // 【除錯關鍵修改】：不推到視窗外，而是蓋在最上面但設為幾乎透明，確保瀏覽器乖乖渲染它
+            // 5. 確保容器能被 html2canvas 抓取，但又不影響使用者畫面
             printContainer.style.position = 'absolute';
             printContainer.style.top = '0px';
             printContainer.style.left = '0px';
@@ -2563,25 +2525,27 @@ async function exportToPDF() {
             printContainer.style.opacity = '0.01'; 
             document.body.appendChild(printContainer);
 
-            // 【除錯關鍵修改】：給予瀏覽器 500ms 的時間載入字體與渲染 DOM，避免全白
+            // 等待 DOM 渲染
             await new Promise(resolve => setTimeout(resolve, 500));
 
+            // 6. html2pdf 配置選項
             const opt = {
                 margin:       [15, 0, 15, 0],
-                filename:     'DaNang_Travel_Journal.pdf',
+                filename:     fileName, // 自動帶入網頁標題
                 image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                html2canvas:  { scale: 2, useCORS: true, scrollY: 0, scrollX: 0 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
+            // 7. 產生並下載 PDF
             try {
                 await html2pdf().set(opt).from(printContainer).save();
-                showToast("✅ 旅行日記 PDF 匯出成功！");
+                showToast("✅ PDF 匯出成功！");
             } catch (error) {
                 console.error("PDF 匯出失敗: ", error);
                 showToast("❌ 匯出發生錯誤，請重試。", "fa-circle-xmark", "text-red-400");
             } finally {
-                document.body.removeChild(printContainer);
+                document.body.removeChild(printContainer); // 清理隱藏的排版容器
             }
         }
     </script>
