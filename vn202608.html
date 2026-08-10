@@ -320,7 +320,6 @@
                 <h2 class="text-sm font-extrabold text-stone-700 mb-3 flex items-center gap-2 pb-2 border-b border-stone-100">
                     <i class="fa-solid fa-star text-amber-400"></i> 專屬地圖口袋名單總覽
                 </h2>
-            </section>
                 
                 <div class="space-y-4">
                     <div>
@@ -856,59 +855,61 @@
             </div>
         </section>
         
-  <section id="day3-content" class="tab-content">
+<section id="day3-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-orange-600">Day 3 <span class="text-xs font-normal text-stone-400 ml-1">08.10 (一)</span></h2>
                 <a href="https://www.google.com/maps/search/?api=1&query=Risemount+Premier+Resort+Da+Nang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed text-orange-600"></i> 住宿：Risemount</a>
             </div>
 
             <div class="meal-nav">
-                <span class="meal-pill break"><i class="fa-solid fa-mug-saucer"></i> B: 飯店早餐 (06:30-10:00)</span>
-                <span class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: 市場內道地 Phở (河粉)</span>
-                <a href="https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-mug-hot"></i> T: Login Coffee</a>
+                <span class="meal-pill break"><i class="fa-solid fa-mug-saucer"></i> B: 兩人共進早餐</span>
+                <span class="meal-pill lunch"><i class="fa-solid fa-bowl-food"></i> L: 市場內道地 Phở</span>
+                <span class="meal-pill dinner"><i class="fa-solid fa-wine-glass"></i> D: 李-大會晚宴 / 晴-Me Time</span>
             </div>
 
-            <div class="compact-card border-l-4 border-l-orange-500 mt-3">
+            <div class="compact-card bg-cyan-50/50 border border-cyan-100">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">08:00</span>
+                        <span class="text-[9px] font-bold bg-cyan-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">06:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">李前往半島酒店</h3>
-                            <p class="text-[10px] text-stone-500">搭 Grab 領取研討會號碼牌與會前準備</p>
+                            <h3 class="font-bold text-sm text-cyan-800">☕ 兩人共進飯店早餐</h3>
+                            <p class="text-[10px] text-cyan-600">早起一起享用 Risemount 豐盛早餐，開啟美好的一天</p>
+                        </div>
+                    </div>
+                    <button onclick="openNoteModal('d3-breakfast')" class="nav-icon bg-white border-stone-100 text-stone-400" id="btn-note-d3-breakfast"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
+                </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">吃飽後，李準備出發前往會場。</p>
+            </div>
+
+            <div class="compact-card border-l-4 border-l-sky-500">
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-sky-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">07:50</span>
+                        <div>
+                            <h3 class="font-bold text-sm">李出發前往研討會飯店</h3>
+                            <p class="text-[10px] text-stone-500">李搭 Grab 準備聽 Keynote；晴可以回房繼續補眠、追劇，享受沒有鬧鐘的早晨</p>
                         </div>
                     </div>
                     <button onclick="openNoteModal('d3-peninsula')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-peninsula"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
                 </div>
             </div>
             
-            <div class="compact-card border-l-4 border-l-pink-400 mt-3">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-pink-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:00</span>
-                        <div>
-                            <h3 class="font-bold text-sm text-pink-700">晴前往 Ciao nail studio</h3>
-                            <p class="text-[10px] text-stone-500">做手和腳的美甲，讓指甲美美的度假</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-1.5 shrink-0 ml-2">
-                        <button onclick="openNoteModal('d3-nail')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-nail"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://maps.app.goo.gl/KkudRKm5TS7bQjXb7?g_st=ic" target="_blank" class="nav-icon bg-pink-50 text-pink-500 border-pink-100"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                </div>
-            </div>
-
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">美甲結束後，搭 Grab 過去韓市場 (Han Market)。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">11:30 李結束 Keynote 搭 Grab 前往韓市場；晴也從飯店出發，兩人於市場會合！</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-amber-500">
                 <div class="flex justify-between items-start">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:30</span>
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">12:00</span>
                         <div class="w-full">
-                            <h3 class="font-bold text-sm">韓市場 Han Market</h3>
-                            <p class="text-[10px] text-stone-500 mb-1">直奔 114 攤位購買/訂做奧黛！展現妳絕佳的「淨春型」穿搭優勢，推薦挑選高明度、高對比的清透鮮豔色系（如正白、鮮紅等暖色調），拍照效果最亮眼。</p>
+                            <h3 class="font-bold text-sm">韓市場 114 攤位量身訂做奧黛</h3>
+                            <p class="text-[10px] text-stone-500 mb-1">跟李一起挑選最適合的情侶色系！因為<strong class="text-amber-700">約定明天才拿</strong>，阿姨做工會更細緻，我們下午的時間也完全解放！</p>
                             
                             <div class="flex gap-2 mt-2 flex-wrap">
                                 <a href="https://m.blog.naver.com/ttltjsdla/224222173381" target="_blank" class="inline-flex items-center gap-1 bg-rose-50 text-rose-600 border border-rose-200 px-2 py-1 rounded text-[10px] font-bold active:scale-95 transition-transform">
@@ -930,39 +931,18 @@
             <div class="compact-card mt-3">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">12:30</span>
+                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:00</span>
                         <div>
                             <h3 class="font-bold text-sm">市場內享用 Phở (河粉)</h3>
-                            <p class="text-[10px] text-stone-500">在市場熟食區找間人多的攤位，來碗熱騰騰的在地美味河粉</p>
+                            <p class="text-[10px] text-stone-500">訂做完奧黛剛好肚子餓，在市場熟食區找間人多的攤位吃午餐</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-person-walking text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">吃飽後帶著戰利品，步行前往粉紅教堂拍美照。</p>
-            </div>
-
-            <div class="compact-card border-l-4 border-l-pink-500">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-pink-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">13:15</span>
-                        <div>
-                            <h3 class="font-bold text-sm">峴港大教堂 (粉紅教堂)</h3>
-                            <p class="text-[10px] text-stone-500">法式哥德風粉紅教堂，少女心噴發必拍</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-1.5 shrink-0 ml-2">
-                        <button onclick="openNoteModal('d3-pinkchurch')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-pinkchurch"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Da+Nang+Cathedral" target="_blank" class="nav-icon bg-pink-50 text-pink-500 border-pink-100"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
                 </div>
             </div>
             
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">拍完照後，搭 Grab 前往大賣場。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 離開市場，前往大賣場。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-green-500">
@@ -970,8 +950,8 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-green-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">14:00</span>
                         <div>
-                            <h3 class="font-bold text-sm text-green-700">GO! Đà Nẵng 大賣場</h3>
-                            <p class="text-[10px] text-stone-500">試吃探路：先買些回飯店當宵夜的零食、水果或啤酒，不用搬重物！</p>
+                            <h3 class="font-bold text-sm text-green-700">GO! Đà Nẵng 大賣場試吃</h3>
+                            <p class="text-[10px] text-stone-500">沒有等衣服的壓力，可以慢慢逛，買些回飯店當宵夜的零食或啤酒</p>
                         </div>
                     </div>
                     <div class="flex gap-1.5 shrink-0 ml-2">
@@ -983,37 +963,16 @@
 
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">搭 Grab 回飯店放戰利品，稍微休息後，搭 Grab 前往咖啡廳。</p>
-            </div>
-
-            <div class="compact-card">
-                <div class="flex justify-between items-center">
-                    <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:00</span>
-                        <div>
-                            <h3 class="font-bold text-sm">Login Coffee 下午茶</h3>
-                            <p class="text-[10px] text-stone-500">明亮韓系網美海景咖啡廳，享受悠閒的午後時光</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-1.5">
-                        <button onclick="openNoteModal('d3-coffee')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-coffee"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Login+Coffee+Da+Nang" target="_blank" class="nav-icon"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="transit-line">
-                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">喝完咖啡後，搭 Grab 返回 Risemount。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">15:30 搭 Grab 直接回飯店，準備玩水囉！</p>
             </div>
 
             <div class="compact-card bg-cyan-50/50 border border-cyan-100">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-cyan-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">下午彈性</span>
+                        <span class="text-[9px] font-bold bg-cyan-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">16:00</span>
                         <div>
-                            <h3 class="font-bold text-sm text-cyan-800">🏊‍♂️ 泳池放空時光</h3>
-                            <p class="text-[10px] text-cyan-600">安插一點空檔，跳進聖托里尼泳池享受南國度假感</p>
+                            <h3 class="font-bold text-sm text-cyan-800">🏊‍♂️ 兩人無壓泳池戲水</h3>
+                            <p class="text-[10px] text-cyan-600">毫無牽掛！換上泳裝，一起跳進聖托里尼泳池盡情放鬆</p>
                         </div>
                     </div>
                     <button onclick="openNoteModal('d3-swim')" class="nav-icon bg-white border-stone-100 text-stone-400" id="btn-note-d3-swim"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
@@ -1023,35 +982,36 @@
             <div class="compact-card border-l-4 border-l-orange-500 mt-3">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">18:15</span>
+                        <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">17:45</span>
                         <div>
-                            <h3 class="font-bold text-sm">李出席晚宴，晴享 Me Time</h3>
-                            <p class="text-[10px] text-stone-500">李在半島出席晚宴，晴在飯店敷面膜休息</p>
+                            <h3 class="font-bold text-sm">李從容赴大會晚宴，晴享 Me Time</h3>
+                            <p class="text-[10px] text-stone-500">李洗完澡優雅出發；晴可以在飯店敷面膜休息，或自己出門吃頓好料！</p>
                         </div>
                     </div>
                     <button onclick="openNoteModal('d3-dinner')" class="nav-icon bg-stone-50 border-stone-100 text-stone-400" id="btn-note-d3-dinner"><i class="fa-solid fa-pen-to-square text-[11px]"></i></button>
                 </div>
             </div>
         </section>
+
         
-<!-- D4 行程更新：修改行李動線與安排美甲 -->
-        <section id="day4-content" class="tab-content">
+<section id="day4-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-amber-700">Day 4 <span class="text-xs font-normal text-stone-400 ml-1">08.11 (二)</span></h2>
                 <a href="https://www.google.com/maps/search/?api=1&query=Peninsula+Hotel+Da+Nang" target="_blank" class="hotel-card hover:bg-orange-100 transition-colors"><i class="fa-solid fa-bed text-amber-600"></i> 住宿：Peninsula Hotel</a>
             </div>
 
             <div class="meal-nav">
+                <span class="meal-pill breakfast"><i class="fa-solid fa-mug-saucer"></i> B: 飯店早餐</span>
                 <a href="https://www.google.com/maps/search/?api=1&query=All+Seasons+Buffet+Da+Nang" target="_blank" class="meal-pill dinner"><i class="fa-solid fa-shrimp"></i> D: All Seasons 龍蝦百匯</a>
             </div>
 
             <div class="compact-card bg-orange-50/50 border border-orange-100 mb-4">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:00</span>
+                        <span class="text-[9px] font-bold bg-orange-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">08:00</span>
                         <div>
                             <h3 class="font-bold text-sm text-orange-800">悠閒早晨與退房準備</h3>
-                            <p class="text-[10px] text-orange-600">把行李整理好並先寄放在 Risemount 櫃台，準備迎接中午的重頭戲</p>
+                            <p class="text-[10px] text-orange-600">吃完早餐，把行李整理好並先寄放在 Risemount 櫃台</p>
                         </div>
                     </div>
                 </div>
@@ -1059,16 +1019,16 @@
 
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-arrows-split-up-and-left text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">11:00 兵分兩路：李前往半島準備報告；晴搭 Grab 去做美甲。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">兵分兩路：李留在飯店準備報告；晴 08:40 出發搭 Grab 去做美甲。</p>
             </div>
 
             <div class="compact-card border-l-4 border-l-pink-400">
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2">
-                        <span class="text-[9px] font-bold bg-pink-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">11:30</span>
+                        <span class="text-[9px] font-bold bg-pink-500 text-white px-1.5 py-0.5 rounded h-fit mt-1">09:00</span>
                         <div>
                             <h3 class="font-bold text-sm text-pink-700">晴：Ciao nail studio 美甲</h3>
-                            <p class="text-[10px] text-stone-500">利用這 2-3 小時的空檔做手部與足部美甲，寵愛自己一下</p>
+                            <p class="text-[10px] text-stone-500">做手部與足部美甲，寵愛自己一下 (預計 11:30 結束)</p>
                         </div>
                     </div>
                     <div class="flex gap-1.5 shrink-0 ml-2">
@@ -1076,6 +1036,11 @@
                         <a href="https://maps.app.goo.gl/KkudRKm5TS7bQjXb7?g_st=ic" target="_blank" class="nav-icon bg-pink-50 text-pink-500 border-pink-100"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
                 </div>
+            </div>
+
+            <div class="transit-line">
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-clock text-[10px]"></i></div>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">11:00 李從飯店出發前往半島酒店會場。</p>
             </div>
 
             <div class="compact-card mt-3">
@@ -1091,9 +1056,21 @@
                 </div>
             </div>
             
+            <div class="compact-card border-l-4 border-l-amber-500 mt-3">
+                <div class="flex justify-between items-start">
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-bold bg-amber-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">12:30</span>
+                        <div class="w-full">
+                            <h3 class="font-bold text-sm">晴：韓市場取奧黛</h3>
+                            <p class="text-[10px] text-stone-500 mb-1">美甲結束後，搭 Grab 回韓市場 114 攤位拿昨天訂做的奧黛，拿完可以就近吃個午餐</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="transit-line">
                 <div class="absolute -left-3 top-1/2 -translate-y-1/2 bg-orange-50 p-1.5 rounded-full text-orange-400"><i class="fa-solid fa-car text-[10px]"></i></div>
-                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">任務完成！下午 15:30 兩人會合，前往 SPA 放鬆。</p>
+                <p class="text-[11px] text-stone-500 leading-relaxed font-medium">任務各自完成！下午 15:30 兩人在 Herbal Spa 集合。</p>
             </div>
 
             <div class="compact-card">
@@ -1101,7 +1078,7 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-stone-800 text-white px-1.5 py-0.5 rounded h-fit mt-1">15:30</span>
                         <div>
-                            <h3 class="font-bold text-sm">Herbal Spa 全身精油 SPA 放鬆</h3>
+                            <h3 class="font-bold text-sm">Herbal Spa 全身精油放鬆</h3>
                             <p class="text-[10px] text-stone-500 font-bold">💡 同房客製！李選深層指壓，晴選熱石精油</p>
                         </div>
                     </div>
@@ -1122,7 +1099,7 @@
                     <div class="flex gap-2">
                         <span class="text-[9px] font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded h-fit mt-1">17:00</span>
                         <div>
-                            <h3 class="font-bold text-sm">🔥 All Seasons 頂級海鮮龍蝦百匯 (17:00 黃金場次)</h3>
+                            <h3 class="font-bold text-sm">🔥 All Seasons 頂級海鮮龍蝦百匯</h3>
                             <p class="text-[10px] text-stone-500 font-bold text-orange-700">開餐第一刻享用最新鮮、補好補滿的大龍蝦與生蠔！</p>
                         </div>
                     </div>
@@ -1154,6 +1131,7 @@
                 </div>
             </div>
         </section>
+        
   <section id="day5-content" class="tab-content">
             <div class="flex justify-between items-baseline mb-2">
                 <h2 class="text-xl font-extrabold text-stone-600">Day 5 <span class="text-xs font-normal text-stone-400 ml-1">08.12 (三)</span></h2>
