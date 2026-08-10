@@ -2440,43 +2440,28 @@
             }
         }
 async function exportToPDF() {
-            showToast("⏳ 正在為您排版專屬旅行日記，產生 PDF 中...");
+            showToast("⏳ 正在擷取行程與筆記，產生 PDF 中...");
             
-            // 【防白畫面關鍵 1】強制將畫面捲回最上方，避免 html2canvas 座標偏移截到白紙
-            window.scrollTo(0, 0);
-
-            // 1. 建立一個專門給 PDF 用的排版容器
-            const printContainer = document.createElement('div');
-            printContainer.id = "pdf-export-container";
-            printContainer.style.width = '794px'; // A4 寬度
-            printContainer.style.padding = '40px 50px';
-            printContainer.style.fontFamily = "'Noto Sans TC', sans-serif";
-            printContainer.style.color = '#292524';
-            printContainer.style.backgroundColor = '#ffffff';
-            printContainer.style.position = 'absolute';
-            printContainer.style.top = '0';
-            printContainer.style.left = '0';
-            printContainer.style.zIndex = '99999'; // 蓋在最上層確保完美渲染
-
-            // 2. 構建大標題與【注意事項】區塊
+            // 1. 直接構建完整的 HTML 字串 (使用 Inline CSS 確保排版樣式)
             let html = `
-                <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #ea580c; padding-bottom: 20px;">
-                    <h1 style="color: #ea580c; font-size: 32px; font-weight: 900; margin: 0; letter-spacing: 2px;">峴港｜陽光假期 旅行回憶錄</h1>
-                    <p style="color: #78716c; font-size: 14px; margin-top: 8px; letter-spacing: 1px;">2026 研討漫遊 - 專屬行程與隨身筆記</p>
-                </div>
+                <div style="width: 100%; max-width: 800px; padding: 10px; font-family: 'Inter', 'Noto Sans TC', sans-serif; color: #292524; background-color: #ffffff;">
+                    <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #ea580c; padding-bottom: 20px;">
+                        <h1 style="color: #ea580c; font-size: 28px; font-weight: 900; margin: 0; letter-spacing: 2px;">峴港｜陽光假期 旅行回憶錄</h1>
+                        <p style="color: #78716c; font-size: 14px; margin-top: 8px; letter-spacing: 1px;">2026 研討漫遊 - 專屬行程與隨身筆記</p>
+                    </div>
 
-                <div style="margin-bottom: 30px; page-break-inside: avoid; background-color: #f8fafc; padding: 20px; border-radius: 12px; border-left: 5px solid #3b82f6;">
-                    <h2 style="color: #1e40af; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 12px;">💡 行前與當地注意事項</h2>
-                    <ul style="font-size: 13px; color: #475569; line-height: 1.8; margin: 0; padding-left: 20px;">
-                        <li><b>簽證通訊：</b>備妥實體 E-visa 與護照；推薦使用 Viettel 電信 eSIM。</li>
-                        <li><b>金錢換匯：</b>台幣/美金至當地金店換匯佳。越盾計算：去掉 4 個零後乘 12 約為台幣。</li>
-                        <li><b>交通治安：</b>全程使用 Grab，勿搭路邊攬客計程車；手機與包包勿放桌上，過馬路保持等速前進。</li>
-                        <li><b>飲食文化：</b>勿飲生水與路邊攤冰塊；筷子勿直插飯碗；參訪寺廟古蹟需著過膝衣物。</li>
-                    </ul>
-                </div>
+                    <div style="margin-bottom: 30px; background-color: #f8fafc; padding: 20px; border-radius: 12px; border-left: 5px solid #3b82f6;">
+                        <h2 style="color: #1e40af; font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 12px;">💡 行前與當地注意事項</h2>
+                        <ul style="font-size: 13px; color: #475569; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li><b>簽證通訊：</b>備妥實體 E-visa 與護照；推薦使用 Viettel 電信 eSIM。</li>
+                            <li><b>金錢換匯：</b>台幣/美金至當地金店換匯佳。越盾計算：去掉 4 個零後乘 12 約為台幣。</li>
+                            <li><b>交通治安：</b>全程使用 Grab，勿搭路邊攬客計程車；手機與包包勿放桌上，過馬路保持等速前進。</li>
+                            <li><b>飲食文化：</b>勿飲生水與路邊攤冰塊；筷子勿直插飯碗；參訪寺廟古蹟需著過膝衣物。</li>
+                        </ul>
+                    </div>
             `;
 
-            // 3. 準備行程資料與抓取 LocalStorage 筆記
+            // 2. 準備行程資料與抓取 LocalStorage 筆記
             const allNotes = [];
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
@@ -2506,26 +2491,27 @@ async function exportToPDF() {
                 { id: 'd6', title: 'Day 6 (08.13) 最後掃貨與神級披薩', desc: 'Lotte Mart 伴手禮爆買 ➔ Pizza 4P\'s 神級披薩 ➔ 前往機場 (19:00 班機返回台灣)' }
             ];
 
-            // 4. 產生【每天行程 ＋ 行程筆記】
-            html += `<h2 style="color: #ea580c; font-size: 22px; font-weight: bold; border-bottom: 2px solid #ffedd5; padding-bottom: 10px; margin-top: 30px;">📅 每日行程與隨身筆記</h2>`;
+            // 3. 產生【每天行程 ＋ 行程筆記】
+            html += `<h2 style="color: #ea580c; font-size: 20px; font-weight: bold; border-bottom: 2px solid #ffedd5; padding-bottom: 8px; margin-top: 30px;">📅 每日行程與隨身筆記</h2>`;
             
             itineraryData.forEach(day => {
                 const dayNotes = allNotes.filter(n => n.day === day.id);
                 
                 html += `
-                    <div style="margin-bottom: 25px; page-break-inside: avoid;">
-                        <h3 style="color: #c2410c; font-size: 16px; font-weight: bold; margin-bottom: 5px;">${day.title}</h3>
-                        <p style="color: #78716c; font-size: 12px; margin-top: 0; margin-bottom: 15px;">${day.desc}</p>
+                    <div style="margin-bottom: 20px; page-break-inside: avoid;">
+                        <h3 style="color: #c2410c; font-size: 15px; font-weight: bold; margin-bottom: 4px;">${day.title}</h3>
+                        <p style="color: #78716c; font-size: 12px; margin-top: 0; margin-bottom: 12px;">${day.desc}</p>
                 `;
 
+                // 只有當天有做筆記時，才會印出筆記框框
                 if (dayNotes.length > 0) {
                     dayNotes.forEach(note => {
                         const title = titleMap[note.place] || note.place;
                         const formattedContent = note.content.replace(/\n/g, '<br>');
                         html += `
-                            <div style="margin-bottom: 12px; margin-left: 15px; border-left: 3px solid #fdba74; padding-left: 12px; background-color: #fff7ed; padding-top: 10px; padding-bottom: 10px; padding-right: 12px; border-radius: 0 8px 8px 0;">
+                            <div style="margin-bottom: 10px; margin-left: 10px; border-left: 3px solid #fdba74; padding-left: 10px; background-color: #fff7ed; padding-top: 8px; padding-bottom: 8px; padding-right: 10px; border-radius: 0 6px 6px 0;">
                                 <div style="font-weight: bold; font-size: 13px; color: #9a3412; margin-bottom: 4px;">📍 ${title}</div>
-                                <div style="font-size: 13px; color: #57534e; line-height: 1.6;">${formattedContent}</div>
+                                <div style="font-size: 13px; color: #57534e; line-height: 1.5;">${formattedContent}</div>
                             </div>
                         `;
                     });
@@ -2533,13 +2519,14 @@ async function exportToPDF() {
                 html += `</div>`;
             });
 
-            // 5. 產生【去過的店家筆記內容】
+            // 4. 產生【去過的店家筆記內容】
             const foodNotes = [];
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
                 if (key.startsWith('food_meta_')) {
                     try {
                         const meta = JSON.parse(localStorage.getItem(key));
+                        // 只有當你真的有寫字在筆記欄位時，才會被收錄進來
                         if (meta.note && meta.note.trim() !== '') {
                             const foodId = parseInt(key.replace('food_meta_', ''));
                             const foodItem = foodDatabase.find(f => f.id === foodId); 
@@ -2551,15 +2538,15 @@ async function exportToPDF() {
 
             if (foodNotes.length > 0) {
                 html += `
-                    <div style="margin-top: 40px; margin-bottom: 30px; page-break-inside: avoid;">
-                        <h2 style="color: #0ea5e9; font-size: 22px; font-weight: bold; border-bottom: 2px solid #e0f2fe; padding-bottom: 10px;">🍽️ 美食打卡與店家筆記</h2>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                    <div style="margin-top: 30px; margin-bottom: 30px; page-break-inside: avoid;">
+                        <h2 style="color: #0ea5e9; font-size: 20px; font-weight: bold; border-bottom: 2px solid #e0f2fe; padding-bottom: 8px;">🍽️ 美食打卡與店家筆記</h2>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
                 `;
                 foodNotes.forEach(fn => {
                     const formattedNote = fn.note.replace(/\n/g, '<br>');
                     html += `
-                        <div style="border: 1px solid #bae6fd; padding: 12px; background: #f0f9ff; border-radius: 8px;">
-                            <div style="font-weight: bold; font-size: 13px; color: #0369a1; margin-bottom: 6px;">${fn.name}</div>
+                        <div style="border: 1px solid #bae6fd; padding: 10px; background: #f0f9ff; border-radius: 6px;">
+                            <div style="font-weight: bold; font-size: 13px; color: #0369a1; margin-bottom: 4px;">${fn.name}</div>
                             <div style="font-size: 12px; color: #334155; line-height: 1.5;">${formattedNote}</div>
                         </div>
                     `;
@@ -2568,37 +2555,28 @@ async function exportToPDF() {
             }
 
             html += `
-                <div style="text-align: center; margin-top: 50px; font-size: 11px; color: #a8a29e; border-top: 1px dashed #e7e5e4; padding-top: 15px;">
+                <div style="text-align: center; margin-top: 40px; font-size: 11px; color: #a8a29e; border-top: 1px dashed #e7e5e4; padding-top: 15px;">
                     Generated by Da Nang Sunshine Itinerary App
                 </div>
-            `;
+            </div>`; // 結束最外層的 div
 
-            printContainer.innerHTML = html;
-            document.body.appendChild(printContainer);
-
-            // 讓瀏覽器有時間把字體與 DOM 畫好 (500毫秒)
-            await new Promise(resolve => setTimeout(resolve, 500));
-
-            // 6. html2pdf 配置選項
+            // 5. html2pdf 配置選項 (這次完全不用動到 DOM，直接餵字串)
             const opt = {
-                margin:       [15, 0, 15, 0],
+                margin:       10, // 設定四周邊距為 10mm
                 filename:     'DaNang_Travel_Journal.pdf',
-                image:        { type: 'jpeg', quality: 1.0 },
-                // 【防白畫面關鍵 2】明確告知套件以座標 0,0 為基準擷取
-                html2canvas:  { scale: 2, useCORS: true, scrollY: 0, scrollX: 0, windowWidth: 794 },
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            // 7. 產生並下載 PDF
+            // 6. 產生並下載 PDF
             try {
-                await html2pdf().set(opt).from(printContainer).save();
+                // 直接將組裝好的 html 字串傳入
+                await html2pdf().set(opt).from(html).save();
                 showToast("✅ 旅行日記 PDF 匯出成功！");
             } catch (error) {
                 console.error("PDF 匯出失敗: ", error);
                 showToast("❌ 匯出發生錯誤，請重試。", "fa-circle-xmark", "text-red-400");
-            } finally {
-                // 匯出後移除這個排版容器
-                document.body.removeChild(printContainer);
             }
         }
     </script>
